@@ -10,24 +10,25 @@
         })
 
         function checkArea(){
-            let url = '/info.do'
+            let url = '/select.do'
 
             $('.areaSelect').click(function (){
                 $.ajax({
                     url : url,
-                    method : 'get',
-                    contentType:"application/json",
-                    data : {
+                    type: 'POST',
+                    contentType : 'application/json; charset=UTF-8',
+                    dataType: 'json',
+                    data : JSON.stringify({
                         area : $('input[name=area]:checked').val(),
                         sigungu : $('input[name=sigungu]:checked').val(),
                         cat1 : $('input[name=cat1]:checked').val(),
                         cat2 : $('input[name=cat2]:checked').val(),
                         cat3 : $('input[name=cat3]:checked').val(),
                         type : $('input[name=type]:checked').val()
-                    },
+                    }),
                     success : function(data){
-                        console.log("${test}");
-                        console.log(data);
+                        console.log("데이터 값 : " + JSON.stringify(data));
+                        console.log(data.sigunguList);
 
                     }
                 })
