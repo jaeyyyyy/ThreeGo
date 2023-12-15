@@ -1,6 +1,7 @@
-package com.data;
+package com.DAO;
 
 import com.common.JDBConnect;
+import com.DTO.AreaDTO;
 
 import java.util.ArrayList;
 import java.util.List;

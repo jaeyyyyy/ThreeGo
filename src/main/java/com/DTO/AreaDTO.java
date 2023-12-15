@@ -1,4 +1,4 @@
-package com.data;
+package com.DTO;
 
 public class AreaDTO {
     private int j_areacode;

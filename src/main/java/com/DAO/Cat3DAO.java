@@ -1,6 +1,7 @@
-package com.data;
+package com.DAO;
 
 import com.common.JDBConnect;
+import com.DTO.Cat3DTO;
 
 public class Cat3DAO extends JDBConnect {
     public Cat3DAO() {  super();  }

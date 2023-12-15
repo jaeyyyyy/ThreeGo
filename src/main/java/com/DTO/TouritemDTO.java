@@ -1,4 +1,4 @@
-package com.data;
+package com.DTO;
 
 public class TouritemDTO {
     private String contentid;

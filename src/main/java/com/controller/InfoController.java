@@ -1,6 +1,11 @@
 package com.controller;
 
-import com.data.*;
+import com.DAO.AreaDAO;
+import com.DAO.SigunguDAO;
+import com.DAO.TouritemDAO;
+import com.DTO.AreaDTO;
+import com.DTO.SigunguDTO;
+import com.DTO.TouritemDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

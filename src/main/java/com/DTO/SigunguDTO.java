@@ -1,4 +1,4 @@
-package com.data;
+package com.DTO;
 
 public class SigunguDTO {
     private int s_sigungucode;

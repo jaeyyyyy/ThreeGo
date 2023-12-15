@@ -1,4 +1,4 @@
-package com.data;
+package com.DTO;
 
 public class Cat2DTO {
     private String cat2;
