@@ -5,13 +5,21 @@
          version="4.0">
 
     <!--KJY-->
+    <context-param>
+        <param-name>POSTS_PER_PAGE</param-name>
+        <param-value>10</param-value>
+    </context-param>
+    <context-param>
+        <param-name>POSTS_PER_BLOCK</param-name>
+        <param-value>5</param-value>
+    </context-param>
     <servlet>
         <servlet-name>BoardList</servlet-name>
         <servlet-class>com.controller.B_ListController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BoardList</servlet-name>
-        <url-pattern>/board/list.do</url-pattern>
+        <url-pattern>/proj/views/community/list.do</url-pattern>
     </servlet-mapping>
 
 
