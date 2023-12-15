@@ -15,9 +15,7 @@
 
     <title>회원가입</title>
     <link rel = "icon" href="image/wave.ico">
-<%--    <style>--%>
-<%--        /*@import url("signUpCss3.css");*/--%>
-<%--    </style>--%>
+
     <!-- 자바스크립트(유효성검사 해당) -->
     <script src ="signUpjs3.js"></script>
     <!-- 다음 우편번호찾기 API -->
@@ -27,7 +25,7 @@
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap" class="wrapper">
-    <form action="join_ok.jsp" method ="post" name="join" id="join">
+    <form action="Proc.do" method ="post">
         <!-- 회원가입 타이틀부분 -->
         <div id="header">
             <h1 class="text-center">

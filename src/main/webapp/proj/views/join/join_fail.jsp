@@ -7,9 +7,9 @@
   <title>Insert title here</title>
 </head>
 <body>
-
-<h2>회원가입에 실패했습니다</h2>
-<a href="join.jsp">다시 가입하기</a>
-
+<script type="text/javascript">
+alert("패스워드가 일치하지 않습니다. 다시 확인해주세요.");
+location.href='join.jsp';
+</script>
 </body>
 </html>
