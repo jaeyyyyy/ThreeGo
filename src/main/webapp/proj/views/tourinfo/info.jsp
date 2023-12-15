@@ -27,8 +27,13 @@
                         type : $('input[name=type]:checked').val()
                     }),
                     success : function(data){
-                        console.log("데이터 값 : " + JSON.stringify(data));
-                        console.log(data.sigunguList);
+                        console.log("sigunguList : " + JSON.stringify(data));
+
+                        <%--data.sigunguList.forEach(function (si_dto){--%>
+                        <%--    $('#sigungu').append(--%>
+                        <%--        '<input type="radio" class="areaSelect" name="sigungu" value=si_dto.get>${sigungu.sigungu_name}'--%>
+                        <%--    )--%>
+                        <%--})--%>
 
                     }
                 })

@@ -5,8 +5,8 @@ public class InsertMain {
         InsertData insert = new InsertData();
 
         insert.areaCode();
-        insert.categoryCode();
-        insert.tourItem();
+//        insert.categoryCode();
+//        insert.tourItem();
 
     }
 }
