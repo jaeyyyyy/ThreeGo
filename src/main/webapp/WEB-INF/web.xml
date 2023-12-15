@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!--KJY-->
     <servlet>
         <servlet-name>BoardList</servlet-name>
         <servlet-class>com.controller.B_ListController</servlet-class>
@@ -13,5 +14,10 @@
         <url-pattern>/board/list.do</url-pattern>
     </servlet-mapping>
 
+
+    <!--KGH-->
+
+
+    <!--KMJ-->
 </web-app>
 
