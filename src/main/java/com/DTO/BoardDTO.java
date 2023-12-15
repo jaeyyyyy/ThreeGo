@@ -1,70 +1,97 @@
 package com.DTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class BoardDTO {
-        private String num;
-        private String title;
-        private String content;
-        private String id;
-        private Date postdate;
-        private String visitcount;
-        private String name;
+    private String idx;
+    private String name;
+    private String title;
+    private String content;
+    private java.util.Date postdate;
+    private String ofile;
+    private String sfile;
+    private int downcount;
+    private String pass;
+    private int visitcount;
 
-        public String getNum() {
-            return num;
-        }
 
-        public void setNum(String num) {
-            this.num = num;
-        }
+    public String getIdx() {
+        return idx;
+    }
 
-        public String getTitle() {
-            return title;
-        }
+    public void setIdx(String idx) {
+        this.idx = idx;
+    }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public String getContent() {
-            return content;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setContent(String content) {
-            this.content = content;
-        }
+    public String getTitle() {
+        return title;
+    }
 
-        public String getId() {
-            return id;
-        }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-        public void setId(String id) {
-            this.id = id;
-        }
+    public String getContent() {
+        return content;
+    }
 
-        public Date getPostdate() {
-            return postdate;
-        }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-        public void setPostdate(Date postdate) {
-            this.postdate = postdate;
-        }
+    public Date getPostdate() {
+        return postdate;
+    }
 
-        public String getVisitcount() {
-            return visitcount;
-        }
+    public void setPostdate(Date postdate) {
+        this.postdate = postdate;
+    }
 
-        public void setVisitcount(String visitcount) {
-            this.visitcount = visitcount;
-        }
+    public String getOfile() {
+        return ofile;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public void setOfile(String ofile) {
+        this.ofile = ofile;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public String getSfile() {
+        return sfile;
+    }
 
+    public void setSfile(String sfile) {
+        this.sfile = sfile;
+    }
+
+    public int getDowncount() {
+        return downcount;
+    }
+
+    public void setDowncount(int downcount) {
+        this.downcount = downcount;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public int getVisitcount() {
+        return visitcount;
+    }
+
+    public void setVisitcount(int visitcount) {
+        this.visitcount = visitcount;
+    }
 }
