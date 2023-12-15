@@ -1,27 +1,5 @@
-<%@ page import="com.DAO.BoardDAO" %>
-<%@ page import="com.DTO.BoardDTO" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
-<%
-    //DAO 생성
-    BoardDAO dao = new BoardDAO();
-
-    //사용자 검색 조건 입력
-    Map<String, Object> param = new HashMap<>();
-    String searchFiled = request.getParameter("searchFiled");
-    String searchWord =  request.getParameter("searchWord");
-    if(searchWord !=null){
-        param.put("searchFiled", searchFiled);
-        param.put("searchWord", searchWord);
-    }
-    int totalCount = dao.selectCount(param); //게시물 수 확인
-    List<BoardDTO> boardList = dao.selectList(param); //게시물 목록
-    dao.close();
-
-%>
 
 
 <html>
@@ -64,34 +42,35 @@
             <th width="10%">조회수</th>
             <th width="15%">작성일</th>
         </tr>
-
-        <%
-            //게시물이 하나도 없을때
-            if(boardList.isEmpty()){
-
-        %>
-        <tr>
-            <td colspan="5" align="center">등록된 게시물이 없습니다.</td>
-        </tr>
-
-        <%
-            //게시물이 있을 때
-        }else{
-            int virtualNum = 0; //화면상에서 게시물 번호
-            for(BoardDTO dto : boardList){
-                virtualNum = totalCount--;
-        %>
-        <tr align="center">
-            <td><%= virtualNum%></td> <%--게시물 번호--%>
-            <td align="left"><a href="View.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle()%></a></td> <%--제목--%>
-            <td align="center"><%=dto.getId()%></td>            <%--작성자 아이디--%>
-            <td align="center"><%=dto.getVisitcount()%></td>    <%--조회수--%>
-            <td align="center"><%=dto.getPostdate()%></td>      <%--작성일--%>
-        </tr>
-        <%
-                }
-            }
-        %>
+        <c:choose>
+            <c:when test="${empty boardList}">
+                <tr>
+                    <td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${boardList}" var="row" varStatus="loop">
+                    <tr align="center">
+                        <td>
+                                ${map.totalCount - (((map.pageNum -1) * mpa.pageSize) + loop.index)}
+                        </td>
+                        <td align="left">
+                            <a href="../mvcboard/view.do?idx=${row.idx}">${row.title}</a>
+                        </td>
+                        <td>${row.name}</td>
+                        <td>${row.visitcount}</td>
+                        <td>${row.postdate}</td>
+                        <td>
+                            <c:if test="${not empty row.ofile}">
+                                <a href="../mvcboard/download.do?ofile=${row.ofile}&sfile=${row.sfile}&idx=${row.idx}">
+                                    [Down]
+                                </a>
+                            </c:if>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </table>
 <%--    <div class="card-deck row row-cols-1 row-cols-md-3 g-4">--%>
 <%--        <div class="col">--%>

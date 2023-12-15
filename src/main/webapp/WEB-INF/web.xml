@@ -3,4 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+        <servlet-name>BoardList</servlet-name>
+        <servlet-class>com.controller.B_ListController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BoardList</servlet-name>
+        <url-pattern>/board/list.do</url-pattern>
+    </servlet-mapping>
+
 </web-app>
+

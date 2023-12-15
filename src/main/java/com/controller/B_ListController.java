@@ -67,6 +67,6 @@ public class B_ListController extends HttpServlet{
 
         req.setAttribute("boardList", boardList);
         req.setAttribute("map", map);
-        req.getRequestDispatcher("/14/List.jsp").forward(req, resp);
+        req.getRequestDispatcher("/proj/views/community/bbs.jsp").forward(req, resp);
     }
 }
