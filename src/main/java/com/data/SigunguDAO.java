@@ -15,7 +15,9 @@ public class SigunguDAO extends JDBConnect {
         //쿼리문 작성
         String query = "SELECT * FROM t_sigungu"
                     + " WHERE s_areacode = " + areacode
-                    + " ORDER BY s_sigungucode DESC";
+                    + " ORDER BY s_sigungucode ASC";
+
+        System.out.println(query);
 
         try {
             stmt = con.createStatement();

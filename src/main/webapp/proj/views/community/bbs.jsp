@@ -11,8 +11,8 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../resources/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../resources/assets/css/style.css?after" rel="stylesheet" />
+    <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <title>커뮤니티</title>
 </head>
 <body>
