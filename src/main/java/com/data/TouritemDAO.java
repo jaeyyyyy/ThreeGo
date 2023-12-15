@@ -95,8 +95,6 @@ public class TouritemDAO extends JDBConnect {
         }
         query += " ORDER BY contentid ASC";
 
-        System.out.println(query);
-
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);

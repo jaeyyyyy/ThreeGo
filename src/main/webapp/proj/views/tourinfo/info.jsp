@@ -11,10 +11,12 @@
 
         function checkArea(){
             let url = '/info.do'
+
             $('.areaSelect').click(function (){
                 $.ajax({
                     url : url,
                     method : 'get',
+                    contentType:"application/json",
                     data : {
                         area : $('input[name=area]:checked').val(),
                         sigungu : $('input[name=sigungu]:checked').val(),
@@ -24,8 +26,9 @@
                         type : $('input[name=type]:checked').val()
                     },
                     success : function(data){
-                        console.log(data.test)
-                        $('#test').html(data.test)
+                        console.log("${test}");
+                        console.log(data);
+
                     }
                 })
             })
@@ -34,12 +37,17 @@
 </head>
 <body>
 
-    <h2 id="test"></h2>
+    <h2 id="test">test</h2>
     <div id="area">
         <c:forEach items="${areaList}" var="area">
             <input type="radio" class="areaSelect" name="area" value="${area.j_areacode}">${area.j_area_name}
         </c:forEach>
-
+        <br/>
+        <div id="sigungu">
+            <c:forEach items="${sigunguList}" var="sigungu">
+                <input type="radio" class="areaSelect" name="sigungu" value="${sigungu.s_sigungucode}">${sigungu.sigungu_name}
+            </c:forEach>
+        </div>
     </div>
 
 </body>
