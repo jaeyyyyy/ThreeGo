@@ -46,7 +46,7 @@ public class JoinController extends HttpServlet {
 //패스 1이랑 2는 같은지 확인하나봄
         if(pw1.equals(pw2)){
             UserDAO dao = new UserDAO();
-            dao.
+
         }
     }
 }
