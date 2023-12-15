@@ -13,14 +13,14 @@
         <param-name>POSTS_PER_BLOCK</param-name>
         <param-value>5</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>BoardList</servlet-name>
-        <servlet-class>com.controller.B_ListController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>BoardList</servlet-name>
-        <url-pattern>/proj/views/community/list.do</url-pattern>
-    </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>BoardList</servlet-name>-->
+<!--        <servlet-class>com.controller.B_ListController</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>BoardList</servlet-name>-->
+<!--        <url-pattern>/proj/views/community/list.do</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 
     <!--KGH-->
