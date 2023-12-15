@@ -1,0 +1,79 @@
+/*navvar 추가*/
+.card {
+    transition: 0.2s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.card img {
+    width: 100%;
+    height: 12em;
+}
+
+
+.nav-link {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    min-width: 88px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    box-sizing: border-box;
+    position: relative;
+    color: #0d6efd;
+    cursor: pointer;
+    border: none;
+}
+
+.navbar-brand {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #f4f4f4;
+    padding: 0 16px;
+}
+
+#searchForm {
+    margin-top : 10rem;
+}
+
+.top-header {
+    height: 30rem;
+    background: linear-gradient(to bottom left, #77c4e3, #8176b5);
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar {
+    justify-content: space-between;
+}
+
+.navbar-collapse {
+    padding: 20px;
+}
+
+.nav-right {
+    margin-left: auto;
+}
+
+.text-white {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.navbar-nav {
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (min-width : 300px) {
+    .navbar-collapse {
+        flex-basis: 0;
+    }
+}
