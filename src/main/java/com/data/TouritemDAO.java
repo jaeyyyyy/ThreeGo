@@ -66,12 +66,12 @@ public class TouritemDAO extends JDBConnect {
         if(map.size() > 0){
             query += " WHERE ";
             if(map.containsKey("area")){
-                query += "area = " + map.get("area") + " ";
+                query += "areacode = " + map.get("area") + " ";
                 if(andCount > 0) query += "AND ";
                 andCount--;
             }
             if(map.containsKey("sigungu")){
-                query += "sigungu = " + map.get("sigungu") + " ";
+                query += "sigungucode = " + map.get("sigungu") + " ";
                 if(andCount > 0) query += "AND ";
                 andCount--;
             }
@@ -90,10 +90,12 @@ public class TouritemDAO extends JDBConnect {
                 if(andCount > 0) query += "AND ";
             }
             if(map.containsKey("type")){
-                query += "type = " + map.get("type") + " ";
+                query += "contenttypeid = " + map.get("type") + " ";
             }
         }
-        query += " ORDER BY contentid DESC";
+        query += " ORDER BY contentid ASC";
+
+        System.out.println(query);
 
         try {
             stmt = con.createStatement();

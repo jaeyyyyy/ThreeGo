@@ -28,13 +28,21 @@ public class InfoController extends HttpServlet {
         String cat3 = req.getParameter("cat3");
         String type = req.getParameter("type");
 
+        System.out.println("area: " + area);
+        System.out.println("sigungu: " + sigungu);
+
         Map<String, Object> map = new HashMap<>();
-        if(area != null) map.put(area, "area");
-        if(sigungu != null) map.put(sigungu, "sigungu");
-        if(cat1 != null) map.put(cat1, "cat1");
-        if(cat2 != null) map.put(cat2, "cat2");
-        if(cat3 != null) map.put(cat3, "cat3");
-        if(type != null) map.put(type, "type");
+        if(area != null) map.put("area", area);
+        if(sigungu != null) map.put("sigungu", sigungu);
+        if(cat1 != null) map.put("cat1", cat1);
+        if(cat2 != null) map.put("cat2", cat2);
+        if(cat3 != null) map.put("cat3", cat3);
+        if(type != null) map.put("type", type);
+
+        for (String key : map.keySet()){
+            System.out.println("key: " + key);
+            System.out.println("value: " + map.get(key));
+        }
 
         List<TouritemDTO> touritemList = ti_dao.selectList(map);
         List<AreaDTO> areaList = ar_dao.selectList();
@@ -49,6 +57,7 @@ public class InfoController extends HttpServlet {
         ar_dao.close();
         si_dao.close();
 
+        req.setAttribute("test", area);
         req.setAttribute("touritemList", touritemList);
         req.setAttribute("areaList", areaList);
         req.setAttribute("sigunguList", sigunguList);

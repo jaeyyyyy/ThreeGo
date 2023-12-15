@@ -5,38 +5,41 @@
     <title>관광지 정보 | 3GO</title>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-        // $(document).ready(function (){
-        //
-        // })
-        //
-        // function checkArea(){
-        //     let url = '/info.do'
-        //     $('.areaSelect').click(function (){
-        //         $.ajax({
-        //             url : url,
-        //             method : 'get',
-        //             data : {
-        //                 area : $('input[name=area]').val(),
-        //                 sigungu : $('input[name=sigungu]').val(),
-        //                 cat1 : $('input[name=cat1]').val(),
-        //                 cat2 : $('input[name=cat2]').val(),
-        //                 cat3 : $('input[name=cat3]').val(),
-        //                 type : $('input[name=type]').val(),
-        //             },
-        //             success : function(){
-        //             }
-        //         })
-        //     })
-        // }
+        $(document).ready(function (){
+            checkArea();
+        })
+
+        function checkArea(){
+            let url = '/info.do'
+            $('.areaSelect').click(function (){
+                $.ajax({
+                    url : url,
+                    method : 'get',
+                    data : {
+                        area : $('input[name=area]').val(),
+                        sigungu : $('input[name=sigungu]').val(),
+                        cat1 : $('input[name=cat1]').val(),
+                        cat2 : $('input[name=cat2]').val(),
+                        cat3 : $('input[name=cat3]').val(),
+                        type : $('input[name=type]').val()
+                    },
+                    success : function(data){
+                        console.log(data.test)
+                        $('#test').html(data.test)
+                    }
+                })
+            })
+        }
     </script>
 </head>
 <body>
 
-test
+    <h2 id="test"></h2>
     <div id="area">
         <c:forEach items="${areaList}" var="area">
-            <input type="radio" name="area" class="areaSelect">${area.j_area_name};
+            <input type="radio" class="areaSelect" name="area" value="${area.j_areacode}">${area.j_area_name}
         </c:forEach>
+
     </div>
 
 </body>
