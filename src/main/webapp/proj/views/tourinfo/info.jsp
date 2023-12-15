@@ -16,12 +16,12 @@
                     url : url,
                     method : 'get',
                     data : {
-                        area : $('input[name=area]').val(),
-                        sigungu : $('input[name=sigungu]').val(),
-                        cat1 : $('input[name=cat1]').val(),
-                        cat2 : $('input[name=cat2]').val(),
-                        cat3 : $('input[name=cat3]').val(),
-                        type : $('input[name=type]').val()
+                        area : $('input[name=area]:checked').val(),
+                        sigungu : $('input[name=sigungu]:checked').val(),
+                        cat1 : $('input[name=cat1]:checked').val(),
+                        cat2 : $('input[name=cat2]:checked').val(),
+                        cat3 : $('input[name=cat3]:checked').val(),
+                        type : $('input[name=type]:checked').val()
                     },
                     success : function(data){
                         console.log(data.test)
