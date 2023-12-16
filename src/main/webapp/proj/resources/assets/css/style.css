@@ -77,3 +77,13 @@
         flex-basis: 0;
     }
 }
+
+/*커뮤니티 게시판 view */
+.card_text {
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    /*width: 100%;*/
+}
+
+
