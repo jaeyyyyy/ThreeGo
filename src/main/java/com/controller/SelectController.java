@@ -4,6 +4,8 @@ import com.DAO.SigunguDAO;
 import com.DTO.SigunguDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,18 +22,26 @@ public class SelectController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader reader = req.getReader();
         String result = reader.readLine();
-        System.out.println(result);
+//        JSONParser parser = new JSONParser();
+//        JSONObject data = new JSONObject();
+//        try {
+//            data = (JSONObject) parser.parse(result);
+//        } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//        String area = (String) data.get("area");
+//        String sigungu = (String) data.get("sigungu");
 
         String area = cropValue(result, "\"area\":\"");
         String sigungu = cropValue(result, "\"sigungu\":\"");
-//        String cat1 = cropValue(result, "\"cat1\":\"");
-//        String cat2 = cropValue(result, "\"cat2\":\"");
-//        String cat3 = cropValue(result, "\"cat3\":\"");
-//        String type = cropValue(result, "\"type\":\"");
+        String cat1 = cropValue(result, "\"cat1\":\"");
+        String cat2 = cropValue(result, "\"cat2\":\"");
+        String cat3 = cropValue(result, "\"cat3\":\"");
+        String type = cropValue(result, "\"type\":\"");
 
         reader.close();
 
-        if(sigungu != null) System.out.println("area: " + area);
+        if(area != null) System.out.println("area: " + area);
         if(sigungu != null) System.out.println("sigungu: " + sigungu);
 
         SigunguDAO si_dao = new SigunguDAO();
