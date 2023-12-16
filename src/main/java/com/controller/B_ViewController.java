@@ -42,6 +42,6 @@ public class B_ViewController extends HttpServlet {
             // 뷰로 포워드
             req.setAttribute("dto",dto);
             req.setAttribute("isImage",isImage);
-            req.getRequestDispatcher("/14/View.jsp").forward(req,resp);
+            req.getRequestDispatcher("/proj/views/community/bbs/view.jsp").forward(req,resp);
         }
 }
