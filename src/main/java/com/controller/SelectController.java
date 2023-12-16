@@ -2,9 +2,8 @@ package com.controller;
 
 import com.DAO.SigunguDAO;
 import com.DTO.SigunguDTO;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,18 +19,20 @@ public class SelectController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader reader = req.getReader();
+        String result = reader.readLine();
+        System.out.println(result);
 
-        String area = cropValue(reader.readLine());
-        String sigungu = cropValue(reader.readLine());
-        String cat1 = cropValue(reader.readLine());
-        String cat2 = cropValue(reader.readLine());
-        String cat3 = cropValue(reader.readLine());
-        String type = cropValue(reader.readLine());
+        String area = cropValue(result, "\"area\":\"");
+        String sigungu = cropValue(result, "\"sigungu\":\"");
+//        String cat1 = cropValue(result, "\"cat1\":\"");
+//        String cat2 = cropValue(result, "\"cat2\":\"");
+//        String cat3 = cropValue(result, "\"cat3\":\"");
+//        String type = cropValue(result, "\"type\":\"");
 
         reader.close();
 
-        System.out.println("area: " + area);
-        System.out.println("sigungu: " + sigungu);
+        if(sigungu != null) System.out.println("area: " + area);
+        if(sigungu != null) System.out.println("sigungu: " + sigungu);
 
         SigunguDAO si_dao = new SigunguDAO();
         List<SigunguDTO> sigunguList = si_dao.selectList(area);
@@ -42,17 +43,28 @@ public class SelectController extends HttpServlet {
         si_dao.close();
 
         JSONObject json = new JSONObject();
-//        json.put("area", area);
-        json.put("sigunguList", sigunguList);
+        JSONArray dtoArr = new JSONArray();
+
+        for(SigunguDTO dto : sigunguList){
+            JSONObject dtoObj = new JSONObject();
+            dtoObj.put("s_sigungucode", dto.getS_sigungucode());
+            dtoObj.put("s_areacode", dto.getS_areacode());
+            dtoObj.put("sigungu_name", dto.getSigungu_name());
+            dtoArr.add(dtoObj);
+        }
+
+        json.put("sigunguList", dtoArr);
+
+        System.out.println(json);
 
         resp.setContentType("application/x-json; charset=utf-8");
         resp.getWriter().print(json);
     }
 
-    public String cropValue(String valueStr){
-        if(valueStr == null) return null;
-        int start = valueStr.indexOf(":") + 2;
-        int end = valueStr.lastIndexOf("\"");
-        return valueStr.substring(start,end);
+    public String cropValue(String result, String valueStr){
+        int start = result.indexOf(valueStr) + valueStr.length();
+        if(result.indexOf(valueStr) == -1) return null;
+        int end = result.indexOf("\"", start+1);
+        return result.substring(start,end);
     }
 }

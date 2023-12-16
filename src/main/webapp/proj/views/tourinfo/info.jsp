@@ -27,13 +27,14 @@
                         type : $('input[name=type]:checked').val()
                     }),
                     success : function(data){
-                        console.log("sigunguList : " + JSON.stringify(data));
-
-                        <%--data.sigunguList.forEach(function (si_dto){--%>
-                        <%--    $('#sigungu').append(--%>
-                        <%--        '<input type="radio" class="areaSelect" name="sigungu" value=si_dto.get>${sigungu.sigungu_name}'--%>
-                        <%--    )--%>
-                        <%--})--%>
+                        let sigunguList = data.sigunguList;
+                        $('#sigunguLabel').html("<br/><h4>- 시군구 -</h4>")
+                        $('#sigungu').html("")
+                        sigunguList.forEach(function (sigungu){
+                            $('#sigungu').append(
+                                '<input type="radio" class="areaSelect" name="sigungu" value="' + sigungu.s_sigungucode + '">' + sigungu.sigungu_name
+                            )
+                        })
 
                     }
                 })
@@ -45,14 +46,13 @@
 
     <h2 id="test">test</h2>
     <div id="area">
+        <h4>- 지역 -</h4>
         <c:forEach items="${areaList}" var="area">
             <input type="radio" class="areaSelect" name="area" value="${area.j_areacode}">${area.j_area_name}
         </c:forEach>
         <br/>
+        <div id="sigunguLabel"></div>
         <div id="sigungu">
-            <c:forEach items="${sigunguList}" var="sigungu">
-                <input type="radio" class="areaSelect" name="sigungu" value="${sigungu.s_sigungucode}">${sigungu.sigungu_name}
-            </c:forEach>
         </div>
     </div>
 
