@@ -7,6 +7,7 @@
     <script>
         $(document).ready(function (){
             checkArea();
+            checkSigungu();
         })
 
         function checkArea(){
@@ -32,10 +33,33 @@
                         $('#sigungu').html("")
                         sigunguList.forEach(function (sigungu){
                             $('#sigungu').append(
-                                '<input type="radio" class="areaSelect" name="sigungu" value="' + sigungu.s_sigungucode + '">' + sigungu.sigungu_name
+                                '<input type="radio" class="sigunguSelect" name="sigungu" value="' + sigungu.s_sigungucode + '">' + sigungu.sigungu_name
                             )
                         })
 
+                    }
+                })
+            })
+        }
+
+        function checkSigungu(){
+            let url = '/select.do'
+
+            $(document).on('click','.sigunguSelect',function (){
+                $.ajax({
+                    url : url,
+                    type: 'POST',
+                    contentType : 'application/json; charset=UTF-8',
+                    dataType: 'json',
+                    data : JSON.stringify({
+                        area : $('input[name=area]:checked').val(),
+                        sigungu : $('input[name=sigungu]:checked').val(),
+                        cat1 : $('input[name=cat1]:checked').val(),
+                        cat2 : $('input[name=cat2]:checked').val(),
+                        cat3 : $('input[name=cat3]:checked').val(),
+                        type : $('input[name=type]:checked').val()
+                    }),
+                    success : function(data){
                     }
                 })
             })
