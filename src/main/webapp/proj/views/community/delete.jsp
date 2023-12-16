@@ -24,7 +24,7 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-<form name="writeFrm" method="post" action="/mvcboard/pass.do" onsubmit="return validateForm(this);">
+<form name="writeFrm" method="post" action="/pass.do" onsubmit="return validateForm(this);">
     <input type="hidden" name="idx" value="${param.idx}">
     <input type="hidden" name="mode" value="${param.mode}">
     <table border="1" width="90%">
@@ -36,7 +36,7 @@
             <td colspan="2" align="center">
                 <button type="submit">검증</button>
                 <button type="reset">RESET</button>
-                <button type="button" onclick="location.href='../mvcboard/list.do';">목록</button>
+                <button type="button" onclick="location.href='../list.do';">목록</button>
             </td>
         </tr>
     </table>
