@@ -56,11 +56,14 @@ public class TouritemDAO extends JDBConnect {
         return totalCount;
     }
 
-    public List<TouritemDTO> selectListPage(Map<String,Object>map, int start, int end){
+    public List<TouritemDTO> selectListPage(Map<String,Object>map, int page, int perPage){
         //쿼리 결과를 담을 변수
         List<TouritemDTO> bbs = new ArrayList<TouritemDTO>();
 
         int andCount = map.size() - 1;
+
+        String start = Integer.toString((page - 1) * perPage + 1);
+        String end = Integer.toString(page * perPage);
 
         //쿼리문 작성
         String query = "SELECT * FROM ("
@@ -103,8 +106,8 @@ public class TouritemDAO extends JDBConnect {
 
         try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, map.get("start").toString());
-            psmt.setString(2, map.get("end").toString());
+            psmt.setString(1, start);
+            psmt.setString(2, end);
             rs = psmt.executeQuery();
 
             while (rs.next()){
