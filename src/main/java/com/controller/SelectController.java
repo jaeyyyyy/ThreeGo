@@ -3,9 +3,11 @@ package com.controller;
 import com.DAO.Cat2DAO;
 import com.DAO.Cat3DAO;
 import com.DAO.SigunguDAO;
+import com.DAO.TouritemDAO;
 import com.DTO.Cat2DTO;
 import com.DTO.Cat3DTO;
 import com.DTO.SigunguDTO;
+import com.DTO.TouritemDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -47,21 +49,27 @@ public class SelectController extends HttpServlet {
 
         reader.close();
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
 
         if(area != null) map.put("area", area);
-        if(sigungu != null) map.put("area", sigungu);
-        if(cat1 != null) map.put("area", "'"+ cat1 +"'");
-        if(cat2 != null) map.put("area", "'"+ cat2 +"'");
-        if(cat3 != null) map.put("area", "'"+ cat3 +"'");
+        if(sigungu != null) map.put("sigungu", sigungu);
+        if(cat1 != null) map.put("cat1", "'"+ cat1 +"'");
+        if(cat2 != null) map.put("cat2", "'"+ cat2 +"'");
+        if(cat3 != null) map.put("cat3", "'"+ cat3 +"'");
+        if(type != null) map.put("type", type);
 
         SigunguDAO si_dao = new SigunguDAO();
         Cat2DAO cat2_dao = new Cat2DAO();
         Cat3DAO cat3_dao = new Cat3DAO();
+        TouritemDAO ti_dao = new TouritemDAO();
 
         List<SigunguDTO> sigunguList = si_dao.selectList(area);
         List<Cat2DTO> cat2List = cat2_dao.selectList(cat1);
         List<Cat3DTO> cat3List = cat3_dao.selectList(cat1, cat2);
+
+        int totalCount = ti_dao.selectCount(map);
+        List<TouritemDTO> touritemList = ti_dao.selectList(map);
+
 //        for(SigunguDTO dto : sigunguList){
 //            System.out.println(dto.getSigungu_name());
 //        }
@@ -74,6 +82,7 @@ public class SelectController extends HttpServlet {
         JSONArray sigunguArr = new JSONArray();
         JSONArray cat2Arr = new JSONArray();
         JSONArray cat3Arr = new JSONArray();
+        JSONArray touritemArr = new JSONArray();
 
         for(SigunguDTO dto : sigunguList){
             JSONObject dtoObj = new JSONObject();
@@ -100,9 +109,31 @@ public class SelectController extends HttpServlet {
             cat3Arr.add(dtoObj);
         }
 
+        for(TouritemDTO dto : touritemList){
+            JSONObject dtoObj = new JSONObject();
+            dtoObj.put("contentid", dto.getContentid());
+            dtoObj.put("cat1", dto.getCat1());
+            dtoObj.put("cat2", dto.getCat2());
+            dtoObj.put("cat3", dto.getCat3());
+            dtoObj.put("areacode", dto.getAreacode());
+            dtoObj.put("contenttypeid", dto.getContenttypeid());
+            dtoObj.put("addr1", dto.getAddr1());
+            dtoObj.put("addr2", dto.getAddr2());
+            dtoObj.put("firstimage", dto.getFirstimage());
+            dtoObj.put("mapx", dto.getMapx());
+            dtoObj.put("mapy", dto.getMapy());
+            dtoObj.put("mlevel", dto.getMlevel());
+            dtoObj.put("sigungucode", dto.getSigungucode());
+            dtoObj.put("tel", dto.getTel());
+            dtoObj.put("title", dto.getTitle());
+            touritemArr.add(dtoObj);
+        }
+
         json.put("sigunguList", sigunguArr);
         json.put("cat2List", cat2Arr);
         json.put("cat3List", cat3Arr);
+        json.put("totalCount", totalCount);
+        json.put("touritemList", touritemArr);
 
         System.out.println(json);
 
