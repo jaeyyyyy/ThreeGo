@@ -1,6 +1,10 @@
 package com.controller;
 
+import com.DAO.Cat2DAO;
+import com.DAO.Cat3DAO;
 import com.DAO.SigunguDAO;
+import com.DTO.Cat2DTO;
+import com.DTO.Cat3DTO;
 import com.DTO.SigunguDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/select.do")
 public class SelectController extends HttpServlet {
@@ -41,29 +47,62 @@ public class SelectController extends HttpServlet {
 
         reader.close();
 
-        if(area != null) System.out.println("area: " + area);
-        if(sigungu != null) System.out.println("sigungu: " + sigungu);
+        Map<String, String> map = new HashMap<>();
+
+        if(area != null) map.put("area", area);
+        if(sigungu != null) map.put("area", sigungu);
+        if(cat1 != null) map.put("area", "'"+ cat1 +"'");
+        if(cat2 != null) map.put("area", "'"+ cat2 +"'");
+        if(cat3 != null) map.put("area", "'"+ cat3 +"'");
 
         SigunguDAO si_dao = new SigunguDAO();
+        Cat2DAO cat2_dao = new Cat2DAO();
+        Cat3DAO cat3_dao = new Cat3DAO();
+
         List<SigunguDTO> sigunguList = si_dao.selectList(area);
-        for(SigunguDTO dto : sigunguList){
-            System.out.println(dto.getSigungu_name());
-        }
+        List<Cat2DTO> cat2List = cat2_dao.selectList(cat1);
+        List<Cat3DTO> cat3List = cat3_dao.selectList(cat1, cat2);
+//        for(SigunguDTO dto : sigunguList){
+//            System.out.println(dto.getSigungu_name());
+//        }
 
         si_dao.close();
+        cat2_dao.close();
+        cat3_dao.close();
 
         JSONObject json = new JSONObject();
-        JSONArray dtoArr = new JSONArray();
+        JSONArray sigunguArr = new JSONArray();
+        JSONArray cat2Arr = new JSONArray();
+        JSONArray cat3Arr = new JSONArray();
 
         for(SigunguDTO dto : sigunguList){
             JSONObject dtoObj = new JSONObject();
             dtoObj.put("s_sigungucode", dto.getS_sigungucode());
             dtoObj.put("s_areacode", dto.getS_areacode());
             dtoObj.put("sigungu_name", dto.getSigungu_name());
-            dtoArr.add(dtoObj);
+            sigunguArr.add(dtoObj);
         }
 
-        json.put("sigunguList", dtoArr);
+        for(Cat2DTO dto : cat2List){
+            JSONObject dtoObj = new JSONObject();
+            dtoObj.put("cat2", dto.getCat2());
+            dtoObj.put("cat1", dto.getCat1());
+            dtoObj.put("cat2_name", dto.getCat2_name());
+            cat2Arr.add(dtoObj);
+        }
+
+        for(Cat3DTO dto : cat3List){
+            JSONObject dtoObj = new JSONObject();
+            dtoObj.put("cat3", dto.getCat3());
+            dtoObj.put("cat2", dto.getCat2());
+            dtoObj.put("cat1", dto.getCat1());
+            dtoObj.put("cat3_name", dto.getCat3_name());
+            cat3Arr.add(dtoObj);
+        }
+
+        json.put("sigunguList", sigunguArr);
+        json.put("cat2List", cat2Arr);
+        json.put("cat3List", cat3Arr);
 
         System.out.println(json);
 

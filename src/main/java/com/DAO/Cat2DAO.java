@@ -3,8 +3,46 @@ package com.DAO;
 import com.common.JDBConnect;
 import com.DTO.Cat2DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cat2DAO extends JDBConnect {
     public Cat2DAO() {  super();  }
+
+    public List<Cat2DTO> selectList(String cat1){
+        //쿼리 결과를 담을 변수
+        List<Cat2DTO> cat2List = new ArrayList<Cat2DTO>();
+
+        //쿼리문 작성
+        String query = "SELECT * FROM t_cat2"
+                + " WHERE cat1 = '" + cat1 +"'"
+                + " ORDER BY cat2 ASC";
+
+        System.out.println(query);
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()){
+                //게시물 하나의 내용을 저장
+                Cat2DTO dto = new Cat2DTO();
+
+                dto.setCat2(rs.getString("cat2"));
+                dto.setCat1(rs.getString("cat1"));
+                dto.setCat2_name(rs.getString("cat2_name"));
+
+                cat2List.add(dto);
+            }
+
+
+        }catch (Exception e ){
+            e.printStackTrace();
+            System.out.println("selectList 오류 발생");
+        }
+
+        return cat2List;
+    }
 
     public int insertCat2(Cat2DTO dto){
         int result = 1;

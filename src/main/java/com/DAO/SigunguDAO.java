@@ -11,7 +11,7 @@ public class SigunguDAO extends JDBConnect {
 
     public List<SigunguDTO> selectList(String areacode){
         //쿼리 결과를 담을 변수
-        List<SigunguDTO>sigunguList = new ArrayList<SigunguDTO>();
+        List<SigunguDTO> sigunguList = new ArrayList<SigunguDTO>();
 
         //쿼리문 작성
         String query = "SELECT * FROM t_sigungu"

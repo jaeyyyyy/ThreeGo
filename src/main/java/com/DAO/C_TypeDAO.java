@@ -1,20 +1,19 @@
 package com.DAO;
 
+import com.DTO.C_TypeDTO;
 import com.common.JDBConnect;
-import com.DTO.Cat1DTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cat1DAO extends JDBConnect {
-    public Cat1DAO() {  super();  }
+public class C_TypeDAO extends JDBConnect {
 
-    public List<Cat1DTO> selectList(){
+    public List<C_TypeDTO> selectList(){
         //쿼리 결과를 담을 변수
-        List<Cat1DTO> cat1List = new ArrayList<Cat1DTO>();
+        List<C_TypeDTO> c_typeList = new ArrayList<C_TypeDTO>();
 
         //쿼리문 작성
-        String query = "SELECT * FROM t_cat1 ORDER BY cat1 ASC";
+        String query = "SELECT * FROM t_c_type ORDER BY contenttypeid ASC";
 
         try {
             stmt = con.createStatement();
@@ -22,12 +21,12 @@ public class Cat1DAO extends JDBConnect {
 
             while (rs.next()){
                 //게시물 하나의 내용을 저장
-                Cat1DTO dto = new Cat1DTO();
+                C_TypeDTO dto = new C_TypeDTO();
 
-                dto.setCat1(rs.getString("cat1"));
-                dto.setCat1_name(rs.getString("cat1_name"));
+                dto.setContenttypeid(rs.getInt("contenttypeid"));
+                dto.setCtype_name(rs.getString("ctype_name"));
 
-                cat1List.add(dto);
+                c_typeList.add(dto);
             }
 
 
@@ -36,24 +35,24 @@ public class Cat1DAO extends JDBConnect {
             System.out.println("selectList 오류 발생");
         }
 
-        return cat1List;
+        return c_typeList;
     }
 
-    public int insertCat1(Cat1DTO dto){
+    public int insertArea(C_TypeDTO dto){
         int result = 1;
 
         try {
             //쿼리 작성
-            String query = "INSERT INTO t_cat1 ("
-                    + " cat1, cat1_name)"
+            String query = "INSERT INTO t_c_type ("
+                    + " contenttypeid, ctype_name)"
                     + " VALUES(?,?)";
             psmt = con.prepareStatement(query);
-            psmt.setString(1,dto.getCat1());
-            psmt.setString(2,dto.getCat1_name());
+            psmt.setInt(1,dto.getContenttypeid());
+            psmt.setString(2,dto.getCtype_name());
 
             result = psmt.executeUpdate();
         }catch (Exception e){
-            System.out.println("insertCat1 메소드 오류 발생");
+            System.out.println("insertArea 메소드 오류 발생");
             e.printStackTrace();
         }
 
@@ -69,7 +68,7 @@ public class Cat1DAO extends JDBConnect {
             if(psmt != null) psmt.close();
             if(con != null) con.close();
 
-            System.out.println("대분류 - JDBC 자원 해제");
+            System.out.println("컨텐츠타입 - JDBC 자원 해제");
         }catch (Exception e){
             e.printStackTrace();
         }
