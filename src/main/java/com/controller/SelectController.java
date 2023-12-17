@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,11 +69,19 @@ public class SelectController extends HttpServlet {
         List<Cat3DTO> cat3List = cat3_dao.selectList(cat1, cat2);
 
         int totalCount = ti_dao.selectCount(map);
-        List<TouritemDTO> touritemList = ti_dao.selectList(map);
 
-//        for(SigunguDTO dto : sigunguList){
-//            System.out.println(dto.getSigungu_name());
-//        }
+//        /* 페이징 처리 */
+//        String pageStr = cropValue(result, "\"page\":\"");
+//        int page = 1;
+//        if(pageStr != null) page = Integer.parseInt(pageStr);
+//
+//        ServletContext app = getServletContext();
+//        int pageSize = Integer.parseInt(app.getInitParameter("POSTS_PER_PAGE"));
+//        int blockPage = Integer.parseInt(app.getInitParameter("POSTS_PER_BLOCK"));
+//        int start = (page -1) * pageSize +1;
+//        int end = page * pageSize;
+//        List<TouritemDTO> touritemList = ti_dao.selectListPage(map, start, end);
+        List<TouritemDTO> touritemList = ti_dao.selectList(map);
 
         si_dao.close();
         cat2_dao.close();

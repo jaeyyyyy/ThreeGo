@@ -56,6 +56,89 @@ public class TouritemDAO extends JDBConnect {
         return totalCount;
     }
 
+    public List<TouritemDTO> selectListPage(Map<String,Object>map, int start, int end){
+        //쿼리 결과를 담을 변수
+        List<TouritemDTO> bbs = new ArrayList<TouritemDTO>();
+
+        int andCount = map.size() - 1;
+
+        //쿼리문 작성
+        String query = "SELECT * FROM ("
+                + " SELECT Tb.*, ROWNUM rNUM FROM ("
+                + "SELECT * FROM touritem";
+        if(map.size() > 0){
+            query += " WHERE ";
+            if(map.containsKey("area")){
+                query += "areacode = " + map.get("area") + " ";
+                if(andCount > 0) query += "AND ";
+                andCount--;
+            }
+            if(map.containsKey("sigungu")){
+                query += "sigungucode = " + map.get("sigungu") + " ";
+                if(andCount > 0) query += "AND ";
+                andCount--;
+            }
+            if(map.containsKey("cat1")){
+                query += "cat1 = " + map.get("cat1") + " ";
+                if(andCount > 0) query += "AND ";
+                andCount--;
+            }
+            if(map.containsKey("cat2")){
+                query += "cat2 = " + map.get("cat2") + " ";
+                if(andCount > 0) query += "AND ";
+                andCount--;
+            }
+            if(map.containsKey("cat3")){
+                query += "cat3 = " + map.get("cat3") + " ";
+                if(andCount > 0) query += "AND ";
+            }
+            if(map.containsKey("type")){
+                query += "contenttypeid = " + map.get("type") + " ";
+            }
+        }
+        query += " ORDER BY contentid ASC"
+                +" ) Tb"
+                +" )"
+                +" WHERE rNUM BETWEEN ? AND ? ";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, map.get("start").toString());
+            psmt.setString(2, map.get("end").toString());
+            rs = psmt.executeQuery();
+
+            while (rs.next()){
+                //게시물 하나의 내용을 저장
+                TouritemDTO dto = new TouritemDTO();
+
+                dto.setContentid(rs.getString("contentid"));
+                dto.setCat1(rs.getString("cat1"));
+                dto.setCat2(rs.getString("cat2"));
+                dto.setCat3(rs.getString("cat3"));
+                dto.setAreacode(rs.getString("areacode"));
+                dto.setContenttypeid(rs.getString("contenttypeid"));
+                dto.setAddr1(rs.getString("addr1"));
+                dto.setAddr2(rs.getString("addr2"));
+                dto.setFirstimage(rs.getString("firstimage"));
+                dto.setMapx(rs.getString("mapx"));
+                dto.setMapy(rs.getString("mapy"));
+                dto.setMlevel(rs.getString("mlevel"));
+                dto.setSigungucode(rs.getString("sigungucode"));
+                dto.setTel(rs.getString("tel"));
+                dto.setTitle(rs.getString("title"));
+
+                bbs.add(dto);
+            }
+
+
+        }catch (Exception e ){
+            e.printStackTrace();
+            System.out.println("selectList 오류 발생");
+        }
+
+        return bbs;
+    }
+
     public List<TouritemDTO> selectList(Map<String,Object>map){
         //쿼리 결과를 담을 변수
         List<TouritemDTO> bbs = new ArrayList<TouritemDTO>();
