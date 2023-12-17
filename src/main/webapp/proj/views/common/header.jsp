@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="../common/commonstyle.css" rel="stylesheet"/>
+    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
 </head>
 <body>
 <div class="top-header" style="height: 10rem;">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="../index.jsp">
+            <a class="navbar-brand" href="/proj/views/index.jsp">
                 <i class="bi-pin-map-fill m-auto text-primary"></i>
                 <!--<img src="#" target="blank" alt="logo" height="100">-->
             </a>

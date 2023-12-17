@@ -25,7 +25,7 @@ public class BoardDAO extends DBConnPool {
             rs = stmt.executeQuery(query);
             rs.next();
             totalCount = rs.getInt(1);
-        }catch (Exception e ){
+        }catch (Exception e){
             e.printStackTrace();
             System.out.println("selectCount 오류 발생");
         }

@@ -11,7 +11,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <title>글 작성</title>
+    <title>게시판 글 상세보기</title>
 </head>
 <body>
 <!-- header-->

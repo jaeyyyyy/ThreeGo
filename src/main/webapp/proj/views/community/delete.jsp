@@ -11,7 +11,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <title>Title</title>
+    <title>게시판 글 삭제하기</title>
     <script type="text/javascript">
         function validateForm(form){
             if(!form.pass.value){
