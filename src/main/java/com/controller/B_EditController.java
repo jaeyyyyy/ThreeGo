@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/edit.do")
+@WebServlet("/proj/views/community/edit.do")
 @MultipartConfig(maxFileSize = 1048576, maxRequestSize = 10485760)
 public class B_EditController extends HttpServlet {
     @Override

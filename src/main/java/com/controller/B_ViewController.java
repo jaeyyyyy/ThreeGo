@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet("/view.do")
+@WebServlet("/proj/views/community/view.do")
 public class B_ViewController extends HttpServlet {
         @Override
         protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +42,6 @@ public class B_ViewController extends HttpServlet {
             // 뷰로 포워드
             req.setAttribute("dto",dto);
             req.setAttribute("isImage",isImage);
-            req.getRequestDispatcher("/proj/views/community/bbs/view.jsp").forward(req,resp);
+            req.getRequestDispatcher("/proj/views/community/view.jsp").forward(req,resp);
         }
 }

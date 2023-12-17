@@ -89,7 +89,7 @@ public class BoardDAO extends DBConnPool {
         try {
             //쿼리 작성
             String query = "INSERT INTO boardtable ( "
-                    + "idx,name,title,content,ofile,sfile,pass)"
+                    + "idx,name,title,content,postdate,ofile,sfile,pass)"
                     + "VALUES( "
                     + "seq_board_num.nextval, ?,?,?,?,?,?)";
             psmt = con.prepareStatement(query);
@@ -130,8 +130,8 @@ public class BoardDAO extends DBConnPool {
                 dto.setOfile(rs.getString("ofile"));
                 dto.setSfile(rs.getString("sfile"));
                 dto.setDowncount(rs.getInt("downcount"));
-                dto.setVisitcount(rs.getInt("visitcount"));
                 dto.setPass(rs.getString("pass"));
+                dto.setVisitcount(rs.getInt("visitcount"));
 
 
             }

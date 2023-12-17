@@ -10,6 +10,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
+    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
     <title>게시판 글 작성하기</title>
     <script>
         function validateForm(form){
@@ -39,7 +40,7 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-<form name="writeFrm" method="post" enctype="multipart/form-data" action="../mvcboard/write.do" onsubmit="return validateForm(this);">
+<form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
     <table border="1" width="90%">
         <tr>
             <td>작성자</td>
@@ -69,7 +70,7 @@
             <td colspan="2" align="center">
                 <button type="submit">작성완료</button>
                 <button type="reset">다시입력</button>
-                <button type="button" onclick="location.href='../mvcboard/list.do';">목록보기</button>
+                <button type="button" onclick="location.href='../community/list.do';">목록보기</button>
             </td>
         </tr>
     </table>

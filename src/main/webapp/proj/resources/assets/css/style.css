@@ -3,7 +3,7 @@
     transition: 0.2s ease-in-out;
 }
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     cursor: pointer;
 }
 .card img {
@@ -78,12 +78,14 @@
     }
 }
 
-/*커뮤니티 게시판 view */
-.card_text {
+/*커뮤니티 게시판 list */
+.card-text {
     text-overflow:ellipsis;
     overflow:hidden;
     white-space:nowrap;
-    /*width: 100%;*/
+    width: 100%;
 }
-
+.card-footer .text-muted {
+    display: block;
+}
 

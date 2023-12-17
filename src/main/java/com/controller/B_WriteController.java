@@ -6,11 +6,18 @@ import com.util.FileUtil;
 import com.util.JSFunction;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/proj/views/community/write.do")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 1, // 1mb
+        maxRequestSize = 1024 * 1024 * 10 //10mb
+)
 public class B_WriteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,9 +57,9 @@ public class B_WriteController extends HttpServlet {
         dao.close();
 
         if(result == 1) { // 글쓰기 완료
-            resp.sendRedirect("../list.do");
+            resp.sendRedirect("/community/list.do");
         } else {
-            JSFunction.alertLocation(resp,"글쓰기에 실패했습니다.","../write.do");
+            JSFunction.alertLocation(resp,"글쓰기에 실패했습니다.","/community/write.do");
         }
     }
 }
