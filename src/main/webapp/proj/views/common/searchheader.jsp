@@ -1,13 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="common/commonstyle.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="top-header" style="height: 30rem;">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="../index.jsp">
+            <a class="navbar-brand" href="../views/index.jsp">
                 <i class="bi-pin-map-fill m-auto text-primary"></i>
                 <!--<img src="#" target="blank" alt="logo" height="100">-->
             </a>
@@ -21,7 +20,7 @@
                         <a class="nav-link" href="#">여행일정</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/proj/views/community/list.do">커뮤니티</a>
+                        <a class="nav-link" href="../views/community/list.do">커뮤니티</a>
                     </li>
 
 

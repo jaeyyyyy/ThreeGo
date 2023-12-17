@@ -1,39 +1,68 @@
 package com.DAO;
 import com.DTO.UserDTO;
+import com.bean.UserBean;
 import com.common.DBConnPool;
+
+import java.sql.DriverManager;
+import java.util.Vector;
 
 public class UserDAO extends DBConnPool {
 
-    public UserDAO(){
-        super();
-    }
 
-    //받아온 파라미터로 아이디/패스워드 일치하는 회원정보 반환
-    public UserDTO getUserDTO(String uid, String upass){
-
-        UserDTO dto = new UserDTO(); //회원정보 DTO 객체 생성
-        String sql = "SELECT * FROM user WHERE u_id =? AND u_pw =?";
-
+    //회원 한사람에 대한 정보를 저장하는 메소드
+    public void insertMember(UserBean bean) {
         try {
-            //쿼리 실행
-            psmt = con.prepareStatement(sql);
-            psmt.setString(1,uid);
-            psmt.setString(2,upass);
-            rs = psmt.executeQuery(); //쿼리문 실행
+            //쿼리 준비
+            String sql = "INSERT INTO member VALUES(?, ?, ?, ?, ?)";
 
-            if(rs.next()){
-                //쿼리 결과를 DTO 저장한 뒤 반환
-                dto.setId(rs.getString("id"));
-                dto.setPass(rs.getString("pass"));
-                dto.setName(rs.getString("name"));
-                dto.setEmail(rs.getString("email"));
-            }
-        }catch (Exception e){
+            //쿼리 실행창 객체 선언
+            psmt = con.prepareStatement(sql);
+
+            //?에 하나씩 대입
+            psmt.setString(1, bean.getId());
+            psmt.setString(2, bean.getPw1());
+            psmt.setString(3, bean.getPw2());
+            psmt.setString(4, bean.getName());
+            psmt.setString(5, bean.getEmail());
+
+            psmt.executeQuery();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("회원 저장실패");
             e.printStackTrace();
         }
-
-        return dto;
     }
 
+    //회원의 정보 리턴 Vector에 넣어준다. Vector는 ArrayList와 비슷.
+    public Vector<UserBean> getAllMember() {
+        Vector<UserBean> v = new Vector<>();
+        try {
+            //쿼리 준비
+            String sql = "SELECT * FROM member";
+            //쿼리실행창 객체 선언
+            psmt = con.prepareStatement(sql);
+            //쿼리실행
+            rs = psmt.executeQuery();
+            //반복문 돌면서 회원 정보 저장
+            while (rs.next()) {
+                UserBean bean = new UserBean();
+                bean.setId(rs.getString(1));
+                bean.setPw1(rs.getString(2));
+                bean.setPw2(rs.getString(3));
+                bean.setName(rs.getString(4));
+                bean.setEmail(rs.getString(5));
+                //벡터에 빈클래스 저장
+                v.add(bean);
 
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("정보 리턴 실패 ");
+        }
+
+        return v;
+
+
+    }
 }

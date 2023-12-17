@@ -26,6 +26,7 @@ public class JDBConnect {
 
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println("DB 연결 실패");
         }
     }
 

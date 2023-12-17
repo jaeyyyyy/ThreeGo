@@ -11,6 +11,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
+    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
     <title>커뮤니티</title>
 </head>
 <body>
@@ -31,7 +32,24 @@
             </tr>
         </table>
     </form>
-    <%--게시물 목록 테이블 --%>
+
+    <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card card-item">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>
+                    <p class="card-text">여기에 내용이 들어가는데 내용이 많아지면 ...로 줄입니다. css를 이용해서</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>
+                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    게시물 목록 테이블
     <table border="1" width="90%">
         <tr>
             <th width="10%">번호</th>
@@ -71,32 +89,35 @@
         </c:choose>
     </table>
 
+<div class="card-deck row row-cols-1 row-cols-md-3 g-4">
 
 <c:choose>
     <c:when test="${empty boardList}">
-        <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <p class="card-text">등록된 게시물이 없습니다.</p>
-                </div>
+        <div class="col">
+            <p class="card-text">등록된 게시물이 없습니다.</p>
         </div>
     </c:when>
     <c:otherwise>
+        <c:forEach items="${boardList}" var="row" varStatus="loop">
+            <a href="../community/view.do?idx=${row.idx}">
+                <div class="col">
+                    <div class="card card-item">
+                        <img class="card-img-top" src="${row.ofile}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">${row.title}</h5>
+                            <p class="card-text">${row.content}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">${row.name}</small>
+                            <small class="text-muted">${row.postdate}</small>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </c:forEach>
     </c:otherwise>
 </c:choose>
-<%--    <div class="card-deck row row-cols-1 row-cols-md-3 g-4">--%>
-<%--        <div class="col">--%>
-<%--            <div class="card card-item">--%>
-<%--                <img class="card-img-top" src="..." alt="Card image cap">--%>
-<%--                <div class="card-body">--%>
-<%--                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>--%>
-<%--                    <p class="card-text">여기에 내용이 들어가는데 내용이 많아지면 ...로 줄입니다. css를 이용해서</p>--%>
-<%--                </div>--%>
-<%--                <div class="card-footer">--%>
-<%--                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>--%>
-<%--                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
+</div>
 
 <%--        <div class="col">--%>
 <%--            <div class="card card-item">--%>
@@ -171,11 +192,11 @@
                 ${map.pagingImg}
             </td>
             <td width="100">
-                <button type="button" onclick="location.href='../board/write.do';">글쓰기</button>
+                <button type="button" onclick="location.href='../community/write.do';">글쓰기</button>
             </td>
         </tr>
     </table>
-</div>
+
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
 </body>
