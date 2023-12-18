@@ -14,10 +14,13 @@
 <%--    <link href="../common/commonstyle.css?after" rel="stylesheet"/>--%>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- toast grid -->
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.1/tui-pagination.js"></script>
     <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <link rel="stylesheet" href=https://uicdn.toast.com/tui.pagination/v3.4.1/tui-pagination.css />
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
 
     <script>
+
         $(document).ready(function (){
             checkCategory();
             search();
@@ -109,14 +112,20 @@
                 scrollX : false,
                 scrollY : false,
 
-                columns : [ {
-                    header : '제목',
-                    name : 'title'
-                }],
+                columns : [
+                    {
+                        header : 'content Id',
+                        name : 'contentid'
+                    },
+                    {
+                        header : '제목',
+                        name : 'title'
+                    }
+                ],
 
                 pageOptions: {
                     useClient: true,	// front에서만 페이징 하는 속성
-                    perPage: 5
+                    perPage: 10
                 }
 
             });
@@ -131,10 +140,6 @@
 
     </script>
     <style>
-        .touritem-img {
-            width: 400px;
-            height: 300px;
-        }
     </style>
     <title>관광지 정보 | 3GO</title>
 </head>

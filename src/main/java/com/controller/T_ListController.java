@@ -63,7 +63,7 @@ public class T_ListController extends HttpServlet {
             dtoObj.put("mlevel", dto.getMlevel());
             dtoObj.put("sigungucode", dto.getSigungucode());
             dtoObj.put("tel", dto.getTel());
-            dtoObj.put("title", dto.getTitle());
+            dtoObj.put("title", "<a href='#'>" + dto.getTitle() + "</a>");
             touritemArr.add(dtoObj);
         }
 
