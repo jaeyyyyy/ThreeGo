@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
@@ -36,7 +37,7 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-<form name="writeFrm" method="post" enctype="multipart/form-data" action="../edit.do" onsubmit="return validateForm(this);">
+<form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm(this);">
     <input type="hidden" name="idx" value="${dto.idx}"/>
     <input type="hidden" name="prevOfile" value="${dto.ofile}"/>
     <input type="hidden" name="prevSfile" value="${dto.sfile}"/>

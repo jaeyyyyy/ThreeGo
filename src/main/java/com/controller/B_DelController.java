@@ -37,7 +37,7 @@ public class B_DelController extends HttpServlet {
             if(mode.equals("edit")) {
                 HttpSession session = req.getSession();
                 session.setAttribute("pass", pass);
-                resp.sendRedirect("../edit.do?idx=" + idx);
+                resp.sendRedirect("../community/edit.do?idx=" + idx);
             } else if(mode.equals("delete")) {
                 dao = new BoardDAO();
                 BoardDTO dto = dao.selectView(idx);
@@ -47,7 +47,7 @@ public class B_DelController extends HttpServlet {
                     String savedFileName = dto.getSfile();
                     FileUtil.deleteFile(req,"/upload", savedFileName);
                 }
-                JSFunction.alertLocation(resp,"삭제되었습니다.","../list.do");
+                JSFunction.alertLocation(resp,"삭제되었습니다.","../community/list.do");
             }
         } else {
             JSFunction.alertBack(resp, "비밀번호 검증 실패");

@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
@@ -55,7 +56,7 @@
         <td>
             <c:if test="${not empty dto.ofile}">
                 ${dto.ofile}
-                <a href="../mvcboard/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
+                <a href="../community/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
                     [다운로드]
                 </a>
             </c:if>
@@ -67,9 +68,9 @@
     <%--하단 메뉴--%>
     <tr>
         <td colspan="4" align="center">
-            <button type="button" onclick="location.href='../mvcboard/pass.do?mode=edit&idx=${param.idx}';">수정</button>
-            <button type="button" onclick="location.href='../mvcboard/pass.do?mode=delete&idx=${param.idx}';">삭제</button>
-            <button type="button" onclick="location.href='../mvcboard/list.do';">목록</button>
+            <button type="button" onclick="location.href='../community/del.do?mode=edit&idx=${param.idx}';">수정</button>
+            <button type="button" onclick="location.href='../community/del.do?mode=delete&idx=${param.idx}';">삭제</button>
+            <button type="button" onclick="location.href='../community/list.do';">목록</button>
         </td>
     </tr>
 </table>
