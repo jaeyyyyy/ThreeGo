@@ -61,7 +61,7 @@ public class B_ListController extends HttpServlet{
         dao.close();
 
         //뷰에 전달할 변수 추가
-        String pagingImg = BoardPage.pagingStr(totalCount,pageSize,blockPage,pageNum,"/community/list.do");
+        String pagingImg = BoardPage.pagingStr(totalCount,pageSize,blockPage,pageNum,"../community/list.do");
         map.put("pagingImg", pagingImg);
         map.put("totalCount", totalCount);
         map.put("pageSize", pageSize);
