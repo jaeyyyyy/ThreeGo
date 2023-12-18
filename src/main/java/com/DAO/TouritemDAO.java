@@ -222,6 +222,43 @@ public class TouritemDAO extends JDBConnect {
         return bbs;
     }
 
+    public TouritemDTO selctView(String contentid){
+        TouritemDTO dto = new TouritemDTO();
+
+        String query = "SELECT * "
+                + "FROM touritem "
+                + "WHERE contentid = ?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, contentid);
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                dto.setContentid(rs.getString("contentid"));
+                dto.setCat1(rs.getString("cat1"));
+                dto.setCat2(rs.getString("cat2"));
+                dto.setCat3(rs.getString("cat3"));
+                dto.setAreacode(rs.getString("areacode"));
+                dto.setContenttypeid(rs.getString("contenttypeid"));
+                dto.setAddr1(rs.getString("addr1"));
+                dto.setAddr2(rs.getString("addr2"));
+                dto.setFirstimage(rs.getString("firstimage"));
+                dto.setMapx(rs.getString("mapx"));
+                dto.setMapy(rs.getString("mapy"));
+                dto.setMlevel(rs.getString("mlevel"));
+                dto.setSigungucode(rs.getString("sigungucode"));
+                dto.setTel(rs.getString("tel"));
+                dto.setTitle(rs.getString("title"));
+            }
+        }catch (Exception e){
+            System.out.println("selectView 오류 발생");
+            e.printStackTrace();
+        }
+
+        return dto;
+    }
+
     public int insertTouritem(TouritemDTO dto){
         int result = 1;
 

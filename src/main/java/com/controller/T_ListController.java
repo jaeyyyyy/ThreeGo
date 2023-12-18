@@ -26,12 +26,6 @@ public class T_ListController extends HttpServlet {
         String cat3 = req.getParameter("cat3");
         String type = req.getParameter("type");
 
-        System.out.println("area: " + area);
-        System.out.println("sigungu: " + sigungu);
-
-        int page = Integer.parseInt(req.getParameter("page"));
-        int perPage = 16;
-
         Map<String, Object> map = new HashMap<>();
 
         if(!area.isEmpty()) map.put("area", area);
@@ -63,7 +57,7 @@ public class T_ListController extends HttpServlet {
             dtoObj.put("mlevel", dto.getMlevel());
             dtoObj.put("sigungucode", dto.getSigungucode());
             dtoObj.put("tel", dto.getTel());
-            dtoObj.put("title", "<a href='#'>" + dto.getTitle() + "</a>");
+            dtoObj.put("title", "<a href='../info/content.do?contentid=" + dto.getContentid() + "'>" + dto.getTitle() + "</a>");
             touritemArr.add(dtoObj);
         }
 
@@ -72,8 +66,6 @@ public class T_ListController extends HttpServlet {
         JSONObject returnData = new JSONObject();
         returnData.put("result",true);
         returnData.put("data",data);
-
-//        System.out.println(returnData);
 
         resp.setContentType("application/x-json; charset=utf-8");
         resp.getWriter().print(returnData);

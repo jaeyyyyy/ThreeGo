@@ -7,13 +7,13 @@
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" type="text/css" />
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<%--    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">--%>
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
 <%--    <link href="../common/commonstyle.css?after" rel="stylesheet"/>--%>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <title>Title</title>
+    <title>관광지 정보 | 3GO</title>
 </head>
 <body>
     <h2 id="test">test</h2>
