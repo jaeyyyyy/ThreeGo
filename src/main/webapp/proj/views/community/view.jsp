@@ -46,9 +46,15 @@
         <td>내용</td>
         <td colspan="3" height="100">
             ${dto.content}
-            <c:if test="${not empty dto.ofile and isImage == true}">
-                <br><img src="../upload/${dto.sfile}" style="max-width: 100%"/>
-            </c:if>
+            <c:choose>
+                <c:when test="${not empty dto.ofile and isImage == true}">
+                    <br><img src="../../../upload/${dto.sfile}" style="max-width: 100%"/>
+                </c:when>
+                <c:otherwise>
+                    <br>사진이없어염<br>
+                </c:otherwise>
+            </c:choose>
+
         </td>
     </tr>
     <tr>

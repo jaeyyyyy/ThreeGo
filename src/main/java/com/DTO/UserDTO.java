@@ -3,11 +3,10 @@ package com.DTO;
 public class UserDTO {
     //유저 변수 선언
     private String id;
-    private String pass;
+    private String pw1;
+    private String pw2;
     private String name;
     private String email;
-//    private String file;
-//    private String about;
 
     public String getId() {
         return id;
@@ -17,12 +16,20 @@ public class UserDTO {
         this.id = id;
     }
 
-    public String getPass() {
-        return pass;
+    public String getPw1() {
+        return pw1;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPw1(String pw1) {
+        this.pw1 = pw1;
+    }
+
+    public String getPw2() {
+        return pw2;
+    }
+
+    public void setPw2(String pw2) {
+        this.pw2 = pw2;
     }
 
     public String getName() {

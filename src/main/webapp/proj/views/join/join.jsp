@@ -18,14 +18,18 @@
 
     <!-- 자바스크립트(유효성검사 해당) -->
     <script src ="signUpjs3.js"></script>
-    <!-- 다음 우편번호찾기 API -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <body>
+<script>
+    function idCheck(){
+        window.open("idCheck.jsp", "_blank", "width=300px height=100px");
+    }
+</script>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap" class="wrapper">
-    <form action="Proc.do" method ="post">
+    <form action="JoinController.do" method ="post">
         <!-- 회원가입 타이틀부분 -->
         <div id="header">
             <h1 class="text-center">
@@ -43,20 +47,20 @@
                         <!-- 아이디 입력 -->
                         <input type="text" id="id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요.">
                         <!--아이디 중복확인-->
-                        <input type="button" value="중복 확인" class="btn btn-primary btn-sm" onclick="">
+                        <input type="button" value="중복 확인" class="btn btn-primary btn-sm" onclick="idCheck()";>
                     </div>
                 </div>
 
                 <div class="userInput m-5">
                     <!-- 비밀번호 입력 -->
                     <h4 class="list">비밀번호</h4>
-                    <input type="password" id="pw" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                    <input type="password" id="pw1" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
                 </div>
 
                 <!-- 비밀번호 재확인 입력 -->
                 <div class="userInput m-5">
                     <h4 class="list">비밀번호 재확인</h4>
-                    <input type="password" id="pwCheck" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
+                    <input type="password" id="pw2" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
                 </div>
 
                 <!-- 성명 입력 -->
@@ -67,7 +71,7 @@
 
                 <!-- 이메일 입력 -->
                 <div class="userInput m-5">
-                    <h4 class="list">비밀번호 재확인</h4>
+                    <h4 class="list">이메일</h4>
                     <div class="input-group">
                         <input type="password" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
                         <!--이메일 인증-->
@@ -77,7 +81,7 @@
 
                 <%-- 가입버튼--%>
                 <div class="col text-center">
-                    <input type="submit" value="가입" class="btn btn-primary btn-md">
+                    <input type="submit" value="가입" id="joinBtn" class="btn btn-primary btn-md">
                 </div>
 
 
@@ -88,5 +92,21 @@
 </div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+
+<script>
+    $('#joinBtn').click(function(){
+        // 간단한 유효성 검사
+        var pw1=$('input[name=pw1]').val();
+        var pw2=$('input[name=pw2]').val();
+
+        if(pw1!=pw2){
+            alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
+            return false
+        }
+
+        return true;
+    });
+
+</script>
 </body>
 </html>

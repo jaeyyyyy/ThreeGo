@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class B_ListController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //DAO 생성
         BoardDAO dao = new BoardDAO();
+
 
         //뷰에 전달할 맵 생성
         Map<String, Object> map = new HashMap<>();
@@ -58,7 +60,26 @@ public class B_ListController extends HttpServlet{
 
         List<BoardDTO> boardList = dao.selectListPage(map);
 
+
+
+        // 첨부파일이 있으면 첨부파일 출력하게 하기
+        String idx = req.getParameter("idx");
+        BoardDTO dto = dao.selectView(idx);
         dao.close();
+
+        String ext = null, fileName = dto.getSfile();
+        if(fileName != null) {
+            ext = fileName.substring(fileName.lastIndexOf(".")+1);
+        }
+
+        String[] mimeStr = {"png","jpg","gif"};
+        List<String> mimeList = Arrays.asList(mimeStr);
+
+        boolean isImage = false;
+        if(mimeList.contains(ext)) {
+            isImage = true;
+        }
+
 
         //뷰에 전달할 변수 추가
         String pagingImg = BoardPage.pagingStr(totalCount,pageSize,blockPage,pageNum,"../community/list.do");
@@ -69,6 +90,7 @@ public class B_ListController extends HttpServlet{
 
         req.setAttribute("boardList", boardList);
         req.setAttribute("map", map);
+        req.setAttribute("isImage",isImage);
         req.getRequestDispatcher("/proj/views/community/bbs.jsp").forward(req, resp);
     }
 }
