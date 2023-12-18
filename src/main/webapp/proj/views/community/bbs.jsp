@@ -34,22 +34,23 @@
         </table>
     </form>
 
-    <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-            <div class="card card-item">
-                <img class="card-img-top" src="#" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>
-                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>
-                    <p class="card-text">여기에 내용이 들어가는데 내용이 많아지면 ...로 줄입니다. css를 이용해서</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>
-                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>
-                </div>
-            </div>
-        </div>
-    </div>
+    <%--리스트 샘플-->
+<%--    <div class="card-deck row row-cols-1 row-cols-md-3 g-4">--%>
+<%--        <div class="col">--%>
+<%--            <div class="card card-item">--%>
+<%--                <img class="card-img-top" src="#" alt="Card image cap">--%>
+<%--                <div class="card-body">--%>
+<%--                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>--%>
+<%--                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>--%>
+<%--                    <p class="card-text">여기에 내용이 들어가는데 내용이 많아지면 ...로 줄입니다. css를 이용해서</p>--%>
+<%--                </div>--%>
+<%--                <div class="card-footer">--%>
+<%--                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>--%>
+<%--                    <small class="text-muted">작성날짜나 작성자이름을 쓰면 되겟군요</small>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 
 <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
 <c:choose>

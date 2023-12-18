@@ -49,6 +49,10 @@ public class B_EditController extends HttpServlet {
         String title = req.getParameter("title");
         String content = req.getParameter("content");
 
+        System.out.println("idx: " + idx);
+        System.out.println("title: " + title);
+        System.out.println("content: " + content);
+
         // 비밀번호는 session에서 가져옴
         HttpSession session = req.getSession();
         String pass = (String)session.getAttribute("pass");

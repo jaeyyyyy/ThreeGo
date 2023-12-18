@@ -85,7 +85,7 @@ a {
 }
 
 /*커뮤니티 게시판 list */
-.card-text {
+.card-text .card-title {
     text-overflow:ellipsis;
     overflow:hidden;
     white-space:nowrap;
