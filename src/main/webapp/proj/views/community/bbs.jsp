@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
@@ -36,8 +37,9 @@
     <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
         <div class="col">
             <div class="card card-item">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top" src="#" alt="Card image cap">
                 <div class="card-body">
+                    <h5 class="card-title">여기에 제목이 들어갑니다.</h5>
                     <h5 class="card-title">여기에 제목이 들어갑니다.</h5>
                     <p class="card-text">여기에 내용이 들어가는데 내용이 많아지면 ...로 줄입니다. css를 이용해서</p>
                 </div>
@@ -48,46 +50,6 @@
             </div>
         </div>
     </div>
-
-    게시물 목록 테이블
-    <table border="1" width="90%">
-        <tr>
-            <th width="10%">번호</th>
-            <th width="50%">제목</th>
-            <th width="15%">작성자</th>
-            <th width="10%">조회수</th>
-            <th width="15%">작성일</th>
-        </tr>
-        <c:choose>
-            <c:when test="${empty boardList}">
-                <tr>
-                    <td colspan="6" align="center">등록된 게시물이 없습니다.</td>
-                </tr>
-            </c:when>
-            <c:otherwise>
-                <c:forEach items="${boardList}" var="row" varStatus="loop">
-                    <tr align="center">
-                        <td>
-                                ${map.totalCount - (((map.pageNum -1) * mpa.pageSize) + loop.index)}
-                        </td>
-                        <td align="left">
-                            <a href="../board/view.do?idx=${row.idx}">${row.title}</a>
-                        </td>
-                        <td>${row.name}</td>
-                        <td>${row.visitcount}</td>
-                        <td>${row.postdate}</td>
-                        <td>갲
-                            <c:if test="${not empty row.ofile}">
-                                <a href="../board/download.do?ofile=${row.ofile}&sfile=${row.sfile}&idx=${row.idx}">
-                                    [Down]
-                                </a>
-                            </c:if>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
-    </table>
 
 <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
 

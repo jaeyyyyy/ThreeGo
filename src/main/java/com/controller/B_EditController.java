@@ -84,9 +84,9 @@ public class B_EditController extends HttpServlet {
 
         if(result == 1) {
             session.removeAttribute("pass");
-            resp.sendRedirect("../view.do?idx=" + idx);
+            resp.sendRedirect("../community/view.do?idx=" + idx);
         } else {
-            JSFunction.alertLocation(resp, "비밀번호 검증 다시 해주세요", "../view.do?idx=" + idx);
+            JSFunction.alertLocation(resp, "비밀번호 검증 다시 해주세요", "../community/view.do?idx=" + idx);
         }
     }
 }

@@ -57,9 +57,9 @@ public class B_WriteController extends HttpServlet {
         dao.close();
 
         if(result == 1) { // 글쓰기 완료
-            resp.sendRedirect("/community/list.do");
+            resp.sendRedirect("../community/list.do");
         } else {
-            JSFunction.alertLocation(resp,"글쓰기에 실패했습니다.","/community/write.do");
+            JSFunction.alertLocation(resp,"글쓰기에 실패했습니다.","../community/write.do");
         }
     }
 }
