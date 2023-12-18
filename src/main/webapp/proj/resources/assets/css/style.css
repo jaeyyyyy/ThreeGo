@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /*navvar 추가*/
 .card {
     transition: 0.2s ease-in-out;
@@ -9,6 +14,7 @@
 .card img {
     width: 100%;
     height: 12em;
+    object-fit: cover;
 }
 
 

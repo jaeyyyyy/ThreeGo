@@ -52,7 +52,6 @@
     </div>
 
 <div class="card-deck row row-cols-1 row-cols-md-3 g-4">
-
 <c:choose>
     <c:when test="${empty boardList}">
         <div class="col">
@@ -60,18 +59,27 @@
         </div>
     </c:when>
     <c:otherwise>
-        <c:forEach items="${boardList}" var="row" varStatus="loop">
-            <a href="../community/view.do?idx=${row.idx}">
+        <c:forEach items="${boardList}" var="dto" varStatus="loop">
+            <a href="../community/view.do?idx=${dto.idx}">
                 <div class="col">
                     <div class="card card-item">
-                        <img class="card-img-top" src="${row.ofile}" alt="Card image cap">
+                        <div class="card-img-item">
+                            <c:choose>
+                                <c:when test="${not empty dto.ofile == true}">
+                                    <img class="card-img-top" src="../../../upload/${dto.sfile}" alt="Card image cap">
+                                </c:when>
+                                <c:otherwise>
+                                    <img class="card-img-top" src="../../resources/assets/img/no_image.png" alt="Card image cap">
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                         <div class="card-body">
-                            <h5 class="card-title">${row.title}</h5>
-                            <p class="card-text">${row.content}</p>
+                            <h5 class="card-title">${dto.title}</h5>
+                            <p class="card-text">${dto.content}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">${row.name}</small>
-                            <small class="text-muted">${row.postdate}</small>
+                            <small class="text-muted">${dto.name}</small>
+                            <small class="text-muted">${dto.postdate}</small>
                         </div>
                     </div>
                 </div>
