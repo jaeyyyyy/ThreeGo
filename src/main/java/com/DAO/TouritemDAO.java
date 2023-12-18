@@ -104,6 +104,8 @@ public class TouritemDAO extends JDBConnect {
                 +" )"
                 +" WHERE rNUM BETWEEN ? AND ? ";
 
+        System.out.println(query);
+
         try {
             psmt = con.prepareStatement(query);
             psmt.setString(1, start);
@@ -181,6 +183,8 @@ public class TouritemDAO extends JDBConnect {
             }
         }
         query += " ORDER BY contentid ASC";
+
+        System.out.println(query);
 
         try {
             stmt = con.createStatement();

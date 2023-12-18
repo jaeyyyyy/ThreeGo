@@ -26,23 +26,25 @@ public class T_ListController extends HttpServlet {
         String cat3 = req.getParameter("cat3");
         String type = req.getParameter("type");
 
+        System.out.println("area: " + area);
+        System.out.println("sigungu: " + sigungu);
+
         int page = Integer.parseInt(req.getParameter("page"));
         int perPage = 16;
 
         Map<String, Object> map = new HashMap<>();
 
-        if(area != null) map.put("area", area);
-        if(sigungu != null) map.put("sigungu", sigungu);
-        if(cat1 != null) map.put("cat1", "'"+ cat1 +"'");
-        if(cat2 != null) map.put("cat2", "'"+ cat2 +"'");
-        if(cat3 != null) map.put("cat3", "'"+ cat3 +"'");
-        if(type != null) map.put("type", type);
+        if(!area.isEmpty()) map.put("area", area);
+        if(!sigungu.isEmpty()) map.put("sigungu", sigungu);
+        if(!cat1.isEmpty()) map.put("cat1", "'"+ cat1 +"'");
+        if(!cat2.isEmpty()) map.put("cat2", "'"+ cat2 +"'");
+        if(!cat3.isEmpty()) map.put("cat3", "'"+ cat3 +"'");
+        if(!type.isEmpty()) map.put("type", type);
 
         TouritemDAO ti_dao = new TouritemDAO();
-        int totalCount = ti_dao.selectCount(map);
-        List<TouritemDTO> touritemList = ti_dao.selectListPage(map, page, perPage);
+        List<TouritemDTO> touritemList = ti_dao.selectList(map);
 
-        JSONObject json = new JSONObject();
+        JSONObject data = new JSONObject();
         JSONArray touritemArr = new JSONArray();
 
         for(TouritemDTO dto : touritemList){
@@ -65,10 +67,15 @@ public class T_ListController extends HttpServlet {
             touritemArr.add(dtoObj);
         }
 
-        json.put("totalCount", totalCount);
-        json.put("touritemList", touritemArr);
+        data.put("contents", touritemArr);
+
+        JSONObject returnData = new JSONObject();
+        returnData.put("result",true);
+        returnData.put("data",data);
+
+//        System.out.println(returnData);
 
         resp.setContentType("application/x-json; charset=utf-8");
-        resp.getWriter().print(json);
+        resp.getWriter().print(returnData);
     }
 }
