@@ -19,37 +19,7 @@
         })
 
         function checkArea(){
-            let url = '/select.do'
-
-            // 지역 선택
-            $('.areaSelect').click(function (){
-                $.ajax({
-                    url : url,
-                    type: 'POST',
-                    contentType : 'application/json; charset=UTF-8',
-                    dataType: 'json',
-                    data : JSON.stringify({
-                        area : $('input[name=area]:checked').val(),
-                        sigungu : $('input[name=sigungu]:checked').val(),
-                        cat1 : $('input[name=cat1]:checked').val(),
-                        cat2 : $('input[name=cat2]:checked').val(),
-                        cat3 : $('input[name=cat3]:checked').val(),
-                        type : $('input[name=type]:checked').val()
-                    }),
-                    success : function(data){
-                        let sigunguList = data.sigunguList;
-                        $('#sigunguLabel').html("<br/><h4>- 시군구 -</h4>")
-                        $('#sigungu').html("")
-                        sigunguList.forEach(function (sigungu){
-                            $('#sigungu').append(
-                                '<input type="radio" class="sigunguSelect" name="sigungu" value="' + sigungu.s_sigungucode + '">' + sigungu.sigungu_name
-                            )
-                        })
-
-                    }
-                })
-            })
-
+            let url = '/info/city.do'
 
             // 카테고리(분류) 선택
             $('.catSelect').click(function (){
@@ -59,7 +29,6 @@
                     contentType : 'application/json; charset=UTF-8',
                     dataType: 'json',
                     data : JSON.stringify({
-                        area : $('input[name=area]:checked').val(),
                         sigungu : $('input[name=sigungu]:checked').val(),
                         cat1 : $('input[name=cat1]:checked').val(),
                         cat2 : $('input[name=cat2]:checked').val(),
@@ -88,7 +57,6 @@
                     contentType : 'application/json; charset=UTF-8',
                     dataType: 'json',
                     data : JSON.stringify({
-                        area : $('input[name=area]:checked').val(),
                         sigungu : $('input[name=sigungu]:checked').val(),
                         cat1 : $('input[name=cat1]:checked').val(),
                         cat2 : $('input[name=cat2]:checked').val(),
@@ -110,21 +78,26 @@
 
             // 조회
             $('button[name=search]').click(function (){
-                let area = $('input[name=area]:checked').val();
-                let sigungu = $('input[name=sigungu]:checked').val();
-                let cat1 = $('input[name=cat1]:checked').val();
-                let cat2 = $('input[name=cat2]:checked').val();
-                let cat3 = $('input[name=cat3]:checked').val();
-                let type = $('input[name=type]:checked').val();
-
-                $('#result').html("");
-                $('#result').append("<h3>선택한 항목</h3>");
-                if(area != null) $('#result').append("지역: " + area + "<br/>");
-                if(sigungu != null) $('#result').append("시군구: " + sigungu + "<br/>");
-                if(cat1 != null) $('#result').append("대분류: " + cat1 + "<br/>");
-                if(cat2 != null) $('#result').append("중분류: " + cat2 + "<br/>");
-                if(cat3 != null) $('#result').append("소분류: " + cat3 + "<br/>");
-                if(type != null) $('#result').append("컨텐츠 타입: " + type);
+                let url = '/info/city.do'
+                $.ajax({
+                    url : url,
+                    type: 'POST',
+                    contentType : 'application/json; charset=UTF-8',
+                    dataType: 'json',
+                    data : JSON.stringify({
+                        sigungu : $('input[name=sigungu]:checked').val(),
+                        cat1 : $('input[name=cat1]:checked').val(),
+                        cat2 : $('input[name=cat2]:checked').val(),
+                        cat3 : $('input[name=cat3]:checked').val(),
+                        type : $('input[name=type]:checked').val()
+                    }),
+                    success : function(data){
+                        let touritemList = data.touritemList;
+                        touritemList.forEach(function (item){
+                            console.log(item.title);
+                        })
+                    }
+                })
             })
         }
 
@@ -140,16 +113,6 @@
 <body>
 
     <h2 id="test">test</h2>
-    <div id="area">
-        <h4>- 지역 -</h4>
-        <c:forEach items="${areaList}" var="area">
-            <input type="radio" class="areaSelect" name="area" value="${area.j_areacode}">${area.j_area_name}
-        </c:forEach>
-        <br/>
-        <div id="sigunguLabel"></div>
-        <div id="sigungu"></div>
-    </div>
-    <br/>
     <div id="category">
         <h4>- 대분류 -</h4>
         <c:forEach items="${cat1List}" var="cat1">
@@ -162,6 +125,13 @@
         <div id="cat3"></div>
     </div>
     <br/>
+    <div id="sigungu">
+        <h4>- 상세 지역 -</h4>
+        <c:forEach items="${sigunguList}" var="sigungu">
+            <input type="radio" class="areaSelect" name="sigungu" value="${sigungu.s_sigungucode}">${sigungu.sigungu_name}
+        </c:forEach>
+    </div>
+    <br/>
     <div id="content_type">
         <h4>- 컨텐츠 타입 -</h4>
         <c:forEach items="${c_typeList}" var="type">
@@ -172,7 +142,6 @@
 
     <br/>
     <button name="search">조회</button>
-    <div id="result"></div>
 
     <div id="content">
 
