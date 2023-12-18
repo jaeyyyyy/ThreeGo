@@ -118,7 +118,10 @@
         minHeight : null, // set minimum height of editor
         maxHeight : null, // set maximum height of editor
         focus : true,
-        lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
+        lang : 'ko-KR', // 기본 메뉴언어 US->KR로 변경,
+        styleTags : [
+            'span'
+        ]
 
     });
 </script>

@@ -97,8 +97,8 @@ public class BoardDAO extends DBConnPool {
             psmt.setString(2,dto.getTitle());
             // 썸머노트 자동 p태그 추가 삭제
 //            "<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>" 태그 전체 삭제,
-            String delP = dto.getContent().replaceFirst("<(/)?([a-zA-Z]*)(\\\\\\\\s[a-zA-Z]*=[^>]*)?(\\\\\\\\s)*(/)?>","");
-            String plusBr = delP.replaceAll( "<(/)?([a-zA-Z]*)(\\\\\\\\s[a-zA-Z]*=[^>]*)?(\\\\\\\\s)*(/)?>","<BR>");
+            String delP = dto.getContent().replaceAll("<p>","");
+            String plusBr = delP.replaceAll( "</p>","\n");
             psmt.setString(3,plusBr);
             psmt.setString(4,dto.getOfile());
             psmt.setString(5,dto.getSfile());
