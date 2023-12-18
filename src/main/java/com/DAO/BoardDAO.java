@@ -89,7 +89,7 @@ public class BoardDAO extends DBConnPool {
         try {
             //쿼리 작성
             String query = "INSERT INTO boardtable ( "
-                    + "idx,name,title,content,postdate,ofile,sfile,pass)"
+                    + "idx,name,title,content,ofile,sfile,pass)"
                     + "VALUES( "
                     + "seq_board_num.nextval, ?,?,?,?,?,?)";
             psmt = con.prepareStatement(query);

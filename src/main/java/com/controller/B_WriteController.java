@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/proj/views/community/write.do")
+@WebServlet("/community/write.do")
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024 * 1, // 1mb
         maxRequestSize = 1024 * 1024 * 10 //10mb
@@ -43,6 +43,8 @@ public class B_WriteController extends HttpServlet {
         dto.setTitle(req.getParameter("title"));
         dto.setContent(req.getParameter("content"));
         dto.setPass(req.getParameter("pass"));
+
+
 
         if(oFileName != "") {
             // 파일명 변경

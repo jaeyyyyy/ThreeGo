@@ -7,11 +7,12 @@
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" type="text/css" />
     <!-- Google fonts-->
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
+    <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
     <title>게시판 글 작성하기</title>
     <script>
         function validateForm(form){
@@ -41,6 +42,16 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
+
+
+
+
+
+
+
+
+
+
 <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
     <table border="1" width="90%">
         <tr>
@@ -54,7 +65,10 @@
         <tr>
             <td>내용</td>
             <td>
-                <textarea name="content" style="width: 90%; height: 100px;"></textarea>
+                <!--에디터 적용할 컨테이너-->
+                <div id="content" name="content">
+
+                </div>
             </td>
         </tr>
         <tr>
@@ -78,5 +92,27 @@
 </form>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script>
+        const editor = new toastui.Editor({
+        el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
+            toolbarItems: [
+                ['heading', 'bold', 'italic', 'strike'],
+                ['hr', 'quote'],
+                ['ul', 'ol', 'task', 'indent', 'outdent'],
+                ['table', 'link'],
+                ['code', 'codeblock'],
+                ['scrollSync'],
+            ],
+
+
+
+        height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
+        initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+        initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+        previewStyle: 'vertical'
+    });
+
+</script>
 </body>
 </html>

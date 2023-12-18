@@ -20,7 +20,7 @@
                         <a class="nav-link" href="#">여행일정</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../views/community/list.do">커뮤니티</a>
+                        <a class="nav-link" href="../../community/list.do">커뮤니티</a>
                     </li>
 
 
