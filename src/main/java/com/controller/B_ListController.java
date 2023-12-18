@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/proj/views/community/list.do")
+@WebServlet("/community/list.do")
 public class B_ListController extends HttpServlet{
 
     @Override

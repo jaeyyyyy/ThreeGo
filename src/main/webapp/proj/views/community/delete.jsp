@@ -12,7 +12,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
+    <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
     <title>게시판 글 삭제하기</title>
     <script type="text/javascript">
         function validateForm(form){
@@ -38,7 +38,7 @@
             <td colspan="2" align="center">
                 <button type="submit">검증</button>
                 <button type="reset">RESET</button>
-                <button type="button" onclick="location.href='../list.do';">목록</button>
+                <button type="button" onclick="location.href='../community/list.do';">목록</button>
             </td>
         </tr>
     </table>

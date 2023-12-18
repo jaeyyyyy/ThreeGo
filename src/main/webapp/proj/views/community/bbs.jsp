@@ -12,7 +12,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
+    <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
     <title>커뮤니티</title>
 </head>
 <body>
@@ -20,18 +20,15 @@
 <jsp:include page="../common/header.jsp"/>
 <div class="container position-relative">
     <form method="get">
-        <table border="1" width="90%">
-            <tr>
-                <td align="center">
-                    <select name="searchFiled">
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                    <input type="text" name="searchWord">
-                    <input type="submit" value="검색">
-                </td>
-            </tr>
-        </table>
+        <div class="d-flex justify-content-center pt-5">
+            <select name="searchFiled">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+            </select>
+            <input type="text" name="searchWord">
+            <input type="submit" value="검색" class="btn btn-primary btn-sm">
+        </div>
+
     </form>
 
     <%--리스트 샘플-->
@@ -52,7 +49,7 @@
 <%--        </div>--%>
 <%--    </div>--%>
 
-<div class="card-deck row row-cols-1 row-cols-md-3 g-4">
+<div class="card-deck row row-cols-1 row-cols-md-3 g-4 pt-5 pb-5">
 <c:choose>
     <c:when test="${empty boardList}">
         <div class="col">
@@ -70,7 +67,7 @@
                                     <img class="card-img-top" src="../../../upload/${dto.sfile}" alt="Card image cap">
                                 </c:when>
                                 <c:otherwise>
-                                    <img class="card-img-top" src="../../resources/assets/img/no_image.png" alt="Card image cap">
+                                    <img class="card-img-top" src="../../proj/resources/assets/img/no_image.png" alt="Card image cap">
                                 </c:otherwise>
                             </c:choose>
                         </div>
@@ -156,17 +153,15 @@
 <%--            </div>--%>
 <%--        </div>--%>
 <%--    </div>--%>
+    <div class="container position-relative pb-5">
+        <div class="d-flex justify-content-center pb-2">
+            ${map.pagingImg}
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="button" onclick="location.href='../community/write.do';" class="btn btn-primary btn-sm">글쓰기</button>
+        </div>
 
-    <table border="1" width="90%">
-        <tr align="center">
-            <td>
-                ${map.pagingImg}
-            </td>
-            <td width="100">
-                <button type="button" onclick="location.href='../community/write.do';">글쓰기</button>
-            </td>
-        </tr>
-    </table>
+    </div>
 
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>

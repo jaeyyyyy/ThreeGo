@@ -95,6 +95,34 @@ public int checkId(String id){//유저가 입력한 값을 매개변수로 한�
 
 }
 
+public UserDTO getUserDTO(String uid,  String upass){
+
+    UserDTO dto = new UserDTO();
+    String sql = "SELECT * FROM member WHERE id =? AND pass =?";
+//받아온 파라미터로 아이디/패스워드 일치하는 회원정보 반환
+    try {
+        //쿼리 실행
+        psmt = con.prepareStatement(sql);
+        psmt.setString(1,uid);
+        psmt.setString(2,upass);
+        rs = psmt.executeQuery(); //쿼리문 실행
+
+        if(rs.next()){
+            //쿼리 결과를 DTO 저장한 뒤 반환
+            dto.setId(rs.getString("id"));
+            dto.setPw1(rs.getString("pw1"));
+            dto.setPw1(rs.getString("pw2"));
+            dto.setName(rs.getString("name"));
+            dto.setEmail(rs.getString("email"));
+        }
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+
+    return dto;
+}
+
+
 }
 
 
