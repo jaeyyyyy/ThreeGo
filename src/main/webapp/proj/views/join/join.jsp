@@ -21,15 +21,15 @@
 
 </head>
 <body>
-<script>
-    function idCheck(){
-        window.open("idCheck.jsp", "_blank", "width=300px height=100px");
-    }
-</script>
+<%--<script>--%>
+<%--    function idCheck(){--%>
+<%--        window.open("idCheck.jsp", "_blank", "width=500px height=300px");--%>
+<%--    }--%>
+<%--</script>--%>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap" class="wrapper">
-    <form action="JoinController.do" method ="post">
+    <form action="controller/JoinController.do" method ="post">
         <!-- 회원가입 타이틀부분 -->
         <div id="header">
             <h1 class="text-center">
@@ -46,8 +46,8 @@
                     <div class="input-group">
                         <!-- 아이디 입력 -->
                         <input type="text" id="id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요.">
-                        <!--아이디 중복확인-->
-                        <input type="button" value="중복 확인" class="btn btn-primary btn-sm" onclick="idCheck()";>
+<%--                        <!--아이디 중복확인-->--%>
+<%--                        <input type="button" value="중복 확인" class="btn btn-primary btn-sm" onclick="idCheck()";>--%>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@
                 <div class="userInput m-5">
                     <h4 class="list">이메일</h4>
                     <div class="input-group">
-                        <input type="password" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
+                        <input type="email" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
                         <!--이메일 인증-->
                         <input type="button" value="인증하기" class="btn btn-primary btn-sm" onclick="">
                     </div>
