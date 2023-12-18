@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 @WebServlet("/community/write.do")
 @MultipartConfig(
@@ -36,6 +37,8 @@ public class B_WriteController extends HttpServlet {
         }catch (Exception e) {
             System.out.println("WriteController doPost 오류 발생");
         }
+
+
 
         // 폼값을 DTO에 저장
         BoardDTO dto = new BoardDTO();

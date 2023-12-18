@@ -3,6 +3,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
@@ -13,6 +15,10 @@
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
     <title>게시판 글 수정하기</title>
     <script>
         function validateForm(form){
@@ -53,8 +59,8 @@
         </tr>
         <tr>
             <td>내용</td>
-            <td>
-                <textarea name="content" style="width: 90%; height: 100px;">${dto.content}</textarea>
+            <td><!--에디터 적용할 컨테이너-->
+                <textarea name="content" id="summernote">${dto.content}</textarea>
             </td>
         </tr>
         <tr>
@@ -72,5 +78,28 @@
 </form>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+
+        height : 400, // set editor height
+        minHeight : null, // set minimum height of editor
+        maxHeight : null, // set maximum height of editor
+        focus : true,
+        lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
+
+    });
+</script>
 </body>
 </html>

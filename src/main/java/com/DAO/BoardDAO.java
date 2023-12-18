@@ -95,7 +95,11 @@ public class BoardDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             psmt.setString(1,dto.getName());
             psmt.setString(2,dto.getTitle());
-            psmt.setString(3,dto.getContent());
+            // 썸머노트 자동 p태그 추가 삭제
+//            "<(/)?([a-zA-Z]*)(\\\\s[a-zA-Z]*=[^>]*)?(\\\\s)*(/)?>" 태그 전체 삭제,
+            String delP = dto.getContent().replaceFirst("<(/)?([a-zA-Z]*)(\\\\\\\\s[a-zA-Z]*=[^>]*)?(\\\\\\\\s)*(/)?>","");
+            String plusBr = delP.replaceAll( "<(/)?([a-zA-Z]*)(\\\\\\\\s[a-zA-Z]*=[^>]*)?(\\\\\\\\s)*(/)?>","<BR>");
+            psmt.setString(3,plusBr);
             psmt.setString(4,dto.getOfile());
             psmt.setString(5,dto.getSfile());
             psmt.setString(6,dto.getPass());
@@ -229,7 +233,10 @@ public class BoardDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             psmt.setString(1, dto.getTitle());
             psmt.setString(2, dto.getName());
-            psmt.setString(3, dto.getContent());
+            // 썸머노트 자동 p태그 추가 삭제
+            String rContent = dto.getContent().replaceAll("^<p>$", "\n");
+            String rrContent = rContent.replaceAll("/<p>/ig","");
+            psmt.setString(3,rrContent);
             psmt.setString(4, dto.getOfile());
             psmt.setString(5, dto.getSfile());
             psmt.setString(6, dto.getIdx());
