@@ -19,6 +19,7 @@ CREATE TABLE "BOARDTABLE" (
 CREATE TABLE "USER" (
                         U_ID   varchar2(40)      NOT NULL,
                         U_PW   varchar2(40)      NOT NULL,
+                        U_PW2   varchar2(40)      NOT NULL,
                         U_NAME   varchar2(40)      NOT NULL,
                         U_EMAIL   varchar2(200)      NOT NULL,
                         U_FILE   varchar2(200)      NULL,

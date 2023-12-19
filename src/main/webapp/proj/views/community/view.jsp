@@ -18,68 +18,38 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-<h2>파일 첨부형 게시판 - 상세 보기</h2>
-<table border="1" width="90%">
-    <col width="15%"/>
-    <col width="35%"/>
-    <col width="15%"/>
-    <col width="*"/>
 
-    <%--게시글 정보--%>
-    <tr>
-        <td>번호</td>
-        <td>${dto.idx}</td>
-        <td>작성자</td>
-        <td>${dto.name}</td>
-    </tr>
-    <tr>
-        <td>작성일</td>
-        <td>${dto.postdate}</td>
-        <td>조회수</td>
-        <td>${dto.visitcount}</td>
-    </tr>
-    <tr>
-        <td>제목</td>
-        <td colspan="3">${dto.title}</td>
-    </tr>
-    <tr>
-        <td>내용</td>
-        <td colspan="3" height="100">
-            ${dto.content}
-            <c:choose>
-                <c:when test="${not empty dto.ofile and isImage == true}">
-                    <br><img src="../../../upload/${dto.sfile}" style="max-width: 100%"/>
-                </c:when>
-                <c:otherwise>
-                    <br>사진이없어염<br>
-                </c:otherwise>
-            </c:choose>
+<div class="container position-relative pt-5 pb-5">
+    <div class="jumbotron">
+        <h3 class="display-4">${dto.title}</h3>
+    </div>
 
-        </td>
-    </tr>
-    <tr>
-        <td>첨부파일</td>
-        <td>
-            <c:if test="${not empty dto.ofile}">
-                ${dto.ofile}
-                <a href="../community/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
-                    [다운로드]
-                </a>
-            </c:if>
-        </td>
-        <td>다운로드 수</td>
-        <td>${dto.downcount}</td>
-    </tr>
+    <div class="jumbotron">
+        <p>글 번호 : ${dto.idx} 작성자 : ${dto.name} 작성일 : ${dto.postdate} 조회수 : ${dto.visitcount}</p>
+        <hr class="my-4">
+        <p>${dto.content}
+            <c:if test="${not empty dto.ofile and isImage == true}">
+                <br><img src="../../../upload/${dto.sfile}" style="max-width: 100%"/>
+            </c:if></p>
 
-    <%--하단 메뉴--%>
-    <tr>
-        <td colspan="4" align="center">
-            <button type="button" onclick="location.href='../community/del.do?mode=edit&idx=${param.idx}';">수정</button>
-            <button type="button" onclick="location.href='../community/del.do?mode=delete&idx=${param.idx}';">삭제</button>
-            <button type="button" onclick="location.href='../community/list.do';">목록</button>
-        </td>
-    </tr>
-</table>
+        <c:if test="${not empty dto.ofile}">
+            <hr class="my-4">
+            ${dto.ofile}
+            <a href="../community/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
+                [다운로드]
+            </a>
+        </c:if>
+    </div>
+
+    <div class="text-center">
+        <div class="btn-group pt-5" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=edit&idx=${param.idx}';">수정</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=delete&idx=${param.idx}';">삭제</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
+        </div>
+    </div>
+</div>
+
 
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
