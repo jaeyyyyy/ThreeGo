@@ -21,6 +21,11 @@ public class U_LoginController extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       req.getRequestDispatcher("/proj/views/login/LoginForm.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("u_id");
         String pw = req.getParameter("u_pw");
@@ -31,10 +36,17 @@ public class U_LoginController extends HttpServlet {
         if (loginUser != null) {
             HttpSession session = req.getSession();
             session.setAttribute("u_id", id);
+            session.setAttribute("u_name", loginUser.getU_name()); // 수정된 부분
             // 디버깅을 위한 출력문
             System.out.println("Login User ID: " + loginUser.getU_id());
-//            session.setAttribute("UserName", loginUser.getU_name()); // 유저의 이름으로 설정 (DTO의 메서드 명에 따라 조정)
-            resp.sendRedirect("login.do");
+
+            // alert 창 띄우고 페이지 리다이렉션
+            resp.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = resp.getWriter();
+            out.println("<script>");
+            out.println("alert('" + session.getAttribute("u_name") + " 회원님, 로그인하셨습니다.');");
+            out.println("location.href='/proj/views/index.jsp';");
+            out.println("</script>");
         } else {
             // 디버깅을 위한 출력문 (로그인 실패)
             System.out.println("Login failed for User ID: " + id);

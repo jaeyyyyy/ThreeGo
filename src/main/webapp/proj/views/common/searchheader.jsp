@@ -1,8 +1,14 @@
+<%@ page import="com.DTO.UserDTO" %>
+<%@ page import="com.util.LoginService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
 </head>
 <body>
+<%
+    String id = (String)session.getAttribute("id");
+
+%>
 <div class="top-header" style="height: 30rem;">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -25,12 +31,26 @@
 
 
                     <div class="nav-right navbar">
+                        <%
+                            // 로그인이 안되면 로그인과 회원가입을 보여줌
+                            if(session.getAttribute("u_id") == null) {
+                        %>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">로그인</a>
+                            <a class="nav-link" href="/login.do">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="join/join.jsp">회원가입</a>
+                            <a class="nav-link" href="../../join/join.do">회원가입</a>
                         </li>
+                        <%
+                            // 로그인되었을 경우, 로그아웃을 보여준다.
+                            } else {
+                        %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../../../logout.do">로그아웃</a>
+                        </li>
+                        <%
+                            }
+                        %>
                     </div>
                 </ul>
             </div>

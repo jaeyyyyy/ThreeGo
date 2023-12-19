@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
 <html>
@@ -10,9 +11,9 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../resources/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../resources/assets/css/style.css?after" rel="stylesheet" />
-    <link href="../common/commonstyle.css?after" rel="stylesheet"/>
+    <link href="../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
+    <link href="../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
     <title>회원가입</title>
     <link rel = "icon" href="image/wave.ico">
 
@@ -21,15 +22,45 @@
 
 </head>
 <body>
-<%--<script>--%>
-<%--    function idCheck(){--%>
-<%--        window.open("idCheck.jsp", "_blank", "width=500px height=300px");--%>
-<%--    }--%>
-<%--</script>--%>
-<!-- header-->
+<c:if test="${ joinResult == 0}">
+    <script>
+        function joinUser() {
+            const joinForm = document.querySelector("#joinForm");
+            const id = joinForm.id.value;
+            const pw1 = joinForm.pw1.value;
+            const pw2 = joinForm.pw2.value;
+            const name = joinForm.name.value;
+            const email = joinForm.email.value;
+
+            if(id.length == 0 || id == "") {
+                alert("아이디를 입력해주세요.");
+                joinForm.id.focus();
+            } else if (joinForm.idDuplication.value!="idCheck") {
+                alert("아이디 중복체크를 해주세요.");
+            } else if(pw1.length == 0 || pw1 == "") {
+                alert("비밀번호를 입력해주세요.");
+                joinForm.pw1.focus();
+            } else if (pw2.length == 0 || pw2 == "") {
+                alert("비밀번호를 다시 입력해주세요.");
+                joinForm.pw2.focus();
+            } else if (pw2 != pw1) {
+                alert("입력하신 비밀번호가 다릅니다.");
+                joinForm.pw2.focus();
+            } else if(name.length == 0 || name == "") {
+                alert("이름을 입력해주세요.");
+                joinForm.name.focus();
+            } else if(email.length == 0 || email == "") {
+                alert("이메일을 입력해주세요.");
+                joinForm.email.focus();
+            }
+
+        }
+
+    </script>
+</c:if>
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap" class="wrapper">
-    <form action="controller/JoinController.do" method ="post">
+    <form action="/join/join.do" method ="post" id="joinForm">
         <!-- 회원가입 타이틀부분 -->
         <div id="header">
             <h1 class="text-center">
@@ -45,35 +76,36 @@
                     <h4 class="list">아이디</h4>
                     <div class="input-group">
                         <!-- 아이디 입력 -->
-                        <input type="text" id="id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요.">
-<%--                        <!--아이디 중복확인-->--%>
-<%--                        <input type="button" value="중복 확인" class="btn btn-primary btn-sm" onclick="idCheck()";>--%>
+                        <input type="text" name="id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요."/>
+<%--                    <!--아이디 중복확인-->--%>
+                        <button type="button" onclick="joinUser()" name="dbCheckId" class="btn btn-primary btn-sm">중복 확인</button>
+                        <input type="hidden" name="idDuplication" value="idUncheck"/>
                     </div>
                 </div>
 
                 <div class="userInput m-5">
                     <!-- 비밀번호 입력 -->
                     <h4 class="list">비밀번호</h4>
-                    <input type="password" id="pw1" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                    <input type="password" name="pw1" id="pw1" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
                 </div>
 
                 <!-- 비밀번호 재확인 입력 -->
                 <div class="userInput m-5">
                     <h4 class="list">비밀번호 재확인</h4>
-                    <input type="password" id="pw2" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
+                    <input type="password" name="pw2" id="pw2" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
                 </div>
 
                 <!-- 성명 입력 -->
                 <div class="userInput m-5">
                     <h4 class="list">성명</h4>
-                    <input type="text" id="name" class="form-control form-control-sm" maxlength="20" placeholder="이름을 입력해주세요.">
+                    <input type="text" name="name" id="name" class="form-control form-control-sm" maxlength="20" placeholder="이름을 입력해주세요.">
                 </div>
 
                 <!-- 이메일 입력 -->
                 <div class="userInput m-5">
                     <h4 class="list">이메일</h4>
                     <div class="input-group">
-                        <input type="email" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
+                        <input type="email" name="email" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
                         <!--이메일 인증-->
                         <input type="button" value="인증하기" class="btn btn-primary btn-sm" onclick="">
                     </div>
@@ -87,7 +119,6 @@
 
             </div>
         </div>
-
     </form>
 </div>
 <!--footer-->

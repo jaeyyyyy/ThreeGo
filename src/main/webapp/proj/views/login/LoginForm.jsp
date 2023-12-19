@@ -9,8 +9,8 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../resources/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../../resources/assets/css/style.css" rel="stylesheet" />
+    <link href="../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../proj/resources/assets/css/style.css" rel="stylesheet" />
     <title>로그인</title>
     <link rel = "icon" href="image/wave.ico">
 
@@ -24,10 +24,10 @@
 <jsp:include page="../common/header.jsp"/>
 
 <h1 class="text-center">로그인</h1>
-<%
-    if (session.getAttribute("UserId") == null){ //로그인 상태 확인
-        //로그아웃 상태
-%>
+<%--<%--%>
+<%--    if (session.getAttribute("UserId") == null){ //로그인 상태 확인--%>
+<%--        //로그아웃 상태--%>
+<%--%>--%>
 
 <%--validateForm--%>
 <script>
@@ -72,14 +72,14 @@
     </div>
 </form>
 
-<%
-} else {
-%>
-<%=session.getAttribute("UserName")%> 회원님, 로그인하셨습니다. <br/>
-<a href="Logout.jsp">[로그아웃]</a>
-<%
-    }
-%>
+<%--<%--%>
+<%--} else {--%>
+<%--%>--%>
+<%--<%=session.getAttribute("u_name")%> 회원님, 로그인하셨습니다. <br/>--%>
+<%--<a href="Logout.jsp">[로그아웃]</a>--%>
+<%--<%--%>
+<%--    }--%>
+<%--%>--%>
 
 
 
