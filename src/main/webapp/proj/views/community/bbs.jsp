@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,8 +24,8 @@
     <form method="get">
         <div class="d-flex justify-content-center pt-5">
             <select name="searchFiled">
-                <option value="title">제목</option>
-                <option value="content">내용</option>
+                <option value="b_title">제목</option>
+                <option value="b_content">내용</option>
             </select>
             <input type="text" name="searchWord">
             <input type="submit" value="검색" class="btn btn-primary btn-sm">
@@ -59,13 +60,13 @@
     </c:when>
     <c:otherwise>
         <c:forEach items="${boardList}" var="dto" varStatus="loop">
-            <a href="../community/view.do?idx=${dto.idx}">
+            <a href="../community/view.do?b_id=${dto.b_id}">
                 <div class="col">
                     <div class="card card-item">
                         <div class="card-img-item">
                             <c:choose>
-                                <c:when test="${not empty dto.ofile == true}">
-                                    <img class="card-img-top" src="../../../upload/${dto.sfile}" alt="Card image cap">
+                                <c:when test="${not empty dto.b_ofile == true}">
+                                    <img class="card-img-top" src="../../../upload/${dto.b_sfile}" alt="Card image cap">
                                 </c:when>
                                 <c:otherwise>
                                     <img class="card-img-top" src="../../proj/resources/assets/img/no_image.png" alt="Card image cap">
@@ -73,12 +74,12 @@
                             </c:choose>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">${dto.title}</h5>
-                            <p class="card-text">${dto.content}</p>
+                            <h5 class="card-title">${dto.b_title}</h5>
+                            <p class="card-text">${dto.b_content}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">${dto.name}</small>
-                            <small class="text-muted">${dto.postdate}</small>
+                            <small class="text-muted">${dto.u_id}</small>
+                            <small class="text-muted">${dto.b_postdate}</small>
                         </div>
                     </div>
                 </div>
@@ -166,7 +167,7 @@
             <button type="button" onclick="location.href='../community/write.do';" class="btn btn-primary btn-sm">글쓰기</button>
         </div>
 <%--        <%--%>
-<%--            } else {--%>
+<%--            } else { 쓰다 말았음--%>
 <%--        %>--%>
 
     </div>

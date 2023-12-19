@@ -5,19 +5,33 @@
 
 
 -- 테이블 생성 --
-
+--pass 는 수정하면서 지울 것
 create table boardtable (
-                            idx number primary key,
-                            name varchar2(50) not null,
-                            title varchar2(200) not null,
-                            content varchar2(2000) not null,
-                            postdate date default sysdate not null,
-                            ofile varchar2(200),
-                            sfile varchar2(30),
-                            downcount number(5) default 0 not null,
+                            b_id number primary key,
+                            u_id varchar2(50) not null,
+                            CONSTRAINT fk_userid FOREIGN key(u_id) REFERENCES users(u_id),
+                            b_writer varchar2(50) not null,
+                            b_title varchar2(200) not null,
+                            b_content CLOB not null,
+                            b_postdate date default sysdate not null,
+                            b_ofile varchar2(200),
+                            b_sfile varchar2(30),
                             pass varchar2(50) not null,
-                            visitcount number default 0 not null
+                            b_visitcount number default 0 not NULL
 );
+-- 이전에 썼던거
+-- create table boardtable (
+--                             idx number primary key,
+--                             name varchar2(50) not null,
+--                             title varchar2(200) not null,
+--                             content varchar2(2000) not null,
+--                             postdate date default sysdate not null,
+--                             ofile varchar2(200),
+--                             sfile varchar2(30),
+--                             downcount number(5) default 0 not null,
+--                             pass varchar2(50) not null,
+--                             visitcount number default 0 not null
+-- );
 -- 이거 pw1랑 큰따옴표 뺐습니다.
 CREATE TABLE USERS (
                         U_ID   varchar2(40)      NOT NULL,

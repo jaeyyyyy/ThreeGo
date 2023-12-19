@@ -63,11 +63,11 @@ public class B_ListController extends HttpServlet{
 
 
         // 첨부파일이 있으면 첨부파일 출력하게 하기
-        String idx = req.getParameter("idx");
-        BoardDTO dto = dao.selectView(idx);
+        String b_id = req.getParameter("b_id");
+        BoardDTO dto = dao.selectView(b_id);
         dao.close();
 
-        String ext = null, fileName = dto.getSfile();
+        String ext = null, fileName = dto.getB_sfile();
         if(fileName != null) {
             ext = fileName.substring(fileName.lastIndexOf(".")+1);
         }

@@ -27,7 +27,7 @@
                     <div class="nav-right navbar">
                         <%
                             // 로그인이 안되면 로그인과 회원가입을 보여줌
-                            if(session.getAttribute("sessionID") == null) {
+                            if(session.getAttribute("u_id") == null) {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="/login.do">로그인</a>

@@ -42,35 +42,35 @@
 <jsp:include page="../common/header.jsp"/>
 <div class="container position-relative pt-5 pb-5">
 <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm(this);">
-    <input type="hidden" name="idx" value="${dto.idx}"/>
-    <input type="hidden" name="prevOfile" value="${dto.ofile}"/>
-    <input type="hidden" name="prevSfile" value="${dto.sfile}"/>
+    <input type="hidden" name="b_id" value="${dto.b_id}"/>
+    <input type="hidden" name="prevOfile" value="${dto.b_ofile}"/>
+    <input type="hidden" name="prevSfile" value="${dto.b_sfile}"/>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">작성자</label>
         <div class="col-sm-10">
-            <input type="text" name="name" class="form-control form-control-sm" value="${dto.name}"/>
+            <input type="text" name="u_id" class="form-control form-control-sm" value="${dto.u_id}"/>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">제목</label>
         <div class="col-sm-10">
-            <input type="text" name="title" class="form-control form-control-sm" value="${dto.title}"/>
+            <input type="text" name="b_title" class="form-control form-control-sm" value="${dto.b_title}"/>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">내용</label>
         <div class="col-sm-10">
-            <textarea name="content" class="form-control" rows="5">${dto.content}</textarea>
+            <textarea name="b_content" class="form-control" rows="5">${dto.b_content}</textarea>
         </div>
     </div>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">첨부 파일</label>
         <div class="col-sm-10">
-            <input type="file" name="ofile"/>
+            <input type="file" name="b_ofile"/>
         </div>
     </div>
 

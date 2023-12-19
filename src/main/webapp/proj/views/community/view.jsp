@@ -21,21 +21,21 @@
 
 <div class="container position-relative pt-5 pb-5">
     <div class="jumbotron">
-        <h3 class="display-4">${dto.title}</h3>
+        <h3 class="display-4">${dto.b_title}</h3>
     </div>
 
     <div class="jumbotron">
-        <p>글 번호 : ${dto.idx} 작성자 : ${dto.name} 작성일 : ${dto.postdate} 조회수 : ${dto.visitcount}</p>
+        <p>글 번호 : ${dto.b_id} 작성자 : ${dto.u_id} 작성일 : ${dto.b_postdate} 조회수 : ${dto.b_visitcount}</p>
         <hr class="my-4">
-        <p>${dto.content}
-            <c:if test="${not empty dto.ofile and isImage == true}">
-                <br><img src="../../../upload/${dto.sfile}" style="max-width: 100%"/>
+        <p>${dto.b_content}
+            <c:if test="${not empty dto.b_ofile and isImage == true}">
+                <br><img src="../../../upload/${dto.b_sfile}" style="max-width: 100%"/>
             </c:if></p>
 
-        <c:if test="${not empty dto.ofile}">
+        <c:if test="${not empty dto.b_ofile}">
             <hr class="my-4">
-            ${dto.ofile}
-            <a href="../community/download.do?ofile=${dto.ofile}&sfile=${dto.sfile}&idx=${dto.idx}">
+            ${dto.b_ofile}
+            <a href="../community/download.do?ofile=${dto.b_ofile}&sfile=${dto.b_sfile}&idx=${dto.b_id}">
                 [다운로드]
             </a>
         </c:if>
@@ -43,8 +43,8 @@
 
     <div class="text-center">
         <div class="btn-group pt-5" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=edit&idx=${param.idx}';">수정</button>
-            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=delete&idx=${param.idx}';">삭제</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=edit&idx=${param.b_id}';">수정</button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=delete&idx=${param.b_id}';">삭제</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
         </div>
     </div>

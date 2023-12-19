@@ -19,9 +19,9 @@ import java.io.IOException;
 public class B_EditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String idx = req.getParameter("idx");
+        String b_id = req.getParameter("b_id");
         BoardDAO dao = new BoardDAO();
-        BoardDTO dto = dao.selectView(idx);
+        BoardDTO dto = dao.selectView(b_id);
 
         req.setAttribute("dto", dto);
         req.getRequestDispatcher("/proj/views/community/edit.jsp").forward(req, resp);
@@ -42,16 +42,16 @@ public class B_EditController extends HttpServlet {
         }
 
         // DB에 UPDATE 데이터 입력
-        String idx = req.getParameter("idx");
+        String b_id = req.getParameter("b_id");
         String prevOfile = req.getParameter("prevOfile");
         String prevSfile = req.getParameter("prevSfile");
-        String name = req.getParameter("name");
-        String title = req.getParameter("title");
-        String content = req.getParameter("content");
+        String u_id = req.getParameter("u_id");
+        String b_title = req.getParameter("b_title");
+        String b_content = req.getParameter("b_content");
 
-        System.out.println("idx: " + idx);
-        System.out.println("title: " + title);
-        System.out.println("content: " + content);
+        System.out.println("b_id: " + b_id);
+        System.out.println("b_title: " + b_title);
+        System.out.println("b_content: " + b_content);
 
         // 비밀번호는 session에서 가져옴
         HttpSession session = req.getSession();
@@ -59,26 +59,26 @@ public class B_EditController extends HttpServlet {
 
         // DTO에 저장
         BoardDTO dto = new BoardDTO();
-        dto.setIdx(idx);
-        dto.setName(name);
-        dto.setTitle(title);
-        dto.setContent(content);
+        dto.setB_id(b_id);
+        dto.setU_id(u_id);
+        dto.setB_title(b_title);
+        dto.setB_content(b_content);
         dto.setPass(pass);
 
         // 원본 파일명과 저장된 파일 이름 설정
         if(originalFileName != "") {
             String savedFileName = FileUtil.renameFile(saveDir, originalFileName);
 
-            dto.setOfile(originalFileName);
-            dto.setSfile(savedFileName);
+            dto.setB_ofile(originalFileName);
+            dto.setB_sfile(savedFileName);
 
             // 기존에 있던 파일 삭제
             FileUtil.deleteFile(req,"upload",prevSfile);
 
         } else {
             // 첨부파일이 없으면 기존 이름 유지
-            dto.setOfile(prevOfile);
-            dto.setSfile(prevSfile);
+            dto.setB_ofile(prevOfile);
+            dto.setB_sfile(prevSfile);
         }
 
         // DB에 내용 수정 반영
@@ -88,9 +88,9 @@ public class B_EditController extends HttpServlet {
 
         if(result == 1) {
             session.removeAttribute("pass");
-            resp.sendRedirect("../community/view.do?idx=" + idx);
+            resp.sendRedirect("../community/view.do?b_id=" + b_id);
         } else {
-            JSFunction.alertLocation(resp, "비밀번호 검증 다시 해주세요", "../community/view.do?idx=" + idx);
+            JSFunction.alertLocation(resp, "비밀번호 검증 다시 해주세요", "../community/view.do?b_id=" + b_id);
         }
     }
 }

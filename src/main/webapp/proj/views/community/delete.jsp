@@ -29,7 +29,7 @@
 
 <div class="container position-relative pt-5 pb-5">
     <form name="writeFrm" method="post" action="../community/del.do" onsubmit="return validateForm(this);">
-        <input type="hidden" name="idx" value="${param.idx}">
+        <input type="hidden" name="b_id" value="${param.b_id}">
         <input type="hidden" name="mode" value="${param.mode}">
 
         <div class="form-group row">

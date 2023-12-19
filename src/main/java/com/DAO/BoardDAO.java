@@ -45,7 +45,7 @@ public class BoardDAO extends DBConnPool {
             query += " WHERE "  + map.get("searchFiled") + " "
                     +" LIKE '%" + map.get("searchWord") + "%'";
         }
-        query += " ORDER BY idx DESC"
+        query += " ORDER BY b_id DESC"
                 +" ) Tb"
                 +" )"
                 +" WHERE rNUM BETWEEN ? AND ? ";
@@ -60,16 +60,16 @@ public class BoardDAO extends DBConnPool {
                 //게시물 하나의 내용을 저장
                 BoardDTO dto = new BoardDTO();
 
-                dto.setIdx(rs.getString("idx"));
-                dto.setName(rs.getString("name"));
-                dto.setTitle(rs.getString("title"));
-                dto.setContent(rs.getString("content"));
-                dto.setPostdate(rs.getDate("postdate"));
-                dto.setOfile(rs.getString("ofile"));
-                dto.setSfile(rs.getString("sfile"));
-                dto.setDowncount(rs.getInt("downcount"));
+                dto.setB_id(rs.getString("b_id"));
+                dto.setU_id(rs.getString("u_id"));
+                dto.setB_writer(rs.getString("b_writer"));
+                dto.setB_title(rs.getString("b_title"));
+                dto.setB_content(rs.getString("b_content"));
+                dto.setB_postdate(rs.getDate("b_postdate"));
+                dto.setB_ofile(rs.getString("b_ofile"));
+                dto.setB_sfile(rs.getString("b_sfile"));
                 dto.setPass(rs.getString("pass"));
-                dto.setVisitcount(rs.getInt("visitcount"));
+                dto.setB_visitcount(rs.getInt("b_visitcount"));
                 bbs.add(dto);
             }
 
@@ -89,16 +89,17 @@ public class BoardDAO extends DBConnPool {
         try {
             //쿼리 작성
             String query = "INSERT INTO boardtable ( "
-                    + "idx,name,title,content,ofile,sfile,pass)"
+                    + "b_id,u_id,b_writer,b_title,b_content,b_ofile,b_sfile,pass)"
                     + "VALUES( "
-                    + "seq_board_num.nextval, ?,?,?,?,?,?)";
+                    + "seq_board_num.nextval, ?,?,?,?,?,?,?)";
             psmt = con.prepareStatement(query);
-            psmt.setString(1,dto.getName());
-            psmt.setString(2,dto.getTitle());
-            psmt.setString(3,dto.getContent());
-            psmt.setString(4,dto.getOfile());
-            psmt.setString(5,dto.getSfile());
-            psmt.setString(6,dto.getPass());
+            psmt.setString(1,dto.getU_id());
+            psmt.setString(2,dto.getB_writer());
+            psmt.setString(3,dto.getB_title());
+            psmt.setString(4,dto.getB_content());
+            psmt.setString(5,dto.getB_ofile());
+            psmt.setString(6,dto.getB_sfile());
+            psmt.setString(7,dto.getPass());
             result = psmt.executeUpdate();
         }catch (Exception e){
             System.out.println("insertWrite 메소드 오류 발생");
@@ -109,29 +110,29 @@ public class BoardDAO extends DBConnPool {
 
 
     //게시글 조회
-    public BoardDTO selectView(String idx){
+    public BoardDTO selectView(String b_id){
         BoardDTO dto = new BoardDTO();
 
         //쿼리 작성
         String query = "SELECT * "
                 + " FROM boardtable "
-                + " WHERE idx = ?";
+                + " WHERE b_id = ?";
         try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setString(1, b_id);
             rs = psmt.executeQuery();
 
             if(rs.next()){
-                dto.setIdx(rs.getString("idx"));
-                dto.setName(rs.getString("name"));
-                dto.setTitle(rs.getString("title"));
-                dto.setContent(rs.getString("content"));
-                dto.setPostdate(rs.getDate("postdate"));
-                dto.setOfile(rs.getString("ofile"));
-                dto.setSfile(rs.getString("sfile"));
-                dto.setDowncount(rs.getInt("downcount"));
+                dto.setB_id(rs.getString("b_id"));
+                dto.setU_id(rs.getString("u_id"));
+                dto.setB_writer(rs.getString("b_writer"));
+                dto.setB_title(rs.getString("b_title"));
+                dto.setB_content(rs.getString("b_content"));
+                dto.setB_postdate(rs.getDate("b_postdate"));
+                dto.setB_ofile(rs.getString("b_ofile"));
+                dto.setB_sfile(rs.getString("b_sfile"));
                 dto.setPass(rs.getString("pass"));
-                dto.setVisitcount(rs.getInt("visitcount"));
+                dto.setB_visitcount(rs.getInt("b_visitcount"));
 
 
             }
@@ -144,14 +145,14 @@ public class BoardDAO extends DBConnPool {
     }
 
     //조회수 증가
-    public void updateViewCount(String idx){
+    public void updateViewCount(String b_id){
         //쿼리문
         String query = "UPDATE boardtable SET "
-                +"visitcount = visitcount +1"
-                +" WHERE idx =?";
+                +"b_visitcount = b_visitcount +1"
+                +" WHERE b_id =?";
         try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setString(1, b_id);
             rs = psmt.executeQuery();
         }catch (Exception e){
             System.out.println("updateViewCount 오류 발생");
@@ -159,32 +160,15 @@ public class BoardDAO extends DBConnPool {
         }
     }
 
-    //다운로드 수 증가
-    public void updateDownCount(String idx){
-        //쿼리문
-        String query = "UPDATE boardtable SET "
-                +"downcount = downcount +1"
-                +" WHERE idx =?";
-        try {
-            psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
-            rs = psmt.executeQuery();
-        }catch (Exception e){
-            System.out.println("updateDownCount 오류 발생");
-            e.printStackTrace();
-        }
-    }
-
-
     // 입력한 비밀번호가 지정한 idx 게시물의 비밀번호와 일치하는 지 확인
-    public boolean confirmPassword(String pass, String idx) {
+    public boolean confirmPassword(String pass, String b_id) {
         boolean isCorr = true;
 
         try {
-            String sql = "SELECT COUNT(*) FROM boardtable WHERE pass =? AND idx =?";
+            String sql = "SELECT COUNT(*) FROM boardtable WHERE pass =? AND b_id =?";
             psmt = con.prepareStatement(sql);
             psmt.setString(1, pass);
-            psmt.setString(2, idx);
+            psmt.setString(2, b_id);
             rs = psmt.executeQuery();
 
             rs.next();
@@ -202,12 +186,12 @@ public class BoardDAO extends DBConnPool {
     }
 
     // true 이면 게시글 삭제
-    public int deletePost(String idx) {
+    public int deletePost(String b_id) {
         int result = 0;
         try {
-            String query = "DELETE FROM boardtable WHERE idx =?";
+            String query = "DELETE FROM boardtable WHERE b_id =?";
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setString(1, b_id);
             result = psmt.executeUpdate();
 
         }catch (Exception e) {
@@ -224,15 +208,15 @@ public class BoardDAO extends DBConnPool {
         try {
             // 쿼리문 작성
             String query = " UPDATE boardtable "
-                    + " SET title=?, name=?, content=?, ofile=?, sfile=? "
-                    + " WHERE idx=? AND pass=? ";
+                    + " SET b_title=?, b_name=?, b_content=?, b_ofile=?, b_sfile=? "
+                    + " WHERE b_id=? AND pass=? ";
             psmt = con.prepareStatement(query);
-            psmt.setString(1, dto.getTitle());
-            psmt.setString(2, dto.getName());
-            psmt.setString(3,dto.getContent());
-            psmt.setString(4, dto.getOfile());
-            psmt.setString(5, dto.getSfile());
-            psmt.setString(6, dto.getIdx());
+            psmt.setString(1, dto.getB_title());
+            psmt.setString(2, dto.getU_id());
+            psmt.setString(3,dto.getB_content());
+            psmt.setString(4, dto.getB_ofile());
+            psmt.setString(5, dto.getB_sfile());
+            psmt.setString(6, dto.getB_id());
             psmt.setString(7, dto.getPass());
 
             result = psmt.executeUpdate();

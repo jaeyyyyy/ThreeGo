@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%--<%@ include file="bbsIsLoggedIn.jsp"%> <!--로그인 확인-->--%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -51,32 +52,32 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">작성자</label>
             <div class="col-sm-10">
-                <input type="text" name="name" class="form-control form-control-sm"/>
+                <input type="text" name="u_id" class="form-control form-control-sm"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">제목</label>
             <div class="col-sm-10">
-                <input type="text" name="title" class="form-control form-control-sm"/>
+                <input type="text" name="b_title" class="form-control form-control-sm"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">내용</label>
             <div class="col-sm-10">
-                <textarea name="content" class="form-control" rows="5"></textarea>
+                <textarea name="b_content" class="form-control" rows="5"></textarea>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">첨부 파일</label>
             <div class="col-sm-10">
-                <input type="file" name="ofile"/>
+                <input type="file" name="b_ofile"/>
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row"><!--비밀번호 걍 놔둠-->
             <label class="col-sm-2 col-form-label">비밀번호</label>
             <div class="col-sm-10">
                 <input type="password" name="pass" class="form-control form-control-sm"/>

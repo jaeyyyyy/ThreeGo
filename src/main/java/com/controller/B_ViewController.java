@@ -17,16 +17,16 @@ public class B_ViewController extends HttpServlet {
         @Override
         protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             BoardDAO dao = new BoardDAO();
-            String idx = req.getParameter("idx");
-            dao.updateViewCount(idx);
-            BoardDTO dto = dao.selectView(idx);
+            String b_id = req.getParameter("b_id");
+            dao.updateViewCount(b_id);
+            BoardDTO dto = dao.selectView(b_id);
             dao.close();
 
             // 줄바꿈 처리
-            dto.setContent(dto.getContent().replace("\r\n","<br/>"));
+            dto.setB_content(dto.getB_content().replace("\r\n","<br/>"));
 
             // 첨부파일 확장자 추출, 이미지 타입 확인
-            String ext = null, fileName = dto.getSfile();
+            String ext = null, fileName = dto.getB_sfile();
             if(fileName != null) {
                 ext = fileName.substring(fileName.lastIndexOf(".")+1);
             }
