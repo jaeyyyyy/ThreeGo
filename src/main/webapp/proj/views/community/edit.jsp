@@ -15,9 +15,6 @@
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
-    <!-- include summernote css/js -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
     <title>게시판 글 수정하기</title>
     <script>
@@ -43,63 +40,51 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
+<div class="container position-relative pt-5 pb-5">
 <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm(this);">
     <input type="hidden" name="idx" value="${dto.idx}"/>
     <input type="hidden" name="prevOfile" value="${dto.ofile}"/>
     <input type="hidden" name="prevSfile" value="${dto.sfile}"/>
 
-    <table border="1" width="90%">
-        <tr>
-            <td>작성자</td>
-            <td><input type="text" name="name" style="width:150px;" value="${dto.name}"/></td>
-        </tr>
-        <tr>
-            <td>제목</td>
-            <td><input type="text" name="title" style="width: 90%;" value="${dto.title}"/></td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td><!--에디터 적용할 컨테이너-->
-                <textarea name="content" id="summernote">${dto.content}</textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>첨부 파일</td>
-            <td><input type="file" name="ofile"/></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <button type="submit">작성완료</button>
-                <button type="reset">다시입력</button>
-                <button type="button" onclick="location.href='../list.do';">목록보기</button>
-            </td>
-        </tr>
-    </table>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">작성자</label>
+        <div class="col-sm-10">
+            <input type="text" name="name" class="form-control form-control-sm" value="${dto.name}"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">제목</label>
+        <div class="col-sm-10">
+            <input type="text" name="title" class="form-control form-control-sm" value="${dto.title}"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">내용</label>
+        <div class="col-sm-10">
+            <textarea name="content" class="form-control" rows="5">${dto.content}</textarea>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">첨부 파일</label>
+        <div class="col-sm-10">
+            <input type="file" name="ofile"/>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <div class="btn-group pt-5" role="group" aria-label="Basic example">
+            <button type="submit" class="btn btn-primary btn-sm">작성완료</button>
+            <button type="reset" class="btn btn-secondary btn-sm">다시입력</button>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
+        </div>
+    </div>
 </form>
+</div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
-<script>
-    $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-        ],
-
-        height : 400, // set editor height
-        minHeight : null, // set minimum height of editor
-        maxHeight : null, // set maximum height of editor
-        focus : true,
-        lang : 'ko-KR' // 기본 메뉴언어 US->KR로 변경
-
-    });
 </script>
 </body>
 </html>
