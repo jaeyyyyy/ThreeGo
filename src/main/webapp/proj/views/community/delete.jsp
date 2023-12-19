@@ -26,23 +26,31 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-<form name="writeFrm" method="post" action="../community/del.do" onsubmit="return validateForm(this);">
-    <input type="hidden" name="idx" value="${param.idx}">
-    <input type="hidden" name="mode" value="${param.mode}">
-    <table border="1" width="90%">
-        <tr>
-            <td>비밀번호</td>
-            <td><input type="password" name="pass" style="width: 100px;"/></td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <button type="submit">검증</button>
-                <button type="reset">RESET</button>
-                <button type="button" onclick="location.href='../community/list.do';">목록</button>
-            </td>
-        </tr>
-    </table>
-</form>
+
+<div class="container position-relative pt-5 pb-5">
+    <form name="writeFrm" method="post" action="../community/del.do" onsubmit="return validateForm(this);">
+        <input type="hidden" name="idx" value="${param.idx}">
+        <input type="hidden" name="mode" value="${param.mode}">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">비밀번호</label>
+            <div class="col-sm-10">
+                <input type="password" name="pass" class="form-control form-control-sm"/>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <div class="btn-group pt-5" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-primary btn-sm">검증</button>
+                <button type="reset" class="btn btn-secondary btn-sm">RESET</button>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
 </body>
