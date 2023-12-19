@@ -2,6 +2,7 @@ package com.controller;
 
 import com.DAO.UserDAO;
 import com.DTO.UserDTO;
+import com.util.JSFunction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,10 +45,13 @@ public class JoinController extends HttpServlet {
             req.setAttribute("joinResult", joinResult);
             HttpSession session = req.getSession();
             session.setAttribute("sessionID",id);
-            req.getRequestDispatcher("/proj/views/index.jsp").forward(req,resp);
+//            resp.sendRedirect("/proj/views/index.jsp");
+            JSFunction.alertLocation(resp,"회원가입이 완료되었습니다.","/proj/views/index.jsp");
+            System.out.println("회원가입완료");
         } else {
             req.setAttribute("joinResult",0);
             req.getRequestDispatcher("/join/join.do").forward(req,resp);
+            System.out.println("회원가입실패");
         }
 
 

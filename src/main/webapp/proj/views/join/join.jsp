@@ -56,14 +56,11 @@
 
         }
 
-        function  fn_dbCheckId() {
-            const joinForm = document.joinForm;
-        }
     </script>
 </c:if>
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap" class="wrapper">
-    <form action="/join.do" method ="post" id="joinForm">
+    <form action="/join/join.do" method ="post" id="joinForm">
         <!-- 회원가입 타이틀부분 -->
         <div id="header">
             <h1 class="text-center">

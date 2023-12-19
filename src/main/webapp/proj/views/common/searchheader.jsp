@@ -3,6 +3,10 @@
 <head>
 </head>
 <body>
+<%
+    String id = (String)session.getAttribute("id");
+
+%>
 <div class="top-header" style="height: 30rem;">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
