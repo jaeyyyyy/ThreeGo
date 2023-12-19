@@ -13,6 +13,7 @@
 
         $(document).ready(function (){
             checkCategory();
+            showList();
             search();
         })
 
@@ -37,11 +38,16 @@
                         let cat2List = data.cat2List;
                         $('#cat2Label').html("<br/><h4>- 중분류 -</h4>")
                         $('#cat2').html("")
+                        $('#cat2').append('<input type="radio" class="cat2Select" name="cat2" value="" checked> 선택안함')
                         cat2List.forEach(function (cat2){
                             $('#cat2').append(
                                 '<input type="radio" class="cat2Select" name="cat2" value="' + cat2.cat2 + '">' + cat2.cat2_name
                             )
                         })
+                        if($('input[name=cat1]:checked').val() == ""){
+                            $('#cat2Label').html("")
+                            $('#cat2').html("")
+                        }
                         $('#cat3Label').html("")
                         $('#cat3').html("")
                     }
@@ -65,11 +71,16 @@
                         let cat3List = data.cat3List;
                         $('#cat3Label').html("<br/><h4>- 소분류 -</h4>")
                         $('#cat3').html("")
+                        $('#cat3').append('<input type="radio" class="cat3Select" name="cat3" value="" checked> 선택안함')
                         cat3List.forEach(function (cat3){
                             $('#cat3').append(
                                 '<input type="radio" class="cat3Select" name="cat3" value="' + cat3.cat3 + '">' + cat3.cat3_name
                             )
                         })
+                        if($('input[name=cat2]:checked').val() == ""){
+                            $('#cat3Label').html("")
+                            $('#cat3').html("")
+                        }
                     }
                 })
             })
@@ -139,6 +150,7 @@
     <div id="category">
         <input type="hidden" name="area" value="${param.area}">
         <h4>- 대분류 -</h4>
+        <input type="radio" class="catSelect" name="cat1" value="" checked> 선택안함
         <c:forEach items="${cat1List}" var="cat1">
             <input type="radio" class="catSelect" name="cat1" value="${cat1.cat1}">${cat1.cat1_name}
         </c:forEach>
@@ -151,6 +163,7 @@
     <br/>
     <div id="sigungu">
         <h4>- 상세 지역 -</h4>
+        <input type="radio" class="areaSelect" name="sigungu" value="" checked> 선택안함
         <c:forEach items="${sigunguList}" var="sigungu">
             <input type="radio" class="areaSelect" name="sigungu" value="${sigungu.s_sigungucode}">${sigungu.sigungu_name}
         </c:forEach>
@@ -158,6 +171,7 @@
     <br/>
     <div id="content_type">
         <h4>- 컨텐츠 타입 -</h4>
+        <input type="radio" class="typeSelect" name="type" value="" checked> 선택안함
         <c:forEach items="${c_typeList}" var="type">
             <input type="radio" class="typeSelect" name="type" value="${type.contenttypeid}">${type.ctype_name}
         </c:forEach>
