@@ -112,6 +112,8 @@
     <title>관광지 정보 | 3GO</title>
 </head>
 <body>
+<!-- header-->
+<jsp:include page="../common/header.jsp"/>
 <div id="wrap">
     <div id="test"></div>
     <div class="container-fluid">
@@ -164,6 +166,8 @@
         </div>
     </div>
 </div>
+<!--footer-->
+<jsp:include page="../common/footer.jsp"/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a523b773771c7b31ef741ad7e52ee9c"></script>
 <script>

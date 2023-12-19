@@ -145,7 +145,8 @@
     <title>관광지 정보 | 3GO</title>
 </head>
 <body>
-
+<!-- header-->
+<jsp:include page="../common/header.jsp"/>
     <h2 id="test">test</h2>
     <div id="category">
         <input type="hidden" name="area" value="${param.area}">
@@ -182,6 +183,7 @@
     <button name="search">조회</button>
 
     <div id="gridDiv"></div>
-
+<!--footer-->
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
