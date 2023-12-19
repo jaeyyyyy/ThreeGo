@@ -14,10 +14,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">여행정보</a>
+                        <a class="nav-link" href="../info/area.do">여행정보</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../info/area.do">여행일정</a>
+                        <a class="nav-link" href="#">여행일정</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../community/list.do">커뮤니티</a>
