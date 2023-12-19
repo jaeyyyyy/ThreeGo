@@ -8,4 +8,4 @@
 //속성 삭제 후 페이지 이동
     response.sendRedirect("/proj/views/index.jsp");
 
-%>>
+%>
