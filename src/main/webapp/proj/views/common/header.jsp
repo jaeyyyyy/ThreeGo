@@ -29,7 +29,7 @@
                             <a class="nav-link" href="#">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../join/join.jsp">회원가입</a>
+                            <a class="nav-link" href="../join/join.do">회원가입</a>
                         </li>
                     </div>
                 </ul>
