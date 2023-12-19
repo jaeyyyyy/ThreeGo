@@ -9,6 +9,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileUtil {
+
+//    File file = new File("D:\\Directory");
+//    target/ThreeGo-1.0-SNAPSHOT/upload
+//  if(file.exists()) {
+//        if (file.mkdir() == true) {
+//            System.out.println("디렉토리가 생성되었습니다.");
+//        } else {
+//            System.out.println("디렉토리를 생성하지 못했습니다.");
+//        }
+//    } else {
+//        System.out.println("디렉토리가 존재합니다.");
+//    }
+
+
+
     // 파일 업로드
     public static String uploadFile(HttpServletRequest req, String sDir) throws ServletException, IOException {
         Part part = req.getPart("ofile");
