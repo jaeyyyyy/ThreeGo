@@ -24,10 +24,10 @@
 <jsp:include page="../common/header.jsp"/>
 
 <h1 class="text-center">로그인</h1>
-<%
-    if (session.getAttribute("UserId") == null){ //로그인 상태 확인
-        //로그아웃 상태
-%>
+<%--<%--%>
+<%--    if (session.getAttribute("UserId") == null){ //로그인 상태 확인--%>
+<%--        //로그아웃 상태--%>
+<%--%>--%>
 
 <%--validateForm--%>
 <script>
@@ -72,14 +72,14 @@
     </div>
 </form>
 
-<%
-} else {
-%>
-<%=session.getAttribute("u_name")%> 회원님, 로그인하셨습니다. <br/>
-<a href="Logout.jsp">[로그아웃]</a>
-<%
-    }
-%>
+<%--<%--%>
+<%--} else {--%>
+<%--%>--%>
+<%--<%=session.getAttribute("u_name")%> 회원님, 로그인하셨습니다. <br/>--%>
+<%--<a href="Logout.jsp">[로그아웃]</a>--%>
+<%--<%--%>
+<%--    }--%>
+<%--%>--%>
 
 
 
