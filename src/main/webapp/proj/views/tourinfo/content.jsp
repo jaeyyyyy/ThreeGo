@@ -84,6 +84,8 @@
         }
 
     </script>
+    <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <style>
         #myCarousel{
             height: 400px;

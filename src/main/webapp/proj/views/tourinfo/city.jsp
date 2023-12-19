@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
+    <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- toast grid -->
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.1/tui-pagination.js"></script>
@@ -141,48 +143,54 @@
 
     </script>
     <style>
+        #wrap{
+            width: 1200px;
+            margin: 0 auto;
+        }
     </style>
     <title>관광지 정보 | 3GO</title>
 </head>
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-    <h2 id="test">test</h2>
-    <div id="category">
-        <input type="hidden" name="area" value="${param.area}">
-        <h4>- 대분류 -</h4>
-        <input type="radio" class="catSelect" name="cat1" value="" checked> 선택안함
-        <c:forEach items="${cat1List}" var="cat1">
-            <input type="radio" class="catSelect" name="cat1" value="${cat1.cat1}">${cat1.cat1_name}
-        </c:forEach>
+    <div id="wrap">
+        <h2 id="test">test</h2>
+        <div id="category">
+            <input type="hidden" name="area" value="${param.area}">
+            <h4>- 대분류 -</h4>
+            <input type="radio" class="catSelect" name="cat1" value="" checked> 선택안함
+            <c:forEach items="${cat1List}" var="cat1">
+                <input type="radio" class="catSelect" name="cat1" value="${cat1.cat1}">${cat1.cat1_name}
+            </c:forEach>
+            <br/>
+            <div id="cat2Label"></div>
+            <div id="cat2"></div>
+            <div id="cat3Label"></div>
+            <div id="cat3"></div>
+        </div>
         <br/>
-        <div id="cat2Label"></div>
-        <div id="cat2"></div>
-        <div id="cat3Label"></div>
-        <div id="cat3"></div>
-    </div>
-    <br/>
-    <div id="sigungu">
-        <h4>- 상세 지역 -</h4>
-        <input type="radio" class="areaSelect" name="sigungu" value="" checked> 선택안함
-        <c:forEach items="${sigunguList}" var="sigungu">
-            <input type="radio" class="areaSelect" name="sigungu" value="${sigungu.s_sigungucode}">${sigungu.sigungu_name}
-        </c:forEach>
-    </div>
-    <br/>
-    <div id="content_type">
-        <h4>- 컨텐츠 타입 -</h4>
-        <input type="radio" class="typeSelect" name="type" value="" checked> 선택안함
-        <c:forEach items="${c_typeList}" var="type">
-            <input type="radio" class="typeSelect" name="type" value="${type.contenttypeid}">${type.ctype_name}
-        </c:forEach>
+        <div id="sigungu">
+            <h4>- 상세 지역 -</h4>
+            <input type="radio" class="areaSelect" name="sigungu" value="" checked> 선택안함
+            <c:forEach items="${sigunguList}" var="sigungu">
+                <input type="radio" class="areaSelect" name="sigungu" value="${sigungu.s_sigungucode}">${sigungu.sigungu_name}
+            </c:forEach>
+        </div>
         <br/>
+        <div id="content_type">
+            <h4>- 컨텐츠 타입 -</h4>
+            <input type="radio" class="typeSelect" name="type" value="" checked> 선택안함
+            <c:forEach items="${c_typeList}" var="type">
+                <input type="radio" class="typeSelect" name="type" value="${type.contenttypeid}">${type.ctype_name}
+            </c:forEach>
+            <br/>
+        </div>
+
+        <br/>
+        <button name="search">조회</button>
+
+        <div id="gridDiv"></div>
     </div>
-
-    <br/>
-    <button name="search">조회</button>
-
-    <div id="gridDiv"></div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
 </body>
