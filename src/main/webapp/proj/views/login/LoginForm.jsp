@@ -75,7 +75,7 @@
 <%
 } else {
 %>
-<%=session.getAttribute("UserName")%> 회원님, 로그인하셨습니다. <br/>
+<%=session.getAttribute("u_name")%> 회원님, 로그인하셨습니다. <br/>
 <a href="Logout.jsp">[로그아웃]</a>
 <%
     }
