@@ -95,22 +95,44 @@
 </head>
 <body>
 <div id="wrap">
-    <h2>${content.title}</h2>
-    ${content.contenttypeid}
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <%-- indicators --%>
-        <div class="carousel-indicators"></div>
-        <%-- 이미지 --%>
-        <div class="carousel-inner"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>${content.title}</h3>
+                ${content.contenttypeid}
+                <div class="row">
+                    <div class="col-md-5">
+                        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <%-- indicators --%>
+                            <div class="carousel-indicators"></div>
+                            <%-- 이미지 --%>
+                            <div class="carousel-inner"></div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
