@@ -1,5 +1,8 @@
 package com.controller;
 
+import com.util.JSFunction;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,14 +15,24 @@ import java.io.IOException;
 public class U_LogoutController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public U_LogoutController() {
-        super();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        process(req, resp);
+    }
+
+    protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.invalidate();
-        resp.sendRedirect("LoginForm.jsp");
+
+//        RequestDispatcher rd = req.getRequestDispatcher("/proj/views/index.jsp");
+//        rd.forward(req, resp);
+        JSFunction.alertLocation(resp,"로그아웃이 완료되었습니다..","/proj/views/index.jsp");
+        System.out.println("로그아웃완료");
+        
     }
 }
