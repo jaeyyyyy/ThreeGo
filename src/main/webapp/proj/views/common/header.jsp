@@ -25,12 +25,26 @@
 
 
                     <div class="nav-right navbar">
+                        <%
+                            // 로그인이 안되면 로그인과 회원가입을 보여줌
+                            if(session.getAttribute("sessionID") == null) {
+                        %>
                         <li class="nav-item">
-                            <a class="nav-link" href="../login.do">로그인</a>
+                            <a class="nav-link" href="/login.do">로그인</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../join/join.do">회원가입</a>
+                            <a class="nav-link" href="../../join/join.do">회원가입</a>
                         </li>
+                        <%
+                            // 로그인되었을 경우, 로그아웃을 보여준다.
+                        } else {
+                        %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout.do">로그아웃</a>
+                        </li>
+                        <%
+                            }
+                        %>
                     </div>
                 </ul>
             </div>
