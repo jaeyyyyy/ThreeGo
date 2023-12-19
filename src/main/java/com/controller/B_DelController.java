@@ -44,7 +44,7 @@ public class B_DelController extends HttpServlet {
                 int result = dao.deletePost(idx);
                 dao.close();
                 if(result == 1) {
-                    String savedFileName = dto.getSfile();
+                    String savedFileName = dto.getB_sfile();
                     FileUtil.deleteFile(req,"../../upload", savedFileName);
                 }
                 JSFunction.alertLocation(resp,"삭제되었습니다.","../community/list.do");

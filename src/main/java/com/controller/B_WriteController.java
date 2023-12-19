@@ -42,9 +42,9 @@ public class B_WriteController extends HttpServlet {
 
         // 폼값을 DTO에 저장
         BoardDTO dto = new BoardDTO();
-        dto.setName(req.getParameter("name"));
-        dto.setTitle(req.getParameter("title"));
-        dto.setContent(req.getParameter("content"));
+        dto.setU_id(req.getParameter("u_id"));
+        dto.setB_title(req.getParameter("b_title"));
+        dto.setB_content(req.getParameter("b_content"));
         dto.setPass(req.getParameter("pass"));
 
 
@@ -52,8 +52,8 @@ public class B_WriteController extends HttpServlet {
         if(oFileName != "") {
             // 파일명 변경
             String savedFileName = FileUtil.renameFile(saveDir, oFileName);
-            dto.setOfile(oFileName);
-            dto.setSfile(savedFileName);
+            dto.setB_ofile(oFileName);
+            dto.setB_sfile(savedFileName);
         }
 
         // DAO를 통해 DB에 게시글 저장
