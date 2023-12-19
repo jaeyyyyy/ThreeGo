@@ -11,7 +11,6 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../resources/assets/css/style.css" rel="stylesheet" />
-
     <title>로그인</title>
     <link rel = "icon" href="image/wave.ico">
 
@@ -30,7 +29,6 @@
         //로그아웃 상태
 %>
 
-
 <%--validateForm--%>
 <script>
     function validateForm(form){
@@ -45,7 +43,7 @@
     }
 </script>
 
-<form action="login_ok.jsp" method="post" name="loginFrm" onsubmit="return validateForm(this)">
+<form action="/login.do" method="post" name="loginFrm" onsubmit="return validateForm(this)">
     <div id="header" >
 
         <p class="text-center">회원가입에 필요한 정보를 기입해주세요.</p>
@@ -61,12 +59,12 @@
     <%--아이디--%>
     <div class="userInput m-5">
         <h4 class="list">아이디</h4>
-        <input type="text" name="user_id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요."><br/>
+        <input type="text" name="u_id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요."><br/>
     </div>
     <%--비밀번호--%>
     <div class="userInput m-5">
         <h4 class="list">비밀번호</h4>
-        <input type="password" name="user_pw" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요."><br/>
+        <input type="password" name="u_pw" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요."><br/>
     </div>
     <%--    로그인 버튼--%>
     <div class="col text-center">

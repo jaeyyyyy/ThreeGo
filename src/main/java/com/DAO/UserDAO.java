@@ -98,7 +98,8 @@ public int checkId(String id){//유저가 입력한 값을 매개변수로 한�
 public UserDTO getUserDTO(String uid,  String upass){
 
     UserDTO dto = new UserDTO();
-    String sql = "SELECT * FROM member WHERE id =? AND pass =?";
+    String sql = "SELECT * FROM user WHERE u_id =? AND u_pw1 =?";
+
 //받아온 파라미터로 아이디/패스워드 일치하는 회원정보 반환
     try {
         //쿼리 실행
@@ -109,11 +110,11 @@ public UserDTO getUserDTO(String uid,  String upass){
 
         if(rs.next()){
             //쿼리 결과를 DTO 저장한 뒤 반환
-            dto.setId(rs.getString("id"));
-            dto.setPw1(rs.getString("pw1"));
-            dto.setPw1(rs.getString("pw2"));
-            dto.setName(rs.getString("name"));
-            dto.setEmail(rs.getString("email"));
+            dto.setU_id(rs.getString("u_id"));
+            dto.setU_pw1(rs.getString("u_pw1"));
+            dto.setU_pw2(rs.getString("u_pw2"));
+            dto.setU_name(rs.getString("u_name"));
+            dto.setU_email(rs.getString("u_email"));
         }
     }catch (Exception e){
         e.printStackTrace();
