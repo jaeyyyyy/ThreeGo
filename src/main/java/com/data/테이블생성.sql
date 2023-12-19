@@ -18,10 +18,10 @@ create table boardtable (
                             pass varchar2(50) not null,
                             visitcount number default 0 not null
 );
-
-CREATE TABLE "USER" (
+//이거 pw1랑 큰따옴표 뺐습니다.
+CREATE TABLE USER (
                         U_ID   varchar2(40)      NOT NULL,
-                        U_PW   varchar2(40)      NOT NULL,
+                        U_PW1   varchar2(40)      NOT NULL,
                         U_PW2   varchar2(40)      NOT NULL,
                         U_NAME   varchar2(40)      NOT NULL,
                         U_EMAIL   varchar2(200)      NOT NULL,
