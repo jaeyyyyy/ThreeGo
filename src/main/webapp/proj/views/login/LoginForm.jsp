@@ -11,7 +11,6 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../resources/assets/css/style.css" rel="stylesheet" />
-
     <title>로그인</title>
     <link rel = "icon" href="image/wave.ico">
 
@@ -30,7 +29,6 @@
         //로그아웃 상태
 %>
 
-
 <%--validateForm--%>
 <script>
     function validateForm(form){
@@ -45,7 +43,7 @@
     }
 </script>
 
-<form action="login_ok.jsp" method="post" name="loginFrm" onsubmit="return validateForm(this)">
+<form action="login" method="post" name="loginFrm" onsubmit="return validateForm(this)">
     <div id="header" >
 
         <p class="text-center">회원가입에 필요한 정보를 기입해주세요.</p>
