@@ -1,3 +1,5 @@
+<%@ page import="com.DTO.UserDTO" %>
+<%@ page import="com.util.LoginService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -31,7 +33,7 @@
                     <div class="nav-right navbar">
                         <%
                             // 로그인이 안되면 로그인과 회원가입을 보여줌
-                            if(session.getAttribute("sessionID") == null) {
+                            if(session.getAttribute("u_id") == null) {
                         %>
                         <li class="nav-item">
                             <a class="nav-link" href="/login.do">로그인</a>
@@ -44,7 +46,7 @@
                             } else {
                         %>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout.do">로그아웃</a>
+                            <a class="nav-link" href="../../../logout.do">로그아웃</a>
                         </li>
                         <%
                             }
