@@ -21,6 +21,11 @@ public class U_LoginController extends HttpServlet {
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       req.getRequestDispatcher("/proj/views/login/LoginForm.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("u_id");
         String pw = req.getParameter("u_pw");
