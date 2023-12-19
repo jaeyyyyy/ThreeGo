@@ -6,19 +6,22 @@
 
 -- 테이블 생성 --
 
-CREATE TABLE "BOARDTABLE" (
-                              B_ID   varchar2(40)      NOT NULL,
-                              U_ID   varchar2(40)      NOT NULL,
-                              B_WRITER   varchar2(40)      NOT NULL,
-                              B_TITLE   varchar2(200)      NOT NULL,
-                              B_CONTENT   CLOB      NOT NULL,
-                              B_POSTDATE   DATE      NULL,
-                              B_IMG   varchar2(100)      NULL
+create table boardtable (
+                            idx number primary key,
+                            name varchar2(50) not null,
+                            title varchar2(200) not null,
+                            content varchar2(2000) not null,
+                            postdate date default sysdate not null,
+                            ofile varchar2(200),
+                            sfile varchar2(30),
+                            downcount number(5) default 0 not null,
+                            pass varchar2(50) not null,
+                            visitcount number default 0 not null
 );
-
-CREATE TABLE "USER" (
+//이거 pw1랑 큰따옴표 뺐습니다.
+CREATE TABLE USER (
                         U_ID   varchar2(40)      NOT NULL,
-                        U_PW   varchar2(40)      NOT NULL,
+                        U_PW1   varchar2(40)      NOT NULL,
                         U_PW2   varchar2(40)      NOT NULL,
                         U_NAME   varchar2(40)      NOT NULL,
                         U_EMAIL   varchar2(200)      NOT NULL,

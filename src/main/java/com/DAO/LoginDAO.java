@@ -9,8 +9,8 @@ import com.DTO.UserDTO;
 public class LoginDAO extends JDBConnect {
     private static LoginDAO loginDAO;
 
-    public static LoginDAO getInstance(){
-        if(loginDAO == null){
+    public static LoginDAO getInstance() {
+        if (loginDAO == null) {
             loginDAO = new LoginDAO();
         }
         return loginDAO;
@@ -22,19 +22,19 @@ public class LoginDAO extends JDBConnect {
         ResultSet rs = null;
 
         try {
-            psmt = con.prepareStatement("SELECT * FROM user WHERE id=? AND pw=?");
+            // 수정된 쿼리문
+            psmt = con.prepareStatement("SELECT * FROM users WHERE U_ID=? AND U_PW1=?");
             psmt.setString(1, id);
             psmt.setString(2, pw);
 
             rs = psmt.executeQuery();
             if (rs.next()) {
                 loginUser = new UserDTO();
-                loginUser.setU_id(rs.getString("id"));
-                loginUser.setU_pw1(rs.getString("pw"));
-                loginUser.setU_name(rs.getString("name"));
-                loginUser.setU_email(rs.getString("email"));
+                loginUser.setU_id(rs.getString("u_id"));
+                loginUser.setU_pw1(rs.getString("u_pw1"));
+                loginUser.setU_name(rs.getString("u_name"));
+                loginUser.setU_email(rs.getString("u_email"));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -49,7 +49,6 @@ public class LoginDAO extends JDBConnect {
                 e.printStackTrace();
             }
         }
-
         return loginUser;
     }
 }
