@@ -9,7 +9,6 @@
 create table boardtable (
                             b_id number primary key,
                             u_id varchar2(50) not null,
-                            CONSTRAINT fk_userid FOREIGN key(u_id) REFERENCES users(u_id),
                             b_writer varchar2(50) not null,
                             b_title varchar2(200) not null,
                             b_content CLOB not null,

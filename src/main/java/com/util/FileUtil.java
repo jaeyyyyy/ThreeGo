@@ -26,7 +26,7 @@ public class FileUtil {
 
     // 파일 업로드
     public static String uploadFile(HttpServletRequest req, String sDir) throws ServletException, IOException {
-        Part part = req.getPart("ofile");
+        Part part = req.getPart("b_ofile");
 
         // Part 객체의 헤더값 content-disposition 값 읽기
         String partHeader = part.getHeader("content-disposition");

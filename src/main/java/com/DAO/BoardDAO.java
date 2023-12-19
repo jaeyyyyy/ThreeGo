@@ -101,8 +101,17 @@ public class BoardDAO extends DBConnPool {
             psmt.setString(6,dto.getB_sfile());
             psmt.setString(7,dto.getPass());
             result = psmt.executeUpdate();
+
+
         }catch (Exception e){
             System.out.println("insertWrite 메소드 오류 발생");
+            System.out.println("U_id : " + dto.getU_id());
+            System.out.println("B_writer : " + dto.getB_writer());
+            System.out.println("B_title : " + dto.getB_title());
+            System.out.println("B_content : " + dto.getB_content());
+            System.out.println("B_ofile : " + dto.getB_ofile());
+            System.out.println("B_sfile : " + dto.getB_sfile());
+            System.out.println("Pass : " + dto.getPass());
             e.printStackTrace();
         }
         return result;
@@ -160,7 +169,7 @@ public class BoardDAO extends DBConnPool {
         }
     }
 
-    // 입력한 비밀번호가 지정한 idx 게시물의 비밀번호와 일치하는 지 확인
+    // 입력한 비밀번호가 지정한 b_id 게시물의 비밀번호와 일치하는 지 확인
     public boolean confirmPassword(String pass, String b_id) {
         boolean isCorr = true;
 
@@ -208,11 +217,11 @@ public class BoardDAO extends DBConnPool {
         try {
             // 쿼리문 작성
             String query = " UPDATE boardtable "
-                    + " SET b_title=?, b_name=?, b_content=?, b_ofile=?, b_sfile=? "
+                    + " SET b_title=?, b_writer=?, b_content=?, b_ofile=?, b_sfile=? "
                     + " WHERE b_id=? AND pass=? ";
             psmt = con.prepareStatement(query);
             psmt.setString(1, dto.getB_title());
-            psmt.setString(2, dto.getU_id());
+            psmt.setString(2, dto.getB_writer());
             psmt.setString(3,dto.getB_content());
             psmt.setString(4, dto.getB_ofile());
             psmt.setString(5, dto.getB_sfile());

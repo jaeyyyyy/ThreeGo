@@ -19,17 +19,17 @@
     <title>게시판 글 작성하기</title>
     <script>
         function validateForm(form){
-            if(form.name.value == ""){
+            if(form.b_writer.value == ""){
                 alert("작성자를 입력 하세요");
                 form.name.focus();
                 return false;
             }
-            if(form.title.value == ""){
+            if(form.b_title.value == ""){
                 alert("제목을 입력 하세요");
                 form.title.focus();
                 return false;
             }
-            if(form.content.value == ""){
+            if(form.b_content.value == ""){
                 alert("내용을 입력 하세요");
                 form.content.focus();
                 return false;
@@ -48,11 +48,24 @@
 <div class="container position-relative pt-5 pb-5">
     <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
 
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">아이디</label>
+            <div class="col-sm-10">
+                <%
+                    // 로그인이 되어있다면 로그인 정보를 끌어옴
+                    if(session.getAttribute("u_id") != null) {
+                %>
+                <input type="text" name="u_id" class="form-control form-control-sm" value="${u_id}" readonly />
+            </div>
+        </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">작성자</label>
             <div class="col-sm-10">
-                <input type="text" name="u_id" class="form-control form-control-sm"/>
+                <input type="text" name="b_writer" class="form-control form-control-sm" value="${u_name}"/>
+                <%
+                    }
+                %>
             </div>
         </div>
 
