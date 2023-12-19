@@ -158,9 +158,16 @@
         <div class="d-flex justify-content-center pb-2">
             ${map.pagingImg}
         </div>
+<%--        <%--%>
+<%--            // 로그인이 안되면 글은 로그인 후에 쓸 수 있다고 알려줌--%>
+<%--            if(session.getAttribute("u_id") == null) {--%>
+<%--        %>--%>
         <div class="d-flex justify-content-end">
             <button type="button" onclick="location.href='../community/write.do';" class="btn btn-primary btn-sm">글쓰기</button>
         </div>
+<%--        <%--%>
+<%--            } else {--%>
+<%--        %>--%>
 
     </div>
 
