@@ -7,6 +7,8 @@
     <script>
 
         const contentid = ${content.contentid};
+        const contenttypeid = ${content.contenttypeid};
+        const address = "${content.addr1}" + "${content.addr2}";
 
         const endPoint = "https://apis.data.go.kr/B551011/KorService1/";
         const MobileOS = "ETC";
@@ -16,8 +18,24 @@
         const altImag = '../../../proj/resources/assets/img/no_img.jpg'
 
         $(document).ready(function (){
+            if(contenttypeid === 25){
+                $('#carousel_grid').html("");
+                $('#carousel_grid').removeClass("col-md-6");
+                $('#map_grid').removeClass("col-md-6");
+                $('#map_grid').addClass("col-md-12");
+                map.relayout();
+                map.setCenter(placePosition);
+            }
             showImages();
+            showOverview();
         })
+
+        function calcDay(day1, day2){
+            let diff = day1.getTime() - day2.getTime();
+            diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+            return diff
+        }
 
         function showImages(){
             const searchType = 'detailImage1';
@@ -29,8 +47,6 @@
                     + '&serviceKey=' + serviceKey
                     + '&_type=json'
 
-            console.log(url);
-
             $.ajax({
                 url : url,
                 type: 'GET',
@@ -40,7 +56,6 @@
                     const noImg = Object.keys(data.response.body.items).length == 0;
                     let length = 0;
                     if(!noImg) length = Object.keys(images).length;
-                    console.log(noImg)
                     if(noImg){
                         $('.carousel-inner').html(
                             '<div class="carousel-item active">'
@@ -83,6 +98,231 @@
             })
         }
 
+        function showOverview(){
+            const searchType = 'detailCommon1';
+            const url = endPoint + searchType
+                + '?MobileOS=' + MobileOS
+                + '&MobileApp=' + MobileApp
+                + '&contentId=' + contentid
+                + '&defaultYN=Y&overviewYN=Y'
+                + '&serviceKey=' + serviceKey
+                + '&_type=json'
+
+            $.ajax({
+                url : url,
+                type: 'GET',
+                dataType: 'json',
+                success : function(data){
+                    const info = data.response.body.items.item;
+                    let overview = info[0].overview === "" ? "관련 데이터가 없습니다." : info[0].overview;
+                    $('#overview').html(overview)
+                    const homepage = info[0].homepage
+                    showDetail(homepage)
+                }
+            })
+        }
+
+        function showDetail(homepage){
+            const searchType = 'detailIntro1';
+            const url = endPoint + searchType
+                + '?MobileOS=' + MobileOS
+                + '&MobileApp=' + MobileApp
+                + '&contentId=' + contentid
+                + '&contentTypeId=' + contenttypeid
+                + '&serviceKey=' + serviceKey
+                + '&_type=json'
+
+            $.ajax({
+                url : url,
+                type: 'GET',
+                dataType: 'json',
+                success : function(data){
+                    const info = data.response.body.items.item;
+                    let restdate = "";
+                    let parking = "";
+                    switch (contenttypeid){
+                        case 12:
+                            restdate = info[0].restdate === "" ? "연중무휴" : info[0].restdate;
+                            parking = info[0].parking === "" ? "주차 불가" : info[0].parking;
+                            let guide = info[0].expguide === "" ? "없음" : info[0].expguide;
+                            let agerange = info[0].expagerange === "" ? "없음" : info[0].expagerange;
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">주소</th>'
+                                + '<td width="40%">' + address + '</td>'
+                                + '<th width="10%">관광안내원</th>'
+                                + '<td width="40%">' + guide + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>이용문의</th>'
+                                + '<td>' + info[0].infocenter  + '</td>'
+                                + '<th>입장제한연령</th>'
+                                + '<td>' + agerange + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>이용시간</th>'
+                                + '<td>' + info[0].usetime + '</td>'
+                                + '<th>수용인원</th>'
+                                + '<td>' + info[0].accomcount  + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>휴무일</th>'
+                                + '<td>' + restdate + '</td>'
+                                + '<th>주차여부</th>'
+                                + '<td>' + parking + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
+                            break;
+                        case 14:
+                            restdate = info[0].restdateculture === "" ? "연중무휴" : info[0].restdateculture;
+                            parking = info[0].parkingculture === "" ? "주차 불가" : info[0].parkingculture;
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">주소</th>'
+                                + '<td width="40%">' + address + '</td>'
+                                + '<th width="10%">이용요금</th>'
+                                + '<td width="40%">' + info[0].usefee + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>이용문의</th>'
+                                + '<td>' + info[0].infocenterculture  + '</td>'
+                                + '<th>관람소요시간</th>'
+                                + '<td>' + info[0].spendtime + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>이용시간</th>'
+                                + '<td>' + info[0].usetimeculture + '</td>'
+                                + '<th>수용인원</th>'
+                                + '<td>' + info[0].accomcountculture  + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>휴무일</th>'
+                                + '<td>' + restdate + '</td>'
+                                + '<th>주차여부</th>'
+                                + '<td>' + parking + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
+                            break;
+                        case 15:
+                            // 축제 개최 기간 확인
+                            let startDay = info[0].eventstartdate;
+                            startDay = new Date(startDay.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));
+
+                            let endDay = info[0].eventenddate;
+                            endDay = new Date(endDay.replace(/(\d{4})(\d{2})(\d{2})/g, '$1-$2-$3'));
+
+                            let today = new Date();
+
+                            if(startDay > today){
+                                $('#title').after("<h5> D-" + calcDay(startDay, today) + "</h5>")
+                            }else if(startDay <= today && endDay >= today){
+                                $('#title').after("<h5> 행사 " + (calcDay(today, startDay) + 1) + "일차 </h5>")
+                            }else {
+                                $('#title').after("<h5> 종료된 행사 </h5>")
+                            }
+
+                            //상세 정보
+                            let tel = "";
+                            if(info[0].sponsor1tel !== "") tel += ("[주관] " + info[0].sponsor1tel)
+                            if(info[0].sponsor1tel !== "" && info[0].sponsor2tel !== "") tel += ("<br/>")
+                            if(info[0].sponsor2tel !== "") tel += ("[주최] " + info[0].sponsor2tel)
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">행사기간</th>'
+                                + '<td width="40%">' + startDay.toLocaleDateString() + ' ~ ' + endDay.toLocaleDateString() + '</td>'
+                                + '<th width="10%">공연시간</th>'
+                                + '<td width="40%">' + info[0].playtime + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>장소</th>'
+                                + '<td>' + info[0].eventplace + '<br/>(' + address  + ')</td>'
+                                + '<th>이용요금</th>'
+                                + '<td>' + info[0].usetimefestival + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>주관</th>'
+                                + '<td>' + info[0].sponsor1 + '</td>'
+                                + '<th>입장제한연령</th>'
+                                + '<td>' + info[0].agelimit + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>주최</th>'
+                                + '<td>' + info[0].sponsor2 + '</td>'
+                                + '<th>예매</th>'
+                                + '<td>' + info[0].bookingplace + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>이용문의</th>'
+                                + '<td>' + tel + '</td>'
+                                + '<th>위치 안내</th>'
+                                + '<td>' + info[0].placeinfo + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
+                            break;
+                        case 25:
+
+                            break;
+                        case 38:
+                            restdate = info[0].restdateshopping === "" ? "연중무휴" : info[0].restdateshopping;
+                            parking = info[0].parkingshopping === "" ? "주차 불가" : info[0].parkingshopping;
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">판매품목</th>'
+                                + '<td width="40%">' + info[0].saleitem + '</td>'
+                                + '<th width="10%">운영시간</th>'
+                                + '<td width="40%">' + info[0].opentime + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>주소</th>'
+                                + '<td>' + address  + '</td>'
+                                + '<th>휴무일</th>'
+                                + '<td>' + restdate + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>전화번호</th>'
+                                + '<td>' + info[0].infocentershopping + '</td>'
+                                + '<th>주차여부</th>'
+                                + '<td>' + parking + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
+                            break;
+                    }
+                }
+            })
+        }
+
     </script>
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
@@ -100,6 +340,12 @@
             width: 1200px;
             margin: 0 auto;
         }
+
+        th, td{
+            vertical-align: top;
+            padding: 10px;
+        }
+
     </style>
     <style>
         #container {overflow:hidden; width:100%; height:400px;position:relative;}
@@ -121,10 +367,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h3>${content.title}</h3>
-                ${content.contenttypeid}
+                <h3 id="title">${content.title}</h3>
+                <%--${content.contenttypeid}--%>
+                ${category}
                 <div class="row">
-                    <div class="col-md-6">
+                    <%-- 캐러셀 --%>
+                    <div id="carousel_grid" class="col-md-6">
                         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                             <%-- indicators --%>
                             <div class="carousel-indicators"></div>
@@ -141,7 +389,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <%-- 지도 --%>
+                    <div id="map_grid" class="col-md-6">
                         <div id="container" class="view_map">
                             <div id="mapWrapper" style="width:100%;height:400px;position:relative;">
                                 <div id="map" style="width:100%;height:100%"></div> <!-- 지도를 표시할 div 입니다 -->
@@ -155,13 +404,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
-                    </div>
-                    <div class="col-md-4">
+                    <%-- 소개 --%>
+                    <div class="col-md-12">
+                        <h4 id="overviewLabel"> 소개 </h4>
+                        <div id="overview"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <h4>상세정보</h4>
+                        <table border="1" width="100%" id="detailInfo">
+                        </table>
                     </div>
                 </div>
             </div>

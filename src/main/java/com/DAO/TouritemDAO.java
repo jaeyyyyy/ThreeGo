@@ -296,6 +296,72 @@ public class TouritemDAO extends JDBConnect {
         return result;
     }
 
+    public String showCat1Name(TouritemDTO dto){
+        String query = "SELECT cat1_name "
+                + "FROM t_cat1 "
+                + "WHERE cat1 = ?";
+
+        String cat1_name = "";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, dto.getCat1());
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                cat1_name = rs.getString("cat1_name");
+            }
+        }catch (Exception e){
+            System.out.println("showCat1Name 오류 발생");
+            e.printStackTrace();
+        }
+        return cat1_name;
+    }
+
+    public String showCat2Name(TouritemDTO dto){
+        String query = "SELECT cat2_name "
+                + "FROM t_cat2 "
+                + "WHERE cat2 = ?";
+
+        String cat2_name = "";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, dto.getCat2());
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                cat2_name = rs.getString("cat2_name");
+            }
+        }catch (Exception e){
+            System.out.println("showCat1Name 오류 발생");
+            e.printStackTrace();
+        }
+        return cat2_name;
+    }
+
+    public String showCat3Name(TouritemDTO dto){
+        String query = "SELECT cat3_name "
+                + "FROM t_cat3 "
+                + "WHERE cat3 = ?";
+
+        String cat3_name = "";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, dto.getCat3());
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                cat3_name = rs.getString("cat3_name");
+            }
+        }catch (Exception e){
+            System.out.println("showCat3Name 오류 발생");
+            e.printStackTrace();
+        }
+        return cat3_name;
+    }
+
     @Override
     public void close() {
         try {

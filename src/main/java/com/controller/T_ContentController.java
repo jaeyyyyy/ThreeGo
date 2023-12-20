@@ -19,7 +19,21 @@ public class T_ContentController extends HttpServlet {
         TouritemDAO dao = new TouritemDAO();
         TouritemDTO dto = dao.selctView(contentid);
 
+        String cat1_name = dao.showCat1Name(dto);
+        String cat2_name = dao.showCat2Name(dto);
+        String cat3_name = dao.showCat3Name(dto);
+
+        System.out.println(cat1_name);
+        System.out.println(cat2_name);
+        System.out.println(cat3_name);
+
+        String category = "";
+        if(!cat1_name.isEmpty()) category += cat1_name;
+        if(!cat2_name.isEmpty()) category += (" > " + cat2_name);
+        if(!cat3_name.isEmpty()) category += (" > " + cat3_name);
+
         req.setAttribute("content", dto);
+        req.setAttribute("category", category);
 
         req.getRequestDispatcher("/proj/views/tourinfo/content.jsp").forward(req, resp);
     }
