@@ -17,6 +17,9 @@ a {
     object-fit: cover;
 }
 
+.navbar > ul {
+    list-style: none;
+}
 
 .nav-link {
     font-family: 'Noto Sans KR', sans-serif;
