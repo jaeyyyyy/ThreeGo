@@ -24,19 +24,14 @@
 <jsp:include page="../common/header.jsp"/>
 
 <h1 class="text-center">로그인</h1>
-<%--<%--%>
-<%--    if (session.getAttribute("UserId") == null){ //로그인 상태 확인--%>
-<%--        //로그아웃 상태--%>
-<%--%>--%>
 
-<%--validateForm--%>
 <script>
     function validateForm(form){
-        if(!form.user_id.value){
+        if(!form.u_id.value){
             alert("아이디 입력 하세요");
             return false;
         }
-        if(!form.user_pw.value){
+        if(!form.u_pw.value){
             alert("패스워드 입력 하세요");
             return false;
         }
@@ -45,15 +40,8 @@
 
 <form action="/login.do" method="post" name="loginFrm" onsubmit="return validateForm(this)">
     <div id="header" >
-
         <p class="text-center">회원가입에 필요한 정보를 기입해주세요.</p>
     </div>
-    <%--로그인 에러 메세지--%>
-    <span style="color:red; font-size: 1.2em;">
-        <p class="text-center">
-        <%=request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg")%>
-        </p>
-        </span>
 
 
     <%--아이디--%>
@@ -71,16 +59,6 @@
         <input type="submit" value="로그인" class="btn btn-primary btn-md"><br/>
     </div>
 </form>
-
-<%--<%--%>
-<%--} else {--%>
-<%--%>--%>
-<%--<%=session.getAttribute("u_name")%> 회원님, 로그인하셨습니다. <br/>--%>
-<%--<a href="Logout.jsp">[로그아웃]</a>--%>
-<%--<%--%>
-<%--    }--%>
-<%--%>--%>
-
 
 
 <!--footer-->

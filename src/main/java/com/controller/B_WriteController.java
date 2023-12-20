@@ -43,9 +43,9 @@ public class B_WriteController extends HttpServlet {
         // 폼값을 DTO에 저장
         BoardDTO dto = new BoardDTO();
         dto.setU_id(req.getParameter("u_id"));
+        dto.setU_name(req.getParameter("u_name"));
         dto.setB_title(req.getParameter("b_title"));
         dto.setB_content(req.getParameter("b_content"));
-        dto.setPass(req.getParameter("pass"));
 
 
 

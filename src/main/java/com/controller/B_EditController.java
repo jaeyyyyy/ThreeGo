@@ -29,6 +29,9 @@ public class B_EditController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+
         // 파일 업로드 처리
         String saveDir = req.getServletContext().getRealPath("/upload");
 
@@ -45,25 +48,21 @@ public class B_EditController extends HttpServlet {
         String b_id = req.getParameter("b_id");
         String prevOfile = req.getParameter("prevOfile");
         String prevSfile = req.getParameter("prevSfile");
-        String u_id = req.getParameter("u_id");
+        String u_name = req.getParameter("u_name");
         String b_title = req.getParameter("b_title");
         String b_content = req.getParameter("b_content");
 
         System.out.println("b_id: " + b_id);
+        System.out.println("u_name :" + u_name);
         System.out.println("b_title: " + b_title);
         System.out.println("b_content: " + b_content);
-
-        // 비밀번호는 session에서 가져옴
-        HttpSession session = req.getSession();
-        String pass = (String)session.getAttribute("pass");
 
         // DTO에 저장
         BoardDTO dto = new BoardDTO();
         dto.setB_id(b_id);
-        dto.setU_id(u_id);
+        dto.setU_name(u_name);
         dto.setB_title(b_title);
         dto.setB_content(b_content);
-        dto.setPass(pass);
 
         // 원본 파일명과 저장된 파일 이름 설정
         if(originalFileName != "") {
@@ -87,7 +86,6 @@ public class B_EditController extends HttpServlet {
         dao.close();
 
         if(result == 1) {
-            session.removeAttribute("pass");
             resp.sendRedirect("../community/view.do?b_id=" + b_id);
         } else {
             JSFunction.alertLocation(resp, "비밀번호 검증 다시 해주세요", "../community/view.do?b_id=" + b_id);

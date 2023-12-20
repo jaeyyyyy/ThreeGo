@@ -47,4 +47,5 @@ public class UserDTO {
     public void setU_email(String u_email) {
         this.u_email = u_email;
     }
+
 }

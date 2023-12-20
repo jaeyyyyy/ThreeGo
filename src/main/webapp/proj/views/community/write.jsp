@@ -1,5 +1,15 @@
+<%@ page import="com.DAO.BoardDAO" %>
+<%@ page import="com.DTO.BoardDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%--<%@ include file="bbsIsLoggedIn.jsp"%> <!--로그인 확인-->--%>
+
+<%
+    String b_id = request.getParameter("b_id");
+
+    BoardDAO dao = new BoardDAO();
+    dao.updateViewCount(b_id);
+    BoardDTO dto = dao.selectView(b_id);
+    dao.close();
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -48,24 +58,17 @@
 <div class="container position-relative pt-5 pb-5">
     <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">아이디</label>
-            <div class="col-sm-10">
-                <%
-                    // 로그인이 되어있다면 로그인 정보를 끌어옴
-                    if(session.getAttribute("u_id") != null) {
-                %>
-                <input type="text" name="u_id" class="form-control form-control-sm" value="${u_id}" readonly />
-            </div>
-        </div>
+
+        <%
+            // 로그인이 되어있다면 로그인 정보를 끌어옴
+            if(session.getAttribute("u_id") != null) {
+        %>
+        <input type="hidden" name="u_id" class="form-control form-control-sm" value="${u_id}" />
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">작성자</label>
             <div class="col-sm-10">
-                <input type="text" name="b_writer" class="form-control form-control-sm" value="${u_name}"/>
-                <%
-                    }
-                %>
+                <input type="text" name="u_name" class="form-control form-control-sm" value="${u_name}" readonly />
             </div>
         </div>
 
@@ -90,12 +93,17 @@
             </div>
         </div>
 
-        <div class="form-group row"><!--비밀번호 걍 놔둠-->
-            <label class="col-sm-2 col-form-label">비밀번호</label>
-            <div class="col-sm-10">
-                <input type="password" name="pass" class="form-control form-control-sm"/>
-            </div>
-        </div>
+<%--        <div class="form-group row"><!--비밀번호 걍 놔둠-->--%>
+<%--            <label class="col-sm-2 col-form-label">비밀번호</label>--%>
+<%--            <div class="col-sm-10">--%>
+<%--                <input type="password" name="pass" class="form-control form-control-sm"/>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+        <input type="hidden" name="pass" class="form-control form-control-sm" value=${u_pw1}/>
+        <%
+            }
+        %>
 
         <div class="text-center">
             <div class="btn-group pt-5" role="group" aria-label="Basic example">
