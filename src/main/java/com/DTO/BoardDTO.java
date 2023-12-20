@@ -5,13 +5,12 @@ import java.util.Date;
 public class BoardDTO {
     private String b_id;
     private String u_id;
-    private String b_writer;
+    private String u_name;
     private String b_title;
     private String b_content;
     private java.util.Date b_postdate;
     private String b_ofile;
     private String b_sfile;
-    private String pass;
     private int b_visitcount;
 
     public String getB_id() {
@@ -30,12 +29,12 @@ public class BoardDTO {
         this.u_id = u_id;
     }
 
-    public String getB_writer() {
-        return b_writer;
+    public String getU_name() {
+        return u_name;
     }
 
-    public void setB_writer(String b_writer) {
-        this.b_writer = b_writer;
+    public void setU_name(String u_name) {
+        this.u_name = u_name;
     }
 
     public String getB_title() {
@@ -76,14 +75,6 @@ public class BoardDTO {
 
     public void setB_sfile(String b_sfile) {
         this.b_sfile = b_sfile;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
     }
 
     public int getB_visitcount() {

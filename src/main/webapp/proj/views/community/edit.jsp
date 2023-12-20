@@ -46,10 +46,11 @@
     <input type="hidden" name="prevOfile" value="${dto.b_ofile}"/>
     <input type="hidden" name="prevSfile" value="${dto.b_sfile}"/>
 
+    <input type="hidden" name="u_id" class="form-control form-control-sm" value="${dto.u_id}" />
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">작성자</label>
         <div class="col-sm-10">
-            <input type="text" name="u_id" class="form-control form-control-sm" value="${dto.u_id}"/>
+            <input type="text" name="u_name" class="form-control form-control-sm" value="${dto.u_name}" readonly />
         </div>
     </div>
 

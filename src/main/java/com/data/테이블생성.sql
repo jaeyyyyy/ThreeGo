@@ -9,7 +9,7 @@
 create table boardtable (
                             b_id number primary key,
                             u_id varchar2(50) not null,
-                            b_writer varchar2(50) not null,
+                            u_name varchar2(50) not null,
                             b_title varchar2(200) not null,
                             b_content CLOB not null,
                             b_postdate date default sysdate not null,
