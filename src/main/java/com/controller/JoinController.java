@@ -55,18 +55,8 @@ public class JoinController extends HttpServlet {
         }
 
 
-//        // 패스워드 확인
-//        if (pw1.equals(pw2)) {
-//            UserDAO dao = new UserDAO();
-//            // 회원가입 처리(DB에 저장 등)
-//
-//            // 회원가입 후 메인 페이지로 이동
-//            resp.sendRedirect("/main.jsp"); // 적절한 경로로 변경
-//
-//        } else {
-//            req.setAttribute("msg", "패스워드가 일치하지 않습니다.");
-//            RequestDispatcher dis = req.getRequestDispatcher("join_fail.jsp");
-//            dis.forward(req, resp);
-//        }
+
     }
 }
+
+

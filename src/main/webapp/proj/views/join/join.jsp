@@ -77,8 +77,10 @@
                     <div class="input-group">
                         <!-- 아이디 입력 -->
                         <input type="text" name="id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요."/>
-<%--                    <!--아이디 중복확인-->--%>
-                        <button type="button" onclick="joinUser()" name="dbCheckId" class="btn btn-primary btn-sm">중복 확인</button>
+                        <%--                    <!--아이디 중복확인-->--%>
+<%--                        <button type="button" onclick="joinUser()" name="dbCheckId" class="btn btn-primary btn-sm">중복 확인</button>--%>
+                        <button type="button" onclick="checkDuplicateId()" name="dbCheckId" class="btn btn-primary btn-sm">중복 확인</button>
+
                         <input type="hidden" name="idDuplication" value="idUncheck"/>
                     </div>
                 </div>
@@ -113,7 +115,9 @@
 
                 <%-- 가입버튼--%>
                 <div class="col text-center">
-                    <input type="submit" value="가입" id="joinBtn" class="btn btn-primary btn-md">
+<%--                <input type="submit" value="가입" id="joinBtn" class="btn btn-primary btn-md">--%>
+                    <input type="button" value="가입" id="joinBtn" class="btn btn-primary btn-md" onclick="checkDuplicateIdAndJoin()">
+
                 </div>
 
 
@@ -125,19 +129,90 @@
 <jsp:include page="../common/footer.jsp"/>
 
 <script>
-    $('#joinBtn').click(function(){
+    document.getElementById('joinBtn').addEventListener('click', function() {
         // 간단한 유효성 검사
-        var pw1=$('input[name=pw1]').val();
-        var pw2=$('input[name=pw2]').val();
+        var pw1 = document.getElementsByName('pw1')[0].value;
+        var pw2 = document.getElementsByName('pw2')[0].value;
 
-        if(pw1!=pw2){
+        if (pw1 !== pw2) {
             alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
-            return false
+            event.preventDefault(); // 폼 제출 막기
         }
-
-        return true;
     });
-
 </script>
+
+<%--//아이디 체크--%>
+<script>
+    function checkDuplicateId() {
+        const id = document.querySelector("input[name='id']").value;
+
+        // Ajax를 이용한 서버 통신
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/checkDuplicateId", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = xhr.responseText;
+
+                    if (response === "unavailable") {
+                        alert("이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+                        document.querySelector("input[name='idDuplication']").value = "idUncheck";
+                    } else {
+                        alert("사용 가능한 아이디입니다.");
+                        document.querySelector("input[name='idDuplication']").value = "idCheck";
+                    }
+                } else {
+                    alert("서버와의 통신에 문제가 발생했습니다.");
+                }
+            }
+        };
+
+        // 서버로 보낼 데이터 조합
+        const data = "id=" + encodeURIComponent(id);
+
+        // 데이터 전송
+        xhr.send(data);
+    }
+</script>
+<%--//가입불가로 만들기 --%>
+<script>
+    function checkDuplicateIdAndJoin() {
+        const id = document.querySelector("input[name='id']").value;
+
+        // Ajax를 이용한 서버 통신
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/checkDuplicateId", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    const response = xhr.responseText;
+
+                    if (response === "unavailable") {
+                        alert("이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.");
+                        document.querySelector("input[name='idDuplication']").value = "idUncheck";
+                    } else {
+                        // 아이디 중복이 아니면 가입 진행
+                        document.querySelector("input[name='idDuplication']").value = "idCheck";
+                        document.getElementById('joinForm').submit();
+                    }
+                } else {
+                    alert("서버와의 통신에 문제가 발생했습니다.");
+                }
+            }
+        };
+
+        // 서버로 보낼 데이터 조합
+        const data = "id=" + encodeURIComponent(id);
+
+        // 데이터 전송
+        xhr.send(data);
+    }
+</script>
+
+
 </body>
 </html>
