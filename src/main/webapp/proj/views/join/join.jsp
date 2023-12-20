@@ -26,7 +26,7 @@
 <%--<c:if test="${ joinResult == 0}"></c:if>--%>
 
 <jsp:include page="../common/header.jsp"/>
-<div id="wrap" class="wrapper">
+<div id="wrap" class="container position-relative pt-5 pb-5">
     <form action="/join/join.do" method ="post" name="joinForm" onsubmit="return joinUser(this)">
         <!-- 회원가입 타이틀부분 -->
         <div id="header">

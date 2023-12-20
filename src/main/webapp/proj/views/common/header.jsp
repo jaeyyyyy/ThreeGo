@@ -11,6 +11,10 @@
                 <!--<img src="#" target="blank" alt="logo" height="100">-->
             </a>
 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -25,26 +29,29 @@
 
 
                     <div class="nav-right navbar">
-                        <%
-                            // 로그인이 안되면 로그인과 회원가입을 보여줌
-                            if(session.getAttribute("u_id") == null) {
-                        %>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login.do">로그인</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../join/join.do">회원가입</a>
-                        </li>
-                        <%
-                            // 로그인되었을 경우, 로그아웃을 보여준다.
-                        } else {
-                        %>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout.do">로그아웃</a>
-                        </li>
-                        <%
-                            }
-                        %>
+                            <%
+                                // 로그인이 안되면 로그인과 회원가입을 보여줌
+                                if(session.getAttribute("u_id") == null) {
+                            %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/login.do">로그인</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../../join/join.do">회원가입</a>
+                                </li>
+                            <%
+                                // 로그인되었을 경우, 로그아웃을 보여준다.
+                            } else {
+                            %>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout.do">로그아웃</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/mypage.do">마이페이지</a>
+                                </li>
+                            <%
+                                }
+                            %>
                     </div>
                 </ul>
             </div>
