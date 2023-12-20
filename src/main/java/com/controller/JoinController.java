@@ -32,7 +32,36 @@ public class JoinController extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
 
+        // 추가된 부분: 모든 필드가 비어있지 않은지 검사
+
+
+        if(id == null || id.isEmpty()) {
+            JSFunction.alertBack(resp,"아이디를 입력해주세요");
+            return;
+        } else if(pw1 == null || pw1.isEmpty()) {
+            JSFunction.alertBack(resp,"비밀번호를 입력해주세요");
+            return;
+        } else if(pw2 == null || pw2.isEmpty()) {
+            JSFunction.alertBack(resp,"비밀번호를 재확인해주세요");
+            return;
+        } else if(name == null || name.isEmpty()) {
+            JSFunction.alertBack(resp, "이름을 입력해주세요");
+            return;
+        } else if(email == null || email.isEmpty()) {
+            JSFunction.alertBack(resp,"이메일을 입력해주세요");
+            return;
+        }
+
+
         UserDAO dao = new UserDAO().getInstance();
+
+
+        // 중복 아이디 검사
+        if (dao.checkDuplicateId(id)) {
+            // 중복된 아이디가 있는 경우
+            JSFunction.alertLocation(resp, "이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.", "/join/join.do");
+            return;
+        }
         UserDTO dto = new UserDTO();
         dto.setU_id(id);
         dto.setU_pw1(pw1);
@@ -41,17 +70,16 @@ public class JoinController extends HttpServlet {
         dto.setU_email(email);
         int joinResult = dao.join(dto);
 
-        if(joinResult == 1) {
+        if (joinResult == 1) {
             req.setAttribute("joinResult", joinResult);
             HttpSession session = req.getSession();
-            session.setAttribute("sessionID",id);
-//            resp.sendRedirect("/proj/views/index.jsp");
-            JSFunction.alertLocation(resp,"회원가입이 완료되었습니다.","/proj/views/index.jsp");
-            System.out.println("회원가입완료");
+            session.setAttribute("sessionID", id);
+            JSFunction.alertLocation(resp, "회원가입이 완료되었습니다.", "/proj/views/index.jsp");
+            System.out.println("회원가입 완료");
         } else {
-            req.setAttribute("joinResult",0);
-            req.getRequestDispatcher("/join/join.do").forward(req,resp);
-            System.out.println("회원가입실패");
+            req.setAttribute("joinResult", 0);
+            req.getRequestDispatcher("/join/join.do").forward(req, resp);
+            System.out.println("회원가입 실패");
         }
 
 
