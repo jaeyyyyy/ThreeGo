@@ -34,6 +34,7 @@ public class T_ContentController extends HttpServlet {
 
         req.setAttribute("content", dto);
         req.setAttribute("category", category);
+        req.setAttribute("cat3_name", cat3_name);
 
         req.getRequestDispatcher("/proj/views/tourinfo/content.jsp").forward(req, resp);
     }

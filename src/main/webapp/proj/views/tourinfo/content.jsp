@@ -284,7 +284,57 @@
                             }
                             break;
                         case 25:
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">코스 테마</th>'
+                                + '<td width="40%">${cat3_name}</td>'
+                                + '<th width="10%">코스 총 거리</th>'
+                                + '<td width="40%">' + info[0].distance + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>주소</th>'
+                                + '<td>' + address  + '</td>'
+                                + '<th>소요시간</th>'
+                                + '<td>' + info[0].taketime + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>문의 및 안내</th>'
+                                + '<td>' + info[0].infocentertourcourse + '</td>'
+                                +'</tr>'
+                            )
+                            break;
 
+                        case 28:
+                            restdate = info[0].restdateleports === "" ? "연중무휴" : info[0].restdateleports;
+                            parking = info[0].parkingleports === "" ? "주차 불가" : info[0].parkingleports;
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">주소</th>'
+                                + '<td width="40%">' + address  + '</td>'
+                                + '<th width="10%">휴무일</th>'
+                                + '<td width="40%">' + restdate + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>문의 및 안내</th>'
+                                + '<td>' + info[0].infocenterleports + '</td>'
+                                + '<th>주차여부</th>'
+                                + '<td>' + parking + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>이용요금</th>'
+                                + '<td>' + info[0].usefeeleports + '</td>'
+                                + '<th>이용시간</th>'
+                                + '<td>' + info[0].usetimeleports + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
                             break;
                         case 38:
                             restdate = info[0].restdateshopping === "" ? "연중무휴" : info[0].restdateshopping;
