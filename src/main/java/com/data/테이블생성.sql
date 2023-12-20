@@ -5,7 +5,6 @@
 
 
 -- 테이블 생성 --
---pass 는 수정하면서 지울 것
 create table boardtable (
                             b_id number primary key,
                             u_id varchar2(50) not null,
@@ -15,7 +14,6 @@ create table boardtable (
                             b_postdate date default sysdate not null,
                             b_ofile varchar2(200),
                             b_sfile varchar2(30),
-                            pass varchar2(50) not null,
                             b_visitcount number default 0 not NULL
 );
 -- 이전에 썼던거
