@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 
 @WebServlet("/info/content.do")
 public class T_ContentController extends HttpServlet {
@@ -51,6 +52,7 @@ public class T_ContentController extends HttpServlet {
 
         URL url;
         String result = "";
+        JSONArray subItemList = new JSONArray();
 
         if(contenttypeid.equals("25")){
             searchType = "detailInfo1";
@@ -100,19 +102,28 @@ public class T_ContentController extends HttpServlet {
 
             for(Object obj : moreItem){
                 JSONObject subItem = (JSONObject) obj;
-                String subContentId = subItem.get("subcontentid").toString();
+                String subContentId = "";
+                if(contenttypeid.equals("25")){
+                    subContentId = subItem.get("subcontentid").toString();
+                }else {
+                    subContentId = subItem.get("contentid").toString();
+                }
                 TouritemDTO sub_dto = dao.selectItem(subContentId);
-                subItem.put("subimage",dto.getFirstimage());
+                if(contenttypeid.equals("25")){
+                    JSONObject json_dto = new JSONObject();
+                    json_dto.put("title",sub_dto.getTitle());
+                    json_dto.put("mapx",sub_dto.getMapx());
+                    json_dto.put("mapy",sub_dto.getMapy());
+                    subItemList.add(json_dto);
+                }
+                subItem.put("subimage",sub_dto.getFirstimage());
             }
 
         }catch(Exception e) {
             e.printStackTrace();
         }
 
-        for(int i = 0; i < moreItem.size(); i++){
-            System.out.println(i + ": " + moreItem.get(i));
-        }
-
+        req.setAttribute("subItemList", subItemList);
         req.setAttribute("moreItem", moreItem);
 
         req.getRequestDispatcher("/proj/views/tourinfo/content.jsp").forward(req, resp);
