@@ -60,7 +60,7 @@ public class InsertData {
                     TouritemDTO dto = new TouritemDTO();
                     JSONObject tourItem = (JSONObject)item.get(i);
 
-                    String firstImage = ((String)tourItem.get("firstimage")).equals("") ? altImg : (String)tourItem.get("firstimage");
+                    String firstImage = (tourItem.get("firstimage")).equals("") ? altImg : (String)tourItem.get("firstimage");
 
                     dto.setContentid((String)tourItem.get("contentid"));
                     dto.setCat1((String)tourItem.get("cat1"));

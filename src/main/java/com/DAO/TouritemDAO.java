@@ -222,7 +222,7 @@ public class TouritemDAO extends JDBConnect {
         return bbs;
     }
 
-    public TouritemDTO selctView(String contentid){
+    public TouritemDTO selectItem(String contentid){
         TouritemDTO dto = new TouritemDTO();
 
         String query = "SELECT * "

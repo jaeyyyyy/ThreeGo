@@ -305,6 +305,19 @@
                                 + '<td>' + info[0].infocentertourcourse + '</td>'
                                 +'</tr>'
                             )
+                            const moreItem = ${moreItem};
+                            moreItem.forEach(function (cosItem){
+                                $('#more').append(
+                                    '<h4>코스 안내</h4>'
+                                    + '<div class="card" style="width: 18rem;">'
+                                        + '<img src="..." class="card-img-top" alt="...">'
+                                        + '<div class="card-body">'
+                                        + '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>'
+                                    + '</div>'
+                                + '</div>'
+                                )
+                            })
+
                             break;
 
                         case 28:
@@ -548,6 +561,9 @@
                         <table border="1" width="100%" id="detailInfo">
                         </table>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="more"></div>
                 </div>
             </div>
         </div>
