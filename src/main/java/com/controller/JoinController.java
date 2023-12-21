@@ -27,8 +27,8 @@ public class JoinController extends HttpServlet {
 
         // view Page에서 보내온 데이터 받기
         String id = req.getParameter("id");
-        String pw1 = req.getParameter("pw1");
-        String pw2 = req.getParameter("pw2");
+        String pw = req.getParameter("pw");
+        String pwconfirm = req.getParameter("pwconfirm");
         String name = req.getParameter("name");
         String email = req.getParameter("email");
 
@@ -38,10 +38,10 @@ public class JoinController extends HttpServlet {
         if(id == null || id.isEmpty()) {
             JSFunction.alertBack(resp,"아이디를 입력해주세요");
             return;
-        } else if(pw1 == null || pw1.isEmpty()) {
+        } else if(pw == null || pw.isEmpty()) {
             JSFunction.alertBack(resp,"비밀번호를 입력해주세요");
             return;
-        } else if(pw2 == null || pw2.isEmpty()) {
+        } else if(pwconfirm == null || pwconfirm.isEmpty()) {
             JSFunction.alertBack(resp,"비밀번호를 재확인해주세요");
             return;
         } else if(name == null || name.isEmpty()) {
@@ -64,8 +64,7 @@ public class JoinController extends HttpServlet {
         }
         UserDTO dto = new UserDTO();
         dto.setU_id(id);
-        dto.setU_pw1(pw1);
-        dto.setU_pw2(pw2);
+        dto.setU_pw(pw);
         dto.setU_name(name);
         dto.setU_email(email);
         int joinResult = dao.join(dto);

@@ -1,12 +1,6 @@
 <%@ page import="com.DAO.UserDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-
-
-    HttpSession session1 = request.getSession();
-    String sessionId = session.getAttribute("u_id").toString();
-%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -34,24 +28,24 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div>${u_name}님, 환영합니다.</div>
+            <div>${dto.u_name}님, 환영합니다.</div>
             <button>정보 수정하기</button>
         </div>
         <div class="col-md-8">
 
             <!-- 정보 수정 폼 -->
-            <form action="#" method="post">
+            <form action="/mypage.do" method="post">
                 <label for="u_id">아이디:</label>
-                <input type="text" id="u_id" name="u_id" value="${u_id}" readonly><br>
+                <input type="text" id="u_id" name="u_id" value="${dto.u_id}" readonly><br>
 
                 <label for="u_name">이름:</label>
-                <input type="text" id="u_name" name="u_name" value="${u_name}"><br>
+                <input type="text" id="u_name" name="u_name" value="${dto.u_name}"><br>
 
-                <label for="u_pw1">비밀번호:</label>
-                <input type="text" id="u_pw1" name="u_pw1" value="${u_pw1}"><br>
+                <label for="u_pw">비밀번호:</label>
+                <input type="text" id="u_pw" name="u_pw" value="${dto.u_pw}"><br>
 
                 <label for="u_email">이메일:</label>
-                <input type="text" id="u_email" name="u_email" value="${u_email}"><br>
+                <input type="text" id="u_email" name="u_email" value="${dto.u_email}"><br>
 
                 <input type="submit" value="정보 수정">
             </form>
