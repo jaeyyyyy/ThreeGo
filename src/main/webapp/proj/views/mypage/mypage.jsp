@@ -28,8 +28,9 @@
 
     <div class="row">
         <div class="col-md-4">
-            <div>${dto.u_name}님, 환영합니다.</div>
-            <button>정보 수정하기</button>
+            <h1 style="font-weight: 700;">${dto.u_name}님,</h1>
+            <h3 style="font-weight: 500;">환영합니다.</h3>
+            <button class="btn btn-primary">정보 수정하기</button>
         </div>
         <div class="col-md-8">
 
@@ -47,8 +48,8 @@
                 <label for="u_email">이메일:</label>
                 <input type="text" id="u_email" name="u_email" value="${dto.u_email}"><br>
 
-                <label for="u_email">사진:</label>
-                ${dto.u_ofile}
+                <label for="u_ofile">사진:</label>
+                <img src="../../../upload/${dto.u_ofile}" style="max-width: 100%"/>
                 <input type="hidden" name="prevOfile" value="${dto.u_ofile}">
                 <input type="hidden" name="prevSfile" value="${dto.u_sfile}">
                 <input type="file" id="u_ofile" name="u_ofile"><br>
