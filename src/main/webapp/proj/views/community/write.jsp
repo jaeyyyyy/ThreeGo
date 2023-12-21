@@ -100,7 +100,7 @@
 <%--            </div>--%>
 <%--        </div>--%>
 
-        <input type="hidden" name="pass" class="form-control form-control-sm" value=${u_pw1}/>
+        <input type="hidden" name="pass" class="form-control form-control-sm" value=${u_pw}/>
         <%
             }
         %>

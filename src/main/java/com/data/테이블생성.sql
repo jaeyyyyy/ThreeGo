@@ -16,24 +16,11 @@ create table boardtable (
                             b_sfile varchar2(30),
                             b_visitcount number default 0 not NULL
 );
--- 이전에 썼던거
--- create table boardtable (
---                             idx number primary key,
---                             name varchar2(50) not null,
---                             title varchar2(200) not null,
---                             content varchar2(2000) not null,
---                             postdate date default sysdate not null,
---                             ofile varchar2(200),
---                             sfile varchar2(30),
---                             downcount number(5) default 0 not null,
---                             pass varchar2(50) not null,
---                             visitcount number default 0 not null
--- );
+
 -- 이거 pw1랑 큰따옴표 뺐습니다.
 CREATE TABLE USERS (
                         U_ID   varchar2(40)      NOT NULL,
-                        U_PW1   varchar2(40)      NOT NULL,
-                        U_PW2   varchar2(40)      NOT NULL,
+                        U_PW   varchar2(40)      NOT NULL,
                         U_NAME   varchar2(40)      NOT NULL,
                         U_EMAIL   varchar2(200)      NOT NULL,
                         U_FILE   varchar2(200)      NULL,

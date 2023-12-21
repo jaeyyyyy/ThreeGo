@@ -54,13 +54,13 @@
                 <div class="userInput m-5">
                     <!-- 비밀번호 입력 -->
                     <h4 class="list">비밀번호</h4>
-                    <input type="password" name="pw1" id="pw1" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
+                    <input type="password" name="pw" id="pw" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
                 </div>
 
                 <!-- 비밀번호 재확인 입력 -->
                 <div class="userInput m-5">
                     <h4 class="list">비밀번호 재확인</h4>
-                    <input type="password" name="pw2" id="pw2" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
+                    <input type="password" name="pwconfirm" id="pwconfirm" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
                 </div>
 
                 <!-- 성명 입력 -->
@@ -96,10 +96,10 @@
 <script>
     document.getElementById('joinBtn').addEventListener('click', function() {
         // 간단한 유효성 검사
-        var pw1 = document.getElementsByName('pw1')[0].value;
-        var pw2 = document.getElementsByName('pw2')[0].value;
+        var pw = document.getElementsByName('pw')[0].value;
+        var pwconfirm = document.getElementsByName('pwconfirm')[0].value;
 
-        if (pw1 !== pw2) {
+        if (pw !== pwconfirm) {
             alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
             event.preventDefault(); // 폼 제출 막기
         }

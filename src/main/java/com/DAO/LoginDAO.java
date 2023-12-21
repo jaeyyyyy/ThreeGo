@@ -23,7 +23,7 @@ public class LoginDAO extends JDBConnect {
 
         try {
             // 수정된 쿼리문
-            psmt = con.prepareStatement("SELECT * FROM users WHERE U_ID=? AND U_PW1=?");
+            psmt = con.prepareStatement("SELECT * FROM users WHERE U_ID=? AND U_PW=?");
             psmt.setString(1, id);
             psmt.setString(2, pw);
 
@@ -31,7 +31,7 @@ public class LoginDAO extends JDBConnect {
             if (rs.next()) {
                 loginUser = new UserDTO();
                 loginUser.setU_id(rs.getString("u_id"));
-                loginUser.setU_pw1(rs.getString("u_pw1"));
+                loginUser.setU_pw(rs.getString("u_pw"));
                 loginUser.setU_name(rs.getString("u_name"));
                 loginUser.setU_email(rs.getString("u_email"));
             }

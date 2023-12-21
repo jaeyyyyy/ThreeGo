@@ -6,8 +6,7 @@ public class UserDTO {
 
     //유저 변수 선언
     private String u_id;
-    private String u_pw1;
-    private String u_pw2;
+    private String u_pw;
     private String u_name;
     private String u_email;
 
@@ -19,20 +18,12 @@ public class UserDTO {
         this.u_id = u_id;
     }
 
-    public String getU_pw1() {
-        return u_pw1;
+    public String getU_pw() {
+        return u_pw;
     }
 
-    public void setU_pw1(String u_pw1) {
-        this.u_pw1 = u_pw1;
-    }
-
-    public String getU_pw2() {
-        return u_pw2;
-    }
-
-    public void setU_pw2(String u_pw2) {
-        this.u_pw2 = u_pw2;
+    public void setU_pw(String u_pw) {
+        this.u_pw = u_pw;
     }
 
     public String getU_name() {

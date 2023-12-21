@@ -42,15 +42,14 @@ public class MyPageController extends HttpServlet {
         String u_id = (String) session.getAttribute("u_id");
 
         String newName = req.getParameter("u_name");
-        String newPass = req.getParameter("u_pw1");
+        String newPass = req.getParameter("u_pw");
         String newEmail = req.getParameter("u_email");
 
         UserDAO dao = UserDAO.getInstance();
 
         UserDTO dto = dao.findUser(u_id);
         dto.setU_name(newName);
-        dto.setU_pw1(newPass);
-        dto.setU_pw2(newPass);
+        dto.setU_pw(newPass);
         dto.setU_email(newEmail);
 
         int result = dao.updateUserInfo(dto);

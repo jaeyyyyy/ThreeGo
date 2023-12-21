@@ -41,8 +41,8 @@
                 <label for="u_name">이름:</label>
                 <input type="text" id="u_name" name="u_name" value="${dto.u_name}"><br>
 
-                <label for="u_pw1">비밀번호:</label>
-                <input type="text" id="u_pw1" name="u_pw1" value="${dto.u_pw1}"><br>
+                <label for="u_pw">비밀번호:</label>
+                <input type="text" id="u_pw" name="u_pw" value="${dto.u_pw}"><br>
 
                 <label for="u_email">이메일:</label>
                 <input type="text" id="u_email" name="u_email" value="${dto.u_email}"><br>
