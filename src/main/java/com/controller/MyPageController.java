@@ -4,6 +4,7 @@ import com.DAO.UserDAO;
 import com.DTO.UserDTO;
 import com.util.FileUtil;
 import com.util.JSFunction;
+import com.util.U_FileUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -72,9 +73,11 @@ public class MyPageController extends HttpServlet {
         // 파일 업로드
         String oFileName = "";
         try {
-            oFileName = FileUtil.uploadFile(req,saveDir);
+            System.out.println("외않되");
+            oFileName = U_FileUtil.uploadFile(req,saveDir);
+
         }catch (Exception e) {
-            System.out.println("파일 업로드 완료");
+            System.out.println("mypagecontroller dopost 오류");
             return;
         }
 

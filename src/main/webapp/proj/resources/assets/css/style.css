@@ -155,3 +155,27 @@ a {
 .card-footer .text-muted {
     display: block;
 }
+
+/*헤더의 로그인 회원가입 모달창 띄우는 버튼*/
+#start-btn {
+    border: none;
+    background: none;
+}
+
+/*회원가입, 로그인 버튼*/
+.btn-join {
+    background: #0a53be;
+    color: #fff;
+}
+.btn-join:hover {
+    background: #0c4ead;
+    color: #fff;
+}
+.btn-login {
+    background: #2F3545;
+    color: #fff;
+}
+.btn-login:hover {
+    background: #282d38;
+    color: #fff;
+}
