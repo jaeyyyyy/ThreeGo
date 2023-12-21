@@ -278,8 +278,8 @@
         </div>
     </div>
         <div class="pt-4">
-<button type="button" class="btn btn-primary " id="morebtn" >더보기</button>
-<%--            onclick="show();" 실패하면 이거 넣어주기.--%>
+<button type="button" class="btn btn-primary2 " id="morebtn" >더보기</button>
+
         </div>
     </div>
 </section>
@@ -289,21 +289,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <%--<script src="js/script.js"></script>--%>
-<script>
- // function show() {
- //     if($('.invisiblecard').css('display') == 'none') {
- //         $('.invisiblecard').css('display','flex');
- //         $('#morebtn').html('접기');
- //     } else {
- //         $('.invisiblecard').css('display','none');
- //         $('#morebtn').html('더 보기');
- //     };
- // }
-</script>
-
 <%--카드 --%>
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const toggleButton = document.querySelector('#morebtn');

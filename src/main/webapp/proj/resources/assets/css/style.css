@@ -32,11 +32,27 @@ a {
 }
 
 /*메뉴 카드 접기*/
-/*.invisiblecard{*/
-/*display: none;*/
-/*}*/
-/* 추가한 CSS 부분 */
-/* 추가한 CSS 부분 */
+
+.btn-primary2 {
+    width: 100px;
+    --bs-btn-color: #0d6efd;
+    --bs-btn-bg: #fff;
+    --bs-btn-border-color: #0d6efd;
+    --bs-btn-hover-color: #0a53be;
+    --bs-btn-hover-bg: #fff;
+    --bs-btn-hover-border-color: #0a58ca;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #0d6efd;
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-border-color: #0a53be;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #0a53be;
+    --bs-btn-disabled-bg: #fff;
+    --bs-btn-disabled-border-color: #0d6efd;
+}
+
+
+
 #morebtn {
     transform: translateY(-650px); /* 초기에 위로 이동한 상태로 설정 */
     transition: transform 0.6s ease-in-out;
@@ -50,11 +66,13 @@ a {
     opacity: 0;
     transform: translateY(-20px); /* 초기에 위로 이동한 상태로 설정 */
     transition: opacity 0.3s ease-out, transform 0.2s ease-out;
+    pointer-events: none; /* 클릭 비활성화 */
 }
 
 .invisiblecard.removee {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto; /* 클릭 활성화 */
 }
 /*nav*/
 .navbar > ul {
