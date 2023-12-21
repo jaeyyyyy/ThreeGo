@@ -99,7 +99,7 @@
         var pw = document.getElementsByName('pw')[0].value;
         var pwconfirm = document.getElementsByName('pwconfirm')[0].value;
 
-        if (pw !== pwconfirm) {
+        if (pw != null && pwconfirm != null && pw !== pwconfirm) {
             alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
             event.preventDefault(); // 폼 제출 막기
         }

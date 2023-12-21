@@ -47,18 +47,26 @@
                 <label for="u_email">이메일:</label>
                 <input type="text" id="u_email" name="u_email" value="${dto.u_email}"><br>
 
-                <input type="submit" value="정보 수정">
+                <label for="u_email">사진:</label>
+                ${dto.u_ofile}
+                <input type="hidden" name="prevOfile" value="${dto.u_ofile}">
+                <input type="hidden" name="prevSfile" value="${dto.u_sfile}">
+                <input type="file" id="u_ofile" name="u_ofile"><br>
+
+                <label for="u_email">자기소개:</label>
+                <textarea type="text" id="u_about" name="u_about">${dto.u_about}</textarea><br>
+
+                <input type="submit" value="정보 수정" onclick="editUserInfo()">
             </form>
         </div>
     </div>
-
-
-
-
-
-
 </div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+<script>
+    function editUserInfo() {
+        alert('회원 정보가 변경되었습니다.');
+    }
+</script>
 </body>
 </html>

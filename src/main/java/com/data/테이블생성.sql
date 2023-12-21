@@ -17,13 +17,14 @@ create table boardtable (
                             b_visitcount number default 0 not NULL
 );
 
--- 이거 pw1랑 큰따옴표 뺐습니다.
+-- pw 컬럼은 하나만 두고 사진을 넣을거라면 원파일명과 수정된 파일명을
 CREATE TABLE USERS (
                         U_ID   varchar2(40)      NOT NULL,
                         U_PW   varchar2(40)      NOT NULL,
                         U_NAME   varchar2(40)      NOT NULL,
                         U_EMAIL   varchar2(200)      NOT NULL,
-                        U_FILE   varchar2(200)      NULL,
+                        U_OFILE   varchar2(200)      NULL,
+                        U_SFILE   varchar2(200)      NULL,
                         U_ABOUT   varchar2(200)      NULL
 );
 
