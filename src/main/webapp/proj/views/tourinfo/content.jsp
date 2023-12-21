@@ -624,7 +624,11 @@
         mapContainer = document.getElementById('map'); // 지도를 표시할 div 입니다
 
     if(contenttypeid === 25){
+        // 마커 배열
         var markers = [];
+        // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+        var linePath = [];
+
         // 지도와 로드뷰 위에 마커로 표시할 특정 장소의 좌표입니다
         var placePosition = new kakao.maps.LatLng(${content.mapy}, ${content.mapx});
 
@@ -634,12 +638,27 @@
             level: 3 // 지도의 확대 레벨
         };
 
+        // 인포윈도우를 생성합니다
+        var infowindow = new kakao.maps.InfoWindow();
+
         // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
         let positions = ${subItemList};
 
         displayPlaces(positions);
+
+        // 지도에 표시할 선을 생성합니다
+        var polyline = new kakao.maps.Polyline({
+            path: linePath, // 선을 구성하는 좌표배열 입니다
+            strokeWeight: 3, // 선의 두께 입니다
+            strokeColor: '#ff0000', // 선의 색깔입니다
+            strokeOpacity: 0.9, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid' // 선의 스타일입니다
+        });
+
+        // 지도에 선을 표시합니다
+        polyline.setMap(map);
 
         // 함수
 
@@ -656,6 +675,8 @@
                 // 마커를 생성하고 지도에 표시합니다
                 var placePosition = new kakao.maps.LatLng(places[i].mapy, places[i].mapx),
                     marker = addMarker(placePosition, i);
+
+                linePath.push(placePosition);
 
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                 // LatLngBounds 객체에 좌표를 추가합니다
