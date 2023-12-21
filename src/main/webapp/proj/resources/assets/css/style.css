@@ -3,7 +3,7 @@ a {
     color: inherit;
 }
 
-/*navvar 추가*/
+/*main card*/
 .card {
     transition: 0.2s ease-in-out;
 }
@@ -23,22 +23,40 @@ a {
 
 .cardgradient {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
-    /*background: linear-gradient(to top, rgb(0, 0, 0, 1), red);*/
 }
 
 .sec2h2{
     text-align: left !important;
     line-height: 120%;
-    color: #212121;
+    color: #222222;
 }
 
 /*메뉴 카드 접기*/
-.invisiblecard{
-display: none;
+/*.invisiblecard{*/
+/*display: none;*/
+/*}*/
+/* 추가한 CSS 부분 */
+/* 추가한 CSS 부분 */
+#morebtn {
+    transform: translateY(-650px); /* 초기에 위로 이동한 상태로 설정 */
+    transition: transform 0.6s ease-in-out;
 }
 
-#morebtn
+#morebtn.move-down {
+    transform: translateY(0);
+}
 
+.invisiblecard {
+    opacity: 0;
+    transform: translateY(-20px); /* 초기에 위로 이동한 상태로 설정 */
+    transition: opacity 0.3s ease-out, transform 0.2s ease-out;
+}
+
+.invisiblecard.removee {
+    opacity: 1;
+    transform: translateY(0);
+}
+/*nav*/
 .navbar > ul {
     list-style: none;
 }

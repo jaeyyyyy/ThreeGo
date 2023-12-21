@@ -149,11 +149,14 @@
             </div>
 
 
-            <div class="row row-cols-1 row-cols-md-4 g-4 pt-4 invisiblecard">
-            <%--7개 이후 --%>
+
+
+
+            <div class="row row-cols-1 row-cols-md-4 g-4 pt-4">
+<%--7개 이후 --%>
             <div class="col">
                 <a href="http://localhost/info/city.do?area=32">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/gangwon.jpg"
                              class="card-img-top rounded" alt="강원도">
                         <div class="card-img-overlay cardgradient">
@@ -167,7 +170,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=7">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/ulsan.jpg" width="100%"
                              class="card-img-top rounded" alt="울산">
                         <div class="card-img-overlay cardgradient">
@@ -179,7 +182,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=2">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/incheon.jpg"
                              class="card-img-top rounded" alt="인천">
                         <div class="card-img-overlay cardgradient">
@@ -191,7 +194,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=8">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/sejong.png"
                              class="card-img-top rounded" alt="세종">
                         <div class="card-img-overlay cardgradient">
@@ -203,7 +206,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=33">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/chungbuk.jpg"
                              class="card-img-top rounded" alt="충북">
                         <div class="card-img-overlay cardgradient">
@@ -215,7 +218,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=34">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/chungnam.jpg"
                              class="card-img-top rounded" alt="충남">
                         <div class="card-img-overlay cardgradient">
@@ -227,7 +230,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=35">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/kyungbuk.jpg"
                              class="card-img-top rounded" alt="경북">
                         <div class="card-img-overlay cardgradient">
@@ -239,7 +242,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=36">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard" >
                         <img src="../../../proj/resources/assets/img/mainimg/kyungnam.jpg"
                              class="card-img-top rounded" alt="경남">
                         <div class="card-img-overlay cardgradient">
@@ -251,7 +254,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=37">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/jeonrabukdo.jpg"
                              class="card-img-top rounded" alt="전북">
                         <div class="card-img-overlay cardgradient">
@@ -263,7 +266,7 @@
 
             <div class="col">
                 <a href="http://localhost/info/city.do?area=38">
-                    <div class="card border-0">
+                    <div class="card border-0 invisiblecard">
                         <img src="../../../proj/resources/assets/img/mainimg/jeonranamdo.jpg"
                              class="card-img-top rounded" alt="전남">
                         <div class="card-img-overlay cardgradient">
@@ -275,30 +278,61 @@
         </div>
     </div>
         <div class="pt-4">
-<button type="button" class="btn btn-primary" id="morebtn" onclick="show();">더보기</button>
+<button type="button" class="btn btn-primary " id="morebtn" >더보기</button>
+<%--            onclick="show();" 실패하면 이거 넣어주기.--%>
         </div>
+    </div>
 </section>
 <!--footer-->
 <jsp:include page="common/footer.jsp"/>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/script.js"></script>
+<%--<script src="js/script.js"></script>--%>
 <script>
- function show() {
-     if($('.invisiblecard').css('display') == 'none') {
-         $('.invisiblecard').css('display','flex');
-         $('#morebtn').html('접기');
-     } else {
-         $('.invisiblecard').css('display','none');
-         $('#morebtn').html('더 보기');
-     };
- }
+ // function show() {
+ //     if($('.invisiblecard').css('display') == 'none') {
+ //         $('.invisiblecard').css('display','flex');
+ //         $('#morebtn').html('접기');
+ //     } else {
+ //         $('.invisiblecard').css('display','none');
+ //         $('#morebtn').html('더 보기');
+ //     };
+ // }
 </script>
 
-<%--메뉴창 더보기 --%>
-<script>
+<%--카드 --%>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.querySelector('#morebtn');
+        const invisiblecards = document.querySelectorAll('.invisiblecard');
+
+        toggleButton.addEventListener('click', () => {
+            // #morebtn에 move-down 클래스를 토글합니다.
+            toggleButton.classList.toggle('move-down');
+
+            // 애니메이션을 적용할 요소들을 그룹으로 나누어 처리합니다.
+            let delay = 0;
+            let groupIndex = 0;
+
+            invisiblecards.forEach((card, index) => {
+                if (index > 0 && index % 4 === 0) {
+                    groupIndex++;
+                }
+
+                setTimeout(() => {
+                    card.classList.toggle('removee');
+                }, groupIndex * 150);
+
+                delay += 150;
+            });
+
+            // 버튼 텍스트를 토글합니다.
+            toggleButton.innerText = toggleButton.classList.contains('move-down') ? '접기' : '더보기';
+        });
+    });
 </script>
 </body>
 </html>

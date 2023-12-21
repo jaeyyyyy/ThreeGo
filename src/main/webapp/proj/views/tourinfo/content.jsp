@@ -305,18 +305,6 @@
                                 + '<td>' + info[0].infocentertourcourse + '</td>'
                                 +'</tr>'
                             )
-                            const moreItem = ${moreItem};
-                            moreItem.forEach(function (cosItem){
-                                $('#more').append(
-                                    '<h4>코스 안내</h4>'
-                                    + '<div class="card" style="width: 18rem;">'
-                                        + '<img src="..." class="card-img-top" alt="...">'
-                                        + '<div class="card-body">'
-                                        + '<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>'
-                                    + '</div>'
-                                + '</div>'
-                                )
-                            })
 
                             break;
 
@@ -464,6 +452,43 @@
                                 )
                             }
                     }
+
+                    const moreItem = ${moreItem};
+                    switch (contenttypeid){
+                        case 25:
+                            $('#sub-title').html('코스 안내')
+                            moreItem.forEach(function (cosItem){
+                                $('#sub-items').append(
+                                    '<div class="card sub-item">'
+                                    + '<a href="../info/content.do?contentid=' + cosItem.subcontentid + '">'
+                                    + '<img src="' + cosItem.subimage + '" class="card-img-top" alt="...">'
+                                    + '<div class="card-body">'
+                                    + '<p class="card-text">' + cosItem.subname + '</p>'
+                                    + '</div>'
+                                    + '</a>'
+                                    + '</div>'
+                                )
+                            })
+
+                            break;
+
+                        default:
+                            $('#sub-title').html('주변 관광지 추천')
+                            moreItem.forEach(function (cosItem){
+                                $('#sub-items').append(
+                                    '<div class="card sub-item">'
+                                    + '<a href="../info/content.do?contentid=' + cosItem.contentid + '">'
+                                    + '<img src="' + cosItem.subimage + '" class="card-img-top" alt="...">'
+                                    + '<div class="card-body">'
+                                    + '<p class="card-text">' + cosItem.title + '</p>'
+                                    + '</div>'
+                                    + '</a>'
+                                    + '</div>'
+                                )
+                            })
+
+                            break;
+                    }
                 }
             })
         }
@@ -489,6 +514,20 @@
         th, td{
             vertical-align: top;
             padding: 10px;
+        }
+
+        #sub-items{
+            display: flex;
+            padding: 20px 5px;
+            width: 100%;
+            flex-wrap: nowrap;
+            gap: 10px;
+            overflow-x: scroll;
+        }
+
+        .sub-item{
+            flex-basis: calc((100% - 40px)/5);
+            flex-shrink: 0;
         }
 
     </style>
@@ -563,7 +602,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12" id="more"></div>
+                    <div class="col-md-12">
+                        <h4 id="sub-title"></h4>
+                        <div id="sub-items"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -581,17 +623,131 @@
         rvContainer = document.getElementById('roadview'), // 로드뷰를 표시할 div 입니다
         mapContainer = document.getElementById('map'); // 지도를 표시할 div 입니다
 
-    // 지도와 로드뷰 위에 마커로 표시할 특정 장소의 좌표입니다
-    var placePosition = new kakao.maps.LatLng(${content.mapy}, ${content.mapx});
+    if(contenttypeid === 25){
+        var markers = [];
+        // 지도와 로드뷰 위에 마커로 표시할 특정 장소의 좌표입니다
+        var placePosition = new kakao.maps.LatLng(${content.mapy}, ${content.mapx});
 
-    // 지도 옵션입니다
-    var mapOption = {
-        center: placePosition, // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+        // 지도 옵션입니다
+        var mapOption = {
+            center: placePosition, // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
 
-    // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
-    var map = new kakao.maps.Map(mapContainer, mapOption);
+        // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        let positions = ${subItemList};
+
+        displayPlaces(positions);
+
+        // 함수
+
+        // 검색 결과 목록과 마커를 표출하는 함수입니다
+        function displayPlaces(places) {
+
+            var bounds = new kakao.maps.LatLngBounds();
+
+            // 지도에 표시되고 있는 마커를 제거합니다
+            removeMarker();
+
+            for ( var i=0; i<places.length; i++ ) {
+
+                // 마커를 생성하고 지도에 표시합니다
+                var placePosition = new kakao.maps.LatLng(places[i].mapy, places[i].mapx),
+                    marker = addMarker(placePosition, i);
+
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                // LatLngBounds 객체에 좌표를 추가합니다
+                bounds.extend(placePosition);
+
+                // 마커와 검색결과 항목에 mouseover 했을때
+                // 해당 장소에 인포윈도우에 장소명을 표시합니다
+                // mouseout 했을 때는 인포윈도우를 닫습니다
+                (function(marker, title) {
+                    kakao.maps.event.addListener(marker, 'mouseover', function() {
+                        displayInfowindow(marker, title);
+                    });
+
+                    kakao.maps.event.addListener(marker, 'mouseout', function() {
+                        infowindow.close();
+                    });
+
+                })(marker, places[i].title);
+            }
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+            map.setBounds(bounds);
+        }
+
+        // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+        function addMarker(position, idx, title) {
+            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+                imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+                imgOptions =  {
+                    spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+                    spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+                    offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+                },
+                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+                marker = new kakao.maps.Marker({
+                    position: position, // 마커의 위치
+                    image: markerImage
+                });
+
+            marker.setMap(map); // 지도 위에 마커를 표출합니다
+            markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+            return marker;
+        }
+
+// 지도 위에 표시되고 있는 마커를 모두 제거합니다
+        function removeMarker() {
+            for ( var i = 0; i < markers.length; i++ ) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
+
+        // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+        // 인포윈도우에 장소명을 표시합니다
+        function displayInfowindow(marker, title) {
+            var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        }
+
+    }else {
+        // 지도와 로드뷰 위에 마커로 표시할 특정 장소의 좌표입니다
+        var placePosition = new kakao.maps.LatLng(${content.mapy}, ${content.mapx});
+
+        // 지도 옵션입니다
+        var mapOption = {
+            center: placePosition, // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+        // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+        // 지도 중심을 표시할 마커를 생성하고 특정 장소 위에 표시합니다
+        var mapMarker = new kakao.maps.Marker({
+            position: placePosition,
+            map: map
+        });
+
+        var iwContent = '<div style="padding:5px; font-size:15px">${content.title}<br><a href="https://map.kakao.com/link/map/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">길찾기</a></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+        // 인포윈도우를 생성합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            position : position,
+            content : iwContent
+        });
+
+        // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+        infowindow.open(map, mapMarker);
+    }
 
     // 로드뷰 객체를 생성합니다
     var roadview = new kakao.maps.Roadview(rvContainer);
@@ -607,23 +763,6 @@
         }
         roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
     });
-
-    // 지도 중심을 표시할 마커를 생성하고 특정 장소 위에 표시합니다
-    var mapMarker = new kakao.maps.Marker({
-        position: placePosition,
-        map: map
-    });
-
-    var iwContent = '<div style="padding:5px; font-size:15px">${content.title}<br><a href="https://map.kakao.com/link/map/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">길찾기</a></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
-    // 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        position : position,
-        content : iwContent
-    });
-
-    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-    infowindow.open(map, mapMarker);
 
     // 로드뷰 초기화가 완료되면
     kakao.maps.event.addListener(roadview, 'init', function() {
