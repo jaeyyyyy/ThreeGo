@@ -68,7 +68,7 @@
                         <!-- 여행지 검색창 input-->
                         <div class="row">
                             <div class="col">
-                                <input class="form-control form-control-lg" id="searchInput" placeholder="여행지를 입력하세요."/>
+                                <input class="form-control form-control-lg" id="searchInput" placeholder="Coming Soon..."/>
                             </div>
                             <div class="col-auto"><button class="btn btn-primary btn-lg" id="searchButton" type="submit">검색</button></div>
                         </div>

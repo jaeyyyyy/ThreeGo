@@ -17,7 +17,6 @@ create table boardtable (
                             b_visitcount number default 0 not NULL
 );
 
--- 이거 pw1랑 큰따옴표 뺐습니다.
 CREATE TABLE USERS (
                         U_ID   varchar2(40)      NOT NULL,
                         U_PW   varchar2(40)      NOT NULL,

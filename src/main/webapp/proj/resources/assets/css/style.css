@@ -17,6 +17,10 @@ a {
     object-fit: cover;
 }
 
+.main_text{
+    margin-top: 5em;
+}
+
 .navbar > ul {
     list-style: none;
 }

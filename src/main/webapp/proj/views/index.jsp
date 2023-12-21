@@ -11,7 +11,7 @@
     <link href="../resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../resources/assets/css/style.css?after" rel="stylesheet" />
     <link href="common/commonstyle.css?after" rel="stylesheet"/>
-    <title>프로젝트 이름</title>
+    <title>Three Go</title>
 </head>
 <body>
 <!-- header-->
@@ -50,78 +50,160 @@
 </section>
 <!-- Image Cards-->
 <!-- 대략적인 도시들을 나열합니다. 도시는 8개지만 '도'를 포함하면 총 17개(api기준)입니다. 일단은 8개만 나열했습니다.-->
-<!-- 이미지 사이즈는 3:2 비율로 넣으면 예쁘게 들어갑니다.-->
 <section class="bg-light text-center">
     <div class="container-fluid p-0">
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/seoul.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/seoul2.jpg" class="card-img-top rounded" alt="서울">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">서울</h4>
+                        <h4 class="card-title text-white text-center main_text">서울</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/busan.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/busan.png" class="card-img-top rounded" alt="부산">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">부산</h4>
+                        <h4 class="card-title text-white text-center main_text">부산</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/bg-showcase-2.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/jeju.jpg" class="card-img-top rounded" alt="제주">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">Card title</h4>
+                        <h4 class="card-title text-white text-center main_text">제주</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/bg-showcase-2.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/daejeon.jpg" class="card-img-top rounded" alt="대전">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">Card title</h4>
+                        <h4 class="card-title text-white text-center main_text">대전</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/bg-showcase-2.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/daegu.png" class="card-img-top rounded" alt="대구">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">Card title</h4>
+                        <h4 class="card-title text-white text-center main_text">대구</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/bg-showcase-2.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/kunggi.jpg" class="card-img-top rounded" alt="경기도 수원">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">Card title</h4>
+                        <h4 class="card-title text-white text-center main_text">경기도</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/bg-showcase-2.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/gwangju.jpg" class="card-img-top rounded" alt="광주">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">Card title</h4>
+                        <h4 class="card-title text-white text-center main_text">광주</h4>
                     </div>
                 </div>
             </div>
 
             <div class="col">
                 <div class="card border-0">
-                    <img src="images/bg-showcase-2.jpg" class="card-img-top rounded" alt="...">
+                    <img src="../../../proj/resources/assets/img/mainimg/gangwon.jpg" class="card-img-top rounded" alt="강원도">
                     <div class="card-img-overlay">
-                        <h4 class="card-title text-white text-center">Card title</h4>
+                        <h4 class="card-title text-white text-center main_text">강원도</h4>
+                    </div>
+                </div>
+            </div>
+
+            <%--8개 더 --%>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/ulsan.jpg" width="100%" class="card-img-top rounded" alt="울산">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">울산</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/incheon.jpg" class="card-img-top rounded" alt="인천">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">인천</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/sejong.png" class="card-img-top rounded" alt="세종">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">세종</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/chungbuk.jpg" class="card-img-top rounded" alt="충북">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">충북</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/chungnam.jpg" class="card-img-top rounded" alt="충남">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">충남</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/kyungbuk.jpg" class="card-img-top rounded" alt="경북">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">경북</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/kyungnam.jpg" class="card-img-top rounded" alt="경남">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">경남</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/jeonrabukdo.jpg" class="card-img-top rounded" alt="전북">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">전북</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-0">
+                    <img src="../../../proj/resources/assets/img/mainimg/jeonranamdo.jpg" class="card-img-top rounded" alt="전남">
+                    <div class="card-img-overlay">
+                        <h4 class="card-title text-white text-center main_text">전남</h4>
                     </div>
                 </div>
             </div>

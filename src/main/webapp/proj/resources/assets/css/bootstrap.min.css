@@ -4253,6 +4253,7 @@ textarea.form-control-lg {
     left: 0;
     padding: var(--bs-card-img-overlay-padding);
     border-radius: var(--bs-card-inner-border-radius);
+    background: linear-gradient(to top, rgb(0, 0, 0, 100), red);
 }
 
 .card-img,
