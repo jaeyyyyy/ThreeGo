@@ -21,6 +21,24 @@ a {
     margin-top: 5em;
 }
 
+.cardgradient {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+    /*background: linear-gradient(to top, rgb(0, 0, 0, 1), red);*/
+}
+
+.sec2h2{
+    text-align: left !important;
+    line-height: 120%;
+    color: #212121;
+}
+
+/*메뉴 카드 접기*/
+.invisiblecard{
+display: none;
+}
+
+#morebtn
+
 .navbar > ul {
     list-style: none;
 }

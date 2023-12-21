@@ -21,6 +21,7 @@ public class UserDAO extends DBConnPool {
         return dao;
     }
 
+    // 가입하기
     public int join(UserDTO dto) {
         try {
             //쿼리 작성
@@ -41,6 +42,7 @@ public class UserDAO extends DBConnPool {
         return result;
     }
 
+    // 아이디가 일치하는 유저 찾기
     public UserDTO findUser(String u_id) {
         UserDTO userInfo = new UserDTO();
         try {
@@ -53,6 +55,9 @@ public class UserDAO extends DBConnPool {
                 userInfo.setU_pw(rs.getString("u_pw"));
                 userInfo.setU_name(rs.getString("u_name"));
                 userInfo.setU_email(rs.getString("u_email"));
+                userInfo.setU_ofile(rs.getString("u_ofile"));
+                userInfo.setU_sfile(rs.getString("u_sfile"));
+                userInfo.setU_about(rs.getString("u_about"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,27 +66,7 @@ public class UserDAO extends DBConnPool {
         return userInfo;
     }
 
-    public void modUser(UserDTO dto) {
-        String u_id = dto.getU_id();
-        String u_pw = dto.getU_pw();
-        String u_name = dto.getU_name();
-        String u_email = dto.getU_email();
-        try {
-            String query = "UPDATE users SET "
-                    + " u_pw = ?, u_name = ?, u_email=?"
-                    + " WHERE u_id=?";
-            System.out.println(query);
-            psmt = con.prepareStatement(query);
-            psmt.setString(1,u_pw);
-            psmt.setString(2,u_name);
-            psmt.setString(3,u_email);
-            psmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("modUser 메서드 오류");
-        }
-    }
-
+    // 유저 삭제하기
     public void delUser(String u_id) {
         try {
             String query = "DELETE FROM user"
@@ -93,6 +78,7 @@ public class UserDAO extends DBConnPool {
         }
     }
 
+    // 아이디 중복 확인 하기
     public boolean checkDuplicateId(String u_id) {
         try {
             // 쿼리 작성
@@ -111,19 +97,22 @@ public class UserDAO extends DBConnPool {
             e.printStackTrace();
             return false;
         }
-        }
+    }
 
 
-        // 마이페이지 용
+        // 마이페이지에서 내 정보 수정하기
     public int updateUserInfo(UserDTO dto) {
         try {
             // 쿼리 작성
-            String query = "UPDATE users SET u_name=?, u_pw=?, u_email=? WHERE u_id=?";
+            String query = "UPDATE users SET u_name=?, u_pw=?, u_email=?, u_ofile=?, u_sfile=?, u_about=? WHERE u_id=?";
             psmt = con.prepareStatement(query);
             psmt.setString(1, dto.getU_name());
             psmt.setString(2, dto.getU_pw());
             psmt.setString(3, dto.getU_email());
-            psmt.setString(4, dto.getU_id());
+            psmt.setString(4,dto.getU_ofile());
+            psmt.setString(5, dto.getU_sfile());
+            psmt.setString(6, dto.getU_about());
+            psmt.setString(7, dto.getU_id());
             result = psmt.executeUpdate();
         } catch (Exception e) {
             System.out.println("updateUserInfo 메소드 오류 발생");
@@ -131,9 +120,7 @@ public class UserDAO extends DBConnPool {
         }
         return result;
     }
-
-
-    }
+}
 
 
 
