@@ -181,6 +181,7 @@
                                 )
                             }
                             break;
+
                         case 14:
                             restdate = info[0].restdateculture === "" ? "연중무휴" : info[0].restdateculture;
                             parking = info[0].parkingculture === "" ? "주차 불가" : info[0].parkingculture;
@@ -219,6 +220,7 @@
                                 )
                             }
                             break;
+
                         case 15:
                             // 축제 개최 기간 확인
                             let startDay = info[0].eventstartdate;
@@ -283,6 +285,7 @@
                                 )
                             }
                             break;
+
                         case 25:
                             $('#detailInfo').append(
                                 '<tr>'
@@ -336,6 +339,43 @@
                                 )
                             }
                             break;
+                        case 32:
+                            parking = info[0].parkinglodging === "" ? "주차 불가" : info[0].parkinglodging;
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">주소</th>'
+                                + '<td width="40%">' + address  + '</td>'
+                                + '<th>객실유형</th>'
+                                + '<td>' + info[0].roomtype + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>문의 및 안내</th>'
+                                + '<td>' + info[0].infocenterlodging + '</td>'
+                                + '<th width="10%">체크인</th>'
+                                + '<td width="40%">' + info[0].checkintime + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>예약안내</th>'
+                                + '<td>' + info[0].reservationlodging + '</td>'
+                                + '<th>체크아웃</th>'
+                                + '<td>' + info[0].checkouttime + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>부대시설</th>'
+                                + '<td>' + info[0].subfacility + '</td>'
+                                + '<th>주차여부</th>'
+                                + '<td>' + parking + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
+                            break;
                         case 38:
                             restdate = info[0].restdateshopping === "" ? "연중무휴" : info[0].restdateshopping;
                             parking = info[0].parkingshopping === "" ? "주차 불가" : info[0].parkingshopping;
@@ -368,6 +408,48 @@
                                 )
                             }
                             break;
+
+                        case 39:
+                            restdate = info[0].restdatefood === "" ? "연중무휴" : info[0].restdatefood;
+                            parking = info[0].parkingfood === "" ? "주차 불가" : info[0].parkingfood;
+                            $('#detailInfo').append(
+                                '<tr>'
+                                + '<th width="10%">분류</th>'
+                                + '<td width="40%">${cat3_name}</td>'
+                                + '<th width="10%">포장</th>'
+                                + '<td width="40%">' + info[0].packing + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>대표메뉴</th>'
+                                + '<td>' + info[0].firstmenu  + '</td>'
+                                + '<th>영업시간</th>'
+                                + '<td>' + info[0].opentimefood + '</td>'
+                                +'</tr>'
+                                +'<tr>'
+                                + '<th>메뉴</th>'
+                                + '<td>' + info[0].treatmenu + '</td>'
+                                + '<th>휴무일</th>'
+                                + '<td>' + restdate + '</td>'
+                                +'</tr>'
+                                + '<th>주소</th>'
+                                + '<td>' + address + '</td>'
+                                + '<th>카드사용여부</th>'
+                                + '<td>' + info[0].chkcreditcardfood + '</td>'
+                                +'</tr>'
+                                + '<th>전화번호</th>'
+                                + '<td>' + info[0].infocenterfood + '</td>'
+                                + '<th>주차여부</th>'
+                                + '<td>' + parking + '</td>'
+                                +'</tr>'
+                            )
+                            if(homepage !== ""){
+                                $('#detailInfo').append(
+                                    '<tr>'
+                                    + '<th>홈페이지</th>'
+                                    + '<td colspan="3">' + homepage + '</td>'
+                                    +'</tr>'
+                                )
+                            }
                     }
                 }
             })

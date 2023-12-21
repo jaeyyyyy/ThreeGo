@@ -37,16 +37,12 @@ public class B_DelController extends HttpServlet {
         HttpSession session = req.getSession();
         String sessionId = session.getAttribute("u_id").toString();
         System.out.println(sessionId); // 아이디 출력되는 거 확인
-        System.out.println(boardDTO.getU_id()); // 0되는데? 못가져오는데?
-        System.out.println(boardDTO.getB_sfile()); // 이것도? dto에 접근을 못하는데??ㅜㅠㅠㅜㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-
 
         int delResult = 0;
         boardDTO.setB_id(b_id);
         delResult = dao.deletePost(boardDTO);
         dao.close();
         System.out.println(delResult);
-
 
 
         if (sessionId.equals(boardDTO.getU_id())) {
