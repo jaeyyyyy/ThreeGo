@@ -21,6 +21,7 @@ public class UpdateUserInfoController extends HttpServlet {
         String newName = req.getParameter("newName");
         String newEmail = req.getParameter("newEmail");
 
+
         UserDAO dao = UserDAO.getInstance();
 
         UserDTO dto = dao.findUser(u_id);
