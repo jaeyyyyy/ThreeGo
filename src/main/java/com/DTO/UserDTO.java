@@ -1,6 +1,9 @@
 package com.DTO;
 
 public class UserDTO {
+    public UserDTO() {
+    }
+
     //유저 변수 선언
     private String u_id;
     private String u_pw1;
