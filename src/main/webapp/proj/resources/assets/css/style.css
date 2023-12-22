@@ -54,7 +54,7 @@ a {
 
 
 #morebtn {
-    transform: translateY(-650px); /* 초기에 위로 이동한 상태로 설정 */
+    transform: translateY(30px); /* 초기에 위로 이동한 상태로 설정 */
     transition: transform 0.6s ease-in-out;
 }
 
@@ -65,15 +65,20 @@ a {
 .invisiblecard {
     opacity: 0;
     transform: translateY(-20px); /* 초기에 위로 이동한 상태로 설정 */
-    transition: opacity 0.3s ease-out, transform 0.2s ease-out;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     pointer-events: none; /* 클릭 비활성화 */
+    height: 0; /* 초기에 높이 0으로 설정 */
+    margin-bottom: 0; /* 초기에 공간 차지 없도록 설정 */
 }
 
 .invisiblecard.removee {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto; /* 클릭 활성화 */
+    height: auto; /* 높이를 자동으로 설정하여 공간 차지 */
+    margin-bottom: 1rem; /* 원하는 간격으로 조정 */
 }
+
 /*nav*/
 .navbar > ul {
     list-style: none;
