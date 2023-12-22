@@ -37,11 +37,24 @@ public class T_ListController extends HttpServlet {
 
         TouritemDAO ti_dao = new TouritemDAO();
         List<TouritemDTO> touritemList = ti_dao.selectList(map);
+        ti_dao.close();
 
         JSONObject data = new JSONObject();
         JSONArray touritemArr = new JSONArray();
 
         for(TouritemDTO dto : touritemList){
+            String title = dto.getTitle();
+            if(title.contains("[한국")) title = title.substring(0,title.lastIndexOf("[한국"));
+
+            String address = "";
+            if(dto.getAddr1() != null) address += dto.getAddr1();
+            if(dto.getAddr2() != null) address += dto.getAddr2();
+
+            String category = "";
+            if(dto.getCat1_name() != null) category += dto.getCat1_name();
+            if(dto.getCat2_name() != null) category += (" > " + dto.getCat2_name());
+            if(dto.getCat3_name() != null) category += (" > " + dto.getCat3_name());
+
             JSONObject dtoObj = new JSONObject();
             dtoObj.put("contentid", dto.getContentid());
             dtoObj.put("cat1", dto.getCat1());
@@ -51,13 +64,15 @@ public class T_ListController extends HttpServlet {
             dtoObj.put("contenttypeid", dto.getContenttypeid());
             dtoObj.put("addr1", dto.getAddr1());
             dtoObj.put("addr2", dto.getAddr2());
-            dtoObj.put("firstimage", dto.getFirstimage());
+            dtoObj.put("firstimage", "<a href='../info/content.do?contentid=" + dto.getContentid() + "'><img src='" + dto.getFirstimage() + "' alt='" +  dto.getTitle() +"' class='thumbnail'></a>");
             dtoObj.put("mapx", dto.getMapx());
             dtoObj.put("mapy", dto.getMapy());
             dtoObj.put("mlevel", dto.getMlevel());
             dtoObj.put("sigungucode", dto.getSigungucode());
             dtoObj.put("tel", dto.getTel());
-            dtoObj.put("title", "<a href='../info/content.do?contentid=" + dto.getContentid() + "'>" + dto.getTitle() + "</a>");
+            dtoObj.put("title","<h5><a href='../info/content.do?contentid=" + dto.getContentid() + "'>" + title + "</a><h5>"
+                                + "<p>" + address + "</p>"
+                                + "<p>" + category + "</p>");
             touritemArr.add(dtoObj);
         }
 

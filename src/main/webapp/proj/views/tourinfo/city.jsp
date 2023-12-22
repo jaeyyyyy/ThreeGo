@@ -109,16 +109,41 @@
                 }
             };
 
-            var grid = new tui.Grid({
+            const Grid = tui.Grid;
+            Grid.applyTheme('clean',{
+                cell: {
+                    normal: {
+                        background: '#fff',
+                            border: '#e0e0e0',
+                            showVerticalBorder: false,
+                            showHorizontalBorder: true
+                    },
+                    header: {
+                        background: '#fff',
+                            border: '#e0e0e0',
+                            showVerticalBorder: false,
+                            showHorizontalBorder: true
+                    },
+                    selectedHeader: {
+                        background: '#e0e0e0'
+                    }
+                }
+            });
+
+            var grid = new Grid({
                 el : document.getElementById('gridDiv'),
                 data : dataSource,
                 scrollX : false,
                 scrollY : false,
+                rowHeight : 120,
+                rowHeaders: [{type: 'rowNum', width: 100}],
+
 
                 columns : [
                     {
-                        header : 'content Id',
-                        name : 'contentid'
+                        header : '사진',
+                        name : 'firstimage',
+                        width : 200
                     },
                     {
                         header : '제목',
@@ -146,6 +171,13 @@
         #wrap{
             width: 1200px;
             margin: 0 auto;
+        }
+        .thumbnail{
+            width: 150px;
+            height: 100px;
+        }
+        #gridDiv{
+            width: 70%;
         }
     </style>
     <title>관광지 정보 | 3GO</title>

@@ -8,7 +8,7 @@
 
         const contentid = ${content.contentid};
         const contenttypeid = ${content.contenttypeid};
-        const address = "${content.addr1}" + "${content.addr2}";
+        const address = "${content.addr1}" + " " + "${content.addr2}";
 
         const endPoint = "https://apis.data.go.kr/B551011/KorService1/";
         const MobileOS = "ETC";
@@ -62,15 +62,15 @@
                             + '<img src="' + altImag + '" class="d-block w-100" alt="등록된 이미지가 없습니다.">'
                             + '</div>'
                         )
-                    }else{
-                        if(length === 1){
-                            $('.carousel-inner').html(
-                                '<div class="carousel-item active">'
-                                + '<img src="${content.firstimage}" class="d-block w-100" alt="${content.title}">'
-                                + '</div>'
-                            )
-                        }else if(length > 1){
-                            images.forEach(function (image, idx){
+                    }else {
+                        images.forEach(function (image, idx){
+                            if(length === 1){
+                                $('.carousel-inner').html(
+                                    '<div class="carousel-item active">'
+                                    + '<img src=' + image.originimgurl + ' class="d-block w-100" alt=' + image.imgname + '>'
+                                    + '</div>'
+                                )
+                            }else {
                                 if(idx === 0){
                                     $('.carousel-indicators').append(
                                         '<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>'
@@ -90,10 +90,9 @@
                                         + '</div>'
                                     )
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
-
                 }
             })
         }
@@ -473,7 +472,7 @@
                             break;
 
                         default:
-                            $('#sub-title').html('주변 관광지 추천')
+                            $('#sub-title').html('동일 카테고리의 주변 관광지 추천')
                             moreItem.forEach(function (cosItem){
                                 $('#sub-items').append(
                                     '<div class="card sub-item">'
@@ -551,8 +550,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h3 id="title">${content.title}</h3>
-                <%--${content.contenttypeid}--%>
+                <h3 id="title">${title}</h3>
                 ${category}
                 <div class="row">
                     <%-- 캐러셀 --%>
@@ -758,7 +756,7 @@
             map: map
         });
 
-        var iwContent = '<div style="padding:5px; font-size:15px">${content.title}<br><a href="https://map.kakao.com/link/map/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">길찾기</a></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        var iwContent = '<div style="padding:5px; font-size:15px">${title}<br><a href="https://map.kakao.com/link/map/${title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/${content.title},${content.mapy},${content.mapx}" style="color:blue" target="_blank">길찾기</a></div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
         // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({

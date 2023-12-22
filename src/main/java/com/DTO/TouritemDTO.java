@@ -17,6 +17,11 @@ public class TouritemDTO {
     private String tel;
     private String title;
 
+    // join용 변수
+    private String cat1_name;
+    private String cat2_name;
+    private String cat3_name;
+
     public String getContentid() {
         return contentid;
     }
@@ -135,5 +140,32 @@ public class TouritemDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+
+    // join용 게터세터
+
+    public String getCat1_name() {
+        return cat1_name;
+    }
+
+    public void setCat1_name(String cat1_name) {
+        this.cat1_name = cat1_name;
+    }
+
+    public String getCat2_name() {
+        return cat2_name;
+    }
+
+    public void setCat2_name(String cat2_name) {
+        this.cat2_name = cat2_name;
+    }
+
+    public String getCat3_name() {
+        return cat3_name;
+    }
+
+    public void setCat3_name(String cat3_name) {
+        this.cat3_name = cat3_name;
     }
 }

@@ -36,7 +36,11 @@ public class T_ContentController extends HttpServlet {
         if(!cat2_name.isEmpty()) category += (" > " + cat2_name);
         if(!cat3_name.isEmpty()) category += (" > " + cat3_name);
 
+        String title = dto.getTitle();
+        if(title.contains("[한국")) title = title.substring(0,title.lastIndexOf("[한국"));
+
         req.setAttribute("content", dto);
+        req.setAttribute("title", title);
         req.setAttribute("category", category);
         req.setAttribute("cat3_name", cat3_name);
 
@@ -48,7 +52,7 @@ public class T_ContentController extends HttpServlet {
         String MobileApp = "TEST";
         String searchType ="";
         String contenttypeid = dto.getContenttypeid();
-        int numOfRows = 100;
+        int numOfRows = 0;
 
         URL url;
         String result = "";
@@ -56,6 +60,7 @@ public class T_ContentController extends HttpServlet {
 
         if(contenttypeid.equals("25")){
             searchType = "detailInfo1";
+            numOfRows = 100;
 
             url = new URL(endPoint + searchType
                     + "?MobileOS=" + MobileOS
@@ -69,7 +74,8 @@ public class T_ContentController extends HttpServlet {
             searchType = "locationBasedList1";
             String mapX = dto.getMapx();
             String mapY = dto.getMapy();
-            int radius = 5000;
+            int radius = 3000;
+            numOfRows = 10;
 
             url = new URL(endPoint + searchType
                     + "?numOfRows=" + numOfRows
@@ -100,13 +106,21 @@ public class T_ContentController extends HttpServlet {
             JSONObject items = (JSONObject)body.get("items");
             moreItem = (JSONArray)items.get("item");
 
+
             for(Object obj : moreItem){
                 JSONObject subItem = (JSONObject) obj;
+
                 String subContentId = "";
                 if(contenttypeid.equals("25")){
                     subContentId = subItem.get("subcontentid").toString();
+                    String subname = subItem.get("subname").toString();
+                    subname = subname.contains("[한국") ? subname.substring(0,subname.lastIndexOf("[한국")) : subname;
+                    subItem.replace("subname", subname);
                 }else {
                     subContentId = subItem.get("contentid").toString();
+                    String subname = subItem.get("title").toString();
+                    subname = subname.contains("[한국") ? subname.substring(0,subname.lastIndexOf("[한국")) : subname;
+                    subItem.replace("title", subname);
                 }
                 TouritemDTO sub_dto = dao.selectItem(subContentId);
                 if(contenttypeid.equals("25")){
