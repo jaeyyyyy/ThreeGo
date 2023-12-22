@@ -2,7 +2,6 @@ package com.controller;
 
 import com.DAO.UserDAO;
 import com.DTO.UserDTO;
-import com.util.FileUtil;
 import com.util.JSFunction;
 import com.util.U_FileUtil;
 
@@ -16,6 +15,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/mypage.do")
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 1, //1mb
+        maxRequestSize = 1024 * 1024 * 10 // 10mb
+)
 public class MyPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -79,13 +82,13 @@ public class MyPageController extends HttpServlet {
 
         // 파일명 변경
         if(oFileName != "") {
-            String savedFileName = FileUtil.renameFile(saveDir, oFileName);
+            String savedFileName = U_FileUtil.renameFile(saveDir, oFileName);
 
             dto.setU_ofile(oFileName);
             dto.setU_sfile(savedFileName);
 
             // 기존에 있던 파일 삭제
-            FileUtil.deleteFile(req,"upload",prevSfile);
+            U_FileUtil.deleteFile(req,"upload",prevSfile);
 
         } else {
             // 첨부파일이 없으면 기존 이름 유지
