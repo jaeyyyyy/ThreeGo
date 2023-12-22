@@ -83,6 +83,41 @@ public class BoardDAO extends DBConnPool {
         return bbs;
     }
 
+    public List<BoardDTO> selectMyList(String u_id){
+        List<BoardDTO> myList = new ArrayList<BoardDTO>();
+
+        //쿼리문 작성
+        String query = "SELECT * FROM boardtable WHERE U_ID = ?";
+
+        try{
+            psmt = con.prepareStatement(query);
+            psmt.setString(1,u_id);
+            rs = psmt.executeQuery();
+
+            while (rs.next()){
+                //게시물 하나의 내용을 저장
+                BoardDTO dto = new BoardDTO();
+
+                dto.setB_id(rs.getString("b_id"));
+                dto.setU_id(rs.getString("u_id"));
+                dto.setU_name(rs.getString("u_name"));
+                dto.setB_title(rs.getString("b_title"));
+                dto.setB_content(rs.getString("b_content"));
+                dto.setB_postdate(rs.getDate("b_postdate"));
+                dto.setB_ofile(rs.getString("b_ofile"));
+                dto.setB_sfile(rs.getString("b_sfile"));
+                dto.setB_visitcount(rs.getInt("b_visitcount"));
+                myList.add(dto);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("SelectMyList 오류 발생");
+        }
+
+        return myList;
+    }
+
     //게시글 작성
     public int insertWrite(BoardDTO dto){
         int result = 0;

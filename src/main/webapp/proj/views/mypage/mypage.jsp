@@ -18,6 +18,17 @@
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
 
     <title>마이페이지</title>
+    <style>
+        #my-page{
+            align-items: center;
+        }
+        .post-text{
+            border-left: 1px solid #EEEEEE;
+        }
+        .post-img{
+            object-fit: cover;
+        }
+    </style>
 
 </head>
 <body>
@@ -31,7 +42,7 @@
 
 <div class="container position-relative">
 
-    <div class="row">
+    <div id="my-page" class="row gap-3">
         <div class="col-md-3 text-center my-profile mt-5 mb-5">
             <c:choose>
                 <c:when test="${not empty dto.u_ofile == true}">
@@ -57,6 +68,25 @@
             </a>
 
         </div>
+
+        <%-- 내 작성글 확인--%>
+        <c:forEach var="myPost" items="${myList}">
+            <div class="card mb-3" style="max-width: 450px;">
+                <div class="row g-0">
+                    <div class="col-md-4 mt-5 mb-5">
+                        <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
+                    </div>
+                    <div class="col-md-8 post-text">
+                        <div class="card-body">
+                            <h5 class="card-title">${myPost.b_title}</h5>
+                            <p class="card-text">${myPost.b_content}</p>
+                            <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+
         <div class="col-md-8">
 
             <!-- 정보 수정 폼 -->

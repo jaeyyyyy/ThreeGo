@@ -1,6 +1,8 @@
 package com.controller;
 
+import com.DAO.BoardDAO;
 import com.DAO.UserDAO;
+import com.DTO.BoardDTO;
 import com.DTO.UserDTO;
 import com.util.JSFunction;
 import com.util.U_FileUtil;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/mypage.do")
 @MultipartConfig(
@@ -35,7 +38,11 @@ public class MyPageController extends HttpServlet {
             UserDAO dao = UserDAO.getInstance();
             UserDTO dto = dao.findUser(u_id);
 
+            BoardDAO b_dao = new BoardDAO();
+            List<BoardDTO> myList = b_dao.selectMyList(u_id);
+
             req.setAttribute("dto",dto);
+            req.setAttribute("myList",myList);
 
             req.getRequestDispatcher("/proj/views/mypage/mypage.jsp").forward(req,resp);
         }
