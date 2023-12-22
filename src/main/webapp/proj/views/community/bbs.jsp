@@ -124,7 +124,8 @@
                     }
                 %>
             </div>
-        </form>
+    </div>
+</form>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
 <!-- Bootstrap core JS-->
