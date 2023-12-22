@@ -16,10 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/mypage.do")
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 1, //1mb
-        maxRequestSize = 1024 * 1024 * 10 // 10mb
-)
 public class MyPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
