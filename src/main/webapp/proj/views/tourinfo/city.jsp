@@ -4,6 +4,7 @@
 <head>
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
+    <link href="../../../proj/views/common/commonstyle.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- toast grid -->
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.1/tui-pagination.js"></script>
@@ -136,18 +137,22 @@
                 scrollX : false,
                 scrollY : false,
                 rowHeight : 120,
-                rowHeaders: [{type: 'rowNum', width: 100}],
-
+                rowHeaders: [{type: 'rowNum', width: 50}],
 
                 columns : [
                     {
                         header : '사진',
                         name : 'firstimage',
+                        renderer: {
+                            styles: {
+                                textAlign: 'center'
+                            },
+                        },
                         width : 200
                     },
                     {
                         header : '제목',
-                        name : 'title'
+                        name : 'title',
                     }
                 ],
 
