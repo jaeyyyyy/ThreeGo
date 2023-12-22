@@ -11,6 +11,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../proj/resources/assets/css/style.css" rel="stylesheet" />
+    <link href="../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
     <title>로그인</title>
     <link rel = "icon" href="image/wave.ico">
 

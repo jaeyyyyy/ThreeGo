@@ -177,3 +177,12 @@ a {
     background: #282d38;
     color: #fff;
 }
+
+/*sub-header*/
+.sub-header {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background-image: url("../../../../proj/resources/assets/img/mainimg/daejeon.jpg");
+}
