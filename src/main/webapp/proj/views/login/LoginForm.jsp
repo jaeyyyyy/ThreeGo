@@ -21,11 +21,6 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-<!-- header-->
-<jsp:include page="../common/header.jsp"/>
-
-
-
 <script>
     function validateForm(form){
         if(!form.u_id.value){
@@ -39,6 +34,13 @@
     }
 </script>
 
+<!-- header-->
+<jsp:include page="../common/header.jsp"/>
+<div class="sub-header">
+    <div class="container pt-5 pl-5">
+        <h3 class="display-6 text-white">로그인</h3>
+    </div>
+</div>
 <form action="/login.do" method="post" name="loginFrm" onsubmit="return validateForm(this)">
     <div class="container position-relative pt-5 pb-5">
         <h1 class="text-center">로그인</h1>
@@ -48,12 +50,12 @@
 
 
         <%--아이디--%>
-        <div class="userInput m-5">
+        <div class="userInput mb-5">
             <h4 class="list">아이디</h4>
             <input type="text" name="u_id" class="form-control form-control-sm" maxlength="20" placeholder="아이디를 입력하세요."><br/>
         </div>
         <%--비밀번호--%>
-        <div class="userInput m-5">
+        <div class="userInput mb-5">
             <h4 class="list">비밀번호</h4>
             <input type="password" name="u_pw" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요."><br/>
         </div>
