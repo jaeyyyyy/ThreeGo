@@ -31,9 +31,11 @@
 }
 
 .top-header {
-    background: linear-gradient(to bottom left, #77c4e3, #8176b5);
+    background-image: url("../../../proj/resources/assets/img/mainimg/gangwon.jpg");
     background-size: cover;
     background-position: center;
+    background-blend-mode: multiply;
+    background-color: rgba(100,127,255,0.3);
 }
 
 .navbar {

@@ -92,7 +92,8 @@
 </div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
-
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.getElementById('joinBtn').addEventListener('click', function() {
         // 간단한 유효성 검사

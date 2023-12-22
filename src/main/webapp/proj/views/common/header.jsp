@@ -34,16 +34,16 @@
                             if(session.getAttribute("u_id") == null) {
                         %>
                         <%--아이콘을 누르면 모달창이 뜬다.--%>
-                        <button data-bs-toggle="modal" data-bs-target="#log_or_join" id="start-btn">
+                        <button data-bs-toggle="modal" data-bs-target="#log-or-join" data-bs-toggle="modal" id="start-btn">
                             <i class="bi bi-person-circle" style="color:#fff;"></i>
                         </button>
 
                         <!-- 로그인 또는 회원가입 Modal창 -->
-                        <div class="modal fade" id="log_or_join" tabindex="-1" aria-labelledby="log_or_joinModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="log-or-join" tabindex="-1" aria-labelledby="LogJoinModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">ThreeGo</h5>
+                                        <h5 class="modal-title" id="LogJoinModalLabel">ThreeGo</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
