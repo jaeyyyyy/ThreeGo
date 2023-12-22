@@ -23,15 +23,37 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
-<jsp:include page="mypageConfirm.jsp"/>
+<div class="sub-header">
+    <div class="container pt-5 pl-5">
+        <h3 class="display-6 text-white">마이페이지</h3>
+    </div>
+</div>
+
 <div class="container position-relative">
 
     <div class="row">
-        <div class="col-md-4">
-            <h1 style="font-weight: 700;">${dto.u_name}님,</h1>
-            <h3 style="font-weight: 500;">환영합니다.</h3>
+        <div class="col-md-3 text-center my-profile mt-5 mb-5">
+            <c:choose>
+                <c:when test="${not empty dto.u_ofile == true}">
+                    <div class="prof-img mt-5">
+                        <img class="my-prof-img" src="../../../upload/${dto.u_sfile}" />
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="prof-img mt-5">
+                        <img class="my-prof-img" src="../../../proj/resources/assets/img/no_profimg.png')" />
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
+            <div class="greeting m-5 text-white">
+                <h3 style="font-weight: 500;">환영합니다!</h3>
+                <h1 style="font-weight: 700;">${dto.u_name}님</h1>
+            </div>
+
+
             <a href="/updateUser.do">
-                <button class="btn btn-primary">정보 수정하기</button>
+                <button class="btn btn-primary mb-5">정보 수정하기</button>
             </a>
 
         </div>
