@@ -23,15 +23,18 @@ public class T_cityController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String area = req.getParameter("area");
+        String areacode = req.getParameter("area");
 
         Cat1DAO cat1_dao = new Cat1DAO();
         SigunguDAO si_dao = new SigunguDAO();
         C_TypeDAO c_type_dao = new C_TypeDAO();
+        AreaDAO area_dao = new AreaDAO();
 
         List<Cat1DTO> cat1List = cat1_dao.selectList();
-        List<SigunguDTO> sigunguList = si_dao.selectList(area);
+        List<SigunguDTO> sigunguList = si_dao.selectList(areacode);
         List<C_TypeDTO> c_typeList = c_type_dao.selectList();
+
+        String areaName = area_dao.showAreaName(areacode);
 
         cat1_dao.close();
         si_dao.close();
@@ -40,6 +43,7 @@ public class T_cityController extends HttpServlet {
         req.setAttribute("cat1List", cat1List);
         req.setAttribute("sigunguList", sigunguList);
         req.setAttribute("c_typeList", c_typeList);
+        req.setAttribute("areaName", areaName);
 
         req.getRequestDispatcher("/proj/views/tourinfo/city.jsp").forward(req, resp);
 
@@ -50,7 +54,7 @@ public class T_cityController extends HttpServlet {
         BufferedReader reader = req.getReader();
         String result = reader.readLine();
         JSONParser parser = new JSONParser();
-        JSONObject data = new JSONObject();
+        JSONObject data;
         try {
             data = (JSONObject) parser.parse(result);
         } catch (ParseException e) {

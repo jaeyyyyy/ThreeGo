@@ -94,7 +94,7 @@ public class TouritemDAO extends JDBConnect {
                 subquery += "contenttypeid = " + map.get("type") + " ";
             }
         }
-        subquery += " ORDER BY contentid ASC";
+        subquery += " ORDER BY title ASC";
 
         String query = "SELECT contentid, tr.cat1, cat1_name, tr.cat2, cat2_name, tr.cat3, cat3_name,"
                 + " areacode, contenttypeid, addr1, addr2, firstimage, mapx, mapy, mlevel, sigungucode, tel, title FROM"

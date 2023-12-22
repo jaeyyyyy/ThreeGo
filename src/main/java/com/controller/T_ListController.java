@@ -70,9 +70,9 @@ public class T_ListController extends HttpServlet {
             dtoObj.put("mlevel", dto.getMlevel());
             dtoObj.put("sigungucode", dto.getSigungucode());
             dtoObj.put("tel", dto.getTel());
-            dtoObj.put("title","<h5><a href='../info/content.do?contentid=" + dto.getContentid() + "'>" + title + "</a><h5>"
-                                + "<p>" + address + "</p>"
-                                + "<p>" + category + "</p>");
+            dtoObj.put("content","<h5 class='list_title'><a href='../info/content.do?contentid=" + dto.getContentid() + "'>" + title + "</a><h5>"
+                                + "<p class='list_address'>" + address + "</p>"
+                                + "<p class='list_category'>" + category + "</p>");
             touritemArr.add(dtoObj);
         }
 
