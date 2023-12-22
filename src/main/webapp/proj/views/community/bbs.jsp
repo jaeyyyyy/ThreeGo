@@ -28,6 +28,12 @@
 </script>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
+<div class="sub-header">
+    <div class="container pt-5 pl-5">
+        <h3 class="display-6 text-white">게시판</h3>
+    </div>
+</div>
+
 <form method="get" name="writeFrm">
     <div class="container position-relative">
         <div class="d-flex justify-content-center pt-5">

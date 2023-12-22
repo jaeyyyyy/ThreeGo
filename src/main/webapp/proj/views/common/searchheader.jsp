@@ -6,11 +6,14 @@
 </head>
 <body>
 
+<!--top-header-->
 <div class="top-header" style="height: 30rem;">
+    <!--container-->
     <div class="container">
+        <!--navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="../views/index.jsp">
-                <i class="bi-pin-map-fill m-auto text-primary"></i>
+                <i class="bi bi-pin-map-fill m-auto text-dark"></i>
                 <!--<img src="#" target="blank" alt="logo" height="100">-->
             </a>
 
@@ -33,8 +36,8 @@
                             if(session.getAttribute("u_id") == null) {
                         %>
                         <%--아이콘을 누르면 모달창이 뜬다.--%>
-                        <button data-bs-toggle="modal" data-bs-target="#log-or-join" id="start-btn">
-                            <i class="bi bi-person-circle" style="color:#fff;"></i>
+                        <button data-bs-toggle="modal" data-bs-target="#log-or-join" id="start-btn" class="navbar-brand">
+                            <i class="bi bi-person-circle text-dark"></i>
                         </button>
 
                         <!-- 로그인 또는 회원가입 Modal창 -->
@@ -71,26 +74,101 @@
                     </div>
                 </ul>
             </div>
-        </nav>
-    </div>
 
-    <div class="container position-relative">
-        <div class="row justify-content-center">
-            <div class="col-xl-8">
-                <div class="text-center text-white">
-                    <form class="form-subscribe" id="searchForm">
-                        <!-- 여행지 검색창 input-->
-                        <div class="row">
-                            <div class="col">
-                                <input class="form-control form-control-lg" id="searchInput" placeholder="Coming Soon..."/>
-                            </div>
-                            <div class="col-auto"><button class="btn btn-primary btn-lg" id="searchButton" type="submit">검색</button></div>
+        </nav>
+        <!--navbar end-->
+
+
+
+    </div>
+    <!--container end-->
+    <!--swiper-->
+    <div class="swiper-container">
+        <section class="slider-1">
+            <div class="swiper" id="swiper-1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="cards cards-1">
+
+                            <p></p>
                         </div>
-                    </form>
+                    </div><!--end swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="cards cards-2">
+
+                            <p></p>
+                        </div>
+                    </div><!--end swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="cards cards-3">
+
+                            <p></p>
+                        </div>
+                    </div><!--end swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="cards cards-4">
+
+                            <p></p>
+                        </div>
+                    </div><!--end swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="cards cards-5">
+
+                            <p></p>
+                        </div>
+                    </div><!--end swiper-slide-->
+                    <div class="swiper-slide">
+                        <div class="cards cards-6">
+
+                            <p></p>
+                        </div>
+                    </div><!--end swiper-slide-->
+                </div><!--end swipper-wrapper-->
+                <div class="swiper-pagination">
+
                 </div>
             </div>
-        </div>
+        </section>
     </div>
+    <!--end swiper-->
+
+
+<%--검색창 삭제-->
+<%--    <div class="container position-relative">--%>
+<%--        <div class="row justify-content-center">--%>
+<%--            <div class="col-xl-8">--%>
+<%--                <div class="text-center text-white">--%>
+<%--                    <form class="form-subscribe" id="searchForm">--%>
+<%--                        <!-- 여행지 검색창 input-->--%>
+<%--                        <div class="row">--%>
+<%--                            <div class="col">--%>
+<%--                                <input class="form-control form-control-lg" id="searchInput" placeholder="Coming Soon..."/>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-auto"><button class="btn btn-primary btn-lg" id="searchButton" type="submit">검색</button></div>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </div>
+
+<script>
+    new Swiper("#swiper-1",{
+        autoplay:{
+            delay: 3500,
+            disableOnInteraction: false
+        },
+        pagination:{
+            el: "#swiper-1 .swiper-pagination",
+            clickable:true,
+        },
+        lazyLoading: true,
+        loop: true,
+        keyboard:{
+            enabled:true,
+        }
+    });
+</script>
 </body>
 </html>
