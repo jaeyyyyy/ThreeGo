@@ -28,7 +28,7 @@
 <jsp:include page="../common/header.jsp"/>
 <div class="sub-header">
     <div class="container pt-5 pl-5">
-        <h3 class="display-6 text-white">회원가입</h3>
+        <h3 class="display-6 text-white">마이페이지</h3>
     </div>
 </div>
 <div id="wrap" class="container position-relative pt-5 pb-5">
@@ -44,7 +44,7 @@
 
         <div id="container">
             <div class="row_group">
-                <div class="userInput m-5">
+                <div class="userInput mb-5">
                     <h4 class="list">아이디</h4>
                     <div class="input-group">
                         <!-- 아이디 입력 -->
@@ -56,26 +56,26 @@
                     </div>
                 </div>
 
-                <div class="userInput m-5">
+                <div class="userInput mb-5">
                     <!-- 비밀번호 입력 -->
                     <h4 class="list">비밀번호</h4>
                     <input type="password" name="pw" id="pw" class="form-control form-control-sm" maxlength="20" placeholder="비밀번호를 입력하세요.">
                 </div>
 
                 <!-- 비밀번호 재확인 입력 -->
-                <div class="userInput m-5">
+                <div class="userInput mb-5">
                     <h4 class="list">비밀번호 재확인</h4>
                     <input type="password" name="pwconfirm" id="pwconfirm" class="form-control form-control-sm" maxlength="20" placeholder="입력한 비밀번호를 확인해주세요.">
                 </div>
 
                 <!-- 성명 입력 -->
-                <div class="userInput m-5">
+                <div class="userInput mb-5">
                     <h4 class="list">성명</h4>
                     <input type="text" name="name" id="name" class="form-control form-control-sm" maxlength="20" placeholder="이름을 입력해주세요.">
                 </div>
 
                 <!-- 이메일 입력 -->
-                <div class="userInput m-5">
+                <div class="userInput mb-5">
                     <h4 class="list">이메일</h4>
                     <div class="input-group">
                         <input type="email" name="email" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
@@ -85,12 +85,9 @@
                 </div>
 
                 <%-- 가입버튼--%>
-                <div class="col text-center">
+                <div class="col text-center mb-5">
                     <input type="submit" value="가입" id="joinBtn" class="btn btn-primary btn-md" onclick="checkDuplicateIdAndJoin()">
-
                 </div>
-
-
             </div>
         </div>
     </form>
