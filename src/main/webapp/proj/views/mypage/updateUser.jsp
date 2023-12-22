@@ -58,7 +58,7 @@
                 <div class="userInput mb-5">
                     <h4 class="list">비밀번호</h4>
                     <div class="input-group">
-                        <input type="text" id="u_pw" name="u_pw" class="form-control form-control-sm" maxlength="20" <%--value="${dto.u_pw}"--%>><br>
+                        <input type="password" id="u_pw" name="u_pw" class="form-control form-control-sm" maxlength="20" value="${dto.u_pw}"><br>
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@
                 <div class="userInput mb-5">
                     <h4 class="list">비밀번호 재확인</h4>
                     <div class="input-group">
-                        <input type="text" id="u_pwConfirm" class="form-control form-control-sm" maxlength="20" name="u_pwConfirm">
+                        <input type="password" id="u_pwConfirm" class="form-control form-control-sm" maxlength="20" name="u_pwConfirm">
                     </div>
                 </div>
 
