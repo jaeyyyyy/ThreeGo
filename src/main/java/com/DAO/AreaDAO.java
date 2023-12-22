@@ -1,5 +1,6 @@
 package com.DAO;
 
+import com.DTO.TouritemDTO;
 import com.common.JDBConnect;
 import com.DTO.AreaDTO;
 
@@ -38,6 +39,28 @@ public class AreaDAO extends JDBConnect {
         }
 
         return areaList;
+    }
+
+    public String showAreaName(String areacode){
+        String query = "SELECT j_area_name "
+                + "FROM t_area "
+                + "WHERE j_areacode = ?";
+
+        String area_name = "";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, areacode);
+            rs = psmt.executeQuery();
+
+            if(rs.next()){
+                area_name = rs.getString("j_area_name");
+            }
+        }catch (Exception e){
+            System.out.println("showAreaName 오류 발생");
+            e.printStackTrace();
+        }
+        return area_name;
     }
 
     public int insertArea(AreaDTO dto){

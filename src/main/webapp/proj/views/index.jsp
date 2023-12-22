@@ -13,7 +13,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../resources/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../resources/assets/css/style.css?after" rel="stylesheet"/>
-    <link href="common/commonstyle.css?after" rel="stylesheet"/>
+    <link href="    common/commonstyle.css?after" rel="stylesheet"/>
 
     <!--swiper-->
     <link href="../resources/assets/swiper/swiper-bundle.min.css" rel="stylesheet" />
