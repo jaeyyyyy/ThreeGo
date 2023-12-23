@@ -44,6 +44,9 @@ public class MyPageController extends HttpServlet {
             req.setAttribute("dto",dto);
             req.setAttribute("myList",myList);
 
+//            dao.close();
+            b_dao.close();
+
             req.getRequestDispatcher("/proj/views/mypage/mypage.jsp").forward(req,resp);
         }
     }
@@ -107,6 +110,7 @@ public class MyPageController extends HttpServlet {
         int result = dao.updateUserInfo(dto);
 
         req.setAttribute("dto",dto);
+
 
         if (result > 0) {
             // 업데이트 성공
