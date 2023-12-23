@@ -87,7 +87,7 @@ public class BoardDAO extends DBConnPool {
         List<BoardDTO> myList = new ArrayList<BoardDTO>();
 
         //쿼리문 작성
-        String query = "SELECT * FROM boardtable WHERE U_ID = ?";
+        String query = "SELECT * FROM boardtable WHERE U_ID = ? ORDER BY b_postdate DESC";
 
         try{
             psmt = con.prepareStatement(query);
