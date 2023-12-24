@@ -1,3 +1,5 @@
+<%@ page import="com.DAO.UserDAO" %>
+<%@ page import="com.DTO.UserDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
@@ -17,9 +19,6 @@
 
 </head>
 <body>
-<script>
-
-</script>
 
 <jsp:include page="../common/header.jsp"/>
 <div class="sub-header">
@@ -27,6 +26,10 @@
         <h3 class="display-6 text-white">회원정보 수정</h3>
     </div>
 </div>
+
+
+
+<c:if test="${not empty sessionScope.u_id and sessionScope.u_id eq dto.u_id}">
 <div id="wrap" class="container position-relative pt-5 pb-5">
     <form name="writeFrm" action="/mypage.do" method="post" enctype="multipart/form-data" onsubmit="return editUserInfo(this);" >
         <div id="header">
@@ -90,7 +93,7 @@
                             </c:when>
                             <c:otherwise>
                                 <div class="prof-img mt-5">
-                                    <img class="my-prof-img" src="../../../proj/resources/assets/img/no_profimg.png')" />
+                                    <img class="my-prof-img" src="../proj/resources/assets/img/no_profimg.png" />
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -99,7 +102,7 @@
                         <input type="hidden" name="prevOfile" value="${dto.u_ofile}">
                         <input type="hidden" name="prevSfile" value="${dto.u_sfile}">
                         <input type="file" id="u_ofile" name="u_ofile">
-                        <input type="button" id="u_ofile_del" name="u_ofile_del" value="파일 삭제">
+<%--                        <button type="button" onclick="deleteImg();">파일 삭제</button>--%>
                     </div>
                 </div>
 
@@ -116,6 +119,7 @@
         </div>
     </form>
 </div>
+</c:if>
 <script>
     document.getElementById('editBtn').addEventListener('click', function() {
         // 간단한 유효성 검사
