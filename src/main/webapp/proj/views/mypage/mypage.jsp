@@ -20,13 +20,23 @@
     <title>마이페이지</title>
     <style>
         #my-page{
-            align-items: center;
+            display: flex;
+            align-items: flex-start;
         }
         .post-text{
             border-left: 1px solid #EEEEEE;
         }
         .post-img{
             object-fit: cover;
+        }
+        .myboard-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 1em;
+        }
+        .myboard-card {
+            width: calc(100% / 2);
         }
     </style>
 
@@ -43,6 +53,7 @@
 <div class="container position-relative">
 
     <div id="my-page" class="row gap-3">
+        <!-- 정보 수정 폼 -->
         <div class="col-md-3 text-center my-profile mt-5 mb-5">
             <c:choose>
                 <c:when test="${not empty dto.u_ofile == true}">
@@ -52,7 +63,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="prof-img mt-5">
-                        <img class="my-prof-img" src="../../../proj/resources/assets/img/no_profimg.png')" />
+                        <img class="my-prof-img" src="../proj/resources/assets/img/no_profimg.png" />
                     </div>
                 </c:otherwise>
             </c:choose>
@@ -69,30 +80,42 @@
 
         </div>
 
-        <%-- 내 작성글 확인--%>
-        <c:forEach var="myPost" items="${myList}">
-            <div class="card mb-3" style="max-width: 450px;">
-                <div class="row g-0">
-                    <div class="col-md-4 mt-5 mb-5">
-                        <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
-                    </div>
-                    <div class="col-md-8 post-text">
-                        <div class="card-body">
-                            <h5 class="card-title">${myPost.b_title}</h5>
-                            <p class="card-text">${myPost.b_content}</p>
-                            <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
+
+        <div class="col-md mt-5 mb-5">
+            <h3>나의 게시글</h3>
+            <div class="myboard-list">
+                <!-- 내 작성글 확인-->
+                <!-- 두 개만 보여줌-->
+                <c:forEach var="myPost" items="${myList}" end="1">
+                    <div class="card mb-3 myboard-card">
+                        <a href="/community/view.do?b_id=${myPost.b_id}">
+                        <div class="row g-0">
+                            <div class="col-md-4 mt-5 mb-5">
+                                <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
+                            </div>
+                            <div class="col-md-8 post-text">
+                                <div class="card-body">
+                                    <h5 class="card-title">${myPost.b_title}</h5>
+                                    <p class="card-text">${myPost.b_content}</p>
+                                    <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
+                                </div>
+                            </div>
                         </div>
+                        </a>
                     </div>
-                </div>
+
+                </c:forEach>
             </div>
-        </c:forEach>
-
-        <div class="col-md-8">
-
-            <!-- 정보 수정 폼 -->
-
+            <!-- 게시글 더 보려면 클릭-->
+            <a href="/mypage/boardlist.do">게시글 더 보기</a>
         </div>
+
     </div>
+
+
+
+
+
 </div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
