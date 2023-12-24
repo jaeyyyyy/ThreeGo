@@ -23,12 +23,6 @@
 <body>
 <!-- header-->
 <jsp:include page="common/searchheader.jsp"/>
-<style>
-    /* show */
-    .invisiblecard {
-        display: none;
-    }
-</style>
 <!-- Icons Grid-->
 <section class="features-icons bg-light text-center">
     <div class="container">
