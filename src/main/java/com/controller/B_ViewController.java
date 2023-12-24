@@ -1,7 +1,9 @@
 package com.controller;
 
 import com.DAO.BoardDAO;
+import com.DAO.ReplyDAO;
 import com.DTO.BoardDTO;
+import com.DTO.ReplyDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +41,15 @@ public class B_ViewController extends HttpServlet {
                 isImage = true;
             }
 
+            ReplyDAO re_dao = new ReplyDAO();
+            int replyTotal = re_dao.totalCount(b_id);
+            List<ReplyDTO> replyList = re_dao.selectReplyList(b_id);
+
             // 뷰로 포워드
             req.setAttribute("dto",dto);
             req.setAttribute("isImage",isImage);
+            req.setAttribute("replyTotal", replyTotal);
+            req.setAttribute("replyList", replyList);
             req.getRequestDispatcher("/proj/views/community/view.jsp").forward(req,resp);
         }
 }

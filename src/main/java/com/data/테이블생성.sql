@@ -5,6 +5,24 @@
 
 
 -- 테이블 생성 --
+--댓글 테이블 추가 --
+CREATE TABLE REPLY
+(
+    b_id NUMBER,
+    re_num NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    u_id varchar2(50) NOT NULL,
+    re_content varchar2(400) NOT NULL,
+    re_regdate DATE DEFAULT SYSDATE NOT NULL,
+    re_modifydate DATE,
+    re_del varchar2(1) DEFAULT 'N' NOT NULL,
+    re_parent NUMBER DEFAULT 0 NOT NULL,
+    re_child NUMBER DEFAULT 0 NOT NULL,
+    re_ref NUMBER NOT NULL,
+    re_order NUMBER DEFAULT 0 NOT NULL,
+    re_level NUMBER DEFAULT 0 NOT NULL,
+    CONSTRAINT reply_pk PRIMARY KEY(b_id, re_num)
+);
+
 create table boardtable (
                             b_id number primary key,
                             u_id varchar2(50) not null,

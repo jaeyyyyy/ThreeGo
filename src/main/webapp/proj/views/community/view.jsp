@@ -2,14 +2,14 @@
 <%@ page import="com.DTO.BoardDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%
-    String b_id = request.getParameter("b_id");
+<%--<%--%>
+<%--    String b_id = request.getParameter("b_id");--%>
 
-    BoardDAO dao = new BoardDAO();
-    dao.updateViewCount(b_id);
-    BoardDTO dto = dao.selectView(b_id);
-    dao.close();
-%>
+<%--    BoardDAO dao = new BoardDAO();--%>
+<%--    dao.updateViewCount(b_id);--%>
+<%--    BoardDTO dto = dao.selectView(b_id);--%>
+<%--    dao.close();--%>
+<%--%>--%>
 
 <html>
 <head>
@@ -24,10 +24,20 @@
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <title>게시판 글 상세보기</title>
 </head>
 <body>
 <script>
+
+    $(document).ready(function (){
+        regComment();
+        clickReply();
+        regReply();
+        clickDelete();
+    })
+
     function deletePost(){
         var confirmed = confirm("정말 삭제하시겠습니까?");
         if (confirmed) {
@@ -39,7 +49,208 @@
             alert("취소하였습니다.")
         }
     }
+
+    function clickReply(){
+        $('.btn-reply').click(function (e) {
+            const num = e.target.value;
+            const selectedReply = '#reply-box' + num;
+            if($(selectedReply).hasClass('hide')){
+                $('.reply-box').addClass('hide');
+                $(selectedReply).toggleClass('hide');
+            }else {
+                $(selectedReply).addClass('hide');
+            }
+        })
+    }
+
+    function clickDelete(){
+        let url = '/community/reply_del.do'
+        $('.btn-delete').click(function (e) {
+            const num = e.target.value;
+            var confirmed = confirm("정말 삭제하시겠습니까?");
+            if (confirmed) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    data: {
+                        re_num: $('#re_num' + num).val()
+                    },
+                    success: function (){
+                        alert("삭제되었습니다.");
+                        location.reload(true);
+                    }
+                })
+            }else {
+                alert("취소하였습니다.")
+            }
+        })
+    }
+
+    function regReply() {
+        let url = '/community/reply.do'
+        $('.reply-btn').click(function (e) {
+            const num = e.target.value;
+            console.log(num)
+            $.ajax({
+                    url: url,
+                    type: 'POST',
+                    contentType: 'application/json; charset=UTF-8',
+                    dataType: 'text',
+                    data: JSON.stringify({
+                        b_id: $('input[name=b_id]').val(),
+                        content: $('#reply-text' + num).val(),
+                        re_num: $('#re_num' + num).val(),
+                        re_ref: $('#re_ref' + num).val(),
+                        re_order: $('#re_order' + num).val(),
+                        re_level: $('#re_level' + num).val()
+                    }),
+                    success: function (data) {
+                        location.reload(true);
+                    },
+                    error:function(request,status,error){
+                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                    }
+                })
+        })
+    }
+
+    function regComment() {
+        let url = '/community/comment.do'
+        $('#comment-btn').click(function () {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType : 'application/json; charset=UTF-8',
+                dataType: 'text',
+                data : JSON.stringify({
+                    b_id: $('input[name=b_id]').val(),
+                    content: $('#comment-text').val()
+                }),
+                success : function (data){
+                    location.reload(true);
+                    /*console.log(data)
+                    let replyList = data.replyList;
+                    let total = data.total
+                    let login_id = '{sessionScope.u_id}';
+                    console.log("통신 성공")
+                    console.log(total);
+
+                    $('#comment-text').val("");
+
+                    $('#reply-total').html(
+                        '<p>댓글 ' + total + '개</p>'
+                    )
+                    $('#reply-list').html("");
+                    replyList.forEach(function (reply, no){
+                        $('#reply-list').append('<div class="reply" style="margin-left: ' + (reply.re_level * 50) + 'px">')
+                        if(reply.re_del === 'N'){
+                            $('#reply-list').append(
+                                '<div class="reply-img"><img src="../../../upload/' + reply.u_sfile + '"></div>'
+                                + '<div class="reply-content">'
+                                + '<div class="reply-profile">'
+                                + '<p class="reply-nickname">' + reply.u_name + '</p>'
+                            )
+                            if(reply.re_modifydate == null){
+                                $('#reply-list').append(
+                                    '<p class="reply-date">' + reply.re_regdate + '</p>'
+                                )
+                            }else {
+                                $('#reply-list').append(
+                                    '<p class="reply-date">' + reply.re_modifydate + '</p>'
+                                )
+                            }
+                            $('#reply-list').append('</div>')
+
+                            if(login_id === reply.u_id){
+                                $('#reply-list').append(
+                                    + '<div class="reply-btn-grop">'
+                                    + '<button type="button" class="btn btn-update">수정</button>'
+                                    + '<button type="button" class="btn btn-delete">삭제</button>'
+                                    + '</div>'
+                                )
+                            }
+                            $('#reply-list').append(
+                                + '</div>'
+                                + '<div class="reply-text">' + reply.re_content + '</p></div>'
+                                + '</div>'
+                            )
+                        }else if(reply.re_del === 'Y') {
+                            $('#reply-list').append(
+                                '<div class="deleted-reply">'
+                                + '<p>삭제된 댓글 입니다.</p>'
+                                + '</div>'
+                                + '</div>'
+                            )
+                        }
+                    })*/
+                }
+            })
+        })
+    }
+
 </script>
+<style>
+    #comment-btn, .reply-btn{
+        width: 70px;
+    }
+    #reply-box{
+        margin: 50px 0 10px;
+    }
+    .reply-img{
+        border: 1px solid #CCCCCC;
+        border-radius: 10%;
+        margin-right: 15px;
+    }
+    .reply-img>img{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+    .reply{
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .reply-content{
+        width: 100%;
+        border-bottom: 1px solid #CCCCCC;
+    }
+    .reply-profile{
+        display: flex;
+        align-items: center;
+    }
+    .reply-nickname{
+        font-weight: 700;
+        margin-right: 10px;
+    }
+    .reply-date{
+        color: #999999;
+    }
+    .reply-btn-grop{
+        margin-left: 10px;
+    }
+    .btn-update, .btn-delete, .btn-reply{
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        font-size: 14px;
+    }
+    .deleted-reply{
+        padding: 20px 10px 20px;
+        width: 100%;
+        margin-left: 85px;
+        border-bottom: 1px solid #CCCCCC;
+        color: #666666;
+    }
+    label {
+        color: #999999;
+    }
+    .hide{
+        visibility: hidden;
+        height: 0;
+    }
+</style>
 
 
 <!-- header-->
@@ -69,19 +280,78 @@
 
         <div class="text-center">
             <div class="btn-group pt-5" role="group" aria-label="Basic example">
-                <%
+                <%--<%
                     if(session.getAttribute("u_id") != null
                             && session.getAttribute("u_id").toString().equals(dto.getU_id())){
-                %>
+                %>--%>
+                <c:if test="${not empty sessionScope.u_id and sessionScope.u_id eq dto.u_id}">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/edit.do?mode=edit&b_id=${param.b_id}';">수정</button>
+                    <%--            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=delete&b_id=${param.b_id}';">삭제</button>--%>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="deletePost();">삭제</button>
+                </c:if>
 
-                <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/edit.do?mode=edit&b_id=${param.b_id}';">수정</button>
-                <%--            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=delete&b_id=${param.b_id}';">삭제</button>--%>
-                <button type="button" class="btn btn-primary btn-sm" onclick="deletePost();">삭제</button>
-                <%
+                <%--<%
                     }
-                %>
+                %>--%>
 
                 <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
+            </div>
+        </div>
+
+        <div id="reply-box">
+            <div id="reply-total"><p>댓글 ${replyTotal}개</p></div>
+            <div class="input-group mb-3">
+                <div class="form-floating">
+                    <input type="hidden" name="b_id" value="${dto.b_id}">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="comment-text" style="height: 100px"></textarea>
+                    <label for="comment-text">Comments</label>
+                </div>
+                <button class="btn btn-outline-secondary" type="button" id="comment-btn">등록</button>
+            </div>
+
+            <div id="reply-list">
+                <c:forEach items="${replyList}" var="reply" varStatus="no">
+                    <div class="reply" id="reply${no.count}" style="padding-left: ${reply.re_level * 50}px">
+                        <c:if test="${reply.re_del eq 'N'}">
+                            <input type="hidden" id="re_num${no.count}" value="${reply.re_num}">
+                            <input type="hidden" id="re_ref${no.count}" value="${reply.re_ref}">
+                            <input type="hidden" id="re_order${no.count}" value="${reply.re_order}">
+                            <input type="hidden" id="re_level${no.count}" value="${reply.re_level}">
+                            <div class="reply-img"><img src="../../../upload/${reply.u_sfile}"></div>
+                            <div class="reply-content">
+                                <div class="reply-profile">
+                                    <p class="reply-nickname">${reply.u_name}</p>
+                                    <p class="reply-date">
+                                        <c:choose>
+                                            <c:when test="${empty reply.re_modifydate}">${reply.re_regdate}</c:when>
+                                            <c:otherwise>${reply.re_modifydate} 수정됨</c:otherwise>
+                                        </c:choose>
+                                    </p>
+                                    <div class="reply-btn-grop">
+                                        <button type="button" class="btn btn-reply" value="${no.count}">답글</button>
+                                    <c:if test="${sessionScope.u_id eq reply.u_id}">
+<%--                                        <button type="button" class="btn btn-update" value="${no.count}" >수정</button>--%>
+                                        <button type="button" class="btn btn-delete" value="${no.count}">삭제</button>
+                                    </c:if>
+                                    </div>
+                                </div>
+                                <div class="reply-text"><p>${reply.re_content}</p></div>
+                            </div>
+                        </c:if>
+                        <c:if test="${reply.re_del eq 'Y'}">
+                            <div class="deleted-reply">
+                                <p>삭제된 댓글 입니다.</p>
+                            </div>
+                        </c:if>
+                    </div>
+                    <div class="input-group mb-3 reply-box hide" id="reply-box${no.count}">
+                        <div class="form-floating" style="margin-left: ${reply.re_level * 50}px; margin-top: 10px">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="reply-text${no.count}" style="height: 100px"></textarea>
+                            <label for="reply-text${no.count}">${reply.u_name} 님 에게.</label>
+                        </div>
+                        <button class="btn btn-outline-secondary reply-btn" type="button" value="${no.count}" style="margin-top: 10px">등록</button>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </div>
