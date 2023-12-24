@@ -81,7 +81,7 @@
         </div>
 
 
-        <div class="col-md-8 mt-5 mb-5">
+        <div class="col-md mt-5 mb-5">
             <h3>나의 게시글</h3>
             <div class="myboard-list">
                 <!-- 내 작성글 확인-->
