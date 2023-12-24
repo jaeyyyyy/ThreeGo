@@ -23,7 +23,12 @@
 <body>
 <!-- header-->
 <jsp:include page="common/searchheader.jsp"/>
-
+<style>
+    /* show */
+    .invisiblecard {
+        display: none;
+    }
+</style>
 <!-- Icons Grid-->
 <section class="features-icons bg-light text-center">
     <div class="container">
@@ -148,7 +153,7 @@
 
 
             <div class = "invisiblecard">
-            <%--7개 이후 --%>
+                <%--7개 이후 --%>
                 <div class="row row-cols-1 row-cols-md-4 g-4 pt-4">
                     <div class="col">
                         <a href="http://localhost/info/city.do?area=32">
@@ -278,32 +283,10 @@
 <%--<script src="js/script.js"></script>--%>
 <%--카드 --%>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleButton = document.querySelector('#morebtn');
-        const invisiblecards = document.querySelectorAll('.invisiblecard');
-
-        toggleButton.addEventListener('click', () => {
-            // #morebtn에 move-down 클래스를 토글합니다.
-            toggleButton.classList.toggle('move-down');
-
-            // 애니메이션을 적용할 요소들을 그룹으로 나누어 처리.
-            let delay = 0;
-            let groupIndex = 0;
-
-            invisiblecards.forEach((card, index) => {
-                if (index > 0 && index % 4 === 0) {
-                    groupIndex++;
-                }
-
-                setTimeout(() => {
-                    card.classList.toggle('removee');
-                }, groupIndex * 150);
-
-                delay += 150;
-            });
-
-            // 버튼 텍스트를 토글합니다.
-            toggleButton.innerText = toggleButton.classList.contains('move-down') ? '접기' : '더보기';
+    // 버튼 누르면 더보기
+    $(document).ready(function() {
+        $("#morebtn").click(function() {
+            $(".invisiblecard").slideToggle(500);
         });
     });
 </script>
