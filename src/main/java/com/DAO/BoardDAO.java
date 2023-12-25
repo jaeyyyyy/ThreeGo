@@ -19,7 +19,7 @@ public class BoardDAO extends DBConnPool {
 
         String query = "SELECT COUNT(*) FROM boardtable";
         if(map.get("searchWord")!= null){
-            query += " WHERE "  + map.get("searchFiled") + " "
+            query += " WHERE "  + map.get("searchField") + " "
                     +" LIKE '%" + map.get("searchWord") + "%'";
         }
         try {
@@ -44,7 +44,7 @@ public class BoardDAO extends DBConnPool {
                 + " SELECT Tb.*, ROWNUM rNUM FROM ("
                 + " SELECT * FROM boardtable";
         if(map.get("searchWord")!= null){
-            query += " WHERE "  + map.get("searchFiled") + " "
+            query += " WHERE "  + map.get("searchField") + " "
                     +" LIKE '%" + map.get("searchWord") + "%'";
         }
         query += " ORDER BY b_id DESC"

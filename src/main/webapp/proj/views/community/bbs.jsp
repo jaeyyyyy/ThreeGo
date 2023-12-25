@@ -37,11 +37,11 @@
 <form method="get" name="writeFrm">
     <div class="container position-relative">
         <div class="d-flex justify-content-center pt-5">
-            <select name="searchFiled">
-                <option value="b_title">제목</option>
-                <option value="b_content">내용</option>
+            <select name="searchField">
+                <option value="b_title"<c:if test="${param.searchField ne 'b_content'}"> selected="selected"</c:if>>제목</option>
+                <option value="b_content"<c:if test="${param.searchField eq 'b_content'}"> selected="selected"</c:if>>내용</option>
             </select>
-            <input type="text" name="searchWord">
+            <input type="text" name="searchWord" value="${param.searchWord}">
             <input type="submit" value="검색" class="btn btn-primary btn-sm">
         </div>
 
