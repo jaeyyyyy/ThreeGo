@@ -13,8 +13,8 @@
     <!-- jquery-->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!--swiper-->
-    <link href="../../../proj/resources/assets/swiper/swiper-bundle.min.css" rel="stylesheet" />
-    <script src="../../../proj/resources/assets/swiper/swiper-bundle.min.js"></script>
+<%--    <link href="../../../proj/resources/assets/swiper/swiper-bundle.min.css" rel="stylesheet" />--%>
+<%--    <script src="../../../proj/resources/assets/swiper/swiper-bundle.min.js"></script>--%>
 
     <script>
 
@@ -127,6 +127,7 @@
                     const info = data.response.body.items.item;
                     let overview = info[0].overview === "-" ? "관련 데이터가 없습니다." : info[0].overview;
                     overview = overview.replaceAll("\n","<br/>");
+                    // overview = "&nbsp;" + overview.replaceAll("\n","<br/><!--<br/>-->&nbsp;");
                     $('#overview').html(overview)
                     const homepage = info[0].homepage
                     showDetail(homepage)
