@@ -88,10 +88,16 @@
 
     function regReply() {
         let url = '/community/reply.do'
+        const loginedId = '${sessionScope.u_id}'
         $('.reply-btn').click(function (e) {
             const num = e.target.value;
-            console.log(num)
-            $.ajax({
+            if(loginedId === null){
+                alert("로그인 후 이용 가능한 페이지 입니다.")
+                location.href = "/login.do"
+            }else if($('#reply-text' + num).val() === ""){
+                alert("내용을 입력해주십시오.")
+            }else{
+                $.ajax({
                     url: url,
                     type: 'POST',
                     contentType: 'application/json; charset=UTF-8',
@@ -111,80 +117,89 @@
                         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                     }
                 })
+            }
         })
     }
 
     function regComment() {
         let url = '/community/comment.do'
+        const loginedId = '${sessionScope.u_id}'
         $('#comment-btn').click(function () {
-            $.ajax({
-                url: url,
-                type: 'POST',
-                contentType : 'application/json; charset=UTF-8',
-                dataType: 'text',
-                data : JSON.stringify({
-                    b_id: $('input[name=b_id]').val(),
-                    content: $('#comment-text').val()
-                }),
-                success : function (data){
-                    location.reload(true);
-                    /*console.log(data)
-                    let replyList = data.replyList;
-                    let total = data.total
-                    let login_id = '{sessionScope.u_id}';
-                    console.log("통신 성공")
-                    console.log(total);
+            if(loginedId === ""){
+                alert("로그인 후 이용 가능한 페이지 입니다.")
+                location.href = "/login.do"
+            }else if($('#comment-text').val() === ""){
+                alert("내용을 입력해주십시오.")
+            }else{
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    contentType : 'application/json; charset=UTF-8',
+                    dataType: 'text',
+                    data : JSON.stringify({
+                        b_id: $('input[name=b_id]').val(),
+                        content: $('#comment-text').val()
+                    }),
+                    success : function (data){
+                        location.reload(true);
+                        /*console.log(data)
+                        let replyList = data.replyList;
+                        let total = data.total
+                        let login_id = '{sessionScope.u_id}';
+                        console.log("통신 성공")
+                        console.log(total);
 
-                    $('#comment-text').val("");
+                        $('#comment-text').val("");
 
-                    $('#reply-total').html(
-                        '<p>댓글 ' + total + '개</p>'
-                    )
-                    $('#reply-list').html("");
-                    replyList.forEach(function (reply, no){
-                        $('#reply-list').append('<div class="reply" style="margin-left: ' + (reply.re_level * 50) + 'px">')
-                        if(reply.re_del === 'N'){
-                            $('#reply-list').append(
-                                '<div class="reply-img"><img src="../../../upload/' + reply.u_sfile + '"></div>'
-                                + '<div class="reply-content">'
-                                + '<div class="reply-profile">'
-                                + '<p class="reply-nickname">' + reply.u_name + '</p>'
-                            )
-                            if(reply.re_modifydate == null){
+                        $('#reply-total').html(
+                            '<p>댓글 ' + total + '개</p>'
+                        )
+                        $('#reply-list').html("");
+                        replyList.forEach(function (reply, no){
+                            $('#reply-list').append('<div class="reply" style="margin-left: ' + (reply.re_level * 50) + 'px">')
+                            if(reply.re_del === 'N'){
                                 $('#reply-list').append(
-                                    '<p class="reply-date">' + reply.re_regdate + '</p>'
+                                    '<div class="reply-img"><img src="../../../upload/' + reply.u_sfile + '"></div>'
+                                    + '<div class="reply-content">'
+                                    + '<div class="reply-profile">'
+                                    + '<p class="reply-nickname">' + reply.u_name + '</p>'
                                 )
-                            }else {
-                                $('#reply-list').append(
-                                    '<p class="reply-date">' + reply.re_modifydate + '</p>'
-                                )
-                            }
-                            $('#reply-list').append('</div>')
+                                if(reply.re_modifydate == null){
+                                    $('#reply-list').append(
+                                        '<p class="reply-date">' + reply.re_regdate + '</p>'
+                                    )
+                                }else {
+                                    $('#reply-list').append(
+                                        '<p class="reply-date">' + reply.re_modifydate + '</p>'
+                                    )
+                                }
+                                $('#reply-list').append('</div>')
 
-                            if(login_id === reply.u_id){
+                                if(login_id === reply.u_id){
+                                    $('#reply-list').append(
+                                        + '<div class="reply-btn-grop">'
+                                        + '<button type="button" class="btn btn-update">수정</button>'
+                                        + '<button type="button" class="btn btn-delete">삭제</button>'
+                                        + '</div>'
+                                    )
+                                }
                                 $('#reply-list').append(
-                                    + '<div class="reply-btn-grop">'
-                                    + '<button type="button" class="btn btn-update">수정</button>'
-                                    + '<button type="button" class="btn btn-delete">삭제</button>'
+                                    + '</div>'
+                                    + '<div class="reply-text">' + reply.re_content + '</p></div>'
+                                    + '</div>'
+                                )
+                            }else if(reply.re_del === 'Y') {
+                                $('#reply-list').append(
+                                    '<div class="deleted-reply">'
+                                    + '<p>삭제된 댓글 입니다.</p>'
+                                    + '</div>'
                                     + '</div>'
                                 )
                             }
-                            $('#reply-list').append(
-                                + '</div>'
-                                + '<div class="reply-text">' + reply.re_content + '</p></div>'
-                                + '</div>'
-                            )
-                        }else if(reply.re_del === 'Y') {
-                            $('#reply-list').append(
-                                '<div class="deleted-reply">'
-                                + '<p>삭제된 댓글 입니다.</p>'
-                                + '</div>'
-                                + '</div>'
-                            )
-                        }
-                    })*/
-                }
-            })
+                        })*/
+                    }
+                })
+            }
         })
     }
 
@@ -328,7 +343,9 @@
                                         </c:choose>
                                     </p>
                                     <div class="reply-btn-grop">
+                                    <c:if test="${reply.re_level < 2}">
                                         <button type="button" class="btn btn-reply" value="${no.count}">답글</button>
+                                    </c:if>
                                     <c:if test="${sessionScope.u_id eq reply.u_id}">
 <%--                                        <button type="button" class="btn btn-update" value="${no.count}" >수정</button>--%>
                                         <button type="button" class="btn btn-delete" value="${no.count}">삭제</button>
