@@ -1,13 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" type="text/css" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
     <link href="../../../proj/views/common/commonstyle.css" rel="stylesheet" />
+    <!-- jquery-->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!--swiper-->
+    <link href="../../../proj/resources/assets/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <script src="../../../proj/resources/assets/swiper/swiper-bundle.min.js"></script>
+
     <script>
 
         const contentid = ${content.contentid};
@@ -117,7 +125,8 @@
                 dataType: 'json',
                 success : function(data){
                     const info = data.response.body.items.item;
-                    let overview = info[0].overview === "" ? "관련 데이터가 없습니다." : info[0].overview;
+                    let overview = info[0].overview === "-" ? "관련 데이터가 없습니다." : info[0].overview;
+                    overview = overview.replaceAll("\n","<br/>");
                     $('#overview').html(overview)
                     const homepage = info[0].homepage
                     showDetail(homepage)
@@ -235,11 +244,11 @@
                             let today = new Date();
 
                             if(startDay > today){
-                                $('#title').after("<h5> D-" + calcDay(startDay, today) + "</h5>")
+                                $('#title').after("<h5 id='period'> D-" + calcDay(startDay, today) + "</h5>")
                             }else if(startDay <= today && endDay >= today){
-                                $('#title').after("<h5> 행사 " + (calcDay(today, startDay) + 1) + "일차 </h5>")
+                                $('#title').after("<h5 id='period'> 행사 " + (calcDay(today, startDay) + 1) + "일차 </h5>")
                             }else {
-                                $('#title').after("<h5> 종료된 행사 </h5>")
+                                $('#title').after("<h5 id='period'> 종료된 행사 </h5>")
                             }
 
                             //상세 정보
@@ -530,6 +539,31 @@
             flex-basis: calc((100% - 40px)/5);
             flex-shrink: 0;
         }
+        .title-box{
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            padding: 50px 0 0;
+        }
+        #period{
+            background-color: #333333;
+            color: #FFFFFF;
+            padding: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            border-radius: 10px;
+        }
+        #category{
+            font-weight: 500;
+            color: #333333;
+        }
+        .row{
+            padding: 20px 0;
+        }
+        .sub-title{
+            padding: 10px 0;
+        }
 
     </style>
     <style>
@@ -552,9 +586,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h3 id="title">${title}</h3>
-                ${category}
-                <div class="row">
+                <div class="title-box">
+                    <h3 id="title">${title}</h3>
+                </div>
+                <div id="category">${category}</div>
+                <div class="row" id="row1">
                     <%-- 캐러셀 --%>
                     <div id="carousel_grid" class="col-md-6">
                         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -590,13 +626,13 @@
                 <div class="row">
                     <%-- 소개 --%>
                     <div class="col-md-12">
-                        <h4 id="overviewLabel"> 소개 </h4>
+                        <h4 class="sub-title"> 소개 </h4>
                         <div id="overview"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>상세정보</h4>
+                        <h4 class="sub-title">상세정보</h4>
                         <table border="1" width="100%" id="detailInfo">
                         </table>
                     </div>

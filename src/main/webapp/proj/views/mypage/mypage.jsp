@@ -91,7 +91,14 @@
                         <a href="/community/view.do?b_id=${myPost.b_id}">
                         <div class="row g-0">
                             <div class="col-md-4 mt-5 mb-5">
-                                <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
+                                <c:choose>
+                                    <c:when test="${not empty myPost.b_sfile == true}">
+                                        <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="../proj/resources/assets/img/no_image.png" class="img-fluid rounded-start post-img" alt="...">
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="col-md-8 post-text">
                                 <div class="card-body">
