@@ -24,7 +24,7 @@ CREATE TABLE REPLY
 );
 
 create table boardtable (
-                            b_id number primary key,
+                            b_id number GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
                             u_id varchar2(50) not null,
                             u_name varchar2(50) not null,
                             b_title varchar2(200) not null,

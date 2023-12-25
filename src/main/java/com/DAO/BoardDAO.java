@@ -125,9 +125,9 @@ public class BoardDAO extends DBConnPool {
         try {
             //쿼리 작성
             String query = "INSERT INTO boardtable ( "
-                    + "b_id,u_id,u_name,b_title,b_content,b_ofile,b_sfile)"
+                    + "u_id,u_name,b_title,b_content,b_ofile,b_sfile)"
                     + "VALUES( "
-                    + "seq_board_num.nextval, ?,?,?,?,?,?)";
+                    + "?,?,?,?,?,?)";
             psmt = con.prepareStatement(query);
             psmt.setString(1,dto.getU_id());
             psmt.setString(2,dto.getU_name());
