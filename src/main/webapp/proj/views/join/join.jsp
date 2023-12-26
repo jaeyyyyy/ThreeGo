@@ -80,7 +80,7 @@
                     <div class="input-group">
                         <input type="email" name="email" id="emailCheck" class="form-control form-control-sm" placeholder="이메일을 입력해주세요.">
                         <!--이메일 인증-->
-                        <input type="button" value="인증하기" class="btn btn-primary btn-sm" onclick="">
+                        <input type="button" value="인증하기" class="btn btn-primary btn-sm" id="emailCheckBtn" onclick="checkEmail();">
                     </div>
                 </div>
 
@@ -107,6 +107,17 @@
             event.preventDefault(); // 폼 제출 막기
         }
     });
+
+    document.getElementById('emailCheckBtn').addEventListener('click',function() {
+        let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        let testEmails = document.getElementsByName('email')[0].value;
+
+        if(!regExp.test(testEmails)) {
+            alert('이메일 형식이 올바르지 않습니다.');
+        } else {
+            alert('이메일 형식이 맞습니다.');
+        }
+    })
 </script>
 
 
