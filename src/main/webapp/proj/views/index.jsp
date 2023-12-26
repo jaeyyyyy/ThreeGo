@@ -281,6 +281,11 @@
     $(document).ready(function() {
         $("#morebtn").click(function() {
             $(".invisiblecard").slideToggle(500);
+            if ($("#morebtn").html() == "더보기") {
+                $("#morebtn").html("접기");
+            } else {
+                $("#morebtn").html("더보기");
+            }
         });
     });
 </script>
