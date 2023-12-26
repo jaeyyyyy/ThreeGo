@@ -265,6 +265,11 @@
         visibility: hidden;
         height: 0;
     }
+    .bi-arrow-return-right{
+        font-size: 20px;
+        padding-right: 10px;
+        color: #999999;
+    }
 </style>
 
 
@@ -326,7 +331,10 @@
 
             <div id="reply-list">
                 <c:forEach items="${replyList}" var="reply" varStatus="no">
-                    <div class="reply" id="reply${no.count}" style="padding-left: ${reply.re_level * 50}px">
+                    <div class="reply" id="reply${no.count}" style="padding-left: ${reply.re_level * 50 - 30}px">
+                        <c:if test="${reply.re_level > 0}">
+                            <i class="bi bi-arrow-return-right"></i>
+                        </c:if>
                         <c:if test="${reply.re_del eq 'N'}">
                             <input type="hidden" id="re_num${no.count}" value="${reply.re_num}">
                             <input type="hidden" id="re_ref${no.count}" value="${reply.re_ref}">

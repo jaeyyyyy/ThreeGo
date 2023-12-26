@@ -74,7 +74,7 @@ public class ReplyDAO extends JDBConnect {
         try{
             psmt = con.prepareStatement(updateQuery);
             psmt.setInt(1, re_parent);
-            result = psmt.executeUpdate();
+            rs = psmt.executeQuery();
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("addChild-update 오류 발생");
