@@ -18,27 +18,6 @@
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
 
     <title>마이페이지</title>
-    <style>
-        #my-page{
-            display: flex;
-            align-items: flex-start;
-        }
-        .post-text{
-            border-left: 1px solid #EEEEEE;
-        }
-        .post-img{
-            object-fit: cover;
-        }
-        .myboard-list {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            gap: 1em;
-        }
-        .myboard-card {
-            width: calc(100% / 2);
-        }
-    </style>
 
 </head>
 <body>
@@ -121,21 +100,16 @@
                     <a href="/mypage/boardlist.do">게시글 더 보기</a>
                     </c:otherwise>
                 </c:choose>
-
-
         </div>
-
     </div>
-
-
-
-
-
 </div>
+
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     function editUserInfo() {
         alert('회원 정보가 변경되었습니다.');

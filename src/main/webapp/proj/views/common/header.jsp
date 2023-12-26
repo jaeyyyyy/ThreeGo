@@ -2,15 +2,7 @@
 <%@ page import="com.DAO.UserDAO" %>
 <%@ page import="com.DTO.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%--%>
-<%--    HttpSession session1 = request.getSession();--%>
-<%--    String u_id = (String) session1.getAttribute("u_id");--%>
 
-<%--    UserDAO userDAO = UserDAO.getInstance();--%>
-<%--    UserDTO userDTO = userDAO.findUser(u_id);--%>
-
-<%--    request.setAttribute("userDTO",userDTO);--%>
-<%--%>--%>
 <html>
 <head>
 </head>
