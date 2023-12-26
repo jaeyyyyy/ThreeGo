@@ -302,10 +302,13 @@
 
 
             <!--글 내용-->
-            <p>${dto.b_content}
+            <p>
                 <c:if test="${not empty dto.b_ofile and isImage == true}">
-                    <br><img src="../../../upload/${dto.b_sfile}" style="max-width: 100%"/>
-                </c:if></p>
+                    <img src="../../../upload/${dto.b_sfile}" style="max-width: 100%"/>
+                </c:if>
+                <br>
+                ${dto.b_content}
+                </p>
 
             <!--첨부파일 표시-->
             <c:if test="${not empty dto.b_ofile}">
