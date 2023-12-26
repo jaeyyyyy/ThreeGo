@@ -6,10 +6,10 @@
     HttpSession session1 = request.getSession();
     String u_id = (String) session1.getAttribute("u_id");
 
-    UserDAO dao = UserDAO.getInstance();
-    UserDTO dto = dao.findUser(u_id);
+    UserDAO userDAO = UserDAO.getInstance();
+    UserDTO userDTO = userDAO.findUser(u_id);
 
-    request.setAttribute("dto",dto);
+    request.setAttribute("userDTO",userDTO);
 %>
 <html>
 <head>
@@ -41,7 +41,7 @@
 
                         <div class="nav-right navbar">
                             <c:choose>
-                                <c:when test="${empty dto.u_id == true}">
+                                <c:when test="${empty userDTO.u_id == true}">
                                     <!--로그인이 안되면 로그인과 회원가입을 보여줌-->
                                     <button data-bs-toggle="modal" data-bs-target="#log-or-join" id="start-btn" class="navbar-brand">
                                         <i class="bi bi-person-circle text-dark"></i>
@@ -72,9 +72,9 @@
                                     <button data-bs-toggle="modal" data-bs-target="#mypage-or-logout" id="start-btn2" class="navbar-brand">
                                         <div class="header-prof-img">
                                             <c:choose>
-                                                <c:when test="${not empty dto.u_ofile == true}">
+                                                <c:when test="${not empty userDTO.u_ofile == true}">
                                                     <!--프로필 사진이 있다면 보여주고-->
-                                                    <img class="header-my-prof-img" src="../../../upload/${dto.u_sfile}" />
+                                                    <img class="header-my-prof-img" src="../../../upload/${userDTO.u_sfile}" />
                                                 </c:when>
                                                 <c:otherwise>
                                                     <!-- 아니라면 빈 사진을 보여준다-->
