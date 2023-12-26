@@ -19,19 +19,7 @@
 
     <title>마이페이지</title>
     <style>
-        #my-page{
-            display: flex;
-            align-items: flex-start;
-        }
-        .post-text{
-            border-left: 1px solid #EEEEEE;
-        }
-        .post-img{
-            object-fit: cover;
-        }
-        .myboard-card {
-            width: calc((100% / 2) - 1rem);
-        }
+
     </style>
 
 </head>
@@ -84,8 +72,10 @@
         </c:choose>
     </div>
 </div>
+
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

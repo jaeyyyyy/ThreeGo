@@ -2,14 +2,6 @@
 <%@ page import="com.DTO.BoardDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%--<%--%>
-<%--    String b_id = request.getParameter("b_id");--%>
-
-<%--    BoardDAO dao = new BoardDAO();--%>
-<%--    dao.updateViewCount(b_id);--%>
-<%--    BoardDTO dto = dao.selectView(b_id);--%>
-<%--    dao.close();--%>
-<%--%>--%>
 
 <html>
 <head>
@@ -319,19 +311,11 @@
         <!--댓글란-->
         <div class="text-center">
             <div class="btn-group pt-5" role="group" aria-label="Basic example">
-                <%--<%
-                    if(session.getAttribute("u_id") != null
-                            && session.getAttribute("u_id").toString().equals(dto.getU_id())){
-                %>--%>
                 <c:if test="${not empty sessionScope.u_id and sessionScope.u_id eq dto.u_id}">
                     <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/edit.do?mode=edit&b_id=${param.b_id}';">수정</button>
                     <%--            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='../community/del.do?mode=delete&b_id=${param.b_id}';">삭제</button>--%>
                     <button type="button" class="btn btn-primary btn-sm" onclick="deletePost();">삭제</button>
                 </c:if>
-
-                <%--<%
-                    }
-                %>--%>
 
                 <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
             </div>

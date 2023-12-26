@@ -1,8 +1,10 @@
 package com.controller;
 
 import com.DAO.BoardDAO;
+import com.DAO.ReplyDAO;
 import com.DAO.UserDAO;
 import com.DTO.BoardDTO;
+import com.DTO.ReplyDTO;
 import com.DTO.UserDTO;
 import com.util.JSFunction;
 import com.util.U_FileUtil;
@@ -39,12 +41,21 @@ public class MyPageController extends HttpServlet {
             UserDTO dto = dao.findUser(u_id);
 
             BoardDAO b_dao = new BoardDAO();
+            String b_id = req.getParameter("b_id");
+            b_dao.updateViewCount(b_id);
+            BoardDTO b_dto = b_dao.selectView(b_id);
             List<BoardDTO> myList = b_dao.selectMyList(u_id);
+
+            ReplyDAO re_dao = new ReplyDAO();
+            int replyTotal = re_dao.totalCount(b_id);
+            List<ReplyDTO> replyList = re_dao.selectReplyList(b_id);
+
 
             req.setAttribute("dto",dto);
             req.setAttribute("myList",myList);
+            req.setAttribute("replyTotal", replyTotal);
+            req.setAttribute("replyList", replyList);
 
-//            dao.close();
             b_dao.close();
 
             req.getRequestDispatcher("/proj/views/mypage/mypage.jsp").forward(req,resp);

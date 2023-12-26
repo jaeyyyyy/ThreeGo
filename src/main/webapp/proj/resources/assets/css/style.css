@@ -188,6 +188,27 @@ a {
 
 }
 
+
+#my-page{
+    display: flex;
+    align-items: flex-start;
+}
+.post-text{
+    border-left: 1px solid #EEEEEE;
+}
+.post-img{
+    object-fit: cover;
+}
+.myboard-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1em;
+}
+.myboard-card {
+    width: calc((100% / 2) - 1rem);
+}
+
 /*헤더의 내 정보*/
 #start-btn2 {
     border: none;

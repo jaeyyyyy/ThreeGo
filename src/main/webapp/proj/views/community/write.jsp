@@ -1,15 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.DAO.BoardDAO" %>
 <%@ page import="com.DTO.BoardDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
-<%
-    String b_id = request.getParameter("b_id");
-
-    BoardDAO dao = new BoardDAO();
-    dao.updateViewCount(b_id);
-    BoardDTO dto = dao.selectView(b_id);
-    dao.close();
-%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -58,60 +51,49 @@
 <div class="container position-relative pt-5 pb-5">
     <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
 
+            <c:if test="${not empty sessionScope.u_id}">
+                <input type="hidden" name="u_id" class="form-control form-control-sm" value="${u_id}" />
 
-        <%
-            // 로그인이 되어있다면 로그인 정보를 끌어옴
-            if(session.getAttribute("u_id") != null) {
-        %>
-        <input type="hidden" name="u_id" class="form-control form-control-sm" value="${u_id}" />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">작성자</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="u_name" class="form-control form-control-sm" value="${u_name}" readonly />
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">작성자</label>
-            <div class="col-sm-10">
-                <input type="text" name="u_name" class="form-control form-control-sm" value="${u_name}" readonly />
-            </div>
-        </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">제목</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="b_title" class="form-control form-control-sm"/>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">제목</label>
-            <div class="col-sm-10">
-                <input type="text" name="b_title" class="form-control form-control-sm"/>
-            </div>
-        </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">내용</label>
+                    <div class="col-sm-10">
+                        <textarea name="b_content" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">내용</label>
-            <div class="col-sm-10">
-                <textarea name="b_content" class="form-control" rows="5"></textarea>
-            </div>
-        </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">첨부 파일</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="b_ofile"/>
+                    </div>
+                </div>
 
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">첨부 파일</label>
-            <div class="col-sm-10">
-                <input type="file" name="b_ofile"/>
-            </div>
-        </div>
+                <%--        <div class="form-group row"><!--비밀번호 걍 놔둠-->--%>
+                <input type="hidden" name="pass" class="form-control form-control-sm" value=${u_pw}/>
 
-<%--        <div class="form-group row"><!--비밀번호 걍 놔둠-->--%>
-<%--            <label class="col-sm-2 col-form-label">비밀번호</label>--%>
-<%--            <div class="col-sm-10">--%>
-<%--                <input type="password" name="pass" class="form-control form-control-sm"/>--%>
-<%--            </div>--%>
-<%--        </div>--%>
 
-        <input type="hidden" name="pass" class="form-control form-control-sm" value=${u_pw}/>
-        <%
-            }
-        %>
-
-        <div class="text-center">
-            <div class="btn-group pt-5" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-primary btn-sm">작성완료</button>
-                <button type="reset" class="btn btn-secondary btn-sm">다시입력</button>
-                <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
-            </div>
-        </div>
+                <div class="text-center">
+                    <div class="btn-group pt-5" role="group" aria-label="Basic example">
+                        <button type="submit" class="btn btn-primary btn-sm">작성완료</button>
+                        <button type="reset" class="btn btn-secondary btn-sm">다시입력</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
+                    </div>
+                </div>
+            </c:if>
     </form>
 </div>
 
