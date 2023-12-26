@@ -542,10 +542,9 @@
         let distance = 0;
 
         function slideItem(btn){
-            clickArrow();
             const direction = $(btn).val();
             const width = parseFloat($('#sub-items').css('width'));
-            const wrapWidth = (width - 40)/5 * ${moreItem}.length + 10 * ${moreItem}.length  - 20
+            const wrapWidth = (width - 40)/5 * ${moreItem}.length + 10 * ${moreItem}.length  - 18
             if(direction === 'left'){
                 distance += (width - 40)/5 + 8;
                 if(distance > 0) distance = 0
@@ -624,11 +623,6 @@
         .icon-arrow{
             color: #333333;
             font-size: 50px;
-        }
-        .click-arrow{
-            color: #555555;
-            font-size: 45px;
-            transition: 0.1s;
         }
         .hide{
             visibility: hidden;
