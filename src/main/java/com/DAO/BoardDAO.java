@@ -83,6 +83,7 @@ public class BoardDAO extends DBConnPool {
         return bbs;
     }
 
+    // 게시글을 리스트에 저장
     public List<BoardDTO> selectMyList(String u_id){
         List<BoardDTO> myList = new ArrayList<BoardDTO>();
 
@@ -201,33 +202,6 @@ public class BoardDAO extends DBConnPool {
             e.printStackTrace();
         }
     }
-
-
-
-    // 입력한 비밀번호가 지정한 idx 게시물의 비밀번호와 일치하는 지 확인
-//    public boolean confirmPassword(String pass, String idx) {
-//        boolean isCorr = true;
-//
-//        try {
-//            String sql = "SELECT COUNT(*) FROM mvcboard WHERE pass =? AND idx =?";
-//            psmt = con.prepareStatement(sql);
-//            psmt.setString(1, pass);
-//            psmt.setString(2, idx);
-//            rs = psmt.executeQuery();
-//
-//            rs.next();
-//            if(rs.getInt(1) == 0) {
-//                isCorr = false;
-//            }
-//
-//        } catch (Exception e) {
-//            isCorr = false;
-//            System.out.println("confirmPassword 오류 발생");
-//            e.printStackTrace();
-//        }
-//
-//        return isCorr;
-//    }
 
     // true 이면 게시글 삭제
     public int deletePost(BoardDTO dto) {

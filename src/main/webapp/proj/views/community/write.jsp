@@ -87,10 +87,6 @@
                     </div>
                 </div>
 
-                <%--        <div class="form-group row"><!--비밀번호 걍 놔둠-->--%>
-                <input type="hidden" name="pass" class="form-control form-control-sm" value=${u_pw}/>
-
-
                 <div class="text-center">
                     <div class="btn-group pt-5" role="group" aria-label="Basic example">
                         <button type="submit" class="btn btn-primary btn-sm">작성완료</button>

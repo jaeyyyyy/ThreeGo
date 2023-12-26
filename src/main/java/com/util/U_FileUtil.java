@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class U_FileUtil {
-
+    // 유저 프로필 사진 업로드를 위한 fileutil
     // 파일 업로드
     public static String uploadFile(HttpServletRequest req, String sDir) throws ServletException, IOException {
         Part part = req.getPart("u_ofile");

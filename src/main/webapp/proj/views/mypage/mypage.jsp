@@ -94,11 +94,11 @@
                                 </a>
                             </div>
                         </c:forEach>
-                    </div>
-                    <!-- 게시글 더 보려면 클릭-->
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                        <a href="/mypage/boardlist.do"><button class="btn btn-primary btn-sm">게시글 더 보기</button></a>
-                    </div>
+            </div>
+            <!-- 게시글 더 보려면 클릭-->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                <a href="/mypage/boardlist.do"><button class="btn btn-primary btn-sm">게시글 더 보기</button></a>
+            </div>
 
                     </c:otherwise>
                 </c:choose>
