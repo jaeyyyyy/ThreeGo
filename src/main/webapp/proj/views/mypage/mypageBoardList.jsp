@@ -49,32 +49,39 @@
     <div id="my-page" class="row gap-3">
         <%-- 내 작성글 확인--%>
         <h3 class="mt-5">내 작성 글</h3>
-        <c:forEach var="myPost" items="${myList}">
-            <div class="card myboard-card">
-                <a href="/community/view.do?b_id=${myPost.b_id}">
-                <div class="row g-0">
-                    <div class="col-md-4 mt-5 mb-5">
-                        <c:choose>
-                            <c:when test="${not empty myPost.b_sfile == true}">
-                                <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
-                            </c:when>
-                            <c:otherwise>
-                                <img src="../proj/resources/assets/img/no_image.png" class="img-fluid rounded-start post-img" alt="...">
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                    <div class="col-md-8 post-text">
-                        <div class="card-body">
-                            <h5 class="card-title">${myPost.b_title}</h5>
-                            <p class="card-text">${myPost.b_content}</p>
-                            <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
-                        </div>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </c:forEach>
 
+        <c:choose>
+            <c:when test="${empty myList == true}">
+                작성한 게시글이 없습니다.
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="myPost" items="${myList}">
+                    <div class="card myboard-card">
+                        <a href="/community/view.do?b_id=${myPost.b_id}">
+                        <div class="row g-0">
+                            <div class="col-md-4 mt-5 mb-5">
+                                <c:choose>
+                                    <c:when test="${not empty myPost.b_sfile == true}">
+                                        <img src="../../../upload/${myPost.b_sfile}" class="img-fluid rounded-start post-img" alt="...">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="../proj/resources/assets/img/no_image.png" class="img-fluid rounded-start post-img" alt="...">
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <div class="col-md-8 post-text">
+                                <div class="card-body">
+                                    <h5 class="card-title">${myPost.b_title}</h5>
+                                    <p class="card-text">${myPost.b_content}</p>
+                                    <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 <!--footer-->

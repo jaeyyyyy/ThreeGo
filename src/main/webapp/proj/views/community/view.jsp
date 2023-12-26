@@ -277,27 +277,46 @@
 <jsp:include page="../common/header.jsp"/>
 <form name="writeFrm">
     <div class="container position-relative pt-5 pb-5">
+        <!--글 제목-->
         <div class="jumbotron">
             <h3 class="display-4">${dto.b_title}</h3>
         </div>
 
+        <!--글 정보-->
         <div class="jumbotron">
-            <p>글 번호 : ${dto.b_id} 작성자 : ${dto.u_name} 작성일 : ${dto.b_postdate} 조회수 : ${dto.b_visitcount}</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                    </div>
+                    <div class="col-md-auto">
+                        <i class="bi bi-person"></i> &nbsp;&nbsp; ${dto.u_name}
+                    </div>
+                    <div class="col-md-auto">
+                        <i class="bi bi-calendar"></i> &nbsp;&nbsp; ${dto.b_postdate}
+                    </div>
+                    <div class="col-md-auto">
+                        <i class="bi bi-eye"></i> &nbsp;&nbsp; ${dto.b_visitcount}
+                    </div>
+                </div>
+            </div>
+
             <hr class="my-4">
+
+
+            <!--글 내용-->
             <p>${dto.b_content}
                 <c:if test="${not empty dto.b_ofile and isImage == true}">
                     <br><img src="../../../upload/${dto.b_sfile}" style="max-width: 100%"/>
                 </c:if></p>
 
+            <!--첨부파일 표시-->
             <c:if test="${not empty dto.b_ofile}">
                 <hr class="my-4">
-                ${dto.b_ofile}
-                <a href="../community/download.do?b_ofile=${dto.b_ofile}&b_sfile=${dto.b_sfile}&b_id=${dto.b_id}">
-                    [다운로드]
-                </a>
+                첨부파일 &nbsp;&nbsp; <i class="bi bi-file-earmark-image"></i> ${dto.b_ofile}
             </c:if>
         </div>
 
+        <!--댓글란-->
         <div class="text-center">
             <div class="btn-group pt-5" role="group" aria-label="Basic example">
                 <%--<%
