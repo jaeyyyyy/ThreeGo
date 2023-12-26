@@ -36,9 +36,11 @@ public class U_LoginController extends HttpServlet {
         if (loginUser != null) {
             HttpSession session = req.getSession();
             session.setAttribute("u_id", id);
-            session.setAttribute("u_name", loginUser.getU_name()); // 수정된 부분
+            session.setAttribute("u_name", loginUser.getU_name());
+            session.setAttribute("u_sfile", loginUser.getU_sfile());// 수정된 부분
             // 디버깅을 위한 출력문
             System.out.println("Login User ID: " + loginUser.getU_id());
+            System.out.println("Login User ProfileImg: " + loginUser.getU_sfile());
 
             // alert 창 띄우고 페이지 리다이렉션
             resp.setContentType("text/html; charset=UTF-8");

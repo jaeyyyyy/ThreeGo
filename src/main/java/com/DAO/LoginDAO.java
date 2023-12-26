@@ -34,6 +34,9 @@ public class LoginDAO extends JDBConnect {
                 loginUser.setU_pw(rs.getString("u_pw"));
                 loginUser.setU_name(rs.getString("u_name"));
                 loginUser.setU_email(rs.getString("u_email"));
+                loginUser.setU_ofile(rs.getString("u_ofile"));
+                loginUser.setU_sfile(rs.getString("u_sfile"));
+                loginUser.setU_about(rs.getString("u_about"));
             }
         } catch (Exception e) {
             e.printStackTrace();

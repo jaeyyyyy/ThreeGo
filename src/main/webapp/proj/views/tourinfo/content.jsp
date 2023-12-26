@@ -3,8 +3,10 @@
 <head>
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" type="text/css" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Core theme CSS (includes Bootstrap)-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -471,7 +473,7 @@
                         case 25:
                             $('#sub-title').html('코스 안내')
                             moreItem.forEach(function (cosItem){
-                                $('#sub-items').append(
+                                $('#sub-items-wrap').append(
                                     '<div class="card sub-item">'
                                     + '<a href="../info/content.do?contentid=' + cosItem.subcontentid + '">'
                                     + '<img src="' + cosItem.subimage + '" class="card-img-top" alt="...">'
@@ -488,7 +490,7 @@
                         default:
                             $('#sub-title').html('동일 카테고리의 주변 관광지 추천')
                             moreItem.forEach(function (cosItem){
-                                $('#sub-items').append(
+                                $('#sub-items-wrap').append(
                                     '<div class="card sub-item">'
                                     + '<a href="../info/content.do?contentid=' + cosItem.contentid + '">'
                                     + '<img src="' + cosItem.subimage + '" class="card-img-top" alt="...">'
@@ -506,6 +508,39 @@
             })
         }
 
+    </script>
+    <script>
+        let distance = 0;
+
+        function slideItem(btn){
+            const direction = $(btn).val();
+            const width = parseFloat($('#sub-items').css('width'));
+            const wrapWidth = (width - 40)/5 * ${moreItem}.length + 10 * ${moreItem}.length
+            if(direction === 'left'){
+                distance += (width - 40)/5 + 10;
+                if(distance > 0) distance = 0
+            }else if(direction === 'right'){
+                distance -= (width - 40)/5 + 10;
+                if(distance < -(wrapWidth - width)) distance = -(wrapWidth - width);
+            }
+            $('#sub-items-wrap').css("transform", "translateX(" + distance + "px)");
+
+            if(distance = 0){
+                $('.btn-slide-left').addClass('hide');
+                console.log(1);
+            }else if(distance = -(wrapWidth - width)){
+                $('.btn-slide-right').addClass('hide');
+                console.log(2);
+            }else {
+                $('.btn-slide-left').removeClass('hide');
+                $('.btn-slide-right').removeClass('hide');
+                console.log(3);
+            }
+            console.log(distance)
+            console.log(wrapWidth)
+            console.log(wrapWidth - width)
+            console.log(parseFloat($('#sub-items').css('width')))
+        }
     </script>
     <style>
         #myCarousel{
@@ -528,18 +563,53 @@
         }
 
         #sub-items{
+            width: 100%;
+            position: relative;
+        }
+        #sub-items-container{
+            width: 100%;
+            overflow: hidden;
+        }
+        #sub-items-wrap{
             display: flex;
             padding: 20px 5px;
-            width: 100%;
             flex-wrap: nowrap;
             gap: 10px;
-            overflow-x: scroll;
+            transition: 0.3s ease-in-out;
         }
-
         .sub-item{
             flex-basis: calc((100% - 40px)/5);
             flex-shrink: 0;
         }
+        .btn-slide-left, .btn-slide-right{
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+        }
+        .btn-slide-left{
+            top:calc(50% - 30px);
+            left:-60px;
+        }
+        .btn-slide-right{
+            top:calc(50% - 30px);
+            right:-60px;
+        }
+        .icon-arrow{
+            color: #333333;
+            font-size: 50px;
+        }
+        .click-arrow{
+            color: #555555;
+            font-size: 45px;
+            transition: 0.1s;
+        }
+        .hide{
+            visibility: hidden;
+        }
+
         .title-box{
             display: flex;
             align-items: flex-end;
@@ -641,7 +711,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4 id="sub-title"></h4>
-                        <div id="sub-items"></div>
+                        <div id="sub-items">
+                            <div id="sub-items-container">
+                                <div id="sub-items-wrap"></div>
+                            </div>
+                            <button class="btn-slide-left hide" value="left" onclick="slideItem(this)"><i class="fa-solid fa-chevron-left icon-arrow"></i></button>
+                            <button class="btn-slide-right" value="right" onclick="slideItem(this)"><i class="fa-solid fa-chevron-right icon-arrow"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
