@@ -95,9 +95,9 @@ CREATE TABLE "T_SIGUNGU" (
                              sigungu_name   varchar2(200)      NOT NULL
 );
 
-
+-- varchar2(40)으로 바꾸었습니다. TOURITEM이랑 맞게
 CREATE TABLE "T_C_TYPE" (
-                            contenttypeid   number(38,0)      NOT NULL,
+                            contenttypeid   varchar2(40)      NOT NULL,
                             ctype_name   varchar2(200)      NOT NULL
 );
 
