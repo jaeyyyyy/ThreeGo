@@ -20,6 +20,9 @@ public class ReplyDTO {
     private String u_name;
     private String u_sfile;
 
+    // 내 댓글 리스트용 댓글을 작성한 게시글 제목
+    private String b_title;
+
     public String getB_id() {
         return b_id;
     }
@@ -107,8 +110,8 @@ public class ReplyDTO {
     public int getRe_child() { return re_child; }
 
     public void setRe_child(int re_child) { this.re_child = re_child; }
-    // 댓글 리스트용 프로필 사진과 닉네임 게터 세터
 
+    // 댓글 리스트용 프로필 사진과 닉네임 게터 세터
     public String getU_name() {  return u_name; }
 
     public void setU_name(String u_name) {
@@ -122,4 +125,10 @@ public class ReplyDTO {
     public void setU_sfile(String u_sfile) {
         this.u_sfile = u_sfile;
     }
+
+    // 내 댓글 리스트 용 댓글을 작성한 게시글 제목의 게터 세터
+
+    public String getB_title() { return b_title; }
+    public void setB_title(String b_title) { this.b_title = b_title; }
+
 }

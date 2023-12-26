@@ -51,16 +51,14 @@ public class MyPageController extends HttpServlet {
 
             // 댓글 정보 가져오기
             ReplyDAO re_dao = new ReplyDAO();
-            int replyTotal = re_dao.totalCount(b_id);
-            List<ReplyDTO> replyList = re_dao.selectReplyList(b_id);
-
+            List<ReplyDTO> myReplyList = re_dao.selectMyReplyList(u_id);
 
             req.setAttribute("dto",dto);
             req.setAttribute("myList",myList);
-            req.setAttribute("replyTotal", replyTotal);
-            req.setAttribute("replyList", replyList);
+            req.setAttribute("myReplyList", myReplyList);
 
             b_dao.close();
+            re_dao.close();
 
             req.getRequestDispatcher("/proj/views/mypage/mypage.jsp").forward(req,resp);
         }

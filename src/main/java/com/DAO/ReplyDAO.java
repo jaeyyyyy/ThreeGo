@@ -264,6 +264,46 @@ public class ReplyDAO extends JDBConnect {
         return replyList;
     }
 
+    public List<ReplyDTO> selectMyReplyList(String u_id){
+        List<ReplyDTO> myList = new ArrayList<ReplyDTO>();
+
+        // 쿼리문 작성
+        String subQuery = "SELECT * FROM reply WHERE u_id = ? ORDER BY re_regdate DESC, re_num DESC";
+
+        String query = "SELECT r.b_id, b.b_title, re_num, r.u_id, re_content, re_regdate, re_modifydate, re_del, re_level"
+                    + " FROM (" + subQuery + ") r"
+                    + " INNER JOIN BOARDTABLE b"
+                    + " ON r.b_id = b.b_id";
+
+        try{
+            psmt = con.prepareStatement(query);
+            psmt.setString(1,u_id);
+            rs = psmt.executeQuery();
+
+            while (rs.next()){
+                //게시물 하나의 내용을 저장
+                ReplyDTO dto = new ReplyDTO();
+
+                dto.setB_id(rs.getString("b_id"));
+                dto.setB_title(rs.getString("b_title"));
+                dto.setRe_num(rs.getString("re_num"));
+                dto.setU_id(rs.getString("u_id"));
+                dto.setRe_content(rs.getString("re_content"));
+                dto.setRe_regdate(rs.getDate("re_regdate"));
+                dto.setRe_modifydate(rs.getDate("re_modifydate"));
+                dto.setRe_del(rs.getString("re_del"));
+                dto.setRe_level(rs.getInt("re_level"));
+                myList.add(dto);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("SelectMyReplyList 오류 발생");
+        }
+
+        return myList;
+    }
+
     public int updateReply(ReplyDTO dto){
         int result = 0;
 
