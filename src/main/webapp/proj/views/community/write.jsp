@@ -48,6 +48,11 @@
 <body>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
+<div class="sub-header">
+    <div class="container pt-5 pl-5">
+        <h3 class="display-6 text-white">게시판</h3>
+    </div>
+</div>
 <div class="container position-relative pt-5 pb-5">
     <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
 
