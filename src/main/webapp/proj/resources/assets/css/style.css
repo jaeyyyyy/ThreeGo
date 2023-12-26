@@ -226,3 +226,11 @@ a {
     border-radius: 100%;
     object-fit: cover;
 }
+
+/*페이지네이션 아이콘 위치 조정*/
+.tui-pagination > a > span {
+    margin-top: 8px;
+}
+.tui-pagination > .tui-is-disabled > span {
+    margin-top: 8px;
+}

@@ -37,15 +37,19 @@ public class MyPageController extends HttpServlet {
         } else {
             // 로그인 된 경우 마이페이지로 이동
 
+
+            // 유저 정보 가져오기
             UserDAO dao = UserDAO.getInstance();
             UserDTO dto = dao.findUser(u_id);
 
+            // 게시판 정보 가져오기
             BoardDAO b_dao = new BoardDAO();
             String b_id = req.getParameter("b_id");
             b_dao.updateViewCount(b_id);
             BoardDTO b_dto = b_dao.selectView(b_id);
             List<BoardDTO> myList = b_dao.selectMyList(u_id);
 
+            // 댓글 정보 가져오기
             ReplyDAO re_dao = new ReplyDAO();
             int replyTotal = re_dao.totalCount(b_id);
             List<ReplyDTO> replyList = re_dao.selectReplyList(b_id);

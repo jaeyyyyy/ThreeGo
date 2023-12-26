@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.DTO.ReplyDTO;
 import com.util.LoginService;
 import com.DTO.UserDTO;  // 변경 없음
 
@@ -38,6 +39,7 @@ public class U_LoginController extends HttpServlet {
             session.setAttribute("u_id", id);
             session.setAttribute("u_name", loginUser.getU_name());
             session.setAttribute("u_sfile", loginUser.getU_sfile());// 수정된 부분
+
             // 디버깅을 위한 출력문
             System.out.println("Login User ID: " + loginUser.getU_id());
             System.out.println("Login User ProfileImg: " + loginUser.getU_sfile());
