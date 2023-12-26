@@ -35,7 +35,7 @@ public class JoinController extends HttpServlet {
         // 추가된 부분: 모든 필드가 비어있지 않은지 검사
 
 
-        if(id == null || id.isEmpty()) {
+       /* if(id == null || id.isEmpty()) {
             JSFunction.alertBack(resp,"아이디를 입력해주세요");
             return;
         } else if(pw == null || pw.isEmpty()) {
@@ -50,18 +50,19 @@ public class JoinController extends HttpServlet {
         } else if(email == null || email.isEmpty()) {
             JSFunction.alertBack(resp,"이메일을 입력해주세요");
             return;
-        }
+        }*/
 
 
         UserDAO dao = new UserDAO().getInstance();
 
 
-        // 중복 아이디 검사
+        /*// 중복 아이디 검사
         if (dao.checkDuplicateId(id)) {
             // 중복된 아이디가 있는 경우
             JSFunction.alertLocation(resp, "이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.", "/join/join.do");
             return;
-        }
+        }*/
+
         UserDTO dto = new UserDTO();
         dto.setU_id(id);
         dto.setU_pw(pw);
