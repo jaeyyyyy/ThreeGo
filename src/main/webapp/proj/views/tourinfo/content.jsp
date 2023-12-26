@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -127,9 +129,9 @@
                 dataType: 'json',
                 success : function(data){
                     const info = data.response.body.items.item;
-                    let overview = info[0].overview === "-" ? "관련 데이터가 없습니다." : info[0].overview;
-                    overview = overview.replaceAll("\n","<br/>");
-                    // overview = "&nbsp;" + overview.replaceAll("\n","<br/><!--<br/>-->&nbsp;");
+                    let overview = (info[0].overview === "" || info[0].overview === "-") ? "관련 데이터가 없습니다." : info[0].overview;
+                    overview = overview.replaceAll("<br/>","");
+                    overview = "&nbsp;" + overview.replaceAll("\n","<br/><br/>&nbsp;");
                     $('#overview').html(overview)
                     const homepage = info[0].homepage
                     showDetail(homepage)
@@ -513,34 +515,34 @@
         let distance = 0;
 
         function slideItem(btn){
+            clickArrow();
             const direction = $(btn).val();
             const width = parseFloat($('#sub-items').css('width'));
-            const wrapWidth = (width - 40)/5 * ${moreItem}.length + 10 * ${moreItem}.length
+            const wrapWidth = (width - 40)/5 * ${moreItem}.length + 10 * ${moreItem}.length  - 20
             if(direction === 'left'){
-                distance += (width - 40)/5 + 10;
+                distance += (width - 40)/5 + 8;
                 if(distance > 0) distance = 0
             }else if(direction === 'right'){
-                distance -= (width - 40)/5 + 10;
-                if(distance < -(wrapWidth - width)) distance = -(wrapWidth - width);
+                distance -= (width - 40)/5 + 8;
+                if(Math.abs(distance) > (wrapWidth - width)) distance = -(wrapWidth - width);
             }
             $('#sub-items-wrap').css("transform", "translateX(" + distance + "px)");
 
-            if(distance = 0){
+            if(distance === 0){
                 $('.btn-slide-left').addClass('hide');
-                console.log(1);
-            }else if(distance = -(wrapWidth - width)){
+            }else if(distance === -(wrapWidth - width)){
                 $('.btn-slide-right').addClass('hide');
-                console.log(2);
             }else {
                 $('.btn-slide-left').removeClass('hide');
                 $('.btn-slide-right').removeClass('hide');
-                console.log(3);
             }
-            console.log(distance)
-            console.log(wrapWidth)
-            console.log(wrapWidth - width)
-            console.log(parseFloat($('#sub-items').css('width')))
         }
+
+        // function back(){
+        //     $('#title').click(function (){
+        //         window.history.back();
+        //     })
+        // }
     </script>
     <style>
         #myCarousel{
@@ -581,7 +583,7 @@
             flex-basis: calc((100% - 40px)/5);
             flex-shrink: 0;
         }
-        .btn-slide-left, .btn-slide-right{
+        .btn-slide{
             position: absolute;
             width: 60px;
             height: 60px;
@@ -590,11 +592,11 @@
             outline: 0;
         }
         .btn-slide-left{
-            top:calc(50% - 30px);
+            top:calc(50% - 40px);
             left:-60px;
         }
         .btn-slide-right{
-            top:calc(50% - 30px);
+            top:calc(50% - 40px);
             right:-60px;
         }
         .icon-arrow{
@@ -653,7 +655,6 @@
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap">
-    <div id="test"></div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -715,8 +716,10 @@
                             <div id="sub-items-container">
                                 <div id="sub-items-wrap"></div>
                             </div>
-                            <button class="btn-slide-left hide" value="left" onclick="slideItem(this)"><i class="fa-solid fa-chevron-left icon-arrow"></i></button>
-                            <button class="btn-slide-right" value="right" onclick="slideItem(this)"><i class="fa-solid fa-chevron-right icon-arrow"></i></button>
+                            <c:if test="${fn:length(moreItem) > 5 or fn:length(subItemList) > 5}">
+                                <button class="btn-slide btn-slide-left hide" value="left" onclick="slideItem(this)"><i class="fa-solid fa-chevron-left icon-arrow"></i></button>
+                                <button class="btn-slide btn-slide-right" value="right" onclick="slideItem(this)"><i class="fa-solid fa-chevron-right icon-arrow"></i></button>
+                            </c:if>
                         </div>
                     </div>
                 </div>

@@ -33,6 +33,7 @@ public class T_cityController extends HttpServlet {
         List<Cat1DTO> cat1List = cat1_dao.selectList();
         List<SigunguDTO> sigunguList = si_dao.selectList(areacode);
         List<C_TypeDTO> c_typeList = c_type_dao.selectList();
+        List<AreaDTO> areaList = area_dao.selectList();
 
         String areaName = area_dao.showAreaName(areacode);
 
@@ -43,6 +44,7 @@ public class T_cityController extends HttpServlet {
         req.setAttribute("cat1List", cat1List);
         req.setAttribute("sigunguList", sigunguList);
         req.setAttribute("c_typeList", c_typeList);
+        req.setAttribute("areaList", areaList);
         req.setAttribute("areaName", areaName);
 
         req.getRequestDispatcher("/proj/views/tourinfo/city.jsp").forward(req, resp);

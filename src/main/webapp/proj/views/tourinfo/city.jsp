@@ -20,6 +20,9 @@
             checkCategory();
             showList();
             search();
+            $("#morebtn").click(function() {
+                $(".invisiblecard").slideToggle(300);
+            });
         })
 
         function checkCategory(){
@@ -232,9 +235,6 @@
             border-radius: 15px;
         }
 
-        /*label.btn-check{*/
-        /*    border-color: red;*/
-        /*}*/
 
         .d-grid{
             padding: 0 10px 20px;
@@ -255,10 +255,29 @@
             padding: 20px 0;
         }
 
-        /*.tui-pagination .tui-ico-next {*/
-        /*    height: 24px;*/
-        /*    background-position-y: -17px;*/
-        /*}*/
+        label.btn-area{
+            padding: 0;
+        }
+        label.btn-area a{
+            display: block;
+            padding: 10px;
+        }
+
+        .flex-box{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-select-area{
+            border-color: #333333;
+            color: #333333;
+        }
+
+        .btn-select-area:hover{
+            border-color: #666666;
+            color: #666666;
+        }
     </style>
     <title>관광지 정보 | 3GO</title>
 </head>
@@ -266,7 +285,18 @@
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
     <div id="wrap">
-        <h2 id="areaName">${areaName}</h2>
+        <div class="flex-box">
+            <h2 id="areaName">${areaName}</h2>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary2 btn-select-area " id="morebtn" >지역선택</button>
+        </div>
+        <div id="area-list-box" class = "invisiblecard">
+            <c:forEach items="${areaList}" var="area" varStatus="idx">
+                <input type="radio" class="areaSelect btn-check" name="area" id="area${idx.count}" autocomplete="off"
+                       value="${area.j_areacode}" <c:if test="${param.area eq area.j_areacode}"> checked</c:if>>
+                <label class="btn btn-area" for="area${idx.count}"><a href="/info/city.do?area=${area.j_areacode}">#${area.j_area_name}</a></label>
+            </c:forEach>
+        </div>
         <div id="content_container">
             <%-- 리스트 --%>
             <div id="gridDiv"></div>
@@ -314,5 +344,6 @@
     </div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
