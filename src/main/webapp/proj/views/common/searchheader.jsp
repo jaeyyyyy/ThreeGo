@@ -81,7 +81,7 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <!-- 아니라면 빈 사진을 보여준다-->
-                                                <img class="header-my-prof-img" src="../proj/resources/assets/img/no_profimg.png" />
+                                                <img class="header-my-prof-img" src="../resources/assets/img/no_profimg.png" />
                                             </c:otherwise>
                                         </c:choose>
                                     </div>
