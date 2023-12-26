@@ -61,7 +61,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">${myPost.b_title}</h5>
                                     <p class="card-text">${myPost.b_content}</p>
-                                    <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
+                                    <p class="card-text"><small class="text-body-secondary"><i class="bi bi-calendar"></i>&nbsp;&nbsp;${myPost.b_postdate}</small></p>
                                 </div>
                             </div>
                         </div>

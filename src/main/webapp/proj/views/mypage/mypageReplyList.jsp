@@ -18,28 +18,6 @@
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
 
     <title>마이페이지</title>
-    <style>
-        .my-reply-box{
-            display: flex;
-            justify-content: space-between;
-        }
-        .my-reply-text{
-            display: flex;
-            gap: 20px;
-        }
-        .my-reply-content{
-            display: flex;
-            gap: 5px;
-            padding-bottom: 5px;
-        }
-        .my-reply-btitle{
-            font-weight: 700;
-        }
-        .my-reply-level, .my-reply-deleted{
-            color: #999999;
-        }
-    </style>
-
 </head>
 <body>
 <!-- header-->
