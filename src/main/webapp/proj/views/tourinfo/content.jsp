@@ -110,6 +110,15 @@
                         })
                     }
                 }
+                ,beforeSend:function(){
+                    $('.wrap-loading').removeClass('display-none');
+                }
+
+                ,complete:function(){
+                    setTimeout(function(){
+                        $('.wrap-loading').addClass('display-none');
+                    },1500);
+                }
             })
         }
 
@@ -135,6 +144,15 @@
                     $('#overview').html(overview)
                     const homepage = info[0].homepage
                     showDetail(homepage)
+                }
+                ,beforeSend:function(){
+                    $('.wrap-loading').removeClass('display-none');
+                }
+
+                ,complete:function(){
+                    setTimeout(function(){
+                        $('.wrap-loading').addClass('display-none');
+                    },1500);
                 }
             })
         }
@@ -507,6 +525,15 @@
                             break;
                     }
                 }
+                ,beforeSend:function(){
+                    $('.wrap-loading').removeClass('display-none');
+                }
+
+                ,complete:function(){
+                    setTimeout(function(){
+                        $('.wrap-loading').addClass('display-none');
+                    },1500);
+                }
             })
         }
 
@@ -538,11 +565,6 @@
             }
         }
 
-        // function back(){
-        //     $('#title').click(function (){
-        //         window.history.back();
-        //     })
-        // }
     </script>
     <style>
         #myCarousel{
@@ -638,6 +660,35 @@
             padding: 10px 0;
         }
 
+        .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+            position: fixed;
+            z-index: 100;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            background: rgba(0,0,0,0.2); /*not in ie */
+            filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',endColorstr='#20000000');    /* ie */
+        }
+        .wrap-loading div{ /*로딩 이미지*/
+            position: fixed;
+            z-index: 300;
+            top:50%;
+            left:50%;
+            width: 100px;
+            height: 100px;
+            margin-left: -21px;
+            margin-top: -21px;
+        }
+        .wrap-loading div>img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .display-none{ /*감추기*/
+            display:none;
+        }
+
     </style>
     <style>
         #container {overflow:hidden; width:100%; height:400px;position:relative;}
@@ -652,6 +703,10 @@
     <title>관광지 정보 | 3GO</title>
 </head>
 <body>
+
+<div class="wrap-loading display-none">
+    <div><img src="../../../proj/resources/assets/img/loading.gif" /></div>
+</div>
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
 <div id="wrap">

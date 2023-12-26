@@ -292,7 +292,7 @@
         </div>
         <div id="area-list-box" class = "invisiblecard">
             <c:forEach items="${areaList}" var="area" varStatus="idx">
-                <input type="radio" class="areaSelect btn-check" name="area" id="area${idx.count}" autocomplete="off"
+                <input type="radio" class="areaSelect btn-check" name="areaSelect" id="area${idx.count}" autocomplete="off"
                        value="${area.j_areacode}" <c:if test="${param.area eq area.j_areacode}"> checked</c:if>>
                 <label class="btn btn-area" for="area${idx.count}"><a href="/info/city.do?area=${area.j_areacode}">#${area.j_area_name}</a></label>
             </c:forEach>
