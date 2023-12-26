@@ -168,7 +168,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(to right, #1e3c72, #2a5298);
+    background-color: #2F3545;
     border-radius: 10px;
 }
 

@@ -96,8 +96,8 @@
                         </c:forEach>
                     </div>
                     <!-- 게시글 더 보려면 클릭-->
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="/mypage/boardlist.do"><button class="btn btn-primary">게시글 더 보기</button></a>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a href="/mypage/boardlist.do"><button class="btn btn-primary btn-sm">게시글 더 보기</button></a>
                     </div>
 
                     </c:otherwise>
@@ -140,8 +140,8 @@
                             </div>
                         </c:forEach>
                         <!-- 댓글 더 보려면 클릭-->
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="/mypage/replylist.do"><button class="btn btn-primary">댓글 더 보기</button></a>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                            <a href="/mypage/replylist.do"><button class="btn btn-primary btn-sm">댓글 더 보기</button></a>
                         </div>
                     </c:otherwise>
                 </c:choose>
