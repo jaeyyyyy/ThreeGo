@@ -18,31 +18,6 @@
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
 
     <title>마이페이지</title>
-
-    <style>
-        .myreply-list{
-            margin-top: 20px;
-        }
-        .my-reply-box{
-            display: flex;
-            justify-content: space-between;
-        }
-        .my-reply-text{
-            display: flex;
-            gap: 20px;
-        }
-        .my-reply-content{
-            display: flex;
-            gap: 5px;
-            padding-bottom: 5px;
-        }
-        .my-reply-btitle{
-            font-weight: 700;
-        }
-        .my-reply-level, .my-reply-deleted{
-            color: #999999;
-        }
-    </style>
 </head>
 <body>
 <!-- header-->
@@ -85,7 +60,7 @@
 
 
         <div class="col-md mt-5 mb-5">
-            <h3>나의 최근 게시글</h3>
+            <h3 class="mb-4">나의 최근 게시글</h3>
             <div class="myboard-list">
                 <!-- 내 작성글 확인-->
                 <!-- 두 개만 보여줌-->
@@ -112,7 +87,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title">${myPost.b_title}</h5>
                                                 <p class="card-text">${myPost.b_content}</p>
-                                                <p class="card-text"><small class="text-body-secondary">${myPost.b_postdate}</small></p>
+                                                <p class="card-text"><small class="text-body-secondary"><i class="bi bi-calendar"></i>&nbsp;&nbsp;${myPost.b_postdate}</small></p>
                                             </div>
                                         </div>
                                     </div>
@@ -121,17 +96,21 @@
                         </c:forEach>
                     </div>
                     <!-- 게시글 더 보려면 클릭-->
-                    <a href="/mypage/boardlist.do">게시글 더 보기</a>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a href="/mypage/boardlist.do"><button class="btn btn-primary btn-sm">게시글 더 보기</button></a>
+                    </div>
+
                     </c:otherwise>
                 </c:choose>
 
             <div class="myreply-list">
-                <h3>나의 최근 작성 댓글</h3>
+                <h3 class="mb-4">나의 최근 작성 댓글</h3>
                 <c:choose>
                     <c:when test="${empty myReplyList}">
-                        작성한 게시글이 없습니다.
+                        작성한 댓글이 없습니다.
                     </c:when>
                     <c:otherwise>
+
                         <c:forEach var="myReply" items="${myReplyList}" end="3">
                             <div class="my-reply-box">
                                 <div class="my-reply-text">
@@ -154,14 +133,16 @@
                                 </div>
                                 <div class="my-reply-regdate">
                                     <c:choose>
-                                        <c:when test="${empty myReply.re_modifydate}">${myReply.re_regdate}</c:when>
-                                        <c:otherwise>${myReply.re_modifydate} 수정됨</c:otherwise>
+                                        <c:when test="${empty myReply.re_modifydate}"><i class="bi bi-calendar"></i> &nbsp;&nbsp; ${myReply.re_regdate}</c:when>
+                                        <c:otherwise><i class="bi bi-calendar"></i> &nbsp;&nbsp; ${myReply.re_modifydate} 수정됨</c:otherwise>
                                     </c:choose>
                                 </div>
                             </div>
                         </c:forEach>
-                    <!-- 게시글 더 보려면 클릭-->
-                    <a href="/mypage/replylist.do">게시글 더 보기</a>
+                        <!-- 댓글 더 보려면 클릭-->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                            <a href="/mypage/replylist.do"><button class="btn btn-primary btn-sm">댓글 더 보기</button></a>
+                        </div>
                     </c:otherwise>
                 </c:choose>
             </div>
