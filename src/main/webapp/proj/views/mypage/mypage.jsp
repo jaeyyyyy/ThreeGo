@@ -145,33 +145,6 @@
                         </div>
                     </c:otherwise>
                 </c:choose>
-
-                <table class="table">
-                    <thead class="table-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">댓글내용</th>
-                        <th scope="col">날짜</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                    </tr>
-                    </tbody>
-                </table>
-
             </div>
         </div>
 
