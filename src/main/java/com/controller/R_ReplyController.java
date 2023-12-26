@@ -47,7 +47,8 @@ public class R_ReplyController extends HttpServlet {
         int re_parent = Integer.parseInt(prev_re_num);
         int re_ref = Integer.parseInt((String) data.get("re_ref"));
         int re_level = prev_re_level + 1;
-        int re_order = prev_re_order + dao.addChild(re_parent);
+        dao.addChild(re_parent);
+        int re_order = prev_re_order + dao.showChild(re_parent);
         String u_id = (String) session.getAttribute("u_id");
 
         reader.close();

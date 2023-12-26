@@ -51,9 +51,23 @@ public class ReplyDAO extends JDBConnect {
     }
 
     // 자식 댓글의 개수를 업데이트하고 그 값을 반환
-    public int addChild(int re_parent){
+    public void addChild(int re_parent){
         int result = 0;
-        int child = 0;
+        int grand_parent = 0;
+
+        String selectQuery = "SELECT re_parent FROM reply WHERE re_num = ?";
+
+        try{
+            psmt = con.prepareStatement(selectQuery);
+            psmt.setInt(1, re_parent);
+            rs = psmt.executeQuery();
+            rs.next();
+            grand_parent = rs.getInt(1);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("addChild-select 오류 발생");
+        }
+
 
         String updateQuery = "UPDATE reply SET re_child = re_child+1 WHERE re_num = ?";
 
@@ -66,19 +80,24 @@ public class ReplyDAO extends JDBConnect {
             System.out.println("addChild-update 오류 발생");
         }
 
-        if(result > 0){
-            String selectQuery = "SELECT re_child FROM reply WHERE re_num = ?";
+        if(grand_parent > 0){
+            addChild(grand_parent);
+        }
+    }
 
-            try{
-                psmt = con.prepareStatement(selectQuery);
-                psmt.setInt(1, re_parent);
-                rs = psmt.executeQuery();
-                rs.next();
-                child = rs.getInt(1);
-            }catch (Exception e){
-                e.printStackTrace();
-                System.out.println("addChild-select 오류 발생");
-            }
+    public int showChild(int re_parent){
+        int child = 0;
+        String selectQuery = "SELECT re_child FROM reply WHERE re_num = ?";
+
+        try{
+            psmt = con.prepareStatement(selectQuery);
+            psmt.setInt(1, re_parent);
+            rs = psmt.executeQuery();
+            rs.next();
+            child = rs.getInt(1);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("showChild 오류 발생");
         }
 
         return child;
