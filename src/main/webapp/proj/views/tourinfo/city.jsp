@@ -278,6 +278,10 @@
             border-color: #666666;
             color: #666666;
         }
+
+        #area-list-box{
+            margin-bottom: 10px;
+        }
     </style>
     <title>관광지 정보 | 3GO</title>
 </head>
