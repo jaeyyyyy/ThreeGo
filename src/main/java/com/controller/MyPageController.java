@@ -95,7 +95,7 @@ public class MyPageController extends HttpServlet {
         // 파일 업로드
         String oFileName = "";
         try {
-            System.out.println("외않되");
+            System.out.println("파일업로드 성공");
             oFileName = U_FileUtil.uploadFile(req,saveDir);
 
         }catch (Exception e) {

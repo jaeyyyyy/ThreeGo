@@ -59,7 +59,7 @@ public class U_LoginController extends HttpServlet {
             resp.setContentType("text/html; charset=UTF-8");
             PrintWriter out = resp.getWriter();
             out.println("<script>");
-            out.println("alert('로그인 실패')");
+            out.println("alert('아이디 또는 비밀번호가 일치하지 않습니다.')");
             out.println("history.back()");
             out.println("</script>");
         }

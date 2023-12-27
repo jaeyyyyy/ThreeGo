@@ -7,106 +7,63 @@
 <head>
 </head>
 <body>
-    <!--top-header-->
-    <div class="top-header" style="height: 5rem;">
-        <!--container-->
-        <div class="container">
-            <!--navbar-->
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" href="../proj/views/index.jsp">
-                    <i class="bi bi-pin-map-fill m-auto text-dark"></i>
-                    <!--<img src="#" target="blank" alt="logo" height="100">-->
-                </a>
+<header class="p-3">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="../../proj/views/index.jsp" class="navbar-brand d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+                <i class="bi bi-pin-map-fill m-auto text-dark"></i>
+            </a>
 
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="../../info/area.do">여행정보</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="javascript:alert('준비중입니다.');">여행일정</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../../community/list.do">커뮤니티</a>
-                        </li>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="../../info/area.do" class="nav-link px-2" >여행정보</a></li>
+                <li><a href="javascript:alert('준비중입니다.');" class="nav-link px-2">여행일정</a></li>
+                <li><a href="../../community/list.do" class="nav-link px-2">커뮤니티</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                ${sessionScope.u_name}
+            </form>
+
+            <div class="dropdown text-end">
+
+                <!--로그인이 안되면 로그인과 회원가입을 보여줌-->
+                <c:choose>
+                    <c:when test="${empty sessionScope.u_id}">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle text-dark"></i>
+                        </a>
+                        <ul class="dropdown-menu text-small" style="">
+                            <li><a class="dropdown-item" href="../../login.do">로그인</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../../join/join.do">회원가입</a></li>
+                        </ul>
+                    </c:when>
 
 
-                        <div class="nav-right navbar">
+                    <c:otherwise>
+                        <!--로그인이 되면 마이페이지와 로그아웃을 보여줌-->
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <c:choose>
-                                <c:when test="${empty sessionScope.u_id}">
-                                    <!--로그인이 안되면 로그인과 회원가입을 보여줌-->
-                                    <button data-bs-toggle="modal" data-bs-target="#log-or-join" id="start-btn" class="navbar-brand">
-                                        <i class="bi bi-person-circle text-dark"></i>
-                                    </button>
-
-                                    <!-- 로그인 또는 회원가입 Modal창 -->
-                                    <div class="modal fade" id="log-or-join" tabindex="-1" aria-labelledby="LogJoinModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="LogJoinModalLabel">ThreeGo</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="blockquote text-center p-5">ThreeGo에 회원가입하여<br>여행을 즐겨보세요.</div>
-                                                    <div class="d-grid gap-2 p-5">
-                                                        <button class="btn btn-join" type="button" onclick="location.href='/join/join.do';">회원가입</button>
-                                                        <button class="btn btn-login" type="button" onclick="location.href='/login.do';">로그인</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <c:when test="${not empty sessionScope.u_sfile}">
+                                    <!--프로필 사진이 있다면 보여주고-->
+                                    <img src="../../../upload/${sessionScope.u_sfile}" alt="mdo" width="32" height="32" class="rounded-circle">
                                 </c:when>
-
                                 <c:otherwise>
-                                    <!--로그인이 되면 마이페이지와 로그아웃을 보여줌-->
-                                    <button data-bs-toggle="modal" data-bs-target="#mypage-or-logout" id="start-btn2" class="navbar-brand">
-                                        <div class="header-prof-img">
-                                            <c:choose>
-                                                <c:when test="${not empty sessionScope.u_sfile}">
-                                                    <!--프로필 사진이 있다면 보여주고-->
-                                                    <img class="header-my-prof-img" src="../../../upload/${sessionScope.u_sfile}" />
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <!-- 아니라면 빈 사진을 보여준다-->
-                                                    <img class="header-my-prof-img" src="../proj/resources/assets/img/no_profimg.png" />
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-                                    </button>
-
-                                    <!-- 마이페이지 또는 로그아웃 Modal창 -->
-                                    <div class="modal fade" id="mypage-or-logout" tabindex="-1" aria-labelledby="MypageLogoutModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="MypageLogoutModalLabel">ThreeGo</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="blockquote text-center p-5">ThreeGo에서 나의 정보를 확인하세요.</div>
-                                                    <div class="d-grid gap-2 p-5">
-                                                        <button class="btn btn-join" type="button" onclick="location.href='/mypage.do';">마이페이지</button>
-                                                        <button class="btn btn-login" type="button" onclick="location.href='/logout.do';">로그아웃</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- 아니라면 빈 사진을 보여준다-->
+                                    <img src="../proj/resources/assets/img/no_profimg.png" alt="mdo" width="32" height="32" class="rounded-circle" />
                                 </c:otherwise>
                             </c:choose>
-                        </div>
-                    </ul>
-                </div>
-
-            </nav>
-            <!--navbar end-->
-
-
-
+                        </a>
+                        <ul class="dropdown-menu text-small" style="">
+                            <li><a class="dropdown-item" href="../../mypage.do">마이페이지</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../../logout.do">로그아웃</a></li>
+                        </ul>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
-        <!--container end-->
-</div>
+    </div>
+</header>
 </body>
 </html>
