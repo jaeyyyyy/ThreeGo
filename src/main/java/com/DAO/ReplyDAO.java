@@ -221,14 +221,14 @@ public class ReplyDAO extends JDBConnect {
     public List<ReplyDTO> selectReplyList(String b_id){
         List<ReplyDTO> replyList = new ArrayList<ReplyDTO>();
 
-        String subquery = "SELECT * FROM reply WHERE b_id = ?"
-                    + " ORDER BY re_ref ASC, re_order ASC";
+        String subquery = "SELECT * FROM reply WHERE b_id = ?";
 
         String query = "SELECT b_id, re_num, r.u_id, u.u_name, u.u_sfile, re_content,"
                     + " re_regdate, re_modifydate, re_del, re_ref, re_order, re_level, re_parent, re_child"
                     + " FROM (" + subquery + ") r"
                     + " INNER JOIN USERS u"
-                    + " ON r.u_id = u.u_id";
+                    + " ON r.u_id = u.u_id"
+                    + " ORDER BY re_ref ASC, re_order ASC";
 
         System.out.println(query);
 

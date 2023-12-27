@@ -45,6 +45,7 @@ public class B_ViewController extends HttpServlet {
             int replyTotal = re_dao.totalCount(b_id);
             List<ReplyDTO> replyList = re_dao.selectReplyList(b_id);
 
+
             // 뷰로 포워드
             req.setAttribute("dto",dto);
             req.setAttribute("isImage",isImage);

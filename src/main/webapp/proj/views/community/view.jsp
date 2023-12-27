@@ -44,13 +44,17 @@
 
     function clickReply(){
         $('.btn-reply').click(function (e) {
-            const num = e.target.value;
-            const selectedReply = '#reply-box' + num;
-            if($(selectedReply).hasClass('hide')){
-                $('.reply-box').addClass('hide');
-                $(selectedReply).toggleClass('hide');
-            }else {
-                $(selectedReply).addClass('hide');
+            if(${sessionScope.u_id == null}){
+                alert("댓글은 로그인 후 작성할 수 있습니다.")
+            }else{
+                const num = e.target.value;
+                const selectedReply = '#reply-box' + num;
+                if($(selectedReply).hasClass('hide')){
+                    $('.reply-box').addClass('hide');
+                    $(selectedReply).toggleClass('hide');
+                }else {
+                    $(selectedReply).addClass('hide');
+                }
             }
         })
     }
@@ -84,7 +88,7 @@
         $('.reply-btn').click(function (e) {
             const num = e.target.value;
             if(loginedId === null){
-                alert("로그인 후 이용 가능한 페이지 입니다.")
+                alert("댓글은 로그인 후 작성할 수 있습니다.")
                 location.href = "/login.do"
             }else if($('#reply-text' + num).val() === ""){
                 alert("내용을 입력해주십시오.")
@@ -118,7 +122,7 @@
         const loginedId = '${sessionScope.u_id}'
         $('#comment-btn').click(function () {
             if(loginedId === ""){
-                alert("로그인 후 이용 가능한 페이지 입니다.")
+                alert("댓글은 로그인 후 작성할 수 있습니다.")
                 location.href = "/login.do"
             }else if($('#comment-text').val() === ""){
                 alert("내용을 입력해주십시오.")

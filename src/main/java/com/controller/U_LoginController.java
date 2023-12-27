@@ -30,6 +30,7 @@ public class U_LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("u_id");
         String pw = req.getParameter("u_pw");
+        String prevUrl = req.getParameter("prevUrl");
 
         LoginService loginService = new LoginService();
         UserDTO loginUser = loginService.getLoginUser(id, pw);  // LoginService 클래스의 메서드 호출
@@ -49,7 +50,7 @@ public class U_LoginController extends HttpServlet {
             PrintWriter out = resp.getWriter();
             out.println("<script>");
             out.println("alert('" + session.getAttribute("u_name") + " 회원님, 로그인하셨습니다.');");
-            out.println("location.href='/proj/views/index.jsp';");
+            out.println("location.href = '" + prevUrl + "';");
             out.println("</script>");
         } else {
             // 디버깅을 위한 출력문 (로그인 실패)

@@ -12,6 +12,8 @@
     <link href="../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../proj/resources/assets/css/style.css" rel="stylesheet" />
     <link href="../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <title>로그인</title>
     <link rel = "icon" href="image/wave.ico">
 
@@ -22,6 +24,11 @@
 </head>
 <body>
 <script>
+    $(document).ready(function (){
+        let prevUrl = document.referrer;
+        $('input[name=prevUrl]').val(prevUrl);
+    })
+
     function validateForm(form){
         if(!form.u_id.value){
             alert("아이디 입력 하세요");
@@ -61,6 +68,7 @@
         </div>
         <%--    로그인 버튼--%>
         <div class="col text-center">
+            <input type="hidden" name="prevUrl" value="">
             <input type="submit" value="로그인" class="btn btn-primary btn-md"><br/>
         </div>
     </div>
