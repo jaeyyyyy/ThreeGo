@@ -48,11 +48,11 @@
                             <c:choose>
                                 <c:when test="${not empty sessionScope.u_sfile}">
                                     <!--프로필 사진이 있다면 보여주고-->
-                                    <img src="../../../upload/${sessionScope.u_sfile}" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    <img src="../../../upload/${sessionScope.u_sfile}" alt="mdo" width="40" height="40" class="rounded-circle">
                                 </c:when>
                                 <c:otherwise>
                                     <!-- 아니라면 빈 사진을 보여준다-->
-                                    <img src="../proj/resources/assets/img/no_profimg.png" alt="mdo" width="32" height="32" class="rounded-circle" />
+                                    <img src="../proj/resources/assets/img/no_profimg.png" alt="mdo" width="40" height="40" class="rounded-circle" />
                                 </c:otherwise>
                             </c:choose>
                         </a>
