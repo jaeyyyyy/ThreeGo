@@ -52,7 +52,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <!-- 아니라면 빈 사진을 보여준다-->
-                                    <img src="../proj/resources/assets/img/no_profimg.png" alt="mdo" width="40" height="40" class="rounded-circle" />
+                                    <img src="../resources/assets/img/no_profimg.png" alt="mdo" width="40" height="40" class="rounded-circle" />
                                 </c:otherwise>
                             </c:choose>
                         </a>
