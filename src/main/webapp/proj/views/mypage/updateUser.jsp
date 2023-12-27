@@ -69,8 +69,7 @@
                 <!-- 비밀번호 재확인 -->
                 <div class="userInput mb-5">
                     <h4 class="list">비밀번호 재확인</h4>
-                    <div class="pw_info">※알파벳 대문자, 소문자, 숫자와 특수문자[!@#$%^*+=-]를 모두 포함하는 8~15자리로 작성하여 주십시오.</div>
-                    <div class="input-group">
+                     <div class="input-group">
                         <input type="password" id="u_pwConfirm" class="form-control form-control-sm" maxlength="20" name="u_pwConfirm">
                     </div>
                 </div>
@@ -79,7 +78,7 @@
                 <div class="userInput mb-5">
                     <h4 class="list">이메일</h4>
                     <div class="input-group">
-                        <input type="text" id="u_email" name="u_email" class="form-control form-control-sm" value="${dto.u_email}" readonly>
+                        <input type="text" id="u_email" name="u_email" class="form-control form-control-sm" value="${dto.u_email}" readonly >
                     </div>
                 </div>
 
@@ -123,6 +122,9 @@
 </div>
 </c:if>
 <script>
+    let emailCheck = false;
+
+
     document.getElementById('editBtn').addEventListener('click', function() {
         // 간단한 유효성 검사
         let reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
