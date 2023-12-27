@@ -9,7 +9,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <link href="../../../proj/views/common/commonstyle.css" rel="stylesheet" />
+    <link href="../../../proj/views/common/commonstyle.css?after" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- toast grid -->
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
