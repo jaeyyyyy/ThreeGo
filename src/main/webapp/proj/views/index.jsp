@@ -66,7 +66,7 @@
 
                 <h1 class="mb-5 sec2h2">이번 여행은 <br>어디로 <br>갈까요?</h1>
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=1">
+                    <a href="../../info/city.do?area=1">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/seoul2.jpg" class="card-img-top rounded" alt="서울">
                             <div class="card-img-overlay cardgradient">
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=6">
+                    <a href="../../info/city.do?area=6">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/busan.png" class="card-img-top rounded" alt="부산">
                             <div class="card-img-overlay cardgradient">
@@ -88,7 +88,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=39">
+                    <a href="../../info/city.do?area=39">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/jeju.jpg" class="card-img-top rounded" alt="제주">
                             <div class="card-img-overlay cardgradient">
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=3">
+                    <a href="../../info/city.do?area=3">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/daejeon.jpg" class="card-img-top rounded" alt="대전">
                             <div class="card-img-overlay cardgradient">
@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=4">
+                    <a href="../../info/city.do?area=4">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/daegu.png" class="card-img-top rounded" alt="대구">
                             <div class="card-img-overlay cardgradient">
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=9">
+                    <a href="../../info/city.do?area=9">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/kunggi.jpg" class="card-img-top rounded" alt="경기도 수원">
                             <div class="card-img-overlay cardgradient">
@@ -132,7 +132,7 @@
                 </div>
 
                 <div class="col">
-                    <a href="http://localhost/info/city.do?area=5">
+                    <a href="../../info/city.do?area=5">
                         <div class="card border-0">
                             <img src="../../../proj/resources/assets/img/mainimg/gwangju.jpg" class="card-img-top rounded" alt="광주">
                             <div class="card-img-overlay cardgradient">
@@ -149,7 +149,7 @@
                 <%--7개 이후 --%>
                 <div class="row row-cols-1 row-cols-md-4 g-4 pt-4">
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=32">
+                        <a href="../../info/city.do?area=32">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/gangwon.jpg" class="card-img-top rounded" alt="강원도">
                                 <div class="card-img-overlay cardgradient">
@@ -162,7 +162,7 @@
 
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=7">
+                        <a href="../../info/city.do?area=7">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/ulsan.jpg" width="100%" class="card-img-top rounded" alt="울산">
                                 <div class="card-img-overlay cardgradient">
@@ -173,7 +173,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=2">
+                        <a href="../../info/city.do?area=2">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/incheon.jpg" class="card-img-top rounded" alt="인천">
                                 <div class="card-img-overlay cardgradient">
@@ -184,7 +184,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=8">
+                        <a href="../../info/city.do?area=8">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/sejong.png" class="card-img-top rounded" alt="세종">
                                 <div class="card-img-overlay cardgradient">
@@ -195,7 +195,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=33">
+                        <a href="../../info/city.do?area=33">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/chungbuk.jpg" class="card-img-top rounded" alt="충북">
                                 <div class="card-img-overlay cardgradient">
@@ -206,7 +206,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=34">
+                        <a href="../../info/city.do?area=34">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/chungnam.jpg" class="card-img-top rounded" alt="충남">
                                 <div class="card-img-overlay cardgradient">
@@ -217,7 +217,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=35">
+                        <a href="../../info/city.do?area=35">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/kyungbuk.jpg" class="card-img-top rounded" alt="경북">
                                 <div class="card-img-overlay cardgradient">
@@ -228,7 +228,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=36">
+                        <a href="../../info/city.do?area=36">
                             <div class="card border-0 " >
                                 <img src="../../../proj/resources/assets/img/mainimg/kyungnam.jpg" class="card-img-top rounded" alt="경남">
                                 <div class="card-img-overlay cardgradient">
@@ -239,7 +239,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=37">
+                        <a href="../../info/city.do?area=37">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/jeonrabukdo.jpg" class="card-img-top rounded" alt="전북">
                                 <div class="card-img-overlay cardgradient">
@@ -250,7 +250,7 @@
                     </div>
 
                     <div class="col">
-                        <a href="http://localhost/info/city.do?area=38">
+                        <a href="../../info/city.do?area=38">
                             <div class="card border-0 ">
                                 <img src="../../../proj/resources/assets/img/mainimg/jeonranamdo.jpg" class="card-img-top rounded" alt="전남">
                                 <div class="card-img-overlay cardgradient">
