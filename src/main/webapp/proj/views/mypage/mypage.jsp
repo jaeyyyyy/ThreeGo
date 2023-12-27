@@ -4,6 +4,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <!-- Font Awesome icons (free version)-->

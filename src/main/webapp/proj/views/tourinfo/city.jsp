@@ -9,7 +9,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="../../../proj/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../../proj/resources/assets/css/style.css?after" rel="stylesheet" />
-    <link href="../../../proj/views/common/commonstyle.css" rel="stylesheet" />
+    <link href="../../../proj/views/common/commonstyle.css?after" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <!-- toast grid -->
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
@@ -235,10 +235,15 @@
             font-weight: 400;
         }
 
-        .btn{
-            padding: 10px;
-            font-size: 13px;
-            border-radius: 15px;
+        .btn-2{
+            padding: 10px !important;
+            font-size: 13px !important;
+            border-radius: 15px !important;
+        }
+
+        .btn-3 {
+            font-size: 13px !important;
+            border-radius: 15px !important;
         }
 
 
@@ -298,13 +303,13 @@
         <div class="flex-box">
             <h2 id="areaName">${areaName}</h2>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary2 btn-select-area " id="morebtn" >지역선택</button>
+            <button type="button" class="btn btn-2 btn-primary2 btn-select-area " id="morebtn" >지역선택</button>
         </div>
         <div id="area-list-box" class = "invisiblecard">
             <c:forEach items="${areaList}" var="area" varStatus="idx">
                 <input type="radio" class="areaSelect btn-check" name="areaSelect" id="area${idx.count}" autocomplete="off"
                        value="${area.j_areacode}" <c:if test="${param.area eq area.j_areacode}"> checked</c:if>>
-                <label class="btn btn-area" for="area${idx.count}"><a href="/info/city.do?area=${area.j_areacode}">#${area.j_area_name}</a></label>
+                <label class="btn btn-3 btn-area" for="area${idx.count}"><a href="/info/city.do?area=${area.j_areacode}">#${area.j_area_name}</a></label>
             </c:forEach>
         </div>
         <div id="content_container">
@@ -315,10 +320,10 @@
                 <div id="content_type">
                     <h5>- 관광 타입 -</h5>
                     <input type="radio" class="typeSelect btn-check" name="type" id="type0" autocomplete="off" value="" checked>
-                    <label class="btn" for="type0">#전체</label>
+                    <label class="btn btn-2" for="type0">#전체</label>
                     <c:forEach items="${c_typeList}" var="type" varStatus="idx">
                         <input type="radio" class="typeSelect btn-check" name="type" id="type${idx.count}" autocomplete="off" value="${type.contenttypeid}">
-                        <label class="btn" for="type${idx.count}">#${type.ctype_name}</label>
+                        <label class="btn btn-2" for="type${idx.count}">#${type.ctype_name}</label>
                     </c:forEach>
                     <br/>
                 </div>
@@ -326,10 +331,10 @@
                     <input type="hidden" name="area" value="${param.area}">
                     <h5>- 대분류 -</h5>
                     <input type="radio" class="catSelect btn-check" name="cat1" id="cat10" autocomplete="off" value="" checked>
-                    <label class="btn" for="cat10">#전체</label>
+                    <label class="btn btn-2" for="cat10">#전체</label>
                     <c:forEach items="${cat1List}" var="cat1" varStatus="idx">
                         <input type="radio" class="catSelect btn-check" name="cat1" id="cat1${idx.count}" autocomplete="off" value="${cat1.cat1}">
-                        <label class="btn" for="cat1${idx.count}">#${cat1.cat1_name}</label>
+                        <label class="btn btn-2" for="cat1${idx.count}">#${cat1.cat1_name}</label>
                     </c:forEach>
                     <br/>
                     <div id="cat2Label"></div>
@@ -340,14 +345,14 @@
                 <div id="sigungu">
                     <h5>- 상세 지역 -</h5>
                     <input type="radio" class="areaSelect btn-check" name="sigungu" id="sigungu0" autocomplete="off" value="" checked>
-                    <label class="btn" for="sigungu0">#전체</label>
+                    <label class="btn btn-2" for="sigungu0">#전체</label>
                     <c:forEach items="${sigunguList}" var="sigungu" varStatus="idx">
                         <input type="radio" class="areaSelect btn-check" name="sigungu" id="sigungu${idx.count}" autocomplete="off" value="${sigungu.s_sigungucode}">
-                        <label class="btn" for="sigungu${idx.count}">#${sigungu.sigungu_name}</label>
+                        <label class="btn btn-2" for="sigungu${idx.count}">#${sigungu.sigungu_name}</label>
                     </c:forEach>
                 </div>
                 <div class="d-grid">
-                    <button class="btn search-btn" type="button" name="searchBtn">검색</button>
+                    <button class="btn btn-2 search-btn" type="button" name="searchBtn">검색</button>
                 </div>
             </div>
         </div>
