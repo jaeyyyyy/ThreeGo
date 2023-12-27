@@ -128,6 +128,8 @@ public class MyPageController extends HttpServlet {
         if (result > 0) {
             // 업데이트 성공
             // 마이페이지로 리다이렉트하거나 다른 작업 수행
+            session.setAttribute("u_name", dto.getU_name());
+            session.setAttribute("u_sfile", dto.getU_sfile());
             JSFunction.alertLocation(resp,"업데이트에 성공하였습니다.","/updateUser.do");
         } else {
             // 업데이트 실패
