@@ -190,6 +190,9 @@
 
     </script>
     <style>
+        *{
+            font-family: 'Noto Sans KR', sans-serif;
+        }
         #content_container{
             display: flex;
             gap: 30px;
