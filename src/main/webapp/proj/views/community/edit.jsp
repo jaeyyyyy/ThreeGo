@@ -46,51 +46,62 @@
     </div>
 </div>
 
+<c:choose>
+    <c:when test="${not empty sessionScope.u_id and sessionScope.u_id eq dto.u_id}">
+        <div class="container position-relative pt-5 pb-5">
+            <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm(this);">
+                <input type="hidden" name="b_id" value="${dto.b_id}"/>
+                <input type="hidden" name="prevOfile" value="${dto.b_ofile}"/>
+                <input type="hidden" name="prevSfile" value="${dto.b_sfile}"/>
 
-<div class="container position-relative pt-5 pb-5">
-<form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm(this);">
-    <input type="hidden" name="b_id" value="${dto.b_id}"/>
-    <input type="hidden" name="prevOfile" value="${dto.b_ofile}"/>
-    <input type="hidden" name="prevSfile" value="${dto.b_sfile}"/>
+                <input type="hidden" name="u_id" class="form-control form-control-sm" value="${dto.u_id}" />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">작성자</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="u_name" class="form-control form-control-sm" value="${dto.u_name}" readonly />
+                    </div>
+                </div>
 
-    <input type="hidden" name="u_id" class="form-control form-control-sm" value="${dto.u_id}" />
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">작성자</label>
-        <div class="col-sm-10">
-            <input type="text" name="u_name" class="form-control form-control-sm" value="${dto.u_name}" readonly />
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">제목</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="b_title" class="form-control form-control-sm" value="${dto.b_title}"/>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">내용</label>
+                    <div class="col-sm-10">
+                        <textarea name="b_content" class="form-control" rows="5">${dto.b_content}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">첨부 파일</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="b_ofile"/>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="btn-group pt-5" role="group" aria-label="Basic example">
+                        <button type="submit" class="btn btn-primary btn-sm">작성완료</button>
+                        <button type="reset" class="btn btn-secondary btn-sm">다시입력</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
+    </c:when>
+    <c:otherwise>
+        <script>
+            alert('정상적인 경로의 접근이 아닙니다.');
+        </script>
+    </c:otherwise>
+</c:choose>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">제목</label>
-        <div class="col-sm-10">
-            <input type="text" name="b_title" class="form-control form-control-sm" value="${dto.b_title}"/>
-        </div>
-    </div>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">내용</label>
-        <div class="col-sm-10">
-            <textarea name="b_content" class="form-control" rows="5">${dto.b_content}</textarea>
-        </div>
-    </div>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">첨부 파일</label>
-        <div class="col-sm-10">
-            <input type="file" name="b_ofile"/>
-        </div>
-    </div>
-
-    <div class="text-center">
-        <div class="btn-group pt-5" role="group" aria-label="Basic example">
-            <button type="submit" class="btn btn-primary btn-sm">작성완료</button>
-            <button type="reset" class="btn btn-secondary btn-sm">다시입력</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="location.href='../community/list.do';">목록보기</button>
-        </div>
-    </div>
-</form>
-</div>
 <!--footer-->
 <jsp:include page="../common/footer.jsp"/>
 <!-- Bootstrap core JS-->
