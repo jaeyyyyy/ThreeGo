@@ -52,12 +52,12 @@
 
                         $('#cat2').append(
                             '<input type="radio" class="cat2Select btn-check" name="cat2" id="cat20" autocomplete="off" value="" checked>'
-                            + '<label class="btn" for="cat20">#전체</label>'
+                            + '<label class="btn btn-2" for="cat20">#전체</label>'
                         )
                         cat2List.forEach(function (cat2, idx){
                             $('#cat2').append(
                                 '<input type="radio" class="cat2Select btn-check" name="cat2" id="cat2'+ (idx+1) +'" autocomplete="off" value="' + cat2.cat2 + '">'
-                                + '<label class="btn" for="cat2' + (idx+1) + '">' + cat2.cat2_name + '</label>'
+                                + '<label class="btn btn-2" for="cat2' + (idx+1) + '">' + cat2.cat2_name + '</label>'
                             )
                         })
                         if($('input[name=cat1]:checked').val() == ""){
@@ -89,12 +89,12 @@
                         $('#cat3').html("")
                         $('#cat3').append(
                             '<input type="radio" class="cat3Select btn-check" name="cat3" id="cat30" autocomplete="off" value="" checked>'
-                            + '<label class="btn" for="cat30">#전체</label>'
+                            + '<label class="btn btn-2" for="cat30">#전체</label>'
                         )
                         cat3List.forEach(function (cat3, idx){
                             $('#cat3').append(
                                 '<input type="radio" class="cat3Select btn-check" name="cat3" id="cat3'+ (idx+1) +'" autocomplete="off" value="' + cat3.cat3 + '">'
-                                + '<label class="btn" for="cat3' + (idx+1) + '">' + cat3.cat3_name + '</label>'
+                                + '<label class="btn btn-2" for="cat3' + (idx+1) + '">' + cat3.cat3_name + '</label>'
                             )
                         })
                         if($('input[name=cat2]:checked').val() == ""){
