@@ -108,7 +108,7 @@
 
             <div>
                 <h3 class="mb-4 mt-4">나의 최근 작성 댓글</h3>
-                <div class="myreply-list">
+                <div class="myreply-list gap-2">
                     <c:choose>
                     <c:when test="${empty myReplyList}">
                         <div class="my-reply-box">
