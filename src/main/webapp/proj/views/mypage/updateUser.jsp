@@ -60,6 +60,7 @@
                 <!-- 비밀번호 입력 -->
                 <div class="userInput mb-5">
                     <h4 class="list">비밀번호</h4>
+                    <div class="pw_info">※알파벳 대문자, 소문자, 숫자와 특수문자[!@#$%^*+=-]를 모두 포함하는 8~15자리로 작성하여 주십시오.</div>
                     <div class="input-group">
                         <input type="password" id="u_pw" name="u_pw" class="form-control form-control-sm" maxlength="20" value="${dto.u_pw}"><br>
                     </div>
@@ -68,6 +69,7 @@
                 <!-- 비밀번호 재확인 -->
                 <div class="userInput mb-5">
                     <h4 class="list">비밀번호 재확인</h4>
+                    <div class="pw_info">※알파벳 대문자, 소문자, 숫자와 특수문자[!@#$%^*+=-]를 모두 포함하는 8~15자리로 작성하여 주십시오.</div>
                     <div class="input-group">
                         <input type="password" id="u_pwConfirm" class="form-control form-control-sm" maxlength="20" name="u_pwConfirm">
                     </div>
@@ -77,7 +79,7 @@
                 <div class="userInput mb-5">
                     <h4 class="list">이메일</h4>
                     <div class="input-group">
-                        <input type="text" id="u_email" name="u_email" class="form-control form-control-sm" value="${dto.u_email}">
+                        <input type="text" id="u_email" name="u_email" class="form-control form-control-sm" value="${dto.u_email}" readonly>
                     </div>
                 </div>
 
@@ -123,14 +125,20 @@
 <script>
     document.getElementById('editBtn').addEventListener('click', function() {
         // 간단한 유효성 검사
-        var pw = document.getElementsByName('u_pw')[0].value;
-        var pwConfirm = document.getElementsByName('u_pwConfirm')[0].value;
+        let reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+        let pw = document.getElementsByName('u_pw')[0].value;
+        let pwConfirm = document.getElementsByName('u_pwConfirm')[0].value;
 
         if (pw != null && pwConfirm != null && pw !== pwConfirm) {
             alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
             event.preventDefault(); // 폼 제출 막기
+        } else if (!reg_pw.test(pwConfirm)){
+            alert('비밀번호 양식을 다시 확인하여 주십시오.');
+            event.preventDefault(); // 폼 제출 막기
+            document.getElementsByName('pw')[0].focus();
         }
     });
+
 </script>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
