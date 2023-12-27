@@ -34,6 +34,7 @@ public class BoardDAO extends DBConnPool {
 
         return totalCount;
     }
+
     //게시물 목록 반환
     public List<BoardDTO> selectListPage(Map<String,Object>map){
         //쿼리 결과를 담을 변수
@@ -81,6 +82,68 @@ public class BoardDAO extends DBConnPool {
         }
 
         return bbs;
+    }
+
+    //게시물 개수 반환
+    public int selectMyCount(Map<String,Object>map){
+        int totalCount = 0;
+
+        String query = "SELECT COUNT(*) FROM boardtable WHERE u_id = ?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, map.get("u_id").toString());
+            rs = psmt.executeQuery();
+            rs.next();
+            totalCount = rs.getInt(1);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("selectMyCount 오류 발생");
+        }
+
+        return totalCount;
+    }
+
+    public List<BoardDTO> selectMyListPage(Map<String,Object>map){
+        List<BoardDTO> myList = new ArrayList<BoardDTO>();
+
+        //쿼리문 작성
+        String query = "SELECT * FROM ("
+                + " SELECT Tb.*, ROWNUM rNUM FROM ("
+                + " SELECT * FROM boardtable WHERE U_ID = ? ORDER BY b_postdate DESC, b_id DESC"
+                + " ) Tb"
+                + " )"
+                + " WHERE rNUM BETWEEN ? AND ? ";
+
+        try{
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, map.get("u_id").toString());
+            psmt.setString(2, map.get("start").toString());
+            psmt.setString(3, map.get("end").toString());
+            rs = psmt.executeQuery();
+
+            while (rs.next()){
+                //게시물 하나의 내용을 저장
+                BoardDTO dto = new BoardDTO();
+
+                dto.setB_id(rs.getString("b_id"));
+                dto.setU_id(rs.getString("u_id"));
+                dto.setU_name(rs.getString("u_name"));
+                dto.setB_title(rs.getString("b_title"));
+                dto.setB_content(rs.getString("b_content"));
+                dto.setB_postdate(rs.getDate("b_postdate"));
+                dto.setB_ofile(rs.getString("b_ofile"));
+                dto.setB_sfile(rs.getString("b_sfile"));
+                dto.setB_visitcount(rs.getInt("b_visitcount"));
+                myList.add(dto);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("SelectMyListPage 오류 발생");
+        }
+
+        return myList;
     }
 
     // 게시글을 리스트에 저장
