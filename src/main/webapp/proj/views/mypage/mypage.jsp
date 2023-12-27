@@ -61,14 +61,17 @@
 
         <div class="col-md mt-5 mb-5">
             <h3 class="mb-4">나의 최근 게시글</h3>
-            <div class="myboard-list">
+
                 <!-- 내 작성글 확인-->
                 <!-- 두 개만 보여줌-->
                 <c:choose>
                     <c:when test="${empty myList == true}">
-                        작성한 게시글이 없습니다.
+                    <div class="my-reply-list">
+                        <div class="my-reply-box">작성한 게시글이 없습니다.</div>
+                    </div>
                     </c:when>
                     <c:otherwise>
+                        <div class="myboard-list">
                         <c:forEach var="myPost" items="${myList}" end="1">
                             <div class="card mb-3 myboard-card">
                                 <a href="/community/view.do?b_id=${myPost.b_id}">
@@ -103,49 +106,57 @@
                     </c:otherwise>
                 </c:choose>
 
-            <div class="myreply-list">
-                <h3 class="mb-4">나의 최근 작성 댓글</h3>
-                <c:choose>
+            <div>
+                <h3 class="mb-4 mt-4">나의 최근 작성 댓글</h3>
+                <div class="myreply-list">
+                    <c:choose>
                     <c:when test="${empty myReplyList}">
+                        <div class="my-reply-box">
                         작성한 댓글이 없습니다.
+                        </div>
                     </c:when>
                     <c:otherwise>
 
-                        <c:forEach var="myReply" items="${myReplyList}" end="3">
-                            <div class="my-reply-box">
-                                <div class="my-reply-text">
-                                    <div class="my-reply-btitle"><a href="/community/view.do?b_id=${myReply.b_id}">[${myReply.b_title}]</a></div>
-                                    <div class="my-reply-content">
-                                        <div class="my-reply-level">
-                                            <c:if test="${myReply.re_level > 0}">
-                                                <c:forEach var="level" begin="1" end="${myReply.re_level}" step="1">
-                                                    re:
-                                                </c:forEach>
-                                            </c:if>
-                                        </div>
-                                        <c:if test="${myReply.re_del eq 'Y'}">
-                                            <div class="my-reply-deleted">삭제된 댓글 입니다.</div>
-                                        </c:if>
-                                        <c:if test="${myReply.re_del eq 'N'}">
-                                            <a href="/community/view.do?b_id=${myReply.b_id}">${myReply.re_content}</a>
+                    <c:forEach var="myReply" items="${myReplyList}" end="3">
+                        <div class="my-reply-box">
+                            <div class="my-reply-text">
+                                <div class="my-reply-btitle"><a href="/community/view.do?b_id=${myReply.b_id}">[${myReply.b_title}]</a></div>
+                                <div class="my-reply-content">
+                                    <div class="my-reply-level">
+                                        <c:if test="${myReply.re_level > 0}">
+                                            <c:forEach var="level" begin="1" end="${myReply.re_level}" step="1">
+                                                re:
+                                            </c:forEach>
                                         </c:if>
                                     </div>
-                                </div>
-                                <div class="my-reply-regdate">
-                                    <c:choose>
-                                        <c:when test="${empty myReply.re_modifydate}"><i class="bi bi-calendar"></i> &nbsp;&nbsp; ${myReply.re_regdate}</c:when>
-                                        <c:otherwise><i class="bi bi-calendar"></i> &nbsp;&nbsp; ${myReply.re_modifydate} 수정됨</c:otherwise>
-                                    </c:choose>
+                                    <c:if test="${myReply.re_del eq 'Y'}">
+                                        <div class="my-reply-deleted">삭제된 댓글 입니다.</div>
+                                    </c:if>
+                                    <c:if test="${myReply.re_del eq 'N'}">
+                                        <a href="/community/view.do?b_id=${myReply.b_id}">${myReply.re_content}</a>
+                                    </c:if>
                                 </div>
                             </div>
-                        </c:forEach>
-                        <!-- 댓글 더 보려면 클릭-->
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                            <a href="/mypage/replylist.do"><button class="btn btn-primary btn-sm">댓글 더 보기</button></a>
+                            <div class="my-reply-regdate">
+                                <c:choose>
+                                    <c:when test="${empty myReply.re_modifydate}"><i class="bi bi-calendar"></i> &nbsp;&nbsp; ${myReply.re_regdate}</c:when>
+                                    <c:otherwise><i class="bi bi-calendar"></i> &nbsp;&nbsp; ${myReply.re_modifydate} 수정됨</c:otherwise>
+                                </c:choose>
+                            </div>
                         </div>
+                    </c:forEach>
+                </div>
+
+                <!-- 댓글 더 보려면 클릭-->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                    <a href="/mypage/replylist.do"><button class="btn btn-primary btn-sm">댓글 더 보기</button></a>
+                </div>
+            </div>
+
+
                     </c:otherwise>
                 </c:choose>
-            </div>
+
         </div>
 
     </div>
