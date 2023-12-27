@@ -44,6 +44,7 @@ public class T_ListController extends HttpServlet {
 
         for(TouritemDTO dto : touritemList){
             String title = dto.getTitle();
+            if(title.contains("2022")) continue;
             if(title.contains("[한국")) title = title.substring(0,title.lastIndexOf("[한국"));
 
             String address = "";
