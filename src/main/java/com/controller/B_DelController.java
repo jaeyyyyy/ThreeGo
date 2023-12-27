@@ -26,8 +26,6 @@ public class B_DelController extends HttpServlet {
         String b_id = req.getParameter("b_id");
         String mode = req.getParameter("mode");
 
-//        BoardDTO dto = BoardDAO.getInstance().getB_id(b_id);
-
         BoardDTO boardDTO = new BoardDTO();
         BoardDAO dao = new BoardDAO();
 
