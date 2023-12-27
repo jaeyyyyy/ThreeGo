@@ -16,10 +16,10 @@ public class BoardPage {
 
         //이전 페이지 블록 바로가기
         int pageTemp = (((pageNum -1 ) / blockPage) * blockPage) +1;
+        pagingStr += "<nav aria-label=\"Page navigation example\"><ul class=\"pagination\">";
         if(pageTemp != 1){
-            pagingStr += "<a href ='" + reqUrl + "?pageNum=1" + keyword + "'>[첫 페이지]</a>";
-            pagingStr += "&nbsp";
-            pagingStr += "<a href ='" + reqUrl + "?pageNum="+ (pageTemp -1) + keyword + "'>[이전 블럭]</a>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=1" + keyword + "'><i class=\"bi bi-chevron-double-left\"></i></a></li>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum="+ (pageTemp -1) + keyword + "'><i class=\"bi bi-chevron-left\"></i></a></li>";
         }
 
         //각 페이지 번호 출력
@@ -27,10 +27,10 @@ public class BoardPage {
         while (blockCount <= blockPage && pageTemp <= totalPage){
             if(pageTemp == pageNum){
                 //현재페이지는 링크 걸지 않음
-                pagingStr += "&nbsp;" + pageTemp + "&nbsp;";
+                pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + pageTemp + "</a></li>";
 
             }else{
-                pagingStr += "&nbsp;<a href='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'>" + pageTemp + "</a>&nbsp;";
+                pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'>" + pageTemp + "</a></li>";
             }
             pageTemp++;
             blockCount++;
@@ -39,10 +39,10 @@ public class BoardPage {
 
         //다음 페이지 블록 바로가기
         if(pageTemp <= totalPage){
-            pagingStr += "<a href ='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'>[다음 블록]</a>";
-            pagingStr += "&nbsp";
-            pagingStr += "<a href ='" + reqUrl + "?pageNum=" + totalPage + keyword + "'>[마지막 페이지]</a>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'><i class=\"bi bi-chevron-right\"></i></a></li>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=" + totalPage + keyword + "'><i class=\"bi bi-chevron-double-right\"></i></a></li>";
         }
+        pagingStr += "</ul></nav>";
 
 
         return pagingStr;
