@@ -27,10 +27,10 @@ public class BoardPage {
         while (blockCount <= blockPage && pageTemp <= totalPage){
             if(pageTemp == pageNum){
                 //현재페이지는 링크 걸지 않음
-                pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href=\"#\">" + pageTemp + "</a></li>";
+                pagingStr += "<li id=\"pageBtn" + pageTemp + "\" class=\"page-item\"><a class=\"page-link\" href=\"#\">" + pageTemp + "</a></li>";
 
             }else{
-                pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'>" + pageTemp + "</a></li>";
+                pagingStr += "<li id=\"pageBtn" + pageTemp + "\" class=\"page-item\"><a class=\"page-link\" href='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'>" + pageTemp + "</a></li>";
             }
             pageTemp++;
             blockCount++;

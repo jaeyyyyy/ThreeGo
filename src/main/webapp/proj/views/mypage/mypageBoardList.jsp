@@ -18,6 +18,18 @@
     <link href="../../proj/views/common/commonstyle.css?after" rel="stylesheet"/>
 
     <title>마이페이지</title>
+    <script>
+        $(document).ready(function (){
+            let pageNum = 1;
+            const urlParams = new URL(location.href).searchParams;
+            let pageTemp = urlParams.get('pageNum');
+            if(pageTemp !== null){
+                pageNum = pageTemp
+            }
+
+            $('#pageBtn' + pageNum).addClass('active');
+        })
+    </script>
     <style>
 
     </style>

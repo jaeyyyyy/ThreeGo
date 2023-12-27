@@ -21,6 +21,17 @@
 </head>
 <body>
 <script>
+    $(document).ready(function (){
+        let pageNum = 1;
+        const urlParams = new URL(location.href).searchParams;
+        let pageTemp = urlParams.get('pageNum');
+        if(pageTemp !== null){
+            pageNum = pageTemp
+        }
+
+        $('#pageBtn' + pageNum).addClass('active');
+    })
+
     function PostToLogin(){
         alert("글 작성은 로그인 후에 가능합니다.");
         location.href =  "../login.do";
