@@ -352,7 +352,12 @@
                             <input type="hidden" id="re_ref${no.count}" value="${reply.re_ref}">
                             <input type="hidden" id="re_order${no.count}" value="${reply.re_order}">
                             <input type="hidden" id="re_level${no.count}" value="${reply.re_level}">
-                            <div class="reply-img"><img src="../../../upload/${reply.u_sfile}"></div>
+                            <div class="reply-img">
+                                <c:choose>
+                                    <c:when test="${empty reply.u_sfile}"><img src="../proj/resources/assets/img/no_profimg.png"></c:when>
+                                    <c:otherwise><img src="../../../upload/${reply.u_sfile}"></c:otherwise>
+                                </c:choose>
+                            </div>
                             <div class="reply-content">
                                 <div class="reply-profile">
                                     <p class="reply-nickname">${reply.u_name}</p>
