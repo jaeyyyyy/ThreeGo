@@ -32,7 +32,7 @@
 
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex"><i class="bi-pin-map-fill m-auto text-primary"></i></div>
-                    <h5>국내의 도시를 찾아보고, 관광 정보를 확인해보세요.</h5>
+                    <h5>국내의 도시를 찾아보고,<br>관광 정보를 확인해보세요.</h5>
                     <p class="mb-0"></p>
                 </div>
             </div>
@@ -57,7 +57,6 @@
 
 
 <!-- Image Cards-->
-<!-- 대략적인 도시들을 나열합니다. 도시는 8개지만 '도'를 포함하면 총 17개(api기준)입니다. 일단은 8개만 나열했습니다.-->
 
 <section class="bg-light text-center">
     <div class="container">
@@ -273,8 +272,7 @@
 <jsp:include page="common/footer.jsp"/>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<%--<script src="js/script.js"></script>--%>
+
 <%--카드 --%>
 <script>
     // 버튼 누르면 더보기
