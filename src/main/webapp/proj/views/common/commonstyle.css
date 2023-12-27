@@ -67,6 +67,13 @@ body, * {
     }
 }
 
+.features-icons {
+    padding-top: 4rem !important;
+}
+
+.link-body-emphasis {
+    font-size: 30px !important;
+}
 /*메인 이미지 swiper*/
 .swiper-wrapper {
     height: inherit !important;
