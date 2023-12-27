@@ -69,6 +69,11 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
+        <div class="container position-relative pb-5">
+            <div class="d-flex justify-content-center pb-2">
+                ${map.pagingImg}
+            </div>
+        </div>
     </div>
 </div>
 

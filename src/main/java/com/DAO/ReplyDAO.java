@@ -5,6 +5,7 @@ import com.common.JDBConnect;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ReplyDAO extends JDBConnect {
 
@@ -218,6 +219,25 @@ public class ReplyDAO extends JDBConnect {
         return result;
     }
 
+    public int totalMyCount(String u_id){
+        int totalCnt = 0;
+
+        String query = "SELECT COUNT(*) FROM REPLY r WHERE u_id = ?";
+
+        try{
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, u_id);
+            rs = psmt.executeQuery();
+            rs.next();
+            totalCnt = rs.getInt(1);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("totalCount 오류 발생");
+        }
+
+        return totalCnt;
+    }
+
     public List<ReplyDTO> selectReplyList(String b_id){
         List<ReplyDTO> replyList = new ArrayList<ReplyDTO>();
 
@@ -262,6 +282,47 @@ public class ReplyDAO extends JDBConnect {
             System.out.println("selectReplyList 오류 발생");
         }
         return replyList;
+    }
+
+    public List<ReplyDTO> selectMyReplyListPage(Map<String, Object> map){
+        List<ReplyDTO> myList = new ArrayList<ReplyDTO>();
+
+        // 쿼리문 작성
+        String query = "SELECT * FROM (SELECT Tb.*, ROWNUM rNUM FROM (SELECT r.b_id, b.b_title, re_num, r.u_id, re_content, re_regdate, re_modifydate, re_del, re_level"
+                    + " FROM (SELECT * FROM reply WHERE u_id = ? ORDER BY re_regdate DESC, re_num DESC) r"
+                    + " INNER JOIN BOARDTABLE b"
+                    + " ON r.b_id = b.b_id) tb )"
+                    + " WHERE rNUM BETWEEN ? AND ?";
+
+        try{
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, map.get("u_id").toString());
+            psmt.setString(2, map.get("start").toString());
+            psmt.setString(3, map.get("end").toString());
+            rs = psmt.executeQuery();
+
+            while (rs.next()){
+                //게시물 하나의 내용을 저장
+                ReplyDTO dto = new ReplyDTO();
+
+                dto.setB_id(rs.getString("b_id"));
+                dto.setB_title(rs.getString("b_title"));
+                dto.setRe_num(rs.getString("re_num"));
+                dto.setU_id(rs.getString("u_id"));
+                dto.setRe_content(rs.getString("re_content"));
+                dto.setRe_regdate(rs.getDate("re_regdate"));
+                dto.setRe_modifydate(rs.getDate("re_modifydate"));
+                dto.setRe_del(rs.getString("re_del"));
+                dto.setRe_level(rs.getInt("re_level"));
+                myList.add(dto);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("SelectMyReplyList 오류 발생");
+        }
+
+        return myList;
     }
 
     public List<ReplyDTO> selectMyReplyList(String u_id){

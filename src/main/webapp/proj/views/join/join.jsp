@@ -160,6 +160,7 @@
         let testEmails = document.getElementsByName('email')[0].value;
 
         if(!regExp.test(testEmails)) {
+            emailCheck = false;
             alert('이메일 형식이 올바르지 않습니다.');
         } else {
             emailCheck = true;
@@ -179,6 +180,7 @@
                 let check = data == 'true' ? true : false;
                 if(check){
                     alert('이미 사용중인 아이디 입니다.');
+                    idCheck = false;
                     $('input[name=id]').focus();
                 }else {
                     alert('사용할 수 있는 아이디 입니다.');
