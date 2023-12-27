@@ -68,6 +68,9 @@ body, * {
 }
 
 /*메인 이미지 swiper*/
+.swiper-wrapper {
+    height: inherit !important;
+}
 .swiper-container
 {
     width: 100%;
