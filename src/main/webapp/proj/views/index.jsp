@@ -32,15 +32,15 @@
 
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex"><i class="bi-pin-map-fill m-auto text-primary"></i></div>
-                    <h5>국내의 도시를 검색하세요.</h5>
-                    <p class="mb-0">넣을 내용이 더 있으면 더 넣습니다.</p>
+                    <h5>국내의 도시를 찾아보고, 관광 정보를 확인해보세요.</h5>
+                    <p class="mb-0"></p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                     <div class="features-icons-icon d-flex"><i class="bi-calendar-week m-auto text-primary"></i></div>
                     <h5>다른 여행자들의 일정을 확인하고,<br>나만의 일정을 계획해보세요.</h5>
-                    <p class="mb-0"></p>
+                    <p class="mb-0">coming soon... </p>
                 </div>
             </div>
             <div class="col-lg-4">
