@@ -118,43 +118,44 @@
 
                 <div class="text-center">
                     <button id="editBtn" type="submit" class="btn btn-primary btn-sm">정보 수정</button>
-                    <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" onclick="location.href='/quit.do'">회원 탈퇴</button>
+<%--                    <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" onclick="location.href='/quit.do'">회원 탈퇴</button>--%>
                 </div>
 
             </div>
         </div>
     </form>
-<%--    <button id="quitBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#quitModal">회원 탈퇴</button>--%>
-<%--    <div class="text-center">--%>
-<%--        <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#quitModal">회원 탈퇴</button>--%>
-<%--            &lt;%&ndash;                    <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" onclick="location.href ='/quit.do';">회원 탈퇴</button>&ndash;%&gt;--%>
-<%--    </div>--%>
-<%--    <div class="modal fade" id="quitModal" tabindex="-1" role="dialog" aria-labelledby="quitModalTitle" aria-hidden="true">--%>
-<%--        <div class="modal-dialog" role="document">--%>
-<%--            <div class="modal-content">--%>
-<%--                <div class="modal-header">--%>
-<%--                    <h5 class="modal-title" id="exampleModalLongTitle">회원 탈퇴</h5>--%>
-<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-<%--                        <span aria-hidden="true">&times;</span>--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-<%--                <div class="modal-body">--%>
-<%--                    정말로 탈퇴하시겠습니까?--%>
-<%--                </div>--%>
-<%--                <div class="modal-footer">--%>
-<%--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
-<%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--    </div>--%>
 
+    <!-- Button to Open the Modal -->
+    <button type="button" id="quitBtn" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#quitModal">회원 탈퇴</button>
+<form action="/updateUser/quit.do" method="post">
+    <!-- The Modal -->
+    <div class="modal" id="quitModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">정말 탈퇴하시겠습니까? </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
+                <!-- Modal body -->
+                <div class="modal-body">
+                    탈퇴 시 계정은 삭제되며 복구되지 않습니다.<br>
+                    탈퇴하시려면 비밀번호를 입력하세요.
+                    <input type="password" id="q_pw" name="q_pw" class="form-control form-control-sm" maxlength="20">
+                </div>
 
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">탈퇴하기</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+                </div>
 
-
+            </div>
+        </div>
+    </div>
+</form>
 
 </c:if>
 
