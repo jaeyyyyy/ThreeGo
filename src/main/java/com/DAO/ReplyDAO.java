@@ -365,7 +365,7 @@ public class ReplyDAO extends JDBConnect {
         return myList;
     }
 
-    public int updateReply(ReplyDTO dto){
+    public int updateReply(String re_num, String edit_content){
         int result = 0;
 
         String query = "UPDATE reply SET re_content = ?, re_modifydate = SYSDATE"
@@ -373,8 +373,8 @@ public class ReplyDAO extends JDBConnect {
 
         try{
             psmt = con.prepareStatement(query);
-            psmt.setString(1, dto.getRe_content());
-            psmt.setString(2, dto.getRe_num());
+            psmt.setString(1, edit_content);
+            psmt.setString(2, re_num);
             result = psmt.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();

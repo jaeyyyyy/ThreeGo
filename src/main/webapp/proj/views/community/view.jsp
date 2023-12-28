@@ -28,7 +28,29 @@
         clickReply();
         regReply();
         clickDelete();
+        clickEdit();
+        // $(document).on("click", ".edit_btn", function(e) {
+        //     let url = '/community/reply_edit.do'
+        //     const num = e.target.value;
+        //     console.log('수정버튼')
+        //     $.ajax({
+        //         url: url,
+        //         type: 'GET',
+        //         data: {
+        //             re_num: $('#re_num' + num).val(),
+        //             edit_content: $('#edit-text' + num)
+        //         },
+        //         success: function (){
+        //             alert("수정 되었습니다.");
+        //             location.reload(true);
+        //         },
+        //         error: function (){
+        //             alert("수정이 정상적으로 이루어지지 않았습니다.");
+        //         }
+        //     })
+        // })
     })
+
 
     function deletePost(){
         var confirmed = confirm("정말 삭제하시겠습니까?");
@@ -46,6 +68,7 @@
         $('.btn-reply').click(function (e) {
             if(${sessionScope.u_id == null}){
                 alert("댓글은 로그인 후 작성할 수 있습니다.")
+                location.href = "/login.do"
             }else{
                 const num = e.target.value;
                 const selectedReply = '#reply-box' + num;
@@ -82,7 +105,44 @@
         })
     }
 
-    function regReply() {
+    function clickEdit(){
+        $('.btn-edit').click(function (e) {
+            const num = e.target.value;
+            const content = $('#reply-content'+num).html();
+            $('#reply-wrap'+num).html(
+                '<div class="input-group mb-3 reply-box" id="edit-box' + num + '">'
+                + '<div class="form-floating" style=" margin-top: 10px">'
+                + '<textarea class="form-control" placeholder="Leave a comment here" id="edit-text' + num + '" style="height: 100px">' + content + '</textarea>'
+                + '<label for="edit-text' + num + '">수정 중인 댓글</label>'
+                + '</div>'
+                + '<button class="btn btn-outline-secondary edit-btn" type="button" value="' + num + '" onclick="editReply(' + num + ')" style="margin-top: 10px">수정</button>'
+                + '</div>'
+            );
+        })
+    }
+
+    function editReply(num){
+        let url = '/community/reply_edit.do'
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: {
+                    re_num: $('#re_num' + num).val(),
+                    edit_content: $('#edit-text' + num).val()
+                },
+                success: function (){
+                    alert("수정 되었습니다.");
+                    location.reload(true);
+                },
+                error: function (){
+                    alert("수정이 정상적으로 이루어지지 않았습니다.");
+                }
+            })
+
+    }
+
+    function regReply(){
         let url = '/community/reply.do'
         const loginedId = '${sessionScope.u_id}'
         $('.reply-btn').click(function (e) {
@@ -174,7 +234,7 @@
                                 if(login_id === reply.u_id){
                                     $('#reply-list').append(
                                         + '<div class="reply-btn-grop">'
-                                        + '<button type="button" class="btn btn-update">수정</button>'
+                                        + '<button type="button" class="btn btn-edit">수정</button>'
                                         + '<button type="button" class="btn btn-delete">삭제</button>'
                                         + '</div>'
                                     )
@@ -223,9 +283,17 @@
         width: 100%;
         margin-top: 20px;
     }
+    .reply-wrap{
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+    }
     .reply-content{
         width: 100%;
         border-bottom: 1px solid #CCCCCC;
+    }
+    .reply-text{
+        padding-bottom: 10px;
     }
     .reply-profile{
         display: flex;
@@ -241,7 +309,7 @@
     .reply-btn-grop{
         margin-left: 10px;
     }
-    .btn-update, .btn-delete, .btn-reply{
+    .btn-edit, .btn-delete, .btn-reply{
         width: 30px;
         height: 30px;
         padding: 0;
@@ -351,44 +419,46 @@
                         <c:if test="${reply.re_level > 0}">
                             <i class="bi bi-arrow-return-right"></i>
                         </c:if>
-                        <c:if test="${reply.re_del eq 'N'}">
-                            <input type="hidden" id="re_num${no.count}" value="${reply.re_num}">
-                            <input type="hidden" id="re_ref${no.count}" value="${reply.re_ref}">
-                            <input type="hidden" id="re_order${no.count}" value="${reply.re_order}">
-                            <input type="hidden" id="re_level${no.count}" value="${reply.re_level}">
-                            <div class="reply-img">
-                                <c:choose>
-                                    <c:when test="${empty reply.u_sfile}"><img src="../proj/resources/assets/img/no_profimg.png"></c:when>
-                                    <c:otherwise><img src="../../../upload/${reply.u_sfile}"></c:otherwise>
-                                </c:choose>
-                            </div>
-                            <div class="reply-content">
-                                <div class="reply-profile">
-                                    <p class="reply-nickname">${reply.u_name}</p>
-                                    <p class="reply-date">
-                                        <c:choose>
-                                            <c:when test="${empty reply.re_modifydate}">${reply.re_regdate}</c:when>
-                                            <c:otherwise>${reply.re_modifydate} 수정됨</c:otherwise>
-                                        </c:choose>
-                                    </p>
-                                    <div class="reply-btn-grop">
-                                    <c:if test="${reply.re_level < 2}">
-                                        <button type="button" class="btn btn-reply" value="${no.count}">답글</button>
-                                    </c:if>
-                                    <c:if test="${sessionScope.u_id eq reply.u_id}">
-<%--                                        <button type="button" class="btn btn-update" value="${no.count}" >수정</button>--%>
-                                        <button type="button" class="btn btn-delete" value="${no.count}">삭제</button>
-                                    </c:if>
-                                    </div>
+                        <input type="hidden" id="re_num${no.count}" value="${reply.re_num}">
+                        <input type="hidden" id="re_ref${no.count}" value="${reply.re_ref}">
+                        <input type="hidden" id="re_order${no.count}" value="${reply.re_order}">
+                        <input type="hidden" id="re_level${no.count}" value="${reply.re_level}">
+                        <div id="reply-wrap${no.count}" class="reply-wrap">
+                            <c:if test="${reply.re_del eq 'N'}">
+                                <div class="reply-img">
+                                    <c:choose>
+                                        <c:when test="${empty reply.u_sfile}"><img src="../proj/resources/assets/img/no_profimg.png"></c:when>
+                                        <c:otherwise><img src="../../../upload/${reply.u_sfile}"></c:otherwise>
+                                    </c:choose>
                                 </div>
-                                <div class="reply-text"><p>${reply.re_content}</p></div>
-                            </div>
-                        </c:if>
-                        <c:if test="${reply.re_del eq 'Y'}">
-                            <div class="deleted-reply">
-                                <p>삭제된 댓글 입니다.</p>
-                            </div>
-                        </c:if>
+                                <div class="reply-content">
+                                    <div class="reply-profile">
+                                        <p class="reply-nickname">${reply.u_name}</p>
+                                        <p class="reply-date">
+                                            <c:choose>
+                                                <c:when test="${empty reply.re_modifydate}">${reply.re_regdate}</c:when>
+                                                <c:otherwise>${reply.re_modifydate} 수정됨</c:otherwise>
+                                            </c:choose>
+                                        </p>
+                                        <div class="reply-btn-grop">
+                                            <c:if test="${reply.re_level < 2}">
+                                                <button type="button" class="btn btn-reply" value="${no.count}">답글</button>
+                                            </c:if>
+                                            <c:if test="${sessionScope.u_id eq reply.u_id}">
+                                                <button type="button" class="btn btn-edit" value="${no.count}">수정</button>
+                                                <button type="button" class="btn btn-delete" value="${no.count}">삭제</button>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                    <div id="reply-content${no.count}" class="reply-text">${reply.re_content}</div>
+                                </div>
+                            </c:if>
+                            <c:if test="${reply.re_del eq 'Y'}">
+                                <div class="deleted-reply">
+                                    <p>삭제된 댓글 입니다.</p>
+                                </div>
+                            </c:if>
+                        </div>
                     </div>
                     <div class="input-group mb-3 reply-box hide" id="reply-box${no.count}">
                         <div class="form-floating" style="margin-left: ${reply.re_level * 50}px; margin-top: 10px">
