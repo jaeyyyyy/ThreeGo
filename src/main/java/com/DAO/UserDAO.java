@@ -67,30 +67,33 @@ public class UserDAO extends DBConnPool {
     }
 
     // 유저 삭제하기
-    public void delUser(String u_id) {
+    public int delUser(UserDTO dto) {
+        int result = 0;
         try {
-            String query = "DELETE FROM user"
-                    + "WHERE u_id=?";
+            String query = "DELETE FROM users WHERE u_id=?";
             psmt = con.prepareStatement(query);
-            psmt.setString(1,u_id);
+            psmt.setString(1,dto.getU_id());
+            result = psmt.executeUpdate();
+            System.out.println("탈퇴완료");
         } catch (Exception e) {
-
+            System.out.println("delUser 함수 오류");
+            e.printStackTrace();
         }
+        return result;
     }
 
     // 아이디 중복 확인 하기
     public boolean checkDuplicateId(String u_id) {
+        int count = 0;
         try {
             // 쿼리 작성
             String query = "SELECT COUNT(*) FROM users WHERE u_id = ?";
             psmt = con.prepareStatement(query);
             psmt.setString(1, u_id);
             rs = psmt.executeQuery();
-
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                return count > 0; // count가 0보다 크면 중복된 아이디가 존재
-            }
+            rs.next();
+            count = rs.getInt(1);
+            if(count > 0) return true;
 
             return false;
         } catch (Exception e) {

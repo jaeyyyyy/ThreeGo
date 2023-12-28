@@ -1,10 +1,9 @@
-<%@ page import="com.DAO.UserDAO" %>
-<%@ page import="com.DTO.UserDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <link rel = "icon" href="image/wave.ico">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Bootstrap icons-->
@@ -19,6 +18,7 @@
 
 </head>
 <body>
+
 
 <jsp:include page="../common/header.jsp"/>
 <div class="sub-header">
@@ -112,37 +112,77 @@
                     <h4 class="list">자기소개</h4>
                     <div class="input-group">
                         <textarea type="text" id="u_about" name="u_about" class="form-control" rows="3">${dto.u_about}</textarea>
+
                     </div>
                 </div>
 
-                <button id="editBtn" type="submit" class="btn btn-primary btn-sm">정보 수정</button>
+                <div class="text-center">
+                    <button id="editBtn" type="submit" class="btn btn-primary btn-sm">정보 수정</button>
+                    <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" onclick="location.href='/quit.do'">회원 탈퇴</button>
+                </div>
+
             </div>
         </div>
     </form>
-</div>
+<%--    <button id="quitBtn" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#quitModal">회원 탈퇴</button>--%>
+<%--    <div class="text-center">--%>
+<%--        <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#quitModal">회원 탈퇴</button>--%>
+<%--            &lt;%&ndash;                    <button id="quitBtn" type="button" class="btn btn-secondary btn-sm" onclick="location.href ='/quit.do';">회원 탈퇴</button>&ndash;%&gt;--%>
+<%--    </div>--%>
+<%--    <div class="modal fade" id="quitModal" tabindex="-1" role="dialog" aria-labelledby="quitModalTitle" aria-hidden="true">--%>
+<%--        <div class="modal-dialog" role="document">--%>
+<%--            <div class="modal-content">--%>
+<%--                <div class="modal-header">--%>
+<%--                    <h5 class="modal-title" id="exampleModalLongTitle">회원 탈퇴</h5>--%>
+<%--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                        <span aria-hidden="true">&times;</span>--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--                <div class="modal-body">--%>
+<%--                    정말로 탈퇴하시겠습니까?--%>
+<%--                </div>--%>
+<%--                <div class="modal-footer">--%>
+<%--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
+<%--                    <button type="button" class="btn btn-primary">Save changes</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--    </div>--%>
+
+
+
+
+
+
+
 </c:if>
-<script>
-    let emailCheck = false;
 
 
-    document.getElementById('editBtn').addEventListener('click', function() {
-        // 간단한 유효성 검사
-        let reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
-        let pw = document.getElementsByName('u_pw')[0].value;
-        let pwConfirm = document.getElementsByName('u_pwConfirm')[0].value;
+</div>
+    <!--footer-->
+    <jsp:include page="../common/footer.jsp"/>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let emailCheck = false;
 
-        if (pw != null && pwConfirm != null && pw !== pwConfirm) {
-            alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
-            event.preventDefault(); // 폼 제출 막기
-        } else if (!reg_pw.test(pwConfirm)){
-            alert('비밀번호 양식을 다시 확인하여 주십시오.');
-            event.preventDefault(); // 폼 제출 막기
-            document.getElementsByName('pw')[0].focus();
-        }
-    });
 
-</script>
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        document.getElementById('editBtn').addEventListener('click', function() {
+            // 간단한 유효성 검사
+            let reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+            let pw = document.getElementsByName('u_pw')[0].value;
+            let pwConfirm = document.getElementsByName('u_pwConfirm')[0].value;
+
+            if (pw != null && pwConfirm != null && pw !== pwConfirm) {
+                alert('비밀번호와 비밀번호 재입력 값이 같아야 합니다.');
+                event.preventDefault(); // 폼 제출 막기
+            } else if (!reg_pw.test(pwConfirm)){
+                alert('비밀번호 양식을 다시 확인하여 주십시오.');
+                event.preventDefault(); // 폼 제출 막기
+                document.getElementsByName('pw')[0].focus();
+            }
+        });
+    </script>
 </body>
 </html>
