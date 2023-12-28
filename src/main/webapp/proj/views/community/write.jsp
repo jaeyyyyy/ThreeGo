@@ -21,25 +21,31 @@
 
     <title>게시판 글 작성하기</title>
     <script>
-        function validateForm(form){
-            if(form.b_writer.value == ""){
-                alert("작성자를 입력 하세요");
-                form.name.focus();
-                return false;
-            }
-            if(form.b_title.value == ""){
+        function validateForm(){
+            // 제목과 내용이 빈칸이 아닌지 확인합니다.
+            var title = document.getElementById("b_title");
+            var content = document.getElementById("b_content");
+
+            if(title.value.trim() === ""){
                 alert("제목을 입력 하세요");
-                form.title.focus();
+                title.focus();
                 return false;
             }
-            if(form.b_content.value == ""){
+            if(content.value.trim() === ""){
                 alert("내용을 입력 하세요");
-                form.content.focus();
+                content.focus();
                 return false;
             }
-            if(form.pass.value == ""){
-                alert("비밀번호를 입력 하세요");
-                form.pass.focus();
+        }
+
+        function checkTitleLength() {
+            // 길이가 20자를 초과하는지 확인합니다.
+            var title = document.getElementById("b_title");
+
+            if (title.value.length > 20) {
+                alert('제목은 20자 이내로 작성해주세요.');
+                title.focus();
+                title.value.substr(0,20);
                 return false;
             }
         }
@@ -53,8 +59,10 @@
         <h3 class="display-6 text-white">게시판</h3>
     </div>
 </div>
+
+
 <div class="container position-relative pt-5 pb-5">
-    <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm(this);">
+    <form id="writeFrm" name="writeFrm" method="post" enctype="multipart/form-data" action="../community/write.do" onsubmit="return validateForm();">
 
             <c:if test="${not empty sessionScope.u_id}">
                 <input type="hidden" name="u_id" class="form-control form-control-sm" value="${u_id}" />
@@ -69,14 +77,15 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">제목</label>
                     <div class="col-sm-10">
-                        <input type="text" name="b_title" class="form-control form-control-sm"/>
+                        <div id="alert-text"></div>
+                        <input type="text" id="b_title" name="b_title" class="form-control form-control-sm" maxlength="20" placeholder="제목을 입력하세요." oninput="checkTitleLength()"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">내용</label>
                     <div class="col-sm-10">
-                        <textarea name="b_content" class="form-control" rows="5"></textarea>
+                        <textarea id="b_content" name="b_content" class="form-control" placeholder="내용을 입력하세요" rows="5" ></textarea>
                     </div>
                 </div>
 

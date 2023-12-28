@@ -18,20 +18,31 @@
 
     <title>게시판 글 수정하기</title>
     <script>
-        function validateForm(form){
-            if(form.name.value == ""){
-                alert("작성자를 입력 하세요");
-                form.name.focus();
-                return false;
-            }
-            if(form.title.value == ""){
+        function validateForm(){
+            // 제목과 내용이 빈칸이 아닌지 확인합니다.
+            var title = document.getElementById("b_title");
+            var content = document.getElementById("b_content");
+
+            if(title.value.trim() === ""){
                 alert("제목을 입력 하세요");
-                form.title.focus();
+                title.focus();
                 return false;
             }
-            if(form.content.value == ""){
+            if(content.value.trim() === ""){
                 alert("내용을 입력 하세요");
-                form.content.focus();
+                content.focus();
+                return false;
+            }
+        }
+
+        function checkTitleLength() {
+            // 길이가 20자를 초과하는지 확인합니다.
+            var title = document.getElementById("b_title");
+
+            if (title.value.length > 20) {
+                alert('제목은 20자 이내로 작성해주세요.');
+                title.focus();
+                title.value.substr(0,20);
                 return false;
             }
         }
@@ -49,7 +60,7 @@
 <c:choose>
     <c:when test="${not empty sessionScope.u_id and sessionScope.u_id eq dto.u_id}">
         <div class="container position-relative pt-5 pb-5">
-            <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm(this);">
+            <form name="writeFrm" method="post" enctype="multipart/form-data" action="../community/edit.do" onsubmit="return validateForm();">
                 <input type="hidden" name="b_id" value="${dto.b_id}"/>
                 <input type="hidden" name="prevOfile" value="${dto.b_ofile}"/>
                 <input type="hidden" name="prevSfile" value="${dto.b_sfile}"/>
@@ -65,14 +76,14 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">제목</label>
                     <div class="col-sm-10">
-                        <input type="text" name="b_title" class="form-control form-control-sm" value="${dto.b_title}"/>
+                        <input type="text" id="b_title" name="b_title" class="form-control form-control-sm" maxlength="20" value="${dto.b_title}" oninput="checkTitleLength()"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">내용</label>
                     <div class="col-sm-10">
-                        <textarea name="b_content" class="form-control" rows="5">${dto.b_content}</textarea>
+                        <textarea id="b_content" name="b_content" class="form-control" rows="5">${dto.b_content}</textarea>
                     </div>
                 </div>
 
