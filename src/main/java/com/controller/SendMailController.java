@@ -39,8 +39,7 @@ public class SendMailController extends HttpServlet {
         String htmlContent = "";
 
         try{
-            String templatePath = "C:\\KKH\\ThreeGo\\src\\main\\webapp\\proj\\views\\common\\mailFrom.html";
-                    /*application.getRealPath("/webapp/proj/views/common/mailFrom.html");*/
+            String templatePath = application.getRealPath("/proj/views/common/mailFrom.html");
             BufferedReader br = new BufferedReader(new FileReader(templatePath));
 
             String oneLine;
