@@ -45,7 +45,7 @@
     </script>
 </head>
 <body>
-    <form method="get" action="/sendmail.do" id="sendmail-frm">
+    <form method="post" action="/sendmail.do" id="sendmail-frm">
         <table border="1" align="center">
             <tr>
                 <th colspan="2">비밀번호 찾기</th>

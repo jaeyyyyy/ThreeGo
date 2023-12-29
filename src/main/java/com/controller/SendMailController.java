@@ -20,7 +20,7 @@ import java.util.Map;
 @WebServlet("/sendmail.do")
 public class SendMailController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext application = req.getServletContext();
 
         String u_id = req.getParameter("u_id");
