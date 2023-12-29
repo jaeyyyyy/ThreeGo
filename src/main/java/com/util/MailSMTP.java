@@ -7,33 +7,29 @@ import java.util.Map;
 import java.util.Properties;
 
 public class MailSMTP {
+    private final String user = "t3reego@gmail.com";
+    private final String password = "nnpl vskg fkep zwqk";
     private final Properties serverInfo;
-    private final Authenticator auth;
+//    private final Authenticator auth;
 
     public MailSMTP() {
         // 네이버 SMTP 서버 접속 정보
         serverInfo = new Properties();
         serverInfo.put("mail.smtp.host", "smtp.gmail.com");
         serverInfo.put("mail.smtp.port", "465");
-        serverInfo.put("mail.smtp.starttls.enable", "true");
         serverInfo.put("mail.smtp.auth", "true");
-        serverInfo.put("mail.smtp.debug", "true");
-        serverInfo.put("mail.smtp.socketFactory.port", "465");
-        serverInfo.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        serverInfo.put("mail.smtp.socketFactory.fallback", "false");
-
-        //사용자 인증정보
-        auth = new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("t3reego@gmail.com", "nnpl vskg fkep zwqk");
-            }
-        };
+        serverInfo.put("mail.smtp.ssl.enable", "true");
+        serverInfo.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        serverInfo.put("mail.smtp.ssl.protocols","TLSv1.2");
     }
 
     public void emailSending(Map<String, String> mailInfo) throws MessagingException {
-        Session session = Session.getInstance(serverInfo, auth);
-        session.setDebug(true);
+        Session session = Session.getDefaultInstance(serverInfo, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
 
         //메세지 작성
         MimeMessage msg = new MimeMessage(session);

@@ -39,7 +39,8 @@ public class SendMailController extends HttpServlet {
         String htmlContent = "";
 
         try{
-            String templatePath = application.getRealPath("../../webapp/proj/views/common/mailFrom.html");
+            String templatePath = "C:\\KKH\\ThreeGo\\src\\main\\webapp\\proj\\views\\common\\mailFrom.html";
+                    /*application.getRealPath("/webapp/proj/views/common/mailFrom.html");*/
             BufferedReader br = new BufferedReader(new FileReader(templatePath));
 
             String oneLine;
@@ -54,25 +55,31 @@ public class SendMailController extends HttpServlet {
 
         String userName = findUser.getU_name() + "(" + findUser.getU_id() + ")";
         String tempPw = TempPassword.makeRandomPw(8);
-        htmlContent = htmlContent.replace("__username__", userName);
-        htmlContent = htmlContent.replace("__temp-pw__", tempPw);
+        findUser.setU_pw(tempPw);
+        int updateResult = dao.updateUserInfo(findUser);
 
-        emailInfo.put("content", htmlContent);
+        if(updateResult > 0){
+            htmlContent = htmlContent.replace("__username__", userName);
+            htmlContent = htmlContent.replace("__temp-pw__", tempPw);
+
+            emailInfo.put("content", htmlContent);
 
 //        StringBuilder sb = new StringBuilder(email);
 //        int idx_emailId_last = email.indexOf("@");
 
 
-        try{
-            MailSMTP smtpServer = new MailSMTP();
-            smtpServer.emailSending(emailInfo);
-            req.setAttribute("u_email",u_email);
+            try{
+                MailSMTP smtpServer = new MailSMTP();
+                smtpServer.emailSending(emailInfo);
+                req.setAttribute("u_email",u_email);
 
-            req.getRequestDispatcher("/proj/views/login/FindPwResult.jsp").forward(req,resp);
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("메일 발송 오류 발생");
+                req.getRequestDispatcher("/proj/views/login/FindPwResult.jsp").forward(req,resp);
+            }catch (Exception e){
+                e.printStackTrace();
+                System.out.println("메일 발송 오류 발생");
+            }
+        }else {
+            System.out.println("임시비밀번호 업데이트 오류 발생");
         }
-
     }
 }
