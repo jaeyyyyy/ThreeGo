@@ -73,6 +73,10 @@
         </div>
     </div>
 </form>
+<div>
+    <a href="#">아이디 찾기</a>
+    <a href="/findPw.do">비밀번호 찾기</a>
+</div>
 
 
 <!--footer-->
