@@ -66,6 +66,44 @@ public class UserDAO extends DBConnPool {
         return userInfo;
     }
 
+    // 이메일 가입여부 확인 하기
+    public boolean checkDuplicateEmail(String u_email) {
+        int count = 0;
+        try {
+            // 쿼리 작성
+            String query = "SELECT COUNT(*) FROM users WHERE u_email = ?";
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, u_email);
+            rs = psmt.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+            if(count > 0) return true;
+
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // 이메일이 일치하는 유저 찾기
+    public String findId(String u_email) {
+        String find_id = "";
+        try {
+            String query = "SELECT * FROM users WHERE u_email = ?";
+            psmt = con.prepareStatement(query);
+            psmt.setString(1,u_email);
+            rs = psmt.executeQuery();
+            rs.next();
+            find_id = rs.getString(1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("findId 메서드 오류");
+        }
+        return find_id;
+    }
+
     // 유저 삭제하기
     public int delUser(UserDTO dto) {
         int result = 0;

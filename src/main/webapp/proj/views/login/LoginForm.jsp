@@ -40,6 +40,26 @@
         }
     }
 </script>
+<style>
+    #find-info{
+        margin-top: 20px;
+    }
+    #find-info a:first-of-type{
+        margin-right: 15px;
+        position: relative;
+    }
+    #find-info a:first-of-type:after{
+        width: 1px;
+        height: 20px;
+        position: absolute;
+        bottom: 1px;
+        right: -11px;
+        background-color: #CCCCCC;
+        content: "";
+        pointer-events: none;
+        cursor: default;
+    }
+</style>
 
 <!-- header-->
 <jsp:include page="../common/header.jsp"/>
@@ -71,12 +91,12 @@
             <input type="hidden" name="prevUrl" value="">
             <input type="submit" value="로그인" class="btn btn-primary btn-md"><br/>
         </div>
+        <div id="find-info" class="text-center">
+            <a href="/findId.do">아이디 찾기</a>
+            <a href="/findPw.do">비밀번호 찾기</a>
+        </div>
     </div>
 </form>
-<div>
-    <a href="#">아이디 찾기</a>
-    <a href="/findPw.do">비밀번호 찾기</a>
-</div>
 
 
 <!--footer-->

@@ -8,9 +8,8 @@ import java.util.Properties;
 
 public class MailSMTP {
     private final String user = "t3reego@gmail.com";
-    private final String password = "nnpl vskg fkep zwqk";
+    private final String pwd = "nnpl vskg fkep zwqk";
     private final Properties serverInfo;
-//    private final Authenticator auth;
 
     public MailSMTP() {
         // 네이버 SMTP 서버 접속 정보
@@ -27,7 +26,7 @@ public class MailSMTP {
         Session session = Session.getDefaultInstance(serverInfo, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
+                return new PasswordAuthentication(user, pwd);
             }
         });
 

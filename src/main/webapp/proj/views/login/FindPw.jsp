@@ -14,27 +14,33 @@
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-    <title>Title</title>
+    <title>비밀번호 찾기</title>
 
     <script>
         function checkId(){
-            $.ajax({
-                url: '/join/idcheck',
-                type: 'GET',
-                data : {
-                    inputId : $('input[name=u_id]').val()
-                },
-                success(data){
-                    console.log(data)
-                    let check = data == 'true' ? true : false;
-                    if(check){
-                        $('#sendmail-frm').submit();
-                    }else {
-                        alert('존재하지 않는 아이디 입니다.');
-                        $('input[name=id]').focus();
+            if($('input[name=u_id]').val() === ""){
+                alert('아이디를 입력해주십시오.');
+                $('input[name=id]').focus();
+            }else {
+                $.ajax({
+                    url: '/validation.do',
+                    type: 'GET',
+                    data : {
+                        inputId : $('input[name=u_id]').val(),
+                        mode : 'id'
+                    },
+                    success(data){
+                        console.log(data)
+                        let check = data == 'true' ? true : false;
+                        if(check){
+                            $('#sendmail-frm').submit();
+                        }else {
+                            alert('존재하지 않는 아이디 입니다.');
+                            $('input[name=id]').focus();
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     </script>
 </head>
@@ -50,7 +56,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input id="sendmail-btn" type="button" value="확인" onclick="checkId()">
+                    <input id="findPw-btn" type="button" value="확인" onclick="checkId()">
                 </td>
             </tr>
         </table>

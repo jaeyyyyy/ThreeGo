@@ -170,10 +170,11 @@
 
     document.getElementById('idCheckBtn').addEventListener('click',function() {
         $.ajax({
-            url: '/join/idcheck',
+            url: '/validation.do',
             type: 'GET',
             data : {
-                inputId : $('input[name=id]').val()
+                inputId : $('input[name=id]').val(),
+                mode : 'id'
             },
             success(data){
                 console.log(data)
