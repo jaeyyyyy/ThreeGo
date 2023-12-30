@@ -32,12 +32,18 @@ public class B_ListController extends HttpServlet{
         String searchWord = req.getParameter("searchWord");
         String sort = req.getParameter("sort");
 
+        String sortCol = "b_id";
+        if(sort != null){
+            if(sort.equals("like")) sortCol = "b_likescount";
+            if(sort.equals("visit")) sortCol = "b_visitcount";
+        }
+
         if(searchWord != null){
             map.put("searchField", searchField);
             map.put("searchWord", searchWord);
         }
 
-        map.put("sort", sort);
+        map.put("sort", sortCol);
 
         int totalCount = dao.selectCount(map);
 

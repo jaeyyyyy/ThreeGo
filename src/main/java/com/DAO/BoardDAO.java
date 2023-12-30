@@ -41,27 +41,31 @@ public class BoardDAO extends DBConnPool {
         List<BoardDTO> bbs = new ArrayList<BoardDTO>();
 
         //쿼리문 작성
-        String query = "SELECT bp.*, NVL(lk.count, 0) AS b_likescount"
-                    + " FROM (SELECT * FROM("
-                + " SELECT Tb.*, ROWNUM rNUM FROM ("
-                + " SELECT * FROM boardtable";
+        String query = "SELECT * FROM("
+                + " SELECT od.*, ROWNUM rNUM FROM("
+                + " SELECT b_id, u_id, u_name, b_title, b_content, b_postdate, b_ofile, b_sfile, b_visitcount, NVL(sub.count, 0) AS b_likescount"
+                + " FROM( SELECT * FROM boardtable b"
+                + " LEFT JOIN (SELECT b_id AS like_b_id, count(*) AS count FROM likes GROUP BY b_id) lk"
+                + " ON b.b_id = like_b_id";
+
         if(map.get("searchWord")!= null){
             query += " WHERE "  + map.get("searchField") + " "
-                    +" LIKE '%" + map.get("searchWord") + "%'";
+                    + " LIKE '%" + map.get("searchWord") + "%'";
         }
-        query += " ORDER BY b_id DESC"
-                +" ) Tb)"
-                +" WHERE rNUM BETWEEN ? AND ? ) bp "
-                + " LEFT JOIN (SELECT b_id, count(*) AS count FROM likes GROUP BY b_id) lk"
-                + " ON bp.b_id = lk.b_id";
+        query += " ) sub"
+                + " ORDER BY " + map.get("sort") + " DESC) od)"
+                + " WHERE rNUM BETWEEN ? AND ?";
+
 
         if(map.get("sort")!= null){
-            if(map.get("sort").equals("like")){
-                query += " ORDER BY b_likescount DESC, bp.b_id DESC";
-            }else if(map.get("sort").equals("visit")){
-                query += " ORDER BY bp.b_visitcount DESC, bp.b_id DESC";
+            if(map.get("sort").equals("b_likescount")){
+                query += " ORDER BY b_likescount DESC, b_id DESC";
+            }else if(map.get("sort").equals("b_visitcount")){
+                query += " ORDER BY b_visitcount DESC, b_id DESC";
             }
         }
+
+        System.out.println(query);
 
         try {
             psmt = con.prepareStatement(query);
