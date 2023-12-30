@@ -5,6 +5,15 @@
 
 
 -- 테이블 생성 --
+-- 추천 테이블 추가 --
+CREATE TABLE likes (
+                       l_id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+                       b_id NUMBER NOT NULL,
+                       u_id varchar2(40) NOT NULL,
+                       CONSTRAINT like_pk PRIMARY KEY (l_id),
+                       CONSTRAINT like_uq UNIQUE (b_id, u_id)
+);
+
 --댓글 테이블 추가 --
 CREATE TABLE REPLY
 (
