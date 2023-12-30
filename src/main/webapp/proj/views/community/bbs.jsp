@@ -22,19 +22,37 @@
 <body>
 <script>
     $(document).ready(function (){
+        activePage()
+        selectedSort();
+    })
+
+    function activePage(){
         let pageNum = 1;
         const urlParams = new URL(location.href).searchParams;
         let pageTemp = urlParams.get('pageNum');
         if(pageTemp !== null){
             pageNum = pageTemp
         }
-
         $('#pageBtn' + pageNum).addClass('active');
-    })
+    }
+
+    function selectedSort(){
+        let selected = 'time';
+        const urlParams = new URL(location.href).searchParams;
+        let sortTemp = urlParams.get('sort');
+        if(sortTemp !== null){
+            selected = sortTemp
+        }
+        $('#sort-select option[name=' + selected +']').prop("selected", true);
+    }
 
     function PostToLogin(){
         alert("글 작성은 로그인 후에 가능합니다.");
         location.href =  "../login.do";
+    }
+
+    function resetKeyword(){
+        location.href =  "../community/list.do";
     }
 </script>
 <!-- header-->
@@ -47,13 +65,30 @@
 
 <form method="get" name="writeFrm">
     <div class="container position-relative">
-        <div class="d-flex justify-content-center pt-5">
-            <select name="searchField">
-                <option value="b_title"<c:if test="${param.searchField ne 'b_content'}"> selected="selected"</c:if>>제목</option>
-                <option value="b_content"<c:if test="${param.searchField eq 'b_content'}"> selected="selected"</c:if>>내용</option>
+        <div class="d-flex justify-content-center gap-3 pt-5">
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="resetKeyword()">검색 설정 초기화</button>
+            <div class="d-flex justify-content-center">
+                <select name="searchField">
+                    <option value="b_title"<c:if test="${param.searchField ne 'b_content'}"> selected="selected"</c:if>>제목</option>
+                    <option value="b_content"<c:if test="${param.searchField eq 'b_content'}"> selected="selected"</c:if>>내용</option>
+                </select>
+                <input type="text" name="searchWord" value="${param.searchWord}">
+                <input type="submit" value="검색" class="btn btn-primary btn-sm">
+            </div>
+            <select id="sort-select" onchange="window.open(value,'_self');">
+                <c:choose>
+                    <c:when test="${empty param.searchWord}">
+                        <option name="time" value="../community/list.do?sort=time">최신순</option>
+                        <option name="like" value="../community/list.do?sort=like">추천순</option>
+                        <option name="visit" value="../community/list.do?sort=visit">조회순</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option name="time" value="../community/list.do?sort=time&searchField=${param.searchField}&searchWord=${param.searchWord}">최신순</option>
+                        <option name="like" value="../community/list.do?sort=like&searchField=${param.searchField}&searchWord=${param.searchWord}">추천순</option>
+                        <option name="visit" value="../community/list.do?sort=visit&searchField=${param.searchField}&searchWord=${param.searchWord}">조회순</option>
+                    </c:otherwise>
+                </c:choose>
             </select>
-            <input type="text" name="searchWord" value="${param.searchWord}">
-            <input type="submit" value="검색" class="btn btn-primary btn-sm">
         </div>
 
 
@@ -102,9 +137,15 @@
                                     <h5 class="card-title">${dto.b_title}</h5>
                                     <p class="card-text">${dto.b_content}</p>
                                 </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">${dto.u_id}</small>
-                                    <small class="text-muted">${dto.b_postdate}</small>
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted">${dto.u_id}</small>
+                                        <small class="text-muted">${dto.b_postdate}</small>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <small class="text-muted"><i class="bi bi-eye"></i> ${dto.b_visitcount}</small>
+                                        <small class="text-muted"><i class="bi bi-heart"></i> ${dto.b_likescount}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -113,7 +113,7 @@
                 '<div class="input-group mb-3 reply-box" id="edit-box' + num + '">'
                 + '<div class="form-floating" style=" margin-top: 10px">'
                 + '<textarea class="form-control" placeholder="Leave a comment here" id="edit-text' + num + '" style="height: 100px">' + content + '</textarea>'
-                + '<label for="edit-text' + num + '">수정 중인 댓글</label>'
+                + '<label class="reply-label" for="edit-text' + num + '">수정 중인 댓글</label>'
                 + '</div>'
                 + '<button class="btn btn-outline-secondary edit-btn" type="button" value="' + num + '" onclick="editReply(' + num + ')" style="margin-top: 10px">수정</button>'
                 + '</div>'
@@ -258,6 +258,39 @@
             }
         })
     }
+    function clickLike(){
+        const loginedId = '${sessionScope.u_id}'
+        if(loginedId === ""){
+            alert('로그인 후 이용하실 수 있습니다.');
+            location.href = "/login.do";
+        }else {
+            $.ajax({
+                url: '/like.do',
+                type: 'GET',
+                contentType: 'application/json; charset=UTF-8',
+                data: {
+                    b_id: ${dto.b_id},
+                    check: $('input[name=like-check]').val()
+                },
+                success: function (data){
+                    const like_check = data.like_check;
+                    const like_count = data.like_count;
+                    if(like_check){
+                        $('#like-heart').html(
+                            '<i class="bi bi-heart-fill">'
+                            + '<input type="hidden" name="like-check" value="true">'
+                        )
+                    }else {
+                        $('#like-heart').html(
+                            '<i class="bi bi-heart">'
+                            + '<input type="hidden" name="like-check" value="false">'
+                        )
+                    }
+                    $('#like-counter').html(like_count)
+                }
+            })
+        }
+    }
 
 </script>
 <style>
@@ -322,7 +355,7 @@
         border-bottom: 1px solid #CCCCCC;
         color: #666666;
     }
-    label {
+    .reply-label {
         color: #999999;
     }
     .hide{
@@ -334,6 +367,24 @@
         padding-right: 10px;
         color: #999999;
     }
+
+    #like-btn{
+        width: 80px;
+    }
+    #like-wrap{
+        align-items: center;
+        display: flex;
+        gap: 10px;
+    }
+    #like-heart{
+        display: flex;
+        color: #FFFFFF;
+        font-weight: 700;
+    }
+    #like-counter{
+        width: 100%;
+    }
+
 </style>
 
 
@@ -389,7 +440,27 @@
             </c:if>
         </div>
 
-        <!--댓글란-->
+        <div class="text-center pt-5">
+            <button type="button" class="btn btn-secondary btn-sm" id="like-btn" onclick="clickLike()">
+                <div id="like-wrap">
+                    <div id="like-heart">
+                        <c:choose>
+                            <c:when test="${like_check}">
+                                <i class="bi bi-heart-fill"></i>
+                                <input type="hidden" name="like-check" value="true">
+                            </c:when>
+                            <c:otherwise>
+                                <i class="bi bi-heart"></i>
+                                <input type="hidden" name="like-check" value="false">
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                    <div id="like-counter">${like_count}</div>
+                </div>
+            </button>
+        </div>
+
+
         <div class="text-center">
             <div class="btn-group pt-5" role="group" aria-label="Basic example">
                 <c:if test="${not empty sessionScope.u_id and sessionScope.u_id eq dto.u_id}">
@@ -402,13 +473,14 @@
             </div>
         </div>
 
+        <!--댓글란-->
         <div id="reply-box">
             <div id="reply-total"><p>댓글 ${replyTotal}개</p></div>
             <div class="input-group mb-3">
                 <div class="form-floating">
                     <input type="hidden" name="b_id" value="${dto.b_id}">
                     <textarea class="form-control" placeholder="Leave a comment here" id="comment-text" style="height: 100px"></textarea>
-                    <label for="comment-text">Comments</label>
+                    <label class="reply-label" for="comment-text">Comments</label>
                 </div>
                 <button class="btn btn-outline-secondary" type="button" id="comment-btn">등록</button>
             </div>
@@ -463,7 +535,7 @@
                     <div class="input-group mb-3 reply-box hide" id="reply-box${no.count}">
                         <div class="form-floating" style="margin-left: ${reply.re_level * 50}px; margin-top: 10px">
                             <textarea class="form-control" placeholder="Leave a comment here" id="reply-text${no.count}" style="height: 100px"></textarea>
-                            <label for="reply-text${no.count}">${reply.u_name} 님 에게.</label>
+                            <label class="reply-label" for="reply-text${no.count}">${reply.u_name} 님 에게.</label>
                         </div>
                         <button class="btn btn-outline-secondary reply-btn" type="button" value="${no.count}" style="margin-top: 10px">등록</button>
                     </div>

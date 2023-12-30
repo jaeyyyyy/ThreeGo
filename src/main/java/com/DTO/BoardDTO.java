@@ -8,10 +8,13 @@ public class BoardDTO {
     private String u_name;
     private String b_title;
     private String b_content;
-    private java.util.Date b_postdate;
+    private Date b_postdate;
     private String b_ofile;
     private String b_sfile;
     private int b_visitcount;
+
+    // 리스트 출력 시 추천수 표시용
+    private int b_likescount;
 
     public String getB_id() {
         return b_id;
@@ -85,4 +88,13 @@ public class BoardDTO {
         this.b_visitcount = b_visitcount;
     }
 
+
+    // 리스트 출력 시 추천수 표시용 게터세터
+
+
+    public int getB_likescount() { return b_likescount; }
+
+    public void setB_likescount(int b_likescount) {
+        this.b_likescount = b_likescount;
+    }
 }

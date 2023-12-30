@@ -9,17 +9,21 @@ public class BoardPage {
         int totalPage =  (int)Math.ceil((double)totalCount/pageSize);
         String searchField = (String) map.get("searchField");
         String searchWord = (String) map.get("searchWord");
-        String keyword = "";
+        String sort = (String) map.get("sort");
+        String param = "";
+        if(sort != null){
+            param = "&sort=" + sort;
+        }
         if(searchWord != null){
-            keyword = "&searchField=" + searchField + "&searchWord=" + searchWord;
+            param = "&searchField=" + searchField + "&searchWord=" + searchWord;
         }
 
         //이전 페이지 블록 바로가기
         int pageTemp = (((pageNum -1 ) / blockPage) * blockPage) +1;
         pagingStr += "<nav aria-label=\"Page navigation example\"><ul class=\"pagination\">";
         if(pageTemp != 1){
-            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=1" + keyword + "'><i class=\"bi bi-chevron-double-left\"></i></a></li>";
-            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum="+ (pageTemp -1) + keyword + "'><i class=\"bi bi-chevron-left\"></i></a></li>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=1" + param + "'><i class=\"bi bi-chevron-double-left\"></i></a></li>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum="+ (pageTemp -1) + param + "'><i class=\"bi bi-chevron-left\"></i></a></li>";
         }
 
         //각 페이지 번호 출력
@@ -30,7 +34,7 @@ public class BoardPage {
                 pagingStr += "<li id=\"pageBtn" + pageTemp + "\" class=\"page-item\"><a class=\"page-link\" href=\"#\">" + pageTemp + "</a></li>";
 
             }else{
-                pagingStr += "<li id=\"pageBtn" + pageTemp + "\" class=\"page-item\"><a class=\"page-link\" href='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'>" + pageTemp + "</a></li>";
+                pagingStr += "<li id=\"pageBtn" + pageTemp + "\" class=\"page-item\"><a class=\"page-link\" href='" + reqUrl + "?pageNum=" + pageTemp + param + "'>" + pageTemp + "</a></li>";
             }
             pageTemp++;
             blockCount++;
@@ -39,8 +43,8 @@ public class BoardPage {
 
         //다음 페이지 블록 바로가기
         if(pageTemp <= totalPage){
-            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=" + pageTemp + keyword + "'><i class=\"bi bi-chevron-right\"></i></a></li>";
-            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=" + totalPage + keyword + "'><i class=\"bi bi-chevron-double-right\"></i></a></li>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=" + pageTemp + param + "'><i class=\"bi bi-chevron-right\"></i></a></li>";
+            pagingStr += "<li class=\"page-item\"><a class=\"page-link\" href ='" + reqUrl + "?pageNum=" + totalPage + param + "'><i class=\"bi bi-chevron-double-right\"></i></a></li>";
         }
         pagingStr += "</ul></nav>";
 

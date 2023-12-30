@@ -41,7 +41,8 @@ public class BoardDAO extends DBConnPool {
         List<BoardDTO> bbs = new ArrayList<BoardDTO>();
 
         //쿼리문 작성
-        String query = "SELECT * FROM ("
+        String query = "SELECT bp.*, NVL(lk.count, 0) AS b_likescount"
+                    + " FROM (SELECT * FROM("
                 + " SELECT Tb.*, ROWNUM rNUM FROM ("
                 + " SELECT * FROM boardtable";
         if(map.get("searchWord")!= null){
@@ -49,9 +50,18 @@ public class BoardDAO extends DBConnPool {
                     +" LIKE '%" + map.get("searchWord") + "%'";
         }
         query += " ORDER BY b_id DESC"
-                +" ) Tb"
-                +" )"
-                +" WHERE rNUM BETWEEN ? AND ? ";
+                +" ) Tb)"
+                +" WHERE rNUM BETWEEN ? AND ? ) bp "
+                + " LEFT JOIN (SELECT b_id, count(*) AS count FROM likes GROUP BY b_id) lk"
+                + " ON bp.b_id = lk.b_id";
+
+        if(map.get("sort")!= null){
+            if(map.get("sort").equals("like")){
+                query += " ORDER BY b_likescount DESC, bp.b_id DESC";
+            }else if(map.get("sort").equals("visit")){
+                query += " ORDER BY bp.b_visitcount DESC, bp.b_id DESC";
+            }
+        }
 
         try {
             psmt = con.prepareStatement(query);
@@ -72,6 +82,7 @@ public class BoardDAO extends DBConnPool {
                 dto.setB_ofile(rs.getString("b_ofile"));
                 dto.setB_sfile(rs.getString("b_sfile"));
                 dto.setB_visitcount(rs.getInt("b_visitcount"));
+                dto.setB_likescount(rs.getInt("b_likescount"));
                 bbs.add(dto);
             }
 

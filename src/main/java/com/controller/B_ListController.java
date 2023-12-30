@@ -30,11 +30,14 @@ public class B_ListController extends HttpServlet{
 
         String searchField = req.getParameter("searchField");
         String searchWord = req.getParameter("searchWord");
+        String sort = req.getParameter("sort");
 
         if(searchWord != null){
             map.put("searchField", searchField);
             map.put("searchWord", searchWord);
         }
+
+        map.put("sort", sort);
 
         int totalCount = dao.selectCount(map);
 
