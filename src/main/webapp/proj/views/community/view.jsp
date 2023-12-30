@@ -280,11 +280,13 @@
                             '<i class="bi bi-heart-fill">'
                             + '<input type="hidden" name="like-check" value="true">'
                         )
+                        alert('추천하였습니다.')
                     }else {
                         $('#like-heart').html(
                             '<i class="bi bi-heart">'
                             + '<input type="hidden" name="like-check" value="false">'
                         )
+                        alert('추천을 취소하였습니다.')
                     }
                     $('#like-counter').html(like_count)
                 }
