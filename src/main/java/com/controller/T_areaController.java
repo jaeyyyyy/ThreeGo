@@ -15,6 +15,9 @@ import java.util.List;
 public class T_areaController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 지역, 카테고리, 컨텐츠타입 리스트를 반환하여 동적으로 페이지를 구성하는 용도로 응답
+        // 했으나 페이지를 정적으로 재구성하며 사용하지는 않음...(주석처리해도 무관)
+
         AreaDAO ar_dao = new AreaDAO();
         Cat1DAO cat1_dao = new Cat1DAO();
         C_TypeDAO c_type_dao = new C_TypeDAO();

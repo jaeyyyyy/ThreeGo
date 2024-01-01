@@ -12,7 +12,7 @@ public class MailSMTP {
     private final Properties serverInfo;
 
     public MailSMTP() {
-        // 네이버 SMTP 서버 접속 정보
+        // 구글 SMTP 서버 접속 정보
         serverInfo = new Properties();
         serverInfo.put("mail.smtp.host", "smtp.gmail.com");
         serverInfo.put("mail.smtp.port", "465");

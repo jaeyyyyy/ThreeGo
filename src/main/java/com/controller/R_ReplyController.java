@@ -40,14 +40,20 @@ public class R_ReplyController extends HttpServlet {
         String content = (String) data.get("content");
         content = content.replaceAll("\\r?\\n", "<br/>");
 
+        // 바로 위 레벨의 댓글(= 상위 댓글, 부모 댓글/reply, comment 포함)의 레벨과 순서
         int prev_re_level = Integer.parseInt((String) data.get("re_level"));
         int prev_re_order = Integer.parseInt((String) data.get("re_order"));
         String prev_re_num = (String) data.get("re_num");
 
+        // 상위 댓글 번호가 부모 댓글 번호
+        // 상위 댓글과 같은 ref로 묶임
+        // 작성하는 댓글의 레벨은 상위 댓글의 레벨 + 1
         int re_parent = Integer.parseInt(prev_re_num);
         int re_ref = Integer.parseInt((String) data.get("re_ref"));
         int re_level = prev_re_level + 1;
+        // 대댓글(reply) 작성 떄 마다 부모 댓글부터 같은 ref의 최상위 댓글(0 level)까지 모두 자식 댓글의 수 +1
         dao.addChild(re_parent);
+        // 현재 작성하는 댓글의 순서는 부모 댓글의 순서 + 부모 댓글의 자식댓글 수
         int re_order = prev_re_order + dao.showChild(re_parent);
         String u_id = (String) session.getAttribute("u_id");
 

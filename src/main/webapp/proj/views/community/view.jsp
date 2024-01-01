@@ -29,26 +29,6 @@
         regReply();
         clickDelete();
         clickEdit();
-        // $(document).on("click", ".edit_btn", function(e) {
-        //     let url = '/community/reply_edit.do'
-        //     const num = e.target.value;
-        //     console.log('수정버튼')
-        //     $.ajax({
-        //         url: url,
-        //         type: 'GET',
-        //         data: {
-        //             re_num: $('#re_num' + num).val(),
-        //             edit_content: $('#edit-text' + num)
-        //         },
-        //         success: function (){
-        //             alert("수정 되었습니다.");
-        //             location.reload(true);
-        //         },
-        //         error: function (){
-        //             alert("수정이 정상적으로 이루어지지 않았습니다.");
-        //         }
-        //     })
-        // })
     })
 
 
@@ -197,6 +177,7 @@
                         content: $('#comment-text').val()
                     }),
                     success : function (data){
+                        console.log(data)
                         location.reload(true);
                         /*console.log(data)
                         let replyList = data.replyList;

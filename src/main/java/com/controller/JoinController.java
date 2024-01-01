@@ -32,7 +32,6 @@ public class JoinController extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
 
-        // 추가된 부분: 모든 필드가 비어있지 않은지 검사
 
         UserDAO dao = new UserDAO().getInstance();
 

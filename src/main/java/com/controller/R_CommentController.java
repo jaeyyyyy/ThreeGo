@@ -48,6 +48,7 @@ public class R_CommentController extends HttpServlet {
 
         int totalCount = dao.totalCount(b_id);
 
+        // 새댓글 작성 시 현재 게시글의 총 댓글(0 level, comment) 갯수 + 1
         int re_ref = dao.commentCount(b_id) + 1;
 
         int insertComment = dao.insertComment(b_id, u_id, content, re_ref);
@@ -85,7 +86,7 @@ public class R_CommentController extends HttpServlet {
             System.out.println(json);
 
             resp.setContentType("application/x-json; charset=utf-8");
-            resp.getWriter().print(json.toJSONString());
+            resp.getWriter().print(json);
         }else {
             JSFunction.alertBack(resp, "댓글 등록에 실패하였습니다.");
         }

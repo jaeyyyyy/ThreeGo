@@ -30,12 +30,14 @@ public class SendMailController extends HttpServlet {
 
         String u_email = findUser.getU_email();
 
+        // map에 이메일 발송을 위한 정보 저장
         Map<String, String> emailInfo = new HashMap<>();
         emailInfo.put("from", "t3reego@gamil.com");
         emailInfo.put("to", u_email);
         emailInfo.put("subject", "[threeGo] 임시 비밀번호 발급 안내입니다.");
         emailInfo.put("format", "text/html;charset=UTF-8");
 
+        // 메일 본문에 작성할 내용을 html파일에서 읽어와 저장할 문자열
         String htmlContent = "";
 
         try{
@@ -53,11 +55,13 @@ public class SendMailController extends HttpServlet {
         }
 
         String userName = findUser.getU_name() + "(" + findUser.getU_id() + ")";
+        // 임시 비밀번호 생성 후 유저의 비밀번호를 임시 비밀번호로 변경
         String tempPw = TempPassword.makeRandomPw(8);
         findUser.setU_pw(tempPw);
         int updateResult = dao.updateUserInfo(findUser);
 
         if(updateResult > 0){
+            // html파일의 내용을 pw를 찾는 유저의 정보에 맞춰 replace
             htmlContent = htmlContent.replace("__username__", userName);
             htmlContent = htmlContent.replace("__temp-pw__", tempPw);
 

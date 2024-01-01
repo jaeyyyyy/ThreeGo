@@ -20,6 +20,7 @@ import java.util.List;
 @WebServlet("/info/city.do")
 public class T_cityController extends HttpServlet {
 
+    // 지역, 시군구, 카테고리, 컨텐츠타입 리스트와 현재 선택한 지역의 이름을 반환하여 동적으로 페이지를 구성하는 용도로 응답
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -51,6 +52,8 @@ public class T_cityController extends HttpServlet {
 
     }
 
+    // 상위카테고리 선택 시 하위 카테고리 목록을 동적으로 출력.
+    // 쓰고 보니 시군구 리스트는 굳이 응답에 포함할 필요가 없는 듯...
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader reader = req.getReader();
