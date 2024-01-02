@@ -53,17 +53,19 @@ public class BoardDAO extends DBConnPool {
                     + " LIKE '%" + map.get("searchWord") + "%'";
         }
         query += " ) sub"
-                + " ORDER BY " + map.get("sort") + " DESC) od)"
+                + " ORDER BY " + map.get("sortCol") + " DESC";
+        if(map.get("sort")!= null && !map.get("sort").equals("time")) query += ", b_id DESC";
+        query += " ) od)"
                 + " WHERE rNUM BETWEEN ? AND ?";
 
 
-        if(map.get("sort")!= null){
-            if(map.get("sort").equals("b_likescount")){
-                query += " ORDER BY b_likescount DESC, b_id DESC";
-            }else if(map.get("sort").equals("b_visitcount")){
-                query += " ORDER BY b_visitcount DESC, b_id DESC";
-            }
-        }
+//        if(map.get("sort")!= null){
+//            if(map.get("sort").equals("like")){
+//                query += " ORDER BY b_likescount DESC, b_id DESC";
+//            }else if(map.get("sort").equals("visit")){
+//                query += " ORDER BY b_visitcount DESC, b_id DESC";
+//            }
+//        }
 
         System.out.println(query);
 

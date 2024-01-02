@@ -43,7 +43,8 @@ public class B_ListController extends HttpServlet{
             map.put("searchWord", searchWord);
         }
 
-        map.put("sort", sortCol);
+        map.put("sort", sort);
+        map.put("sortCol", sortCol);
 
         int totalCount = dao.selectCount(map);
 

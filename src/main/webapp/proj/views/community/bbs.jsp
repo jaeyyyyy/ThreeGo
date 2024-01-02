@@ -43,6 +43,7 @@
         if(sortTemp !== null){
             selected = sortTemp
         }
+        console.log(selected)
         $('#sort-select option[name=' + selected +']').prop("selected", true);
     }
 
